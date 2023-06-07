@@ -31,3 +31,8 @@ react native, which would prove useful.
 
 
 
+Goals:
+
+- Create Hello world app:
+    - Write in JS code in Kotlin String
+    - Compile and print "w
