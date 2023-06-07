@@ -34,7 +34,13 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                implementation("androidx.javascriptengine:javascriptengine:1.0.0-alpha05")
+                implementation("androidx.startup:startup-runtime:1.1.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.0")
+            }
+        }
         val androidUnitTest by getting
         val iosX64Main by getting
         val iosArm64Main by getting
