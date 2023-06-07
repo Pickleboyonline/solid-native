@@ -1,0 +1,5 @@
+{
+    "tasks": {
+        "solid_native": "deno run packages/cli/mod.ts"
+    }
+}

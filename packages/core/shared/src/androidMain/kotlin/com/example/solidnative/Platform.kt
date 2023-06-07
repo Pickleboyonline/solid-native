@@ -7,16 +7,16 @@ import com.google.common.util.concurrent.ListenableFuture
 
 
 
-class JSSandBoxInitializer : Initializer<ListenableFuture<JavaScriptSandbox>> {
-    override fun create(context: Context): ListenableFuture<JavaScriptSandbox> {
-        TODO("Not yet implemented")
-        val jsSandboxFuture = JavaScriptSandbox.createConnectedInstanceAsync(context);
-        return jsSandboxFuture
-    }
-
-
-
-}
+//class JSSandBoxInitializer : Initializer<ListenableFuture<JavaScriptSandbox>> {
+//    override fun create(context: Context): ListenableFuture<JavaScriptSandbox> {
+//        TODO("Not yet implemented")
+//        val jsSandboxFuture = JavaScriptSandbox.createConnectedInstanceAsync(context);
+//        return jsSandboxFuture
+//    }
+//
+//
+//
+//}
 
 
 class AndroidPlatform : Platform {
