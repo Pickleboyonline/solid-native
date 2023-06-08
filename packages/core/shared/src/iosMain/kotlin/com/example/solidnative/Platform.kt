@@ -1,10 +1,14 @@
 package com.example.solidnative
 
 import platform.JavaScriptCore.JSContext
-import platform.UIKit.UIDevice
+import platform.JavaScriptCore.JSExportProtocol
 
 
-val context = JSContext()
+
+
+val context = JSContext();
+
+
 
 class IOSPlatform: Platform {
     override val name: String = context.evaluateScript("1 + 22").toString()
@@ -12,3 +16,10 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+// Calls linked Swift libraries and registures there defnitions
+fun registerModule() {}
+
+
+
+//

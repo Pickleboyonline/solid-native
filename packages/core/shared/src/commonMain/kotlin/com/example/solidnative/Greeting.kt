@@ -7,3 +7,5 @@ class Greeting {
         return "Hello, ${platform.name}!"
     }
 }
+
+fun herro() {}
