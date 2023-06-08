@@ -1,5 +1,11 @@
 {
     "tasks": {
         "solid_native": "deno run packages/cli/mod.ts"
+    },
+    "imports": {
+        "solid-js/universal": "./deps/solid_js_universal.ts"
+    },
+    "compilerOptions": {
+        "allowJs": true
     }
 }

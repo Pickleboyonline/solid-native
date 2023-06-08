@@ -1,1 +1,3 @@
-console.log('Hello world!')
+import {createRenderer} from 'solid-js/universal'
+
+console.log("Hello world!");
