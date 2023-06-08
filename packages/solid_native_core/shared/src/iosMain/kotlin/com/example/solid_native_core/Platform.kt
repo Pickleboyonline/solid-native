@@ -1,5 +1,6 @@
 package com.example.solid_native_core
 
+import platform.JavaScriptCore.JSExportProtocol
 import platform.UIKit.UIDevice
 
 class IOSPlatform: Platform {
@@ -7,3 +8,8 @@ class IOSPlatform: Platform {
 }
 
 actual fun getPlatform(): Platform = IOSPlatform()
+
+
+final class LL : JSExportProtocol {
+
+}
