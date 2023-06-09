@@ -10,16 +10,16 @@ class Module {
     /**
      * A dictionary of AnyFunctions based on their name.
      */
-    val functions;
+    // val functions;
 
     /**
      * Dictionary of any properties.
      */
-    val properties;
+    // val properties;
     /**
      * Dictionary of any properties
      */
-    val constants;
+    // val constants;
 }
 
 /**
