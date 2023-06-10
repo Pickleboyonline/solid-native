@@ -1,120 +1,66 @@
 import SwiftUI
 import JavaScriptCore
 
-//class Props: ObservableObject {
-//    @Published var message = ""
-//    @Published var children: [SNView] = []
-//}
-//
-//struct Component: View {
-//    @ObservedObject var props: Props
-//
-//    var body: some View {
-//        Text("Hello, \(props.message)!")
-//    }
-//}
-//
-//
-//class SNView {
-//    let props = Props();
-//
-//    @ViewBuilder
-//    func render() -> some View {
-//        Component(props: props)
-//    }
-//}
+// Reference!!!
+@objc protocol PersonJSExports: JSExport {
+    var firstName: String { get set }
+    var lastName: String { get set }
+    var birthYear: NSNumber? { get set }
 
-class Props: ObservableObject {
-    @Published var message = "World"
+    var fullName: String { get }
+
+    // Imported as `Person.createWithFirstNameLastName(_:_:)`
+    static func createWith(firstName: String, lastName: String) -> Person
 }
 
-struct Component: View {
-    @ObservedObject var props: Props
+@objc public class Person : NSObject, PersonJSExports {
+    // Properties must be declared with `dynamic`
+    dynamic var firstName: String
+    dynamic var lastName: String
+    dynamic var birthYear: NSNumber?
 
-    var body: some View {
-        Text("Hello, \(props.message)!")
+    required init(firstName: String, lastName: String) {
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+
+    var fullName: String {
+        return "\(firstName) \(lastName)"
+    }
+
+    class func createWith(firstName: String, lastName: String) -> Person {
+        return Person(firstName: firstName, lastName: lastName)
     }
 }
 
-class JSObjectModule {
-    let jsContext: JSContext
-    let jsObject: JSValue
-    
-    init(context: JSContext) {
-        self.jsContext = context
-        self.jsObject = JSValue.init(newObjectIn: context)
-    }
-    
-    func addSyncFunction(name: String, executor: @escaping @convention(block) () -> Void) {
-        // context.setObject(executor, forKeyedSubscript: name as NSString)
-        // jsObject.setObject(executor, forKeyedSubscript: "name")
-        jsObject.setValue(executor, forProperty: name)
-    }
-    
-    func addProperty(key: String, value: Any) {
-        jsObject.setValue(value, forKey: key)
-    }
+@objc public class DummyValue: NSObject {
     
 }
-
-
-let globalJsContext = JSContext()
-/**
- All you need to do is define a struct that reacts to props,
- mutate the props based on JS events.
- Children are iterated on  with ForEach and calling `render()`
- */
-class SNView {
-    let props = Props()
-    
-    // Props object contains everthing we need to know. For children.
-    // Mutating that array will cause SwiftUI to re-render
-    
-    // The classes have a binding to JS
-    
-    func defineJsReference() -> JSObjectModule {
-        let jsModule = JSObjectModule(context: globalJsContext!)
-        
-        jsModule.addSyncFunction(name: "print") {
-            print("Hello World!")
-        }
-        
-        return jsModule
-    }
-    
-    /**
-     I can make a more elagant API for this, but this is the jist.
-     */
-    func setMessage(newMessage: String) {
-        props.message = newMessage
-    }
-    
-    
-    @ViewBuilder
-    func render() -> some View {
-        Component(props: props)
-    }
-}
-
-
 
 @main
 struct iOSApp: App {
-    let snViewBuilder = SNView()
+    // let snViewBuilder = SNView()
+    let rootElement: SNElementNode
     
     init() {
-        // snViewBuilder.world.objectWillChange.send()
-        let module = snViewBuilder.defineJsReference();
-        
-        globalJsContext?.setObject(module.jsObject, forKeyedSubscript: "SNModule" as NSString);
-        
-        print("Results: " + (globalJsContext?.evaluateScript("SNModule.print()").toString())!)
-        
+        let core = SNCore()
+        rootElement = core.createElementNode(name: "Root")
+        core.registureGlobalObject()
+        let context = core.jsContext
+        context.setObject(rootElement.getJsObjectExport(), forKeyedSubscript: "rootView" as NSString)
+        // rootElement.getJsObjectExport().setProp(name: "name", value: "World")
+        print(context.evaluateScript(
+        """
+        const view = SNCore.createElement("TextView")
+        view.isTextNode
+        rootView.setProp("name", "world")
+        """
+        ).toString()!)
     }
     
 	var body: some Scene {
 		WindowGroup {
-            snViewBuilder.render()
+            rootElement.value.render()
 		}
 	}
 }
