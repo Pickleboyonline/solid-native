@@ -36,7 +36,9 @@ import JavaScriptCore
 @objc public class DummyValue: NSObject {
     
 }
-
+// Create global object in one pass. Essentially, we can expose
+// the core module with JS completely.
+// https://developer.apple.com/documentation/javascriptcore/1451585-jsglobalcontextcreate?language=objc
 @main
 struct iOSApp: App {
     // let snViewBuilder = SNView()
@@ -47,13 +49,19 @@ struct iOSApp: App {
         rootElement = core.createElementNode(name: "Root")
         core.registureGlobalObject()
         let context = core.jsContext
+        
+        let promise = JSValue(newPromiseResolvedWithResult: 5, in: context)
+        
         context.setObject(rootElement.getJsObjectExport(), forKeyedSubscript: "rootView" as NSString)
+        context.setObject(promise, forKeyedSubscript: "promise" as NSString)
         // rootElement.getJsObjectExport().setProp(name: "name", value: "World")
         print(context.evaluateScript(
         """
-        const view = SNCore.createElement("TextView")
-        view.isTextNode
-        rootView.setProp("name", "world")
+        // rootView.setProp("name", "world")
+        // const view = SNCore.createElement("TextView")
+        // console.log(view.isTextNode)
+        // rootView.setProp("name", "world")
+        promise
         """
         ).toString()!)
     }

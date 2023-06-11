@@ -15,6 +15,7 @@
 		58E6667F2A33FB27009B0559 /* SNModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E6667E2A33FB27009B0559 /* SNModule.swift */; };
 		58E666812A34030C009B0559 /* SNProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E666802A34030C009B0559 /* SNProps.swift */; };
 		58E666832A340B45009B0559 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E666822A340B45009B0559 /* LinkedList.swift */; };
+		58E666852A345EED009B0559 /* SNJSI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E666842A345EED009B0559 /* SNJSI.swift */; };
 		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		58E6667E2A33FB27009B0559 /* SNModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNModule.swift; sourceTree = "<group>"; };
 		58E666802A34030C009B0559 /* SNProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNProps.swift; sourceTree = "<group>"; };
 		58E666822A340B45009B0559 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
+		58E666842A345EED009B0559 /* SNJSI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNJSI.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* solid_native_core_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solid_native_core_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				58E6667E2A33FB27009B0559 /* SNModule.swift */,
 				58E666802A34030C009B0559 /* SNProps.swift */,
 				58E666822A340B45009B0559 /* LinkedList.swift */,
+				58E666842A345EED009B0559 /* SNJSI.swift */,
 			);
 			path = solid_native_core_ios;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				58E6667F2A33FB27009B0559 /* SNModule.swift in Sources */,
 				58E6667B2A33F8FE009B0559 /* SNCore.swift in Sources */,
 				58E6667D2A33F94F009B0559 /* SNElement.swift in Sources */,
+				58E666852A345EED009B0559 /* SNJSI.swift in Sources */,
 				7555FF83242A565900829871 /* ContentView.swift in Sources */,
 				58E666832A340B45009B0559 /* LinkedList.swift in Sources */,
 			);
