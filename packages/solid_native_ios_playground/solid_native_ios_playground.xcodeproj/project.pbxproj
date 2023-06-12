@@ -15,8 +15,9 @@
 		5882F5A52A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */; };
 		5882F5A72A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */; };
 		5882F5B52A36B3BB000D5F99 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */; };
-		5882F5B72A36B3FC000D5F99 /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B62A36B3FC000D5F99 /* SolidNativeView.swift */; };
+		5882F5B72A36B3FC000D5F99 /* SolidNativeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */; };
 		5882F5BA2A36B570000D5F99 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */; };
+		5882F5BC2A36EDB0000D5F99 /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5BB2A36EDB0000D5F99 /* SolidNativeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +49,9 @@
 		5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITests.swift; sourceTree = "<group>"; };
 		5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
-		5882F5B62A36B3FC000D5F99 /* SolidNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
+		5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeElement.swift; sourceTree = "<group>"; };
 		5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
+		5882F5BB2A36EDB0000D5F99 /* SolidNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +141,7 @@
 			children = (
 				5882F5B82A36B402000D5F99 /* Views */,
 				5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */,
-				5882F5B62A36B3FC000D5F99 /* SolidNativeView.swift */,
+				5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */,
 				5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */,
 			);
 			path = Core;
@@ -148,6 +150,7 @@
 		5882F5B82A36B402000D5F99 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5882F5BB2A36EDB0000D5F99 /* SolidNativeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,8 +286,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				5882F58C2A36B390000D5F99 /* ContentView.swift in Sources */,
-				5882F5B72A36B3FC000D5F99 /* SolidNativeView.swift in Sources */,
+				5882F5B72A36B3FC000D5F99 /* SolidNativeElement.swift in Sources */,
 				5882F5B52A36B3BB000D5F99 /* SolidNativeCore.swift in Sources */,
+				5882F5BC2A36EDB0000D5F99 /* SolidNativeView.swift in Sources */,
 				5882F5BA2A36B570000D5F99 /* SolidNativeProps.swift in Sources */,
 				5882F58A2A36B390000D5F99 /* solid_native_ios_playgroundApp.swift in Sources */,
 			);

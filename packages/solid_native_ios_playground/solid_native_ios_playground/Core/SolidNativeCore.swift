@@ -8,15 +8,21 @@
 import Foundation
 import JavaScriptCore
 
-class SolidNativeCore {
+protocol SolidNativeCoreJSExport: JSExport {
     
-    private var jsObject: JSValue?
+}
+
+typealias ElementName = String
+
+@objc public class SolidNativeCore: NSObject, SolidNativeCoreJSExport {
     
-    func registerView() {
+    private var elementRegistry: [ElementName: SolidNativeElement] = [:]
+    
+    func registerElement() {
         
     }
     
-    func createView(name: String) {
-        
+    func createElement(name: String) -> SolidNativeElement {
+        SolidNativeElement()
     }
 }
