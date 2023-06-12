@@ -18,6 +18,7 @@ typealias ElementName = String
     
     private var elementRegistry: [ElementName: SolidNativeElement] = [:]
     
+    // Only thing it needs is the View type, the View Name, whether or not it a text view
     func registerElement() {
         
     }
