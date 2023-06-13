@@ -9,7 +9,7 @@ import Foundation
 import JavaScriptCore
 import SwiftUI
 
-protocol SolidNativeElementJSExport: JSExport {
+protocol AnySolidNativeElementJSExport: JSExport {
     // Expose methods needed.
 }
 
@@ -17,11 +17,11 @@ protocol SolidNativeElementJSExport: JSExport {
  Later, we can have it to where you only need to pass in the SwiftUI View that takes in props.
  Contains a a solid native view
  */
-@objc public class SolidNativeElement: NSObject, ObservableObject, SolidNativeElementJSExport {
-    var next: SolidNativeElement?
-    var prev: SolidNativeElement?
+@objc public class AnySolidNativeElement: NSObject, AnySolidNativeElementJSExport {
+    var next: AnySolidNativeElement?
+    var prev: AnySolidNativeElement?
     
-    private let props = SolidNativeProps()
+    let props = SolidNativeProps()
     
     func setProp(_ name: String, _ value: Any) {
         assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
@@ -32,17 +32,17 @@ protocol SolidNativeElementJSExport: JSExport {
         props.values[name] = value
     }
     
-    var children: [SolidNativeElement] = []
+    var children: [AnySolidNativeElement] = []
     
     // Can be getter
-    var firstChild: SolidNativeElement?
+    var firstChild: AnySolidNativeElement?
     
-    var parentElement: SolidNativeElement?
+    var parentElement: AnySolidNativeElement?
     
     // Iterate over first child prop
     // O(n)
     private func updateChildrenInProps() {
-        var newChildren: [SolidNativeElement] = []
+        var newChildren: [AnySolidNativeElement] = []
         
         var nextChild = firstChild
         while let child = nextChild {
@@ -55,7 +55,7 @@ protocol SolidNativeElementJSExport: JSExport {
     }
    
     // O(1)
-    func removeChild(element: SolidNativeElement) {
+    func removeChild(element: AnySolidNativeElement) {
         // Link the nodes prev and next of it
         if let childNextSibling = element.next,
            let childPrevSibling = element.prev {
@@ -77,7 +77,7 @@ protocol SolidNativeElementJSExport: JSExport {
     }
     
     // O(1)
-    func insertBefore(element: SolidNativeElement, anchor: SolidNativeElement?) {
+    func insertBefore(element: AnySolidNativeElement, anchor: AnySolidNativeElement?) {
         // If no anchor set first child to view (make head)
         //
         if let anchor = anchor {
@@ -106,17 +106,16 @@ protocol SolidNativeElementJSExport: JSExport {
     
     // TODO: You need to override this!
     // This is how SolidJS will deliver a text prop.
-    func isTextElement() -> Bool {
-        false
-    }
+    var isTextElement = false
     
     func setText(text: String) {
         props.text = text
     }
     
+    
     @ViewBuilder
     func render() -> some View {
-        SolidNativeView(props: props)
+        // view.init(isTextView: <#Bool#>, props: <#SolidNativeProps#>)
     }
 }
 

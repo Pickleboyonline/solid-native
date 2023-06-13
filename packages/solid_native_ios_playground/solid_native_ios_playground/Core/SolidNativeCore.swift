@@ -16,14 +16,14 @@ typealias ElementName = String
 
 @objc public class SolidNativeCore: NSObject, SolidNativeCoreJSExport {
     
-    private var elementRegistry: [ElementName: SolidNativeElement] = [:]
+    private var elementRegistry: [ElementName: AnySolidNativeElement] = [:]
     
     // Only thing it needs is the View type, the View Name, whether or not it a text view
     func registerElement() {
         
     }
     
-    func createElement(name: String) -> SolidNativeElement {
-        SolidNativeElement()
+    func createElement(name: String) -> AnySolidNativeElement {
+        AnySolidNativeElement()
     }
 }

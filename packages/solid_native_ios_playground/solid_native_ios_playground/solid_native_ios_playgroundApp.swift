@@ -9,11 +9,8 @@ import SwiftUI
 
 @main
 struct solid_native_ios_playgroundApp: App {
-    var rootView = SolidNativeView()
-    
     var body: some Scene {
         WindowGroup {
-            rootView.render()
         }
     }
 }

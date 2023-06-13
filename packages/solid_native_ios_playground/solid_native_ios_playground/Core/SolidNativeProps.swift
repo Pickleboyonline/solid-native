@@ -27,8 +27,8 @@ class SolidNativeProps: ObservableObject {
         return `default`
     }
     
-    func getChildren() -> [SolidNativeElement] {
-        if let values = values["children"] as? [SolidNativeElement] {
+    func getChildren() -> [AnySolidNativeElement] {
+        if let values = values["children"] as? [AnySolidNativeElement] {
             return values
         }
         return []
