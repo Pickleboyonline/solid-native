@@ -8,7 +8,11 @@
 import Foundation
 import SwiftUI
 
-class SNVStackElement: SolidNativeTextElement {
+class SNVStackElement: AnySolidNativeElement {
+    
+    class override var name: String {
+        "v_stack"
+    }
 
     struct SNVStack: View {
         @ObservedObject var props: SolidNativeProps

@@ -9,12 +9,22 @@ import Foundation
 import SwiftUI
 
 class SNTextElement: AnySolidNativeElement {
+    
+    class override var name: String {
+        "sn_text"
+    }
+    
+    override var isTextElement: Bool {
+        true
+    }
+    
     struct SNTextView: View {
         
         @ObservedObject var props: SolidNativeProps
         
         var body: some View {
-            Text(props.text)
+            let text = props.getProp(name: "text", default: "")
+            Text(text)
         }
     }
     

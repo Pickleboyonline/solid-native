@@ -8,7 +8,11 @@
 import Foundation
 import SwiftUI
 
-class SNButtonElement: SolidNativeTextElement {
+class SNButtonElement: AnySolidNativeElement {
+    
+    class override var name: String {
+        "button"
+    }
 
     struct SNButton: View {
         @ObservedObject var props: SolidNativeProps

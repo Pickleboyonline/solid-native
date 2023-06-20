@@ -8,40 +8,50 @@
 import SwiftUI
 import JavaScriptCore
 
+let sharedSolidNativeCore = SolidNativeCore()
+
 @main
 struct solid_native_ios_playgroundApp: App {
-    
-    var core: SolidNativeCore
-    var rootView: AnySolidNativeElement
+    var rootElement: AnySolidNativeElement
     let jsContext = JSContext()!
     
+    
+    
     init() {
-        core = SolidNativeCore()
-        core.registerElements()
-        let textElement = core.createElement(name: "SNTextElement")!
-        textElement.setText(text: "Hello World!")
-        rootView = textElement
+        sharedSolidNativeCore.registerElements()
+        let root = sharedSolidNativeCore.createRootElement(name: "v_stack")
+        let button =  sharedSolidNativeCore.createRootElement(name: "button")
+        let text = sharedSolidNativeCore.createRootElement(name: "sn_text")
+        rootElement = root
+        
+        var inc = 0
+        
+        root.insertBefore(element: button, anchor: nil)
+        
+        root.insertBefore(element: text, anchor: button)
+        
+        
+        text.setProp("text", "Count: 0")
+        
+        
+        button.setProp("title", "Increment!")
+        
+        button.setProp("onPress", {
+            inc += 1
+            text.setProp("text", "Count \(inc)")
+        })
+        
+        
         // rootView = core.createElement(name: "SNVStackElement")!
     }
     
     var body: some Scene {
         WindowGroup {
-            rootView.render()
+            Group {
+                rootElement.render()
+            }
             // Should be static view, that takes in the element ID
         }
     }
 }
 
-
-func renderView(elemnentId: Int) {
-    // Get element
-    // Get viewType
-    // Get view
-    // Get element props <== Should be mutable, observable object that shadow the view props
-    // return view
-}
-
-// How to handle Refs:
-// Refs are JSValue Objects that are passed by the onRef callback.
-// If that callback exists,
-// It may be easier to represent the views with a class and ViewBuilder, but eh.

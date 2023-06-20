@@ -10,7 +10,6 @@
 		586DA35C2A3AFE2B00BAB0AF /* SNVStackElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DA35B2A3AFE2B00BAB0AF /* SNVStackElement.swift */; };
 		586DA35E2A3AFF3300BAB0AF /* SNButtonElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DA35D2A3AFF3300BAB0AF /* SNButtonElement.swift */; };
 		586E39DD2A37D37A001165FE /* AnySolidNativeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39DC2A37D37A001165FE /* AnySolidNativeElement.swift */; };
-		586E39DF2A37D391001165FE /* SolidNativeTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39DE2A37D391001165FE /* SolidNativeTextElement.swift */; };
 		586E39E12A37D6E7001165FE /* SNTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39E02A37D6E7001165FE /* SNTextElement.swift */; };
 		586E39E42A37D7A0001165FE /* SolidNativeRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39E32A37D7A0001165FE /* SolidNativeRef.swift */; };
 		586E39E72A37E504001165FE /* SNViewElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39E62A37E504001165FE /* SNViewElement.swift */; };
@@ -22,7 +21,6 @@
 		5882F5A52A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */; };
 		5882F5A72A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */; };
 		5882F5B52A36B3BB000D5F99 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */; };
-		5882F5B72A36B3FC000D5F99 /* SolidNativeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */; };
 		5882F5BA2A36B570000D5F99 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +45,6 @@
 		586DA35B2A3AFE2B00BAB0AF /* SNVStackElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNVStackElement.swift; sourceTree = "<group>"; };
 		586DA35D2A3AFF3300BAB0AF /* SNButtonElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButtonElement.swift; sourceTree = "<group>"; };
 		586E39DC2A37D37A001165FE /* AnySolidNativeElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySolidNativeElement.swift; sourceTree = "<group>"; };
-		586E39DE2A37D391001165FE /* SolidNativeTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeTextElement.swift; sourceTree = "<group>"; };
 		586E39E02A37D6E7001165FE /* SNTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTextElement.swift; sourceTree = "<group>"; };
 		586E39E32A37D7A0001165FE /* SolidNativeRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeRef.swift; sourceTree = "<group>"; };
 		586E39E62A37E504001165FE /* SNViewElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNViewElement.swift; sourceTree = "<group>"; };
@@ -62,7 +59,6 @@
 		5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITests.swift; sourceTree = "<group>"; };
 		5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
-		5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeElement.swift; sourceTree = "<group>"; };
 		5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,8 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				586E39DC2A37D37A001165FE /* AnySolidNativeElement.swift */,
-				5882F5B62A36B3FC000D5F99 /* SolidNativeElement.swift */,
-				586E39DE2A37D391001165FE /* SolidNativeTextElement.swift */,
 			);
 			path = BaseElements;
 			sourceTree = "<group>";
@@ -320,11 +314,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				586E39E72A37E504001165FE /* SNViewElement.swift in Sources */,
-				586E39DF2A37D391001165FE /* SolidNativeTextElement.swift in Sources */,
 				586E39DD2A37D37A001165FE /* AnySolidNativeElement.swift in Sources */,
 				586DA35E2A3AFF3300BAB0AF /* SNButtonElement.swift in Sources */,
 				5882F58C2A36B390000D5F99 /* ContentView.swift in Sources */,
-				5882F5B72A36B3FC000D5F99 /* SolidNativeElement.swift in Sources */,
 				586E39E42A37D7A0001165FE /* SolidNativeRef.swift in Sources */,
 				5882F5B52A36B3BB000D5F99 /* SolidNativeCore.swift in Sources */,
 				586E39E12A37D6E7001165FE /* SNTextElement.swift in Sources */,

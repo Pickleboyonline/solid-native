@@ -22,6 +22,10 @@ protocol AnySolidNativeElementJSExport: JSExport {
     var prev: AnySolidNativeElement?
     let id = UUID()
     
+    class var name: String {
+        "any_element"
+    }
+    
     required override init() {
     }
     
@@ -111,7 +115,9 @@ protocol AnySolidNativeElementJSExport: JSExport {
     
     // TODO: You need to override this!
     // This is how SolidJS will deliver a text prop.
-    var isTextElement = false
+    var isTextElement: Bool {
+        false
+    }
     
     func setText(text: String) {
         props.text = text
