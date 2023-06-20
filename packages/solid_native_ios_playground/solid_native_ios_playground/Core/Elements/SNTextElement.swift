@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class SNTextElement: SolidNativeTextElement {
+class SNTextElement: AnySolidNativeElement {
     struct SNTextView: View {
         
         @ObservedObject var props: SolidNativeProps
@@ -18,8 +18,9 @@ class SNTextElement: SolidNativeTextElement {
         }
     }
     
-    func render() -> some View {
-        SNTextView(props: self.props)
+    override func render() -> AnyView
+    {
+        AnyView(SNTextView(props: self.props))
     }
     
 }

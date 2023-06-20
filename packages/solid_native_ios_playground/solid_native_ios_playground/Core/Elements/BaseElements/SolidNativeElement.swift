@@ -3,7 +3,7 @@ import Foundation
 
 
 class SolidNativeElement: AnySolidNativeElement {
-    override init() {
+    required init() {
         super.init()
         self.isTextElement = false
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		586DA35C2A3AFE2B00BAB0AF /* SNVStackElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DA35B2A3AFE2B00BAB0AF /* SNVStackElement.swift */; };
+		586DA35E2A3AFF3300BAB0AF /* SNButtonElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586DA35D2A3AFF3300BAB0AF /* SNButtonElement.swift */; };
 		586E39DD2A37D37A001165FE /* AnySolidNativeElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39DC2A37D37A001165FE /* AnySolidNativeElement.swift */; };
 		586E39DF2A37D391001165FE /* SolidNativeTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39DE2A37D391001165FE /* SolidNativeTextElement.swift */; };
 		586E39E12A37D6E7001165FE /* SNTextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 586E39E02A37D6E7001165FE /* SNTextElement.swift */; };
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		586DA35B2A3AFE2B00BAB0AF /* SNVStackElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNVStackElement.swift; sourceTree = "<group>"; };
+		586DA35D2A3AFF3300BAB0AF /* SNButtonElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButtonElement.swift; sourceTree = "<group>"; };
 		586E39DC2A37D37A001165FE /* AnySolidNativeElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySolidNativeElement.swift; sourceTree = "<group>"; };
 		586E39DE2A37D391001165FE /* SolidNativeTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeTextElement.swift; sourceTree = "<group>"; };
 		586E39E02A37D6E7001165FE /* SNTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTextElement.swift; sourceTree = "<group>"; };
@@ -90,9 +94,11 @@
 		586E39DB2A37D310001165FE /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				586E39E52A37E48B001165FE /* BaseElements */,
 				586E39E02A37D6E7001165FE /* SNTextElement.swift */,
 				586E39E62A37E504001165FE /* SNViewElement.swift */,
-				586E39E52A37E48B001165FE /* BaseElements */,
+				586DA35B2A3AFE2B00BAB0AF /* SNVStackElement.swift */,
+				586DA35D2A3AFF3300BAB0AF /* SNButtonElement.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				586E39E72A37E504001165FE /* SNViewElement.swift in Sources */,
 				586E39DF2A37D391001165FE /* SolidNativeTextElement.swift in Sources */,
 				586E39DD2A37D37A001165FE /* AnySolidNativeElement.swift in Sources */,
+				586DA35E2A3AFF3300BAB0AF /* SNButtonElement.swift in Sources */,
 				5882F58C2A36B390000D5F99 /* ContentView.swift in Sources */,
 				5882F5B72A36B3FC000D5F99 /* SolidNativeElement.swift in Sources */,
 				586E39E42A37D7A0001165FE /* SolidNativeRef.swift in Sources */,
@@ -323,6 +330,7 @@
 				586E39E12A37D6E7001165FE /* SNTextElement.swift in Sources */,
 				5882F5BA2A36B570000D5F99 /* SolidNativeProps.swift in Sources */,
 				5882F58A2A36B390000D5F99 /* solid_native_ios_playgroundApp.swift in Sources */,
+				586DA35C2A3AFE2B00BAB0AF /* SNVStackElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

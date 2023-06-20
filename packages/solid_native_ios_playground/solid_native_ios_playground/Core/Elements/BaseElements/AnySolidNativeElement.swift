@@ -20,6 +20,11 @@ protocol AnySolidNativeElementJSExport: JSExport {
 @objc public class AnySolidNativeElement: NSObject, AnySolidNativeElementJSExport {
     var next: AnySolidNativeElement?
     var prev: AnySolidNativeElement?
+    let id = UUID()
+    
+    required override init() {
+    }
+    
     
     let props = SolidNativeProps()
     
@@ -113,13 +118,16 @@ protocol AnySolidNativeElementJSExport: JSExport {
     }
     
     
-    @ViewBuilder
-    func render() -> some View {
-        // view.init(isTextView: <#Bool#>, props: <#SolidNativeProps#>)
+    
+    func render() -> AnyView {
+        AnyView(EmptyView())
     }
+    // @ViewBuilder
+//    func render() -> some View {
+//        // view.init(isTextView: <#Bool#>, props: <#SolidNativeProps#>)
+//        Text("")
+//    }
 }
-
-
 
 class SolidNativeModule {
     // You can basically do anything here

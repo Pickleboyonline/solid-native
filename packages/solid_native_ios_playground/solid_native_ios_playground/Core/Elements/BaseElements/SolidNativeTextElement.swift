@@ -9,7 +9,7 @@ import Foundation
 
 
 class SolidNativeTextElement: AnySolidNativeElement {
-    override init() {
+    required init() {
         super.init()
         self.isTextElement = true
     }
