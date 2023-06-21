@@ -6,7 +6,12 @@ declare global {
         [name: string]: Record<string, unknown>
       }
       interface Element {
-        [name: string]: Record<string, unknown>
+        // children?: Element | Element[];
+        // [name: string]: Record<string, unknown>
+      }
+
+      interface ElementChildrenAttribute {
+        children?: {}; // specify children name to use
       }
     }
 }
