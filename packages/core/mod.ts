@@ -1,0 +1,1 @@
+// Provide typed definition for SolidNativeCore

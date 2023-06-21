@@ -5,10 +5,10 @@ const solidNativeData = {
       viewType: "button",
       next: 4,
       prev: undefined,
-      isTextElement: false,
       props: {
-        text: "dsadasdas",
-        children: [2, 3],
+        data: {
+          children: [2, 3],
+        },
       },
     },
     2: {

@@ -11,7 +11,7 @@ import SwiftUI
 class SNViewElement: AnySolidNativeElement {
     
     class override var name: String {
-        "view"
+        "sn_view"
     }
     
     struct SNView: View {

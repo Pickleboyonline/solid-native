@@ -11,11 +11,15 @@ import SwiftUI
 class SNVStackElement: AnySolidNativeElement {
     
     class override var name: String {
-        "v_stack"
+        "sn_v_stack_view"
     }
-
+    
+    var isOn: Bool = false
+    
     struct SNVStack: View {
         @ObservedObject var props: SolidNativeProps
+        
+        var isOn: Binding<Bool>
         
         var body: some View {
             let children = props.getChildren()
@@ -23,12 +27,28 @@ class SNVStackElement: AnySolidNativeElement {
                 ForEach(children, id: \.id) { child in
                     child.render()
                 }
+                Toggle("", isOn: isOn)
             }
         }
     }
     
     override func render() -> AnyView {
-        AnyView(SNVStack(props: self.props))
+        let valueBinding = Binding<Bool>(
+          get: {
+              return self.props.getProp(name: "value", default: self.isOn)
+          },
+          set: {
+            if self.props.getProp(name: "value", default: self.isOn) != $0 {
+              self.isOn = $0
+              let callback = self.props.getProp(name: "onChange", default: {(_ newValue: Bool) -> Void in
+                  
+              })
+              callback($0)
+            }
+          }
+        )
+        
+        return AnyView(SNVStack(props: self.props, isOn: valueBinding))
     }
     
 }

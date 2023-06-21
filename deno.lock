@@ -3,7 +3,8 @@
   "remote": {},
   "npm": {
     "specifiers": {
-      "solid-js@1.7.6": "solid-js@1.7.6"
+      "solid-js@1.7.6": "solid-js@1.7.6",
+      "solid-js@latest": "solid-js@1.7.6"
     },
     "packages": {
       "csstype@3.1.2": {

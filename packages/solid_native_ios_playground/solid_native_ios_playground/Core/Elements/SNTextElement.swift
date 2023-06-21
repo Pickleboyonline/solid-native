@@ -11,7 +11,7 @@ import SwiftUI
 class SNTextElement: AnySolidNativeElement {
     
     class override var name: String {
-        "sn_text"
+        "sn_text_view"
     }
     
     override var isTextElement: Bool {

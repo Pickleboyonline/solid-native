@@ -15,13 +15,11 @@ struct solid_native_ios_playgroundApp: App {
     var rootElement: AnySolidNativeElement
     let jsContext = JSContext()!
     
-    
-    
     init() {
         sharedSolidNativeCore.registerElements()
-        let root = sharedSolidNativeCore.createRootElement(name: "v_stack")
-        let button =  sharedSolidNativeCore.createRootElement(name: "button")
-        let text = sharedSolidNativeCore.createRootElement(name: "sn_text")
+        let root = sharedSolidNativeCore.createRootElement(name: "sn_v_stack_view")
+        let button =  sharedSolidNativeCore.createRootElement(name: "sn_button_view")
+        let text = sharedSolidNativeCore.createRootElement(name: "sn_text_view")
         rootElement = root
         
         var inc = 0
@@ -41,8 +39,20 @@ struct solid_native_ios_playgroundApp: App {
             text.setProp("text", "Count \(inc)")
         })
         
+        var toggle = true
         
-        // rootView = core.createElement(name: "SNVStackElement")!
+        root.setProp("value", toggle)
+        
+        root.setProp("onChange") {
+            (_ newValue: Bool) -> Void in
+            toggle = newValue
+            root.setProp("value", newValue)
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+            toggle = !toggle
+            root.setProp("value", toggle)
+        }
     }
     
     var body: some Scene {
@@ -50,7 +60,6 @@ struct solid_native_ios_playgroundApp: App {
             Group {
                 rootElement.render()
             }
-            // Should be static view, that takes in the element ID
         }
     }
 }
