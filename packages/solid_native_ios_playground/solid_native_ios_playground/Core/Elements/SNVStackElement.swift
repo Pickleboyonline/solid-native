@@ -11,7 +11,7 @@ import SwiftUI
 class SNVStackElement: AnySolidNativeElement {
     
     class override var name: String {
-        "sn_v_stack_view"
+        "sn_v_stack"
     }
     
     var isOn: Bool = false
@@ -27,7 +27,7 @@ class SNVStackElement: AnySolidNativeElement {
                 ForEach(children, id: \.id) { child in
                     child.render()
                 }
-                Toggle("", isOn: isOn)
+                // Toggle("", isOn: isOn)
             }
         }
     }

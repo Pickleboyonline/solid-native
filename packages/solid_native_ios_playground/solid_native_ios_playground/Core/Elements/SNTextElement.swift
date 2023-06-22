@@ -11,7 +11,7 @@ import SwiftUI
 class SNTextElement: AnySolidNativeElement {
     
     class override var name: String {
-        "sn_text_view"
+        "sn_text"
     }
     
     override var isTextElement: Bool {
@@ -23,7 +23,7 @@ class SNTextElement: AnySolidNativeElement {
         @ObservedObject var props: SolidNativeProps
         
         var body: some View {
-            let text = props.getProp(name: "text", default: "")
+            let text = props.getProp(name: "text", default: "Hello!")
             Text(text)
         }
     }

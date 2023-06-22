@@ -25,10 +25,14 @@ import JavaScriptCore
     
     var getNextSiblingElementId: @convention(block) (String) -> String? { get }
     
-    var setPropertyOnElement: @convention(block) (String, String, Any) -> Void { get }
+    var setPropertyOnElement: @convention(block) (String, String, Any?) -> Void { get }
+    
+    var getRootElement: @convention(block) () -> String { get }
 }
 
 typealias ElementName = String
+
+let ROOT_ELEMENT_CLASS = SNVStackElement.self
 
 @objc public class SolidNativeCore: NSObject, SolidNativeCoreJSExport {
     
@@ -77,21 +81,22 @@ typealias ElementName = String
     
     lazy var getFirstChildElementId: @convention(block) (_ elementId: String) -> String? = { elementId in
         self.createdElementsById[elementId]?.firstChild?.id.uuidString
+        // return nil
     }
     
     lazy var getNextSiblingElementId: @convention(block) (_ elementId: String) -> String? = { elementId in
         self.createdElementsById[elementId]?.next?.id.uuidString
     }
     
-    lazy var setPropertyOnElement: @convention(block) (_ elementId: String, _ propertyName: String, _ value: Any) -> Void =
+    lazy var setPropertyOnElement: @convention(block) (_ elementId: String, _ propertyName: String, _ value: Any?) -> Void =
     { elementId, propertyName, value in
         if let element = self.createdElementsById[elementId] {
-            element.setProp(propertyName, value)
+            element.setProp(propertyName, value as Any)
         }
     }
     
     
-    private var elementRegistry: [ElementName: AnySolidNativeElement.Type] = [:]
+    private var elementRegistry: [ElementName: AnySolidNativeElement.Type] = [ROOT_ELEMENT_CLASS.name : ROOT_ELEMENT_CLASS.self]
     
     private var createdElementsById: [String: AnySolidNativeElement] = [:]
     
@@ -106,9 +111,25 @@ typealias ElementName = String
         registerElement(SNTextElement.self)
     }
     
-    func createRootElement(name: String) -> AnySolidNativeElement {
+    private var _rootElement: AnySolidNativeElement?
+    
+    private func createRootElement(name: String) -> AnySolidNativeElement {
         let newElement = elementRegistry[name]!.init()
         createdElementsById[newElement.id.uuidString] = newElement
         return newElement
+    }
+    
+    var rootElement: AnySolidNativeElement {
+        if let element = _rootElement {
+            return element
+        }
+        let newRootElement = createRootElement(name: ROOT_ELEMENT_CLASS.name)
+        _rootElement = newRootElement
+        return newRootElement
+    }
+    
+    
+    lazy var getRootElement: @convention(block) () -> String = {
+        self.rootElement.id.uuidString
     }
 }

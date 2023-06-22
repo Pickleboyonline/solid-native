@@ -1,5 +1,4 @@
 type TextProps = {
-  title: string;
   children: JSX.Element;
 };
 

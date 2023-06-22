@@ -12,55 +12,94 @@ let sharedSolidNativeCore = SolidNativeCore()
 
 @main
 struct solid_native_ios_playgroundApp: App {
-    var rootElement: AnySolidNativeElement
-    let jsContext = JSContext()!
-    
+
     init() {
+        // Initialize core object into global
+        // Download JS
+        // print("JSValue: " + SharedJSConext.sharedContext.evaluateScript("globalThis").toString()!)
         sharedSolidNativeCore.registerElements()
-        let root = sharedSolidNativeCore.createRootElement(name: "sn_v_stack_view")
-        let button =  sharedSolidNativeCore.createRootElement(name: "sn_button_view")
-        let text = sharedSolidNativeCore.createRootElement(name: "sn_text_view")
-        rootElement = root
-        
-        var inc = 0
-        
-        root.insertBefore(element: button, anchor: nil)
-        
-        root.insertBefore(element: text, anchor: button)
-        
-        
-        text.setProp("text", "Count: 0")
-        
-        
-        button.setProp("title", "Increment!")
-        
-        button.setProp("onPress", {
-            inc += 1
-            text.setProp("text", "Count \(inc)")
-        })
-        
-        var toggle = true
-        
-        root.setProp("value", toggle)
-        
-        root.setProp("onChange") {
-            (_ newValue: Bool) -> Void in
-            toggle = newValue
-            root.setProp("value", newValue)
-        }
-        
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            toggle = !toggle
-            root.setProp("value", toggle)
-        }
+        print("root element Id: " + sharedSolidNativeCore.rootElement.id.uuidString)
+        // setupApp()
+        setupAppSync()
     }
     
     var body: some Scene {
         WindowGroup {
             Group {
-                rootElement.render()
+                sharedSolidNativeCore.rootElement.render()
             }
         }
     }
 }
 
+
+func setupApp() {
+
+    Task {
+        if let url = URL(string: "http://localhost:8080") {
+            do {
+                let (data, res) = try await URLSession.shared.data(from: url)
+    
+                guard let res = res as? HTTPURLResponse,
+                      res.statusCode == 200 /* OK */ else {
+                    throw URLError(.badServerResponse)
+                }
+    
+                let bundle = String(decoding: data, as: UTF8.self)
+                
+                SharedJSConext.sharedContext.exceptionHandler = { (_, value) in
+                    print("Error: " + value!.toString()!)
+                }
+    
+                let jsPrint: @convention(block) (_ contents: String) -> Void = { str in
+                    print(str)
+                }
+                
+                SharedJSConext.sharedContext.isInspectable = true
+                TimerJS.registerInto(jsContext: SharedJSConext.sharedContext)
+                SharedJSConext.sharedContext.setObject(jsPrint, forKeyedSubscript: "_print" as NSString)
+                SharedJSConext.sharedContext.setObject(sharedSolidNativeCore, forKeyedSubscript: "_SolidNativeCore" as NSString)
+                SharedJSConext.sharedContext.evaluateScript(bundle)
+                
+    
+            } catch {
+                // contents could not be loaded
+                print("Url was bad!")
+            }
+        } else {
+            // the URL was bad!
+            print("ERROR: Url was bad!")
+        }
+    }
+}
+
+func setupAppSync() {
+    
+    if let url = URL(string: "http://localhost:8080") {
+        do {
+            let bundle = try String(contentsOf: url)
+            
+            SharedJSConext.sharedContext.exceptionHandler = { (_, value) in
+                print("Error: " + value!.toString()!)
+            }
+
+            let jsPrint: @convention(block) (_ contents: String) -> Void = { str in
+                print(str)
+            }
+            SharedJSConext.sharedContext.isInspectable = true
+            TimerJS.registerInto(jsContext: SharedJSConext.sharedContext)
+            SharedJSConext.sharedContext.setObject(jsPrint, forKeyedSubscript: "_print" as NSString)
+            SharedJSConext.sharedContext.setObject(sharedSolidNativeCore, forKeyedSubscript: "_SolidNativeCore" as NSString)
+            SharedJSConext.sharedContext.evaluateScript(bundle)
+            
+
+        } catch {
+            // contents could not be loaded
+            print("Url was bad!")
+        }
+    } else {
+        // the URL was bad!
+        print("ERROR: Url was bad!")
+    }
+    
+}
