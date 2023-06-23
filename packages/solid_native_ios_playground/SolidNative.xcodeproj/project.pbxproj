@@ -54,14 +54,14 @@
 		586E39E02A37D6E7001165FE /* SNTextElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNTextElement.swift; sourceTree = "<group>"; };
 		586E39E32A37D7A0001165FE /* SolidNativeRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeRef.swift; sourceTree = "<group>"; };
 		586E39E62A37E504001165FE /* SNViewElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNViewElement.swift; sourceTree = "<group>"; };
-		5882F5862A36B390000D5F99 /* solid_native_ios_playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = solid_native_ios_playground.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5882F5862A36B390000D5F99 /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5882F5892A36B390000D5F99 /* solid_native_ios_playgroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundApp.swift; sourceTree = "<group>"; };
 		5882F58B2A36B390000D5F99 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5882F58D2A36B391000D5F99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5882F5902A36B391000D5F99 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5882F5962A36B391000D5F99 /* solid_native_ios_playgroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = solid_native_ios_playgroundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5882F5962A36B391000D5F99 /* SolidNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5882F59A2A36B391000D5F99 /* solid_native_ios_playgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundTests.swift; sourceTree = "<group>"; };
-		5882F5A02A36B391000D5F99 /* solid_native_ios_playgroundUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = solid_native_ios_playgroundUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5882F5A02A36B391000D5F99 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITests.swift; sourceTree = "<group>"; };
 		5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = solid_native_ios_playgroundUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
@@ -124,9 +124,9 @@
 		5882F57D2A36B390000D5F99 = {
 			isa = PBXGroup;
 			children = (
-				5882F5882A36B390000D5F99 /* solid_native_ios_playground */,
-				5882F5992A36B391000D5F99 /* solid_native_ios_playgroundTests */,
-				5882F5A32A36B391000D5F99 /* solid_native_ios_playgroundUITests */,
+				5882F5882A36B390000D5F99 /* solidNativeApp */,
+				5882F5992A36B391000D5F99 /* solidNativeTests */,
+				5882F5A32A36B391000D5F99 /* solidNativeUITests */,
 				5882F5872A36B390000D5F99 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,14 +134,14 @@
 		5882F5872A36B390000D5F99 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5882F5862A36B390000D5F99 /* solid_native_ios_playground.app */,
-				5882F5962A36B391000D5F99 /* solid_native_ios_playgroundTests.xctest */,
-				5882F5A02A36B391000D5F99 /* solid_native_ios_playgroundUITests.xctest */,
+				5882F5862A36B390000D5F99 /* SolidNative.app */,
+				5882F5962A36B391000D5F99 /* SolidNativeTests.xctest */,
+				5882F5A02A36B391000D5F99 /* SolidNativeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5882F5882A36B390000D5F99 /* solid_native_ios_playground */ = {
+		5882F5882A36B390000D5F99 /* solidNativeApp */ = {
 			isa = PBXGroup;
 			children = (
 				5882F5B32A36B3A2000D5F99 /* Core */,
@@ -153,7 +153,7 @@
 				5844A9D72A43B7890038B83A /* ExampleCode.swift */,
 				5844A9D92A43E1180038B83A /* JSTimers.swift */,
 			);
-			path = solid_native_ios_playground;
+			path = solidNativeApp;
 			sourceTree = "<group>";
 		};
 		5882F58F2A36B391000D5F99 /* Preview Content */ = {
@@ -164,21 +164,21 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		5882F5992A36B391000D5F99 /* solid_native_ios_playgroundTests */ = {
+		5882F5992A36B391000D5F99 /* solidNativeTests */ = {
 			isa = PBXGroup;
 			children = (
 				5882F59A2A36B391000D5F99 /* solid_native_ios_playgroundTests.swift */,
 			);
-			path = solid_native_ios_playgroundTests;
+			path = solidNativeTests;
 			sourceTree = "<group>";
 		};
-		5882F5A32A36B391000D5F99 /* solid_native_ios_playgroundUITests */ = {
+		5882F5A32A36B391000D5F99 /* solidNativeUITests */ = {
 			isa = PBXGroup;
 			children = (
 				5882F5A42A36B391000D5F99 /* solid_native_ios_playgroundUITests.swift */,
 				5882F5A62A36B391000D5F99 /* solid_native_ios_playgroundUITestsLaunchTests.swift */,
 			);
-			path = solid_native_ios_playgroundUITests;
+			path = solidNativeUITests;
 			sourceTree = "<group>";
 		};
 		5882F5B32A36B3A2000D5F99 /* Core */ = {
@@ -195,9 +195,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5882F5852A36B390000D5F99 /* solid_native_ios_playground */ = {
+		5882F5852A36B390000D5F99 /* SolidNative */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5882F5AA2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playground" */;
+			buildConfigurationList = 5882F5AA2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNative" */;
 			buildPhases = (
 				5882F5822A36B390000D5F99 /* Sources */,
 				5882F5832A36B390000D5F99 /* Frameworks */,
@@ -207,14 +207,14 @@
 			);
 			dependencies = (
 			);
-			name = solid_native_ios_playground;
+			name = SolidNative;
 			productName = solid_native_ios_playground;
-			productReference = 5882F5862A36B390000D5F99 /* solid_native_ios_playground.app */;
+			productReference = 5882F5862A36B390000D5F99 /* SolidNative.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5882F5952A36B391000D5F99 /* solid_native_ios_playgroundTests */ = {
+		5882F5952A36B391000D5F99 /* SolidNativeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5882F5AD2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playgroundTests" */;
+			buildConfigurationList = 5882F5AD2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNativeTests" */;
 			buildPhases = (
 				5882F5922A36B391000D5F99 /* Sources */,
 				5882F5932A36B391000D5F99 /* Frameworks */,
@@ -225,14 +225,14 @@
 			dependencies = (
 				5882F5982A36B391000D5F99 /* PBXTargetDependency */,
 			);
-			name = solid_native_ios_playgroundTests;
+			name = SolidNativeTests;
 			productName = solid_native_ios_playgroundTests;
-			productReference = 5882F5962A36B391000D5F99 /* solid_native_ios_playgroundTests.xctest */;
+			productReference = 5882F5962A36B391000D5F99 /* SolidNativeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5882F59F2A36B391000D5F99 /* solid_native_ios_playgroundUITests */ = {
+		5882F59F2A36B391000D5F99 /* SolidNativeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5882F5B02A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playgroundUITests" */;
+			buildConfigurationList = 5882F5B02A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */;
 			buildPhases = (
 				5882F59C2A36B391000D5F99 /* Sources */,
 				5882F59D2A36B391000D5F99 /* Frameworks */,
@@ -243,9 +243,9 @@
 			dependencies = (
 				5882F5A22A36B391000D5F99 /* PBXTargetDependency */,
 			);
-			name = solid_native_ios_playgroundUITests;
+			name = SolidNativeUITests;
 			productName = solid_native_ios_playgroundUITests;
-			productReference = 5882F5A02A36B391000D5F99 /* solid_native_ios_playgroundUITests.xctest */;
+			productReference = 5882F5A02A36B391000D5F99 /* SolidNativeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -271,7 +271,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5882F5812A36B390000D5F99 /* Build configuration list for PBXProject "solid_native_ios_playground" */;
+			buildConfigurationList = 5882F5812A36B390000D5F99 /* Build configuration list for PBXProject "SolidNative" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -284,9 +284,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5882F5852A36B390000D5F99 /* solid_native_ios_playground */,
-				5882F5952A36B391000D5F99 /* solid_native_ios_playgroundTests */,
-				5882F59F2A36B391000D5F99 /* solid_native_ios_playgroundUITests */,
+				5882F5852A36B390000D5F99 /* SolidNative */,
+				5882F5952A36B391000D5F99 /* SolidNativeTests */,
+				5882F59F2A36B391000D5F99 /* SolidNativeUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -360,12 +360,12 @@
 /* Begin PBXTargetDependency section */
 		5882F5982A36B391000D5F99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5882F5852A36B390000D5F99 /* solid_native_ios_playground */;
+			target = 5882F5852A36B390000D5F99 /* SolidNative */;
 			targetProxy = 5882F5972A36B391000D5F99 /* PBXContainerItemProxy */;
 		};
 		5882F5A22A36B391000D5F99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5882F5852A36B390000D5F99 /* solid_native_ios_playground */;
+			target = 5882F5852A36B390000D5F99 /* SolidNative */;
 			targetProxy = 5882F5A12A36B391000D5F99 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -556,7 +556,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/solid_native_ios_playground.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/solid_native_ios_playground";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SolidNative.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SolidNative";
 			};
 			name = Debug;
 		};
@@ -575,7 +575,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/solid_native_ios_playground.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/solid_native_ios_playground";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SolidNative.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SolidNative";
 			};
 			name = Release;
 		};
@@ -616,7 +616,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5882F5812A36B390000D5F99 /* Build configuration list for PBXProject "solid_native_ios_playground" */ = {
+		5882F5812A36B390000D5F99 /* Build configuration list for PBXProject "SolidNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5882F5A82A36B391000D5F99 /* Debug */,
@@ -625,7 +625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5882F5AA2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playground" */ = {
+		5882F5AA2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5882F5AB2A36B391000D5F99 /* Debug */,
@@ -634,7 +634,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5882F5AD2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playgroundTests" */ = {
+		5882F5AD2A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNativeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5882F5AE2A36B391000D5F99 /* Debug */,
@@ -643,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5882F5B02A36B391000D5F99 /* Build configuration list for PBXNativeTarget "solid_native_ios_playgroundUITests" */ = {
+		5882F5B02A36B391000D5F99 /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5882F5B12A36B391000D5F99 /* Debug */,

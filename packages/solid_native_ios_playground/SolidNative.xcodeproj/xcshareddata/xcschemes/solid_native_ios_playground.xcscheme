@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5882F5852A36B390000D5F99"
-               BuildableName = "solid_native_ios_playground.app"
-               BlueprintName = "solid_native_ios_playground"
-               ReferencedContainer = "container:solid_native_ios_playground.xcodeproj">
+               BuildableName = "SolidNative.app"
+               BlueprintName = "SolidNative"
+               ReferencedContainer = "container:SolidNative.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5882F5952A36B391000D5F99"
-               BuildableName = "solid_native_ios_playgroundTests.xctest"
-               BlueprintName = "solid_native_ios_playgroundTests"
-               ReferencedContainer = "container:solid_native_ios_playground.xcodeproj">
+               BuildableName = "SolidNativeTests.xctest"
+               BlueprintName = "SolidNativeTests"
+               ReferencedContainer = "container:SolidNative.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5882F59F2A36B391000D5F99"
-               BuildableName = "solid_native_ios_playgroundUITests.xctest"
-               BlueprintName = "solid_native_ios_playgroundUITests"
-               ReferencedContainer = "container:solid_native_ios_playground.xcodeproj">
+               BuildableName = "SolidNativeUITests.xctest"
+               BlueprintName = "SolidNativeUITests"
+               ReferencedContainer = "container:SolidNative.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5882F5852A36B390000D5F99"
-            BuildableName = "solid_native_ios_playground.app"
-            BlueprintName = "solid_native_ios_playground"
-            ReferencedContainer = "container:solid_native_ios_playground.xcodeproj">
+            BuildableName = "SolidNative.app"
+            BlueprintName = "SolidNative"
+            ReferencedContainer = "container:SolidNative.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "5882F5852A36B390000D5F99"
-            BuildableName = "solid_native_ios_playground.app"
-            BlueprintName = "solid_native_ios_playground"
-            ReferencedContainer = "container:solid_native_ios_playground.xcodeproj">
+            BuildableName = "SolidNative.app"
+            BlueprintName = "SolidNative"
+            ReferencedContainer = "container:SolidNative.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
