@@ -11,7 +11,7 @@ import JavaScriptCore
 let sharedSolidNativeCore = SolidNativeCore()
 
 @main
-struct solid_native_ios_playgroundApp: App {
+struct solidNativeApp: App {
 
     init() {
         // Initialize core object into global
@@ -22,7 +22,6 @@ struct solid_native_ios_playgroundApp: App {
         sharedSolidNativeCore.registerCoreInJSContext()
         // setupApp()
         setupAppSync()
-        // print("JSValue: " + SharedJSConext.sharedContext.evaluateScript("JSON").toString()!)
     }
     
     var body: some Scene {
