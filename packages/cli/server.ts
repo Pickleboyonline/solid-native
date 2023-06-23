@@ -1,4 +1,4 @@
-import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Application, Router } from "https://deno.land/x/oak@v12.5.0/mod.ts";
 import * as esbuild from "https://deno.land/x/esbuild@v0.18.6/mod.js";
 
 import * as esbuildDenoLoader from "https://deno.land/x/esbuild_deno_loader@0.8.1/mod.ts";

@@ -24,7 +24,7 @@ declare global {
     }
 
     interface ElementChildrenAttribute {
-      children?: {}; // specify children name to use
+      children?: unknown; // specify children name to use
     }
   }
 }

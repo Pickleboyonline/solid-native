@@ -1,5 +1,4 @@
-// TODO:
-import { createRenderer } from "npm:solid-js@1.7.6/universal";
+import { createRenderer } from "solid-js/universal";
 import { SolidNativeElement } from "./types.ts";
 import { SolidNativeCore } from "./solid_native_core.ts";
 
