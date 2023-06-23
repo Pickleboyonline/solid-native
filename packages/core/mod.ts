@@ -2,3 +2,4 @@
 
 export * from "./renderer.ts";
 export * from "./solid_native_core.ts";
+export * from "./views/mod.ts";

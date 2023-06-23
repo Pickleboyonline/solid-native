@@ -1,15 +1,16 @@
 {
-    "tasks": {
-        "solid_native": "deno run packages/cli/mod.ts",
-        "start": "deno run --allow-all packages/cli/server.ts"
-    },
-    "imports": {
-        "solid-js/universal": "npm:solid-js@1.7.6/universal",
-        "solid-js": "npm:solid-js@1.7.6",
-        "solid-js/jsx-runtime": "npm:solid-js@1.7.6/jsx-runtime",
-        "solid-native-renderer": "./packages/core/renderer.ts"
-    },
-    "compilerOptions": {
-        "jsx": "preserve"
-    }
+  "tasks": {
+    "solid_native": "deno run packages/cli/mod.ts",
+    "start": "deno run --allow-all packages/cli/server.ts"
+  },
+  "imports": {
+    "solid-js/universal": "npm:solid-js@1.7.6/universal",
+    "solid-js": "npm:solid-js@1.7.6",
+    "solid-js/jsx-runtime": "npm:solid-js@1.7.6/jsx-runtime",
+    "solid-native-renderer": "./packages/core/renderer.ts",
+    "solid-native/core": "./packages/core/mod.ts"
+  },
+  "compilerOptions": {
+    "jsx": "preserve"
+  }
 }

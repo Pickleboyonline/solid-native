@@ -9,8 +9,16 @@ import Foundation
 import JavaScriptCore
 import SwiftUI
 
-protocol AnySolidNativeElementJSExport: JSExport {
+@objc protocol AnySolidNativeElementJSExport: JSExport {
     // Expose methods needed.
+    var firstChild: AnySolidNativeElement? { get }
+    var parentElement: AnySolidNativeElement? {get}
+    func setProp(_ name: String, _ value: Any)
+    var isTextElement: Bool {get}
+    func removeChild(_ element: AnySolidNativeElement)
+    func insertBefore(_ element: AnySolidNativeElement, _ anchor: AnySolidNativeElement?)
+    var next: AnySolidNativeElement? {get}
+    var prev: AnySolidNativeElement? {get}
 }
 
 /**
@@ -18,8 +26,8 @@ protocol AnySolidNativeElementJSExport: JSExport {
  Contains a a solid native view
  */
 @objc public class AnySolidNativeElement: NSObject, AnySolidNativeElementJSExport {
-    var next: AnySolidNativeElement?
-    var prev: AnySolidNativeElement?
+    dynamic var next: AnySolidNativeElement?
+    dynamic var prev: AnySolidNativeElement?
     let id = UUID()
     
     class var name: String {
@@ -32,7 +40,8 @@ protocol AnySolidNativeElementJSExport: JSExport {
     
     let props = SolidNativeProps()
     
-    func setProp(_ name: String, _ value: Any) {
+    @objc public func setProp(_ name: String, _ value: Any) {
+        // print("JS value type: " + String(value!.isObject))
         assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
         props.values[name] = value
     }
@@ -44,9 +53,9 @@ protocol AnySolidNativeElementJSExport: JSExport {
     var children: [AnySolidNativeElement] = []
     
     // Can be getter
-    var firstChild: AnySolidNativeElement?
+    dynamic var firstChild: AnySolidNativeElement?
     
-    var parentElement: AnySolidNativeElement?
+    dynamic var parentElement: AnySolidNativeElement?
     
     // Iterate over first child prop
     // O(n)
@@ -62,9 +71,10 @@ protocol AnySolidNativeElementJSExport: JSExport {
         children = newChildren
         _setProp("children", newChildren)
     }
+    
    
     // O(1)
-    func removeChild(element: AnySolidNativeElement) {
+    func removeChild(_ element: AnySolidNativeElement) {
         // Link the nodes prev and next of it
         if let childNextSibling = element.next,
            let childPrevSibling = element.prev {
@@ -86,10 +96,11 @@ protocol AnySolidNativeElementJSExport: JSExport {
     }
     
     // O(1)
-    func insertBefore(element: AnySolidNativeElement, anchor: AnySolidNativeElement?) {
+    func insertBefore(_ element: AnySolidNativeElement, _ anchor: AnySolidNativeElement?) {
         // If no anchor set first child to view (make head)
         //
         if let anchor = anchor {
+            
             if anchor === firstChild {
                 anchor.prev = element
                 element.next = anchor
@@ -100,10 +111,20 @@ protocol AnySolidNativeElementJSExport: JSExport {
                 anchor.prev = element
                 element.next = anchor
             }
+            
         } else if let firstChild = firstChild {
-            firstChild.prev = element
-            element.next = firstChild
-            self.firstChild = element
+            // Make it at the end of the list
+            var nextChild: AnySolidNativeElement? = firstChild
+            while let child = nextChild {
+                nextChild = child.next
+                
+                if nextChild == nil {
+                    let lastChild = child
+                    lastChild.next = element;
+                    element.prev = lastChild
+                }
+            }
+            
         } else {
             firstChild = element
         }
@@ -115,7 +136,7 @@ protocol AnySolidNativeElementJSExport: JSExport {
     
     // TODO: You need to override this!
     // This is how SolidJS will deliver a text prop.
-    var isTextElement: Bool {
+    dynamic var isTextElement: Bool {
         false
     }
     

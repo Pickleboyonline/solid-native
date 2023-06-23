@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class SNButtonElement: AnySolidNativeElement {
+@objc public class SNButtonElement: AnySolidNativeElement {
     
     class override var name: String {
         "sn_button"

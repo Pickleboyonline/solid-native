@@ -1,39 +1,39 @@
 import { SolidNativeElement } from "./types.ts";
 
-interface TSolidNativeCore {
+export interface TSolidNativeCore<Node> {
   /**
    * @returns elementID
    */
-  createElement: (elementName: SolidNativeElement) => SolidNativeElement;
-  isTextElement: (elementId: SolidNativeElement) => boolean;
+  createElementByName: (elementName: string) => Node;
+  // isTextElement: (elementId: Node) => boolean;
   /**
    * @returns elementID
    */
-  createTextElement: () => SolidNativeElement;
-  removeElement: (
-    parentId: SolidNativeElement,
-    childId: SolidNativeElement
-  ) => void;
-  insertElement: (
-    parentId: SolidNativeElement,
-    childId: SolidNativeElement,
-    anchorId?: SolidNativeElement
-  ) => void;
-  getParentElementId: (
-    elementId: SolidNativeElement
-  ) => SolidNativeElement | undefined;
-  getFirstChildElementId: (
-    elementId: SolidNativeElement
-  ) => SolidNativeElement | undefined;
-  getNextSiblingElementId: (
-    elementId: SolidNativeElement
-  ) => SolidNativeElement | undefined;
-  setPropertyOnElement: (
-    elementId: SolidNativeElement,
-    propertyName: SolidNativeElement,
-    value: unknown
-  ) => void;
-  getRootElement: () => SolidNativeElement;
+  createTextElement: () => Node;
+  // removeElement: (
+  //   parentId: Node,
+  //   childId: Node
+  // ) => void;
+  // insertElement: (
+  //   parentId: Node,
+  //   childId: Node,
+  //   anchorId?: Node
+  // ) => void;
+  // getParentElementId: (
+  //   elementId: Node
+  // ) => Node | undefined;
+  // getFirstChildElementId: (
+  //   elementId: Node
+  // ) => Node | undefined;
+  // getNextSiblingElementId: (
+  //   elementId: Node
+  // ) => Node | undefined;
+  // setPropertyOnElement: (
+  //   elementId: Node,
+  //   propertyName: string,
+  //   value: unknown
+  // ) => void;
+  getRootElement: () => Node;
 }
 
 /**
@@ -59,6 +59,6 @@ export function getNativeModule<ModuleType>(moduleName: string): ModuleType {
 }
 
 export const SolidNativeCore =
-  getNativeModule<TSolidNativeCore>("SolidNativeCore");
+  getNativeModule<TSolidNativeCore<SolidNativeElement>>("SolidNativeCore");
 
 export const print = getNativeModule<(str: string) => void>("print");

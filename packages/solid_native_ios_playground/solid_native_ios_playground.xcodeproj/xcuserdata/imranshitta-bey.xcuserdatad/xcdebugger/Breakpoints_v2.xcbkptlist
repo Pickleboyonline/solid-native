@@ -39,493 +39,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BEC0A62D-D458-429D-817F-29674139E432"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "createElement"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "24573AE3-CFEB-4A2C-B644-EB3020259A14"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "isTextElement"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F605B1CE-161E-4559-A349-1B09065E04C0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "createTextElement"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "90DF9E67-14CB-4C54-893C-BC19FC659E31"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "removeElement"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "90DF9E67-14CB-4C54-893C-BC19FC659E31 - a4859c31f8eaf14f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String) -&gt; () in solid_native_ios_playground.SolidNativeCore.removeElement.getter : @convention(block) (Swift.String, Swift.String) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "104">
-               </Location>
-               <Location
-                  uuid = "90DF9E67-14CB-4C54-893C-BC19FC659E31 - a4859c31f8eaf14f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String) -&gt; () in solid_native_ios_playground.SolidNativeCore.removeElement.getter : @convention(block) (Swift.String, Swift.String) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "240">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "836A8A87-1F68-47FC-8AA2-F2730421AE23"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "SolidNativeCore"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "836A8A87-1F68-47FC-8AA2-F2730421AE23 - 9121d9e7ed08ea39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.insertElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "188">
-               </Location>
-               <Location
-                  uuid = "836A8A87-1F68-47FC-8AA2-F2730421AE23 - 9121d9e7ed08ea39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.insertElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "316">
-               </Location>
-               <Location
-                  uuid = "836A8A87-1F68-47FC-8AA2-F2730421AE23 - 9121d9e7ed08ea39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.insertElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1144">
-               </Location>
-               <Location
-                  uuid = "836A8A87-1F68-47FC-8AA2-F2730421AE23 - 9121d9e7ed08ea39"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.insertElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1416">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4CA5F182-A6DA-46D0-9161-33A755D59907"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "getParentElementId"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "getFirstChildElementId"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555 - fb56aa01be2e083e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getFirstChildElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "83"
-                  endingLineNumber = "83"
-                  offsetFromSymbolStart = "156">
-               </Location>
-               <Location
-                  uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555 - fb56aa01be2e085f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getFirstChildElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555 - a495fcb2caae24dc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; __C.JSValue in solid_native_ios_playground.SolidNativeCore.getFirstChildElementId.getter : @convention(block) (Swift.String) -&gt; __C.JSValue"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "76">
-               </Location>
-               <Location
-                  uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555 - fb56aa01be2e0980"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getFirstChildElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "85"
-                  endingLineNumber = "85"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "E079843D-B913-4B4A-BEC5-B81843EAF555 - fb56aa01be2e085f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getFirstChildElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "84"
-                  endingLineNumber = "84"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F74E145A-8EE4-4436-8BC5-87FA975668A2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
-            landmarkName = "getNextSiblingElementId"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "F74E145A-8EE4-4436-8BC5-87FA975668A2 - 7292ecb03f7056fe"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "solid_native_ios_playground.SolidNativeCore.getNextSiblingElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "416">
-               </Location>
-               <Location
-                  uuid = "F74E145A-8EE4-4436-8BC5-87FA975668A2 - 720bd912611e5bfc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getNextSiblingElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "608">
-               </Location>
-               <Location
-                  uuid = "F74E145A-8EE4-4436-8BC5-87FA975668A2 - 720bd912611e5bfc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.getNextSiblingElementId.getter : @convention(block) (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "156">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DB972225-8635-47FF-AAB3-82180C702BD6"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "SolidNativeCore"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "SolidNativeCore"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - c92680da66758a0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Any) -&gt; () in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Any) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - c92680da66758a0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Any) -&gt; () in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Any) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "108">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - c92680da66758a0a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Any) -&gt; () in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Any) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "240">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - d7aa7b951d8cbf84"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Any) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Any) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "108">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - d7aa7b951d8cbf84"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Any) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Any) -&gt; Swift.Optional&lt;Swift.String&gt;"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "240">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - 3c39afa6086e8ddc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Any&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "904">
-               </Location>
-               <Location
-                  uuid = "81D624D8-3DE4-4219-8176-99D02B13AD96 - 3c39afa6086e8ddc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String, Swift.String, Swift.Optional&lt;Any&gt;) -&gt; () in solid_native_ios_playground.SolidNativeCore.setPropertyOnElement.getter : @convention(block) (Swift.String, Swift.String, Swift.Optional&lt;Any&gt;) -&gt; ()"
-                  moduleName = "solid_native_ios_playground"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "93"
-                  endingLineNumber = "93"
-                  offsetFromSymbolStart = "1180">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "BD2C987E-03B7-4F89-85B2-AF87F075B4D8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
@@ -567,6 +82,543 @@
             endingLineNumber = "28"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "881BE79B-70B9-4685-8200-DA3DEBF22E21"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "SolidNativeCoreJSExport"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "94AFFCA9-F9C8-416A-B2F3-AC968FD1A019"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8648E4C2-5D8D-4C3E-AF87-C0542D18DE10"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "73B22F1F-309F-4EE3-9F8C-652796A014F0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77389D43-9243-4A0D-BBD3-CCD643774C7E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "77389D43-9243-4A0D-BBD3-CCD643774C7E - 7351720ddaf559d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SolidNativeCore.registerCoreInJSContext() -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "3508">
+               </Location>
+               <Location
+                  uuid = "77389D43-9243-4A0D-BBD3-CCD643774C7E - 7351720ddaf559d8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SolidNativeCore.registerCoreInJSContext() -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "3588">
+               </Location>
+               <Location
+                  uuid = "77389D43-9243-4A0D-BBD3-CCD643774C7E - e5db9b0241773b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.String, Swift.String) -&gt; () in solid_native_ios_playground.SolidNativeCore.registerCoreInJSContext() -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "992">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D2FA447C-D5E8-446E-B4B2-CA67CEC28BA4"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1FA86BE1-4599-4942-A9F6-DBF823E15F50"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B1A96239-09E0-413F-A034-0A1DAC8CDFDB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DA2D96D0-CCF4-4A2B-B872-C5371B1CC4D3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "DA2D96D0-CCF4-4A2B-B872-C5371B1CC4D3 - 7351720ddaf5a51f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SolidNativeCore.registerCoreInJSContext() -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "5616">
+               </Location>
+               <Location
+                  uuid = "DA2D96D0-CCF4-4A2B-B872-C5371B1CC4D3 - 426c9390a5109a6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #7 (Swift.String) -&gt; Swift.Optional&lt;Swift.String&gt; in solid_native_ios_playground.SolidNativeCore.registerCoreInJSContext() -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/SolidNativeCore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "1044">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CCA88A5C-3408-4D93-B166-26AB2408E6CB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7803EBF0-42E8-4847-93B9-95AE32D47470"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CD3204A-11AE-463C-9BCF-3FEE5DF33C71"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B3A63402-45FB-45F3-B530-1E32EBD3D61F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/SolidNativeCore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "SolidNativeCore"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E170D2D8-DC7F-4CA6-A1E0-78FF7DE60E6D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "insertBefore(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "47AB8D2E-582B-4C60-B7D9-64606585E1FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/SNVStackElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
+            landmarkName = "SNButton"
+            landmarkType = "14">
+            <Locations>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - bf1d624314969a03"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "property wrapper backing initializer of solid_native_ios_playground.SNButtonElement.SNButton.props : solid_native_ios_playground.SolidNativeProps"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "348">
+               </Location>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - 2661450bcb41f577"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SNButtonElement.SNButton.props.getter : solid_native_ios_playground.SolidNativeProps"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "428">
+               </Location>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - c17d3cb2d7de0543"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SNButtonElement.SNButton.props.setter : solid_native_ios_playground.SolidNativeProps"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "568">
+               </Location>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - 4773e4fff5938ece"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SNButtonElement.SNButton.props.modify : solid_native_ios_playground.SolidNativeProps"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "296">
+               </Location>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - 5a9c71536a499742"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SNButtonElement.SNButton.props.modify : solid_native_ios_playground.SolidNativeProps with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "4E6D0D7E-77FC-4357-BFB4-8FC0295F806F - a1b8d030a0e236fb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.SNButtonElement.SNButton.$props.getter : SwiftUI.ObservedObject&lt;solid_native_ios_playground.SolidNativeProps&gt;.Wrapper"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "464">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0077C49-27D1-4866-B37F-53B1F55B2044"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71A77CB9-FDC2-4B8C-9E7F-1C576A7775C7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/SNButtonElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7CFFB9FF-D8CB-4454-BEA9-F642934B76E0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "setProp(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7CFFB9FF-D8CB-4454-BEA9-F642934B76E0 - 10b8e56c7cb46af9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.AnySolidNativeElement.setProp(Swift.String, Any) -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "740">
+               </Location>
+               <Location
+                  uuid = "7CFFB9FF-D8CB-4454-BEA9-F642934B76E0 - 66b46c6623b220ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.AnySolidNativeElement.setProp(Swift.String, Swift.Optional&lt;__C.JSValue&gt;) -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "740">
+               </Location>
+               <Location
+                  uuid = "7CFFB9FF-D8CB-4454-BEA9-F642934B76E0 - 66b46c6623b220db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.AnySolidNativeElement.setProp(Swift.String, Swift.Optional&lt;__C.JSValue&gt;) -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "1380">
+               </Location>
+               <Location
+                  uuid = "7CFFB9FF-D8CB-4454-BEA9-F642934B76E0 - 66b46c6623b220db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "solid_native_ios_playground.AnySolidNativeElement.setProp(Swift.String, Swift.Optional&lt;__C.JSValue&gt;) -&gt; ()"
+                  moduleName = "solid_native_ios_playground"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/solid_native_ios_playground/solid_native_ios_playground/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "1560">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

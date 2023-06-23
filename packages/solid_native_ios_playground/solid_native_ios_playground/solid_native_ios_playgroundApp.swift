@@ -19,8 +19,10 @@ struct solid_native_ios_playgroundApp: App {
         // print("JSValue: " + SharedJSConext.sharedContext.evaluateScript("globalThis").toString()!)
         sharedSolidNativeCore.registerElements()
         print("root element Id: " + sharedSolidNativeCore.rootElement.id.uuidString)
+        sharedSolidNativeCore.registerCoreInJSContext()
         // setupApp()
         setupAppSync()
+        // print("JSValue: " + SharedJSConext.sharedContext.evaluateScript("JSON").toString()!)
     }
     
     var body: some Scene {
@@ -75,7 +77,8 @@ func setupApp() {
 
 func setupAppSync() {
     
-    if let url = URL(string: "http://localhost:8080") {
+    if let url = URL(string: "http://localhost:8080"),
+        let sourceUrl = URL(string: "http://localhost:8080/source"){
         do {
             let bundle = try String(contentsOf: url)
             
@@ -89,8 +92,8 @@ func setupAppSync() {
             SharedJSConext.sharedContext.isInspectable = true
             TimerJS.registerInto(jsContext: SharedJSConext.sharedContext)
             SharedJSConext.sharedContext.setObject(jsPrint, forKeyedSubscript: "_print" as NSString)
-            SharedJSConext.sharedContext.setObject(sharedSolidNativeCore, forKeyedSubscript: "_SolidNativeCore" as NSString)
-            SharedJSConext.sharedContext.evaluateScript(bundle)
+            // SharedJSConext.sharedContext.setObject(sharedSolidNativeCore, forKeyedSubscript: "_SolidNativeCore" as NSString)
+            SharedJSConext.sharedContext.evaluateScript(bundle, withSourceURL: sourceUrl)
             
 
         } catch {
