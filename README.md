@@ -33,3 +33,12 @@ react native, which would prove useful.
 
 https://github.com/Pickleboyonline/solid-native/assets/16438041/2bb1975b-24bf-4863-89cb-563aa2961116
 
+## How to run:
+
+Make sure you have Deno installed. Then, run the following command to start the bundler:
+```ts
+deno task start
+```
+The bundler should then be running on port 8080.
+
+From there, open the iOS app in `packages/ios`. Run the app in the simulator and it should load the test app in `packages/test_app`. Note, live reload/hot reload is not supported yet, so re-run the iOS app when you make a change to the test app!

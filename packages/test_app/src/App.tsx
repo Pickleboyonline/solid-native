@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { print, Button, VStack } from "solid-native/core";
 
 export function App() {
@@ -6,15 +6,14 @@ export function App() {
 
   setInterval(() => setCount(count() + 1), 1000);
 
+  onMount(() => {
+    print("App Mounted!");
+  });
+
   return (
     <VStack>
-      <Button
-        title={"Click me! " + count()}
-        onPress={() => {
-          print("Hello world!");
-        }}
-      />
-      <Button title="Click me 2" />
+      {`Hello World! Count: ${count()}`}
+      <Button title="Click me!" />
     </VStack>
   );
 }
