@@ -8,6 +8,6 @@ export type VStackProps = {
   spacing?: number;
 };
 
-export function VStack({ children }: VStackProps) {
-  return <sn_v_stack> {children}</sn_v_stack>;
+export function HStack({ children }: VStackProps) {
+  return <sn_h_stack> {children}</sn_h_stack>;
 }

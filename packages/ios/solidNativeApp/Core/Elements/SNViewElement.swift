@@ -18,7 +18,9 @@ class SNViewElement: AnySolidNativeElement {
         @ObservedObject var props: SolidNativeProps
         
         var body: some View {
-            Text(props.text)
+//            let text = props.getProp(name: "text", default: "")
+//            Text(text)
+            Text("TODO: Impliment View!")
         }
     }
     

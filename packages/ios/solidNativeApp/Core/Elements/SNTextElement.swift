@@ -23,7 +23,7 @@ class SNTextElement: AnySolidNativeElement {
         @ObservedObject var props: SolidNativeProps
         
         var body: some View {
-            let text = props.getProp(name: "text", default: "Hello!")
+            let text = props.getString(name: "text")
             Text(text)
         }
     }

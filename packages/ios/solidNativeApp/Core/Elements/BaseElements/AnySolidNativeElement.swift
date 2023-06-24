@@ -13,13 +13,14 @@ import SwiftUI
     // Expose methods needed.
     var firstChild: AnySolidNativeElement? { get }
     var parentElement: AnySolidNativeElement? {get}
-    func setProp(_ name: String, _ value: Any)
+    func setProp(_ name: String, _ value: JSValue?)
     var isTextElement: Bool {get}
     func removeChild(_ element: AnySolidNativeElement)
     func insertBefore(_ element: AnySolidNativeElement, _ anchor: AnySolidNativeElement?)
     var next: AnySolidNativeElement? {get}
     var prev: AnySolidNativeElement? {get}
 }
+
 
 /**
  Later, we can have it to where you only need to pass in the SwiftUI View that takes in props.
@@ -40,15 +41,12 @@ import SwiftUI
     
     let props = SolidNativeProps()
     
-    @objc public func setProp(_ name: String, _ value: Any) {
-        // print("JS value type: " + String(value!.isObject))
+    @objc public func setProp(_ name: String, _ value: JSValue?) {
+        // print("JS value type: " + String(value!.isString))
         assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
         props.values[name] = value
     }
     
-    private func _setProp(_ name: String, _ value: Any) {
-        props.values[name] = value
-    }
     
     var children: [AnySolidNativeElement] = []
     
@@ -69,7 +67,7 @@ import SwiftUI
         }
         
         children = newChildren
-        _setProp("children", newChildren)
+        props.children = newChildren
     }
     
    
@@ -140,20 +138,10 @@ import SwiftUI
         false
     }
     
-    func setText(text: String) {
-        props.text = text
-    }
-    
-    
     
     func render() -> AnyView {
         AnyView(EmptyView())
     }
-    // @ViewBuilder
-//    func render() -> some View {
-//        // view.init(isTextView: <#Bool#>, props: <#SolidNativeProps#>)
-//        Text("")
-//    }
 }
 
 class SolidNativeModule {

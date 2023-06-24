@@ -19,7 +19,7 @@ class SNVStackElement: AnySolidNativeElement {
     struct SNVStack: View {
         @ObservedObject var props: SolidNativeProps
         
-        var isOn: Binding<Bool>
+        // var isOn: Binding<Bool>
         
         var body: some View {
             let children = props.getChildren()
@@ -33,22 +33,22 @@ class SNVStackElement: AnySolidNativeElement {
     }
     
     override func render() -> AnyView {
-        let valueBinding = Binding<Bool>(
-          get: {
-              return self.props.getProp(name: "value", default: self.isOn)
-          },
-          set: {
-            if self.props.getProp(name: "value", default: self.isOn) != $0 {
-              self.isOn = $0
-              let callback = self.props.getProp(name: "onChange", default: {(_ newValue: Bool) -> Void in
-                  
-              })
-              callback($0)
-            }
-          }
-        )
+//        let valueBinding = Binding<Bool>(
+//          get: {
+//              return self.props.getProp(name: "value", default: self.isOn)
+//          },
+//          set: {
+//            if self.props.getProp(name: "value", default: self.isOn) != $0 {
+//              self.isOn = $0
+//              let callback = self.props.getProp(name: "onChange", default: {(_ newValue: Bool) -> Void in
+//
+//              })
+//              callback($0)
+//            }
+//          }
+//        )
         
-        return AnyView(SNVStack(props: self.props, isOn: valueBinding))
+        return AnyView(SNVStack(props: self.props))
     }
     
 }

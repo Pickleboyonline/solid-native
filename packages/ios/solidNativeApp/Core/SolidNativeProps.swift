@@ -6,31 +6,44 @@
 //
 
 import Foundation
-
+import JavaScriptCore
 
 // Not meant to be exteneded
 class SolidNativeProps: ObservableObject {
-    @Published var updateCount = 0;
-    @Published var values: [String:Any] = [:];
-    @Published var text = ""
+    @Published var values: [String:JSValue?] = [:];
+    @Published var children: [AnySolidNativeElement] = [];
     
     // TODO: Figure out how to deal with events and refs
     
-    func getInt(_ name: String) -> Int? {
-        values[name] as? Int
-    }
-    
-    func getProp<T>(name: String, `default`: T) -> T {
-        if let prop = values[name] as? T {
-            return prop
+//    func getProp<T>(name: String, `default`: T) -> T {
+//        if let prop = values[name] as? T {
+//            return prop
+//        }
+//        return `default`
+//    }
+//
+    func getString(name: String, `default`: String = "") -> String {
+        if let prop = (values[name] ?? nil) {
+            return prop.toString()
         }
         return `default`
     }
     
-    func getChildren() -> [AnySolidNativeElement] {
-        if let values = values["children"] as? [AnySolidNativeElement] {
-            return values
+    func getNumber(name: String, `default`: NSNumber = 0) -> NSNumber {
+        if let prop = (values[name] ?? nil) {
+            return prop.toNumber()
         }
-        return []
+        return `default`
+    }
+    
+    /**
+     Usefull for callbacks
+     */
+    func getPropAsJSValue(name: String) -> JSValue? {
+        values[name] ?? nil
+    }
+    
+    func getChildren() -> [AnySolidNativeElement] {
+        children
     }
 }

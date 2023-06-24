@@ -621,5 +621,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4459C8FF-70DF-4903-9441-9C2747B084C8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "solidNativeApp/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "setProp(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4459C8FF-70DF-4903-9441-9C2747B084C8 - 654ac4bc8e90a4e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.AnySolidNativeElement.setProp(Swift.String, Swift.Optional&lt;__C.JSValue&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/ios/solidNativeApp/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "744">
+               </Location>
+               <Location
+                  uuid = "4459C8FF-70DF-4903-9441-9C2747B084C8 - 654ac4bc8e90a4c5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.AnySolidNativeElement.setProp(Swift.String, Swift.Optional&lt;__C.JSValue&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/imranshitta-bey/Documents/GitHub/solid_native/packages/ios/solidNativeApp/Core/Elements/BaseElements/AnySolidNativeElement.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "828">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -17,9 +17,14 @@ import SwiftUI
     struct SNButton: View {
         @ObservedObject var props: SolidNativeProps
         
+        func onPress() {
+            if let callback = props.getPropAsJSValue(name: "onPress") {
+                callback.call(withArguments: nil)
+            }
+        }
+        
         var body: some View {
-            let title = props.getProp(name: "title", default: "")
-            let onPress = props.getProp(name: "onPress", default: {})
+            let title = props.getString(name: "title")
             Button(title) {
                 onPress()
             }
