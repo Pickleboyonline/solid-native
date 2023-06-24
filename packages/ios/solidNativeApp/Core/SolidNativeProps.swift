@@ -7,6 +7,7 @@
 
 import Foundation
 import JavaScriptCore
+import SwiftUI
 
 // Not meant to be exteneded
 class SolidNativeProps: ObservableObject {
@@ -45,5 +46,14 @@ class SolidNativeProps: ObservableObject {
     
     func getChildren() -> [AnySolidNativeElement] {
         children
+    }
+    
+    func getChildrenAsView() -> some View {
+        Group {
+            
+        }
+        ForEach(getChildren(), id: \.id) { child in
+            child.render()
+        }
     }
 }
