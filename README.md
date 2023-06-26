@@ -53,7 +53,7 @@ Some other changes I want to make:
 - Deno Support
 - Webpack => Esbuild
 
-I did some research on how to ahead of time compile the app but I could not find a compiler. It turns out Javascript/Typescript is <i>really</i> hard to statically compile if not impossible in most cases. I investigate whether the (hopc)[http://hop.inria.fr/home/index.html] compiler could generate faster code than using some interpreters, but it was significantly slower. I computed a fib sequence up to 30 with O(n^2) complexity and hopc took around 1 minute to complete whereas the JS interpreters quickjs, hermes, v8jitless all took around 10 seconds. With jit mode enabled for V8, the program took around 1 second to run which is about the same time the equivalent C++ program I wrote took.
+I did some research on how to ahead of time compile the app but I could not find a compiler. It turns out Javascript/Typescript is <i>really</i> hard to statically compile if not impossible in most cases. I investigate whether the [hopc](http://hop.inria.fr/home/index.html) compiler could generate faster code than using some interpreters, but it was significantly slower. I computed a fib sequence up to 30 with O(n^2) complexity and hopc took around 1 minute to complete whereas the JS interpreters quickjs, hermes, v8jitless all took around 10 seconds. With jit mode enabled for V8, the program took around 1 second to run which is about the same time the equivalent C++ program I wrote took.
 
 So, the only way I can realistically see a way to optimize JS into native code is the following:
 - Statically analyze the JS code for deterministic behavior where the types can be known at compile time
