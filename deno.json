@@ -6,7 +6,6 @@
   "imports": {
     "solid-js/universal": "npm:solid-js@1.7.6/universal",
     "solid-js": "npm:solid-js@1.7.6",
-    "solid-js/jsx-runtime": "npm:solid-js@1.7.6/jsx-runtime",
     "solid-native-renderer": "./packages/core/renderer.ts",
     "solid-native/core": "./packages/core/mod.ts"
   },
