@@ -48,12 +48,12 @@ class SolidNativeProps: ObservableObject {
         children
     }
     
-    func getChildrenAsView() -> some View {
-        Group {
-            
-        }
-        ForEach(getChildren(), id: \.id) { child in
-            child.render()
-        }
-    }
+//    func getChildrenAsView() -> some View {
+//        Group {
+//            
+//        }
+//        ForEach(getChildren(), id: \.id) { child in
+//            child.render()
+//        }
+//    }
 }

@@ -11,6 +11,7 @@
     "solid-native/core": "./packages/core/mod.ts"
   },
   "compilerOptions": {
-    "jsx": "preserve"
+    "jsx": "precompile",
+    "lib": ["dom", "deno.window"]
   }
 }

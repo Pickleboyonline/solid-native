@@ -1,3 +1,4 @@
+import type { JSX as solidJSX } from "solid-js";
 /**
  * In actually, this is a string. BUT to make this more
  * Typescript/TSX compiler friendly it's aliased as a
@@ -5,6 +6,16 @@
  */
 export type SolidNativeElement = JSX.Element;
 
+export type SolidNativeNode = {
+  firstChild?: SolidNativeNode;
+  parentElement?: SolidNativeNode;
+  setProp(name: string, value: unknown): void;
+  isTextElement: boolean;
+  removeChild(element: SolidNativeNode): void;
+  insertBefore(element: SolidNativeNode, anchor?: SolidNativeNode): void;
+  next?: SolidNativeNode;
+  prev?: SolidNativeNode;
+};
 // Define types internally
 
 declare global {
@@ -12,16 +23,7 @@ declare global {
     interface IntrinsicElements {
       [name: string]: Record<string, unknown>;
     }
-    interface Element {
-      firstChild?: Element;
-      parentElement?: Element;
-      setProp(name: string, value: unknown): void;
-      isTextElement: boolean;
-      removeChild(element: Element): void;
-      insertBefore(element: Element, anchor?: Element): void;
-      next?: Element;
-      prev?: Element;
-    }
+    type Element = solidJSX.Element;
 
     interface ElementChildrenAttribute {
       children?: unknown; // specify children name to use

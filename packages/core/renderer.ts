@@ -1,5 +1,5 @@
 import { createRenderer } from "solid-js/universal";
-import { SolidNativeElement } from "./types.ts";
+import { SolidNativeNode } from "./types.ts";
 import { SolidNativeCore } from "./solid_native_core.ts";
 
 export const {
@@ -14,7 +14,7 @@ export const {
   spread,
   setProp,
   mergeProps,
-} = createRenderer<SolidNativeElement>({
+} = createRenderer<SolidNativeNode>({
   createElement(elementName) {
     return SolidNativeCore.createElementByName(elementName);
   },

@@ -13,6 +13,8 @@ router
       .resolve("./../../deno.json")
       .replace("file://", "");
 
+    console.log();
+
     console.log("Request!");
 
     const result = await esbuild.build({

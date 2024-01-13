@@ -1,4 +1,4 @@
-import { SolidNativeElement } from "./types.ts";
+import { SolidNativeElement, SolidNativeNode } from "./types.ts";
 
 export interface TSolidNativeCore<Node> {
   /**
@@ -59,6 +59,6 @@ export function getNativeModule<ModuleType>(moduleName: string): ModuleType {
 }
 
 export const SolidNativeCore =
-  getNativeModule<TSolidNativeCore<SolidNativeElement>>("SolidNativeCore");
+  getNativeModule<TSolidNativeCore<SolidNativeNode>>("SolidNativeCore");
 
 export const print = getNativeModule<(str: string) => void>("print");
