@@ -184,20 +184,12 @@
 		5882F5B32A36B3A2000D5F99 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				58F7BDB92A4633DF00E22EA4 /* Modules */,
 				586E39E22A37D791001165FE /* Refs */,
 				586E39DB2A37D310001165FE /* Elements */,
 				5882F5B42A36B3BB000D5F99 /* SolidNativeCore.swift */,
 				5882F5B92A36B570000D5F99 /* SolidNativeProps.swift */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		58F7BDB92A4633DF00E22EA4 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
