@@ -69,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "3e27856cc1a00687",
@@ -148,10 +149,20 @@
   },
   "active": "6cd6d61cbb73af2d",
   "lastOpenFiles": [
+    "packages/new_ios/SolidNative/SolidNativeCore/JSTimers.swift",
+    "packages/new_ios/SolidNative/Views/util/SNView.swift",
+    "packages/new_ios/SolidNative/Views/util/SNViewProps.swift",
+    "packages/new_ios/SolidNative/Views/util/SnViewProps.swift",
+    "packages/new_ios/SolidNative/Views/util",
+    "packages/new_ios/SolidNative/Views/uril",
+    "packages/new_ios/SolidNative/Views/New Group",
+    "packages/new_ios/SolidNative/Views/SNButtonView.swift",
+    "packages/new_ios/SolidNative/Views/SNRootView.swift",
+    "packages/new_ios/SolidNative/Modules/SNRender~.swift",
+    "packages/new_ios/SolidNative/Modules/SNRender.swift",
     "obsidian_notes/Untitled 1.md",
     "obsidian_notes/Module System.md",
     "README.md",
-    "obsidian_notes",
     "notes.md"
   ]
 }

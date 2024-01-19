@@ -14,6 +14,13 @@
 		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
 		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
+		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
+		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
+		58CFF74A2B5A1E4500BA84C7 /* SNRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNRootView.swift */; };
+		58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */; };
+		58CFF74F2B5A1E7900BA84C7 /* SNViewProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74E2B5A1E7900BA84C7 /* SNViewProps.swift */; };
+		58CFF7512B5A1E9B00BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7502B5A1E9B00BA84C7 /* SNView.swift */; };
+		58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +51,13 @@
 		5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
 		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
+		58CFF7472B5A1E1800BA84C7 /* SNRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRender.swift; sourceTree = "<group>"; };
+		58CFF7492B5A1E4500BA84C7 /* SNRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRootView.swift; sourceTree = "<group>"; };
+		58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButtonView.swift; sourceTree = "<group>"; };
+		58CFF74E2B5A1E7900BA84C7 /* SNViewProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNViewProps.swift; sourceTree = "<group>"; };
+		58CFF7502B5A1E9B00BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
+		58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSTimers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +108,9 @@
 		5812F9752B522228001BEE89 /* SolidNative */ = {
 			isa = PBXGroup;
 			children = (
+				58CFF7462B5A1E0500BA84C7 /* Modules */,
+				58CFF7452B5A1DFC00BA84C7 /* Views */,
+				58CFF7422B5A147E00BA84C7 /* SolidNativeCore */,
 				5812F9762B522228001BEE89 /* SolidNativeApp.swift */,
 				5812F9782B522228001BEE89 /* ContentView.swift */,
 				5812F97A2B52222B001BEE89 /* Assets.xcassets */,
@@ -125,6 +142,42 @@
 				5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */,
 			);
 			path = SolidNativeUITests;
+			sourceTree = "<group>";
+		};
+		58CFF7422B5A147E00BA84C7 /* SolidNativeCore */ = {
+			isa = PBXGroup;
+			children = (
+				58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */,
+				58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */,
+			);
+			path = SolidNativeCore;
+			sourceTree = "<group>";
+		};
+		58CFF7452B5A1DFC00BA84C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				58CFF74D2B5A1E6300BA84C7 /* util */,
+				58CFF7492B5A1E4500BA84C7 /* SNRootView.swift */,
+				58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		58CFF7462B5A1E0500BA84C7 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				58CFF7472B5A1E1800BA84C7 /* SNRender.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		58CFF74D2B5A1E6300BA84C7 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				58CFF74E2B5A1E7900BA84C7 /* SNViewProps.swift */,
+				58CFF7502B5A1E9B00BA84C7 /* SNView.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +314,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */,
 				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
+				58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */,
+				58CFF74F2B5A1E7900BA84C7 /* SNViewProps.swift in Sources */,
+				58CFF7512B5A1E9B00BA84C7 /* SNView.swift in Sources */,
+				58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */,
 				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
+				58CFF74A2B5A1E4500BA84C7 /* SNRootView.swift in Sources */,
+				58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
