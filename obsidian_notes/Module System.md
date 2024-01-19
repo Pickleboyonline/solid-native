@@ -58,3 +58,10 @@ Ok so now we have these classes:
 - Views
 - Core
 Thats it!
+
+Ok so the core has a registry of modules that it can can instanciate.
+The registry is needed to lookup modules by name in the JS code.
+When JS gets a native module, it's make a module.
+
+
+When module gets made, the JS side must be able to get some object that has functions in it.

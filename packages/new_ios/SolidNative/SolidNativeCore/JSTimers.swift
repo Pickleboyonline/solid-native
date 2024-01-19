@@ -2,13 +2,13 @@ import Foundation
 import JavaScriptCore
 
 @objc protocol TimerJSExport : JSExport {
-
+    
     func setTimeout(_ callback : JSValue,_ ms : Double) -> String
-
+    
     func clearTimeout(_ identifier: String)
-
+    
     func setInterval(_ callback : JSValue,_ ms : Double) -> String
-
+    
 }
 
 // Custom class must inherit from `NSObject`

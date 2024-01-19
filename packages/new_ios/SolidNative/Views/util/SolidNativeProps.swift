@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 import JavaScriptCore
 
-class SNViewProps: ObservableObject {
+class SolidNativeProps: ObservableObject {
     @Published var values: [String:JSValue?] = [:];
     // TODO: Type this!
-    @Published var children: [Any] = [];
+    @Published var children: [SolidNativeView] = [];
     
     func getProp<T>(name: String, `default`: T) -> T {
         if let prop = values[name] as? T {
-                return prop
+            return prop
         }
         return `default`
     }
@@ -36,7 +36,7 @@ class SNViewProps: ObservableObject {
     }
     
     
-    func getChildren() -> [Any] {
+    func getChildren() -> [SolidNativeView] {
         children
     }
     

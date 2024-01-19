@@ -1,7 +1,19 @@
-import { print } from "../core/mod.ts";
+import { print, getNativeModule } from "solid-native/core";
 // import { App } from "./App.tsx";
 // // deno-lint-ignore ban-ts-comment
 // // @ts-ignore
 // render(App, SolidNativeCore.getRootElement());
 
-print("Hello World from JS!");
+type Renderer = {
+  print: (str: string) => void;
+  getRootView: () => string;
+  printCB: (str: () => string) => void;
+};
+
+const renderer = getNativeModule<Renderer>("SNRender");
+
+renderer.print("Hello!" + renderer.getRootView());
+
+renderer.printCB(() => "hi");
+
+// const s = ;

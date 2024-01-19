@@ -9,17 +9,20 @@ import Foundation
 import JavaScriptCore
 import SwiftUI
 
-class SNView {
-    dynamic var next: SNView?
-    dynamic var prev: SNView?
+class SolidNativeView {
+    dynamic var next: SolidNativeView?
+    dynamic var prev: SolidNativeView?
     let id = UUID()
     
     class var name: String {
         "sn_view"
     }
     
+    required init() {
+    }
     
-    let props = SNViewProps()
+    
+    let props = SolidNativeProps()
     
     @objc public func setProp(_ name: String, _ value: JSValue?) {
         // print("JS value type: " + String(value!.isString))
@@ -28,17 +31,17 @@ class SNView {
     }
     
     
-    var children: [SNView] = []
+    var children: [SolidNativeView] = []
     
     // Can be getter
-    dynamic var firstChild: SNView?
+    dynamic var firstChild: SolidNativeView?
     
-    dynamic var parentElement: SNView?
+    dynamic var parentElement: SolidNativeView?
     
     // Iterate over first child prop
     // O(n)
     private func updateChildrenInProps() {
-        var newChildren: [SNView] = []
+        var newChildren: [SolidNativeView] = []
         
         var nextChild = firstChild
         while let child = nextChild {
@@ -50,9 +53,9 @@ class SNView {
         props.children = newChildren
     }
     
-   
+    
     // O(1)
-    func removeChild(_ element: SNView) {
+    func removeChild(_ element: SolidNativeView) {
         // Link the nodes prev and next of it
         if let childNextSibling = element.next,
            let childPrevSibling = element.prev {
@@ -74,7 +77,7 @@ class SNView {
     }
     
     // O(1)
-    func insertBefore(_ element: SNView, _ anchor: SNView?) {
+    func insertBefore(_ element: SolidNativeView, _ anchor: SolidNativeView?) {
         // If no anchor set first child to view (make head)
         //
         if let anchor = anchor {
@@ -92,7 +95,7 @@ class SNView {
             
         } else if let firstChild = firstChild {
             // Make it at the end of the list
-            var nextChild: SNView? = firstChild
+            var nextChild: SolidNativeView? = firstChild
             while let child = nextChild {
                 nextChild = child.next
                 
@@ -108,7 +111,7 @@ class SNView {
         }
         
         element.parentElement = self
-    
+        
         updateChildrenInProps()
     }
     
