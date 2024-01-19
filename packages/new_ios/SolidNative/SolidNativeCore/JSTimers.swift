@@ -15,20 +15,22 @@ import JavaScriptCore
 @objc class TimerJS: NSObject, TimerJSExport {
     var timers = [String: Timer]()
     
+    static let shared = TimerJS()
+    
     static func registerInto(jsContext: JSContext, forKeyedSubscript: String = "timerJS") {
-//        jsContext.setObject(timerJSSharedInstance,
-//                            forKeyedSubscript: forKeyedSubscript as (NSCopying & NSObjectProtocol))
-//        jsContext.evaluateScript(
-//            "function setTimeout(callback, ms) {" +
-//            "    return timerJS.setTimeout(callback, ms)" +
-//            "}" +
-//            "function clearTimeout(indentifier) {" +
-//            "    timerJS.clearTimeout(indentifier)" +
-//            "}" +
-//            "function setInterval(callback, ms) {" +
-//            "    return timerJS.setInterval(callback, ms)" +
-//            "}"
-//        )
+        jsContext.setObject(TimerJS.shared,
+                            forKeyedSubscript: forKeyedSubscript as (NSCopying & NSObjectProtocol))
+        jsContext.evaluateScript(
+            "function setTimeout(callback, ms) {" +
+            "    return timerJS.setTimeout(callback, ms)" +
+            "}" +
+            "function clearTimeout(indentifier) {" +
+            "    timerJS.clearTimeout(indentifier)" +
+            "}" +
+            "function setInterval(callback, ms) {" +
+            "    return timerJS.setInterval(callback, ms)" +
+            "}"
+        )
     }
     
     func clearTimeout(_ identifier: String) {

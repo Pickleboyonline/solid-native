@@ -44,7 +44,7 @@ Ok, again:
 	- Has registeristry of native modules that is statically linked.
 	- Access views via ID to set props and such.
 	- Views are a native ONLY thing. These really aren't exposed to the JS side like modules are.
-- JS needs some way to get modules in its context. Modules can either be lazy loaded or availabe at run time.
+- JS needs some way to get modules in its context. Modules can either be lazy loaded or available at run time.
 	- For now, initial instantiate at run time. 
 - Core module is really only needed to set things up. It:
 	- Has the JS context
@@ -52,3 +52,9 @@ Ok, again:
 	- Has the blank root view
 	- Attaches this view to the renderer module
 	- Hooks all known modules into global JS context
+
+Ok so now we have these classes:
+- Modules
+- Views
+- Core
+Thats it!
