@@ -14,8 +14,6 @@
 		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
 		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
-		5812F9A12B52230F001BEE89 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9A02B52230E001BEE89 /* File.swift */; };
-		5812F9A42B524605001BEE89 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5812F9A32B524605001BEE89 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +44,6 @@
 		5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
 		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5812F9A02B52230E001BEE89 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +51,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5812F9A42B524605001BEE89 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +98,6 @@
 				5812F9782B522228001BEE89 /* ContentView.swift */,
 				5812F97A2B52222B001BEE89 /* Assets.xcassets */,
 				5812F97C2B52222B001BEE89 /* Preview Content */,
-				5812F9A02B52230E001BEE89 /* File.swift */,
 			);
 			path = SolidNative;
 			sourceTree = "<group>";
@@ -149,7 +144,6 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
-				5812F9A32B524605001BEE89 /* Alamofire */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -224,7 +218,6 @@
 			);
 			mainGroup = 5812F96A2B522228001BEE89;
 			packageReferences = (
-				5812F9A22B524605001BEE89 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
 			projectDirPath = "";
@@ -269,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
-				5812F9A12B52230F001BEE89 /* File.swift in Sources */,
 				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -594,25 +586,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		5812F9A22B524605001BEE89 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5812F9A32B524605001BEE89 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 5812F9A22B524605001BEE89 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
 }
