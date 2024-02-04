@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "obsidian_notes/Module System.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -69,8 +69,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "right": {
     "id": "3e27856cc1a00687",
@@ -86,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "obsidian_notes/Module System.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "obsidian_notes/Module System.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "obsidian_notes/Module System.md"
+                "file": "README.md"
               }
             }
           }
@@ -149,6 +148,7 @@
   },
   "active": "6cd6d61cbb73af2d",
   "lastOpenFiles": [
+    "obsidian_notes/Module System.md",
     "packages/new_ios/SolidNative/Modules/JSValueBuilder~.swift",
     "packages/new_ios/SolidNative/Modules/JSValueBuilder.swift",
     "packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift",
@@ -159,9 +159,7 @@
     "packages/new_ios/SolidNative/SolidNativeCore/SolidNativeCore~.swift",
     "packages/new_ios/SolidNative/Views/util/SolidNativeProps.swift",
     "packages/new_ios/SolidNative/Views/SNView.swift",
-    "packages/new_ios/SolidNative/Views/util/SolidNativeView.swift",
     "obsidian_notes/Untitled 1.md",
-    "obsidian_notes/Module System.md",
     "README.md",
     "notes.md"
   ]
