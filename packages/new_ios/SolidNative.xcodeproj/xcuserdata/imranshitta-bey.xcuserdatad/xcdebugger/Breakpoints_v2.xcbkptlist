@@ -381,5 +381,53 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "createViewByName(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F - e30fdec021d5f95f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.ViewManager.createViewByName(Swift.String) -&gt; Swift.String"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F - e30fdec021d5f95f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.ViewManager.createViewByName(Swift.String) -&gt; Swift.String"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "308">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

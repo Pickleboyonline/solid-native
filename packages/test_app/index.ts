@@ -1,18 +1,19 @@
-import { SolidNativeRenderer, print } from "solid-native/core";
+import { SolidNativeRenderer, print, render, Button } from "solid-native/core";
+import { App } from "./App.tsx";
+print("Hello World from S!");
+// const rootView = SolidNativeRenderer.getRootView();
 
-print("Hello World from JS!");
+// print("RootView: " + rootView);
 
-const rootView = SolidNativeRenderer.getRootView();
+// const text = SolidNativeRenderer.createNodeByName("sn_text");
 
-print("RootView: " + rootView);
+// SolidNativeRenderer.insertBefore(rootView, text);
 
-const text = SolidNativeRenderer.createNodeByName("sn_text");
+// SolidNativeRenderer.setProp(text, "text", "Hello World!");
 
-SolidNativeRenderer.insertBefore(rootView, text);
+// const button = SolidNativeRenderer.createNodeByName("sn_button");
+// SolidNativeRenderer.setProp(button, "title", "Click Me!");
 
-SolidNativeRenderer.setProp(text, "text", "Hello World!");
+// SolidNativeRenderer.insertBefore(rootView, button);
 
-const button = SolidNativeRenderer.createNodeByName("sn_button");
-SolidNativeRenderer.setProp(button, "title", "Click Me!");
-
-SolidNativeRenderer.insertBefore(rootView, button);
+render(App);

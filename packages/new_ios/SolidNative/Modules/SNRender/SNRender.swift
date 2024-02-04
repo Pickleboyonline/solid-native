@@ -43,7 +43,7 @@ class SNRender: SolidNativeModule {
         
         builder.addSyncFunction("getFirstChild") { (_ id: String) in
             let view = self.viewManager.getViewById(id)
-            return view.id.uuidString
+            return view.firstChild?.id.uuidString
         }
         
         builder.addSyncFunction("getParent") { (_ id: String) in

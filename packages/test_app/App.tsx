@@ -1,5 +1,5 @@
 import { For, createSignal, onMount } from "solid-js";
-import { print, Button, VStack } from "solid-native/core";
+import { print, Button, View } from "solid-native/core";
 
 export function App() {
   const [count, setCount] = createSignal(0);
@@ -15,7 +15,7 @@ export function App() {
   });
 
   return (
-    <VStack>
+    <View>
       Hello World!
       {`Count: ${count()}`}
       <Button
@@ -44,6 +44,6 @@ export function App() {
           return item;
         }}
       />
-    </VStack>
+    </View>
   );
 }
