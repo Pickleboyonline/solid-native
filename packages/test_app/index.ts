@@ -1,4 +1,4 @@
 import { render } from "solid-native/core";
-import { App } from "./src/App.tsx";
+import { App } from "./src/app.tsx";
 
 render(App);
