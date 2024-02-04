@@ -70,7 +70,6 @@ class JSValueBuilder {
     // Three arguments
     func addSyncFunction<W>(_ name: String, fn: @escaping (JSValue, JSValue, JSValue) -> W?) {
         let objcFunc: @convention(block) (JSValue, JSValue, JSValue) -> JSValue? = { jsValue1, jsValue2, jsValue3 in
-            let n = name;
             
             if let result = fn(jsValue1, jsValue2, jsValue3) {
                 return JSValue(object: result, in: SolidNativeCore.shared.jsContext)
