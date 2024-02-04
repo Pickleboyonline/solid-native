@@ -39,4 +39,10 @@ From there, open the iOS app in `packages/ios`. Run the app in the simulator and
 
 ## TODO
 
-- [ ] 
+- [ ] Implement React Native's Components
+	- Will use the same API structure for familiarity. However, text will not have to be wrapped in a `<Text />` component since SolidJS's rendering engine will treat bare text JSX as a text component.
+- [ ] Implement React Native Modules
+- [ ] Implement Expo, Flutter, and any other community packages that are needed to make a base app.
+- [ ] Hot Reloading and VSCode Debugging
+- [ ] Create module system and developer workflow cli
+- [ ] Android Version
