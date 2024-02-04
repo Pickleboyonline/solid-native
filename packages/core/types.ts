@@ -6,18 +6,6 @@ import type { JSX as solidJSX } from "solid-js";
  */
 export type SolidNativeElement = JSX.Element;
 
-export type SolidNativeNode = {
-  firstChild?: SolidNativeNode;
-  parentElement?: SolidNativeNode;
-  setProp(name: string, value: unknown): void;
-  isTextElement: boolean;
-  removeChild(element: SolidNativeNode): void;
-  insertBefore(element: SolidNativeNode, anchor?: SolidNativeNode): void;
-  next?: SolidNativeNode;
-  prev?: SolidNativeNode;
-};
-// Define types internally
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
