@@ -27,6 +27,11 @@ For the JS Engine, I will probably be using a V8 engine lite version with byteco
 
 https://github.com/Pickleboyonline/solid-native/assets/16438041/2bb1975b-24bf-4863-89cb-563aa2961116
 
+#### How it works:
+When it the iOS app launches, it downloads a JS Bundle from the developer server. The developer server uses ESbuild and various plugins to ensure that the code transpiles correctly. I implemented a SolidJS universal renderer in the JS side by calling native module methods exposed by the Swift native code. On the Swift side, I have a core, module, and view system. Core takes care of downloading the bundle, instantiating the javascript virtual machine,  and registering the available modules. Modules are any Swift code that can be called from the JS side. For example, the native renderer is a module that exposes JS methods to manipulate views. Views are Swift classes that house and control the SwiftUI views.
+
+When the JS bundle is executed, SolidJS takes care of calling the necessary methods to make the counter appear.
+
 ## How to run:
 
 Make sure you have Deno installed. Then, run the following command to start the bundler:
@@ -46,3 +51,5 @@ From there, open the iOS app in `packages/ios`. Run the app in the simulator and
 - [ ] Hot Reloading and VSCode Debugging
 - [ ] Create module system and developer workflow cli
 - [ ] Android Version
+- [ ] Improve threading:
+	- The threading model should be similar to react native. The JS code should be running on a background thread. JS code needed for animations should be running on the main thread with the `worklet` pattern.
