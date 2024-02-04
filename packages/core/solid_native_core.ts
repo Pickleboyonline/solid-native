@@ -37,20 +37,7 @@ export interface TSolidNativeCore<Node> {
 }
 
 /**
- * Returns module from Solid Native module manager
- */
-export function getNativeModule<ModuleType>(moduleName: string): ModuleType {
-  // deno-lint-ignore no-explicit-any
-  const mod = (globalThis as any)._getNativeModule(moduleName);
-
-  return mod;
-}
-
-/**
  * @deprecated
  */
 export const SolidNativeCore = {};
 //   getNativeModule<TSolidNativeCore<SolidNativeNode>>("SolidNativeCore");
-
-// deno-lint-ignore no-explicit-any
-export const print = (globalThis as any)._print as (str: string) => void;

@@ -1,19 +1,18 @@
-import { print, getNativeModule } from "solid-native/core";
-// import { App } from "./App.tsx";
-// // deno-lint-ignore ban-ts-comment
-// // @ts-ignore
-// render(App, SolidNativeCore.getRootElement());
+import { SolidNativeRenderer, print } from "solid-native/core";
 
-type Renderer = {
-  print: (str: string) => void;
-  getRootView: () => string;
-  printCB: (str: () => string) => void;
-};
+print("Hello World from JS!");
 
-const renderer = getNativeModule<Renderer>("SNRender");
+const rootView = SolidNativeRenderer.getRootView();
 
-renderer.print("Hello!" + renderer.getRootView());
+print("RootView: " + rootView);
 
-renderer.printCB(() => "hi");
+const text = SolidNativeRenderer.createNodeByName("sn_text");
 
-// const s = ;
+SolidNativeRenderer.insertBefore(rootView, text);
+
+SolidNativeRenderer.setProp(text, "text", "Hello World!");
+
+const button = SolidNativeRenderer.createNodeByName("sn_button");
+SolidNativeRenderer.setProp(button, "title", "Click Me!");
+
+SolidNativeRenderer.insertBefore(rootView, button);

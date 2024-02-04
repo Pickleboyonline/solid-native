@@ -14,6 +14,7 @@
 		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
 		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
+		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
 		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
@@ -53,6 +54,7 @@
 		5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
 		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 		58CFF7472B5A1E1800BA84C7 /* SNRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRender.swift; sourceTree = "<group>"; };
 		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				58CFF74D2B5A1E6300BA84C7 /* util */,
 				58CFF7492B5A1E4500BA84C7 /* SNView.swift */,
 				58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */,
+				583FC9022B6F00FB005EE669 /* SNText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */,
+				583FC9032B6F00FB005EE669 /* SNText.swift in Sources */,
 				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
 				58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */,
 				58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */,

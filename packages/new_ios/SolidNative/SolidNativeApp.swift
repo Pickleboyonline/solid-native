@@ -18,7 +18,7 @@ struct SolidNativeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SolidNativeCore.shared.rootElement.render()
         }
     }
 }

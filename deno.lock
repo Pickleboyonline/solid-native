@@ -5,6 +5,7 @@
       "npm:esbuild-plugin-solid@0.5.0": "npm:esbuild-plugin-solid@0.5.0_esbuild@0.19.11_solid-js@1.8.11__seroval@1.0.4_@babel+core@7.23.7",
       "npm:pbxproj-dom@1.0.0": "npm:pbxproj-dom@1.0.0",
       "npm:pbxproj-dom@1.2.0": "npm:pbxproj-dom@1.2.0",
+      "npm:solid-js@1.8.11": "npm:solid-js@1.8.11_seroval@1.0.4",
       "npm:xcode@3.0.1": "npm:xcode@3.0.1"
     },
     "npm": {
@@ -932,5 +933,10 @@
     "https://deno.land/x/oak_commons@0.4.0/server_sent_event.ts": "5c0b5b930bf39ea6742e408d9d47f6080637a1991188e10402d521181ee32286",
     "https://deno.land/x/oak_commons@0.4.0/status.ts": "f13e0e61c2aaf5e254ca528569b03896aee89d96ebc256fa740ea7305a68f53f",
     "https://deno.land/x/path_to_regexp@v6.2.1/index.ts": "894060567837bae8fc9c5cbd4d0a05e9024672083d5883b525c031eea940e556"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:solid-js@1.8.11"
+    ]
   }
 }

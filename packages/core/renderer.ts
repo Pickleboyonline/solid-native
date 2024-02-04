@@ -1,6 +1,5 @@
 import { createRenderer } from "solid-js/universal";
-import { SolidNativeNode } from "./types.ts";
-import { SolidNativeCore } from "./solid_native_core.ts";
+import { SolidNativeRenderer } from "./modules/mod.ts";
 
 export const {
   render,
@@ -14,38 +13,38 @@ export const {
   spread,
   setProp,
   mergeProps,
-} = createRenderer<SolidNativeNode>({
-  createElement(elementName) {
-    return SolidNativeCore.createElementByName(elementName);
+} = createRenderer<string>({
+  createElement(nodeName) {
+    return SolidNativeRenderer.createNodeByName(nodeName);
   },
   createTextNode(value) {
-    const element = SolidNativeCore.createTextElement();
-    element.setProp("text", value);
-    return element;
+    const node = SolidNativeRenderer.createNodeByName("sn_text");
+    SolidNativeRenderer.setProp(node, "text", value);
+
+    return node;
   },
-  replaceText(element, value) {
-    element.setProp("text", value);
+  replaceText(node, value) {
+    SolidNativeRenderer.setProp(node, "text", value);
   },
-  setProperty(element, propertyName, value) {
-    // print(typeof value);
-    element.setProp(propertyName, value);
+  setProperty(node, propertyName, value) {
+    SolidNativeRenderer.setProp(node, propertyName, value);
   },
   insertNode(parent, node, anchor) {
-    parent.insertBefore(node, anchor);
+    SolidNativeRenderer.insertBefore(parent, node, anchor);
   },
   isTextNode(node) {
-    return node.isTextElement;
+    return SolidNativeRenderer.isTextElement(node);
   },
   removeNode(parent, node) {
-    parent.removeChild(node);
+    return SolidNativeRenderer.removeChild(parent, node);
   },
   getParentNode(node) {
-    return node.parentElement;
+    return SolidNativeRenderer.getParent(node);
   },
   getFirstChild(node) {
-    return node.firstChild;
+    return SolidNativeRenderer.getFirstChild(node);
   },
   getNextSibling(node) {
-    return node.next;
+    return SolidNativeRenderer.next(node);
   },
 });

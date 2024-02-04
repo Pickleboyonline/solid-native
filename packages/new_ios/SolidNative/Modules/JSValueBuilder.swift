@@ -30,7 +30,6 @@ class JSValueBuilder {
     func addSyncFunction<U>(_ name: String, fn: @escaping () -> U?) {
         let objcFunc: @convention(block) (JSValue) -> JSValue? = { jsValue in
             let result = fn()
-            print(result ?? "nil", name)
             return JSValue(object: result, in: SolidNativeCore.shared.jsContext)
             
         }
@@ -69,15 +68,11 @@ class JSValueBuilder {
     }
     
     // Three arguments
-    func addSyncFunction<T, U, V, W>(_ name: String, fn: @escaping (T, U, V) -> W?) {
+    func addSyncFunction<W>(_ name: String, fn: @escaping (JSValue, JSValue, JSValue) -> W?) {
         let objcFunc: @convention(block) (JSValue, JSValue, JSValue) -> JSValue? = { jsValue1, jsValue2, jsValue3 in
-            guard let arg1 = self.processValue(jsValue1, asType: T.self),
-                  let arg2 = self.processValue(jsValue2, asType: U.self),
-                  let arg3 = self.processValue(jsValue3, asType: V.self) else {
-                return nil
-            }
+            let n = name;
             
-            if let result = fn(arg1, arg2, arg3) {
+            if let result = fn(jsValue1, jsValue2, jsValue3) {
                 return JSValue(object: result, in: SolidNativeCore.shared.jsContext)
             }
             return nil
