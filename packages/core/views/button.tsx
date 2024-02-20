@@ -1,5 +1,3 @@
-import { SolidNativeElement } from "../types.ts";
-
 type ButtonProps = {
   title?: string;
   onPress?: () => void;

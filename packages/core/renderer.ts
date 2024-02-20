@@ -1,9 +1,23 @@
 import { createRenderer } from "solid-js/universal";
-import { SolidNativeNode } from "./types.ts";
-import { SolidNativeCore } from "./solid_native_core.ts";
+import { SolidNativeRenderer } from "./modules/mod.ts";
+
+type Node = {
+  id: string;
+};
+
+/**
+ * When the SolidJS renderer encounters a string or text, it makes a text component.
+ * This is an issue if the renderer returns string based id's. Thus, wrap in an object
+ * when created to avoid this issue. In the future, we can look into the views
+ * exposing a JSValue Object that allows it to be directly manipulated using the same
+ * JSValueBuilder Swift Class I made.
+ * @param id
+ * @returns
+ */
+const wrapNodeIdInNode = (id: string): Node => ({ id });
 
 export const {
-  render,
+  render: solidRender,
   effect,
   memo,
   createComponent,
@@ -14,38 +28,58 @@ export const {
   spread,
   setProp,
   mergeProps,
-} = createRenderer<SolidNativeNode>({
-  createElement(elementName) {
-    return SolidNativeCore.createElementByName(elementName);
+} = createRenderer<Node>({
+  createElement(nodeName) {
+    const id = SolidNativeRenderer.createNodeByName(nodeName);
+    return wrapNodeIdInNode(id);
   },
   createTextNode(value) {
-    const element = SolidNativeCore.createTextElement();
-    element.setProp("text", value);
-    return element;
+    const node = SolidNativeRenderer.createNodeByName("sn_text");
+    SolidNativeRenderer.setProp(node, "text", value);
+
+    return wrapNodeIdInNode(node);
   },
-  replaceText(element, value) {
-    element.setProp("text", value);
+  replaceText({ id }, value) {
+    SolidNativeRenderer.setProp(id, "text", value);
   },
-  setProperty(element, propertyName, value) {
-    // print(typeof value);
-    element.setProp(propertyName, value);
+  setProperty({ id }, propertyName, value) {
+    SolidNativeRenderer.setProp(id, propertyName, value);
   },
-  insertNode(parent, node, anchor) {
-    parent.insertBefore(node, anchor);
+  insertNode({ id: parentId }, { id: nodeId }, anchor) {
+    const anchorId = anchor?.id;
+    SolidNativeRenderer.insertBefore(parentId, nodeId, anchorId);
   },
-  isTextNode(node) {
-    return node.isTextElement;
+  isTextNode({ id }) {
+    return SolidNativeRenderer.isTextElement(id);
   },
-  removeNode(parent, node) {
-    parent.removeChild(node);
+  removeNode({ id: parentId }, { id: nodeId }) {
+    return SolidNativeRenderer.removeChild(parentId, nodeId);
   },
-  getParentNode(node) {
-    return node.parentElement;
+  getParentNode({ id }) {
+    const parentId = SolidNativeRenderer.getParent(id);
+    if (parentId) {
+      return wrapNodeIdInNode(parentId);
+    }
+    return undefined;
   },
-  getFirstChild(node) {
-    return node.firstChild;
+  getFirstChild({ id }) {
+    const firstChildId = SolidNativeRenderer.getFirstChild(id);
+    if (firstChildId) {
+      return wrapNodeIdInNode(firstChildId);
+    }
+    return undefined;
   },
-  getNextSibling(node) {
-    return node.next;
+  getNextSibling({ id }) {
+    const nextSiblingId = SolidNativeRenderer.next(id);
+    if (nextSiblingId) {
+      return wrapNodeIdInNode(nextSiblingId);
+    }
+    return undefined;
   },
 });
+
+export const render = (code: () => JSX.Element) => {
+  // deno-lint-ignore ban-ts-comment
+  // @ts-ignore
+  solidRender(code, wrapNodeIdInNode(SolidNativeRenderer.getRootView()));
+};

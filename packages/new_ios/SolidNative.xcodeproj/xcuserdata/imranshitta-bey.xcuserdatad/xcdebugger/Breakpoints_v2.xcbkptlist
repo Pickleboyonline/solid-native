@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "9B7A677A-683F-4273-8AD2-0C1228D91CAE"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "794D7CBC-96E8-458C-879E-7B1A5EFF4C8A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "getJSValueRepresentation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "794D7CBC-96E8-458C-879E-7B1A5EFF4C8A - 7cf470f9bc406027"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "248">
+               </Location>
+               <Location
+                  uuid = "794D7CBC-96E8-458C-879E-7B1A5EFF4C8A - 6506edd4b37f9d78"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "136">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F4D86732-C17B-4AA9-8E09-BD5A36497AC1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/JSValueBuilder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "addSyncFunction(_:fn:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F4D86732-C17B-4AA9-8E09-BD5A36497AC1 - cd8b5cd4f4e0b529"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;(_: Swift.String, fn: (&#x3c4;_0_0) -&gt; Swift.Optional&lt;&#x3c4;_0_1&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  uuid = "F4D86732-C17B-4AA9-8E09-BD5A36497AC1 - cd8b5cd4f4e0b529"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;(_: Swift.String, fn: (&#x3c4;_0_0) -&gt; Swift.Optional&lt;&#x3c4;_0_1&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "424">
+               </Location>
+               <Location
+                  uuid = "F4D86732-C17B-4AA9-8E09-BD5A36497AC1 - 6fba65e9bc472454"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;(_: Swift.String, fn: (&#x3c4;_0_0) -&gt; &#x3c4;_0_1) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "348">
+               </Location>
+               <Location
+                  uuid = "F4D86732-C17B-4AA9-8E09-BD5A36497AC1 - cd8b5cd4f4e0b3b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1&gt;(_: Swift.String, fn: (&#x3c4;_0_0) -&gt; Swift.Optional&lt;&#x3c4;_0_1&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "360">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A0C6E272-7370-4138-9C32-3DA9572C4172"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "getJSValueRepresentation()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "getJSValueRepresentation()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972 - 1e3a800082e2d15e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (Swift.String, Swift.String, Swift.Optional&lt;Swift.String&gt;) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972 - 9475f1cf82b30cda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "156">
+               </Location>
+               <Location
+                  uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972 - 9475f1cf82b30cda"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972 - 9475f1cf82b30c01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "977E6D42-DA52-4926-AF77-860A5BE1A972 - 9475f1cf82b30c01"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #8 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;()&gt; in SolidNative.SNRender.getJSValueRepresentation() -&gt; __C.JSValue"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1A1B182A-D53C-43ED-8C57-BB72E55A08C1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/JSValueBuilder.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "addSyncFunction(_:fn:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1A1B182A-D53C-43ED-8C57-BB72E55A08C1 - c3e8ac51f1ac5321"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1, &#x3c4;_0_2, &#x3c4;_0_3&gt;(_: Swift.String, fn: (&#x3c4;_0_0, &#x3c4;_0_1, &#x3c4;_0_2) -&gt; Swift.Optional&lt;&#x3c4;_0_3&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "720">
+               </Location>
+               <Location
+                  uuid = "1A1B182A-D53C-43ED-8C57-BB72E55A08C1 - f007a13415c73661"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.JSValue, __C.JSValue, __C.JSValue) -&gt; Swift.Optional&lt;__C.JSValue&gt; in SolidNative.JSValueBuilder.addSyncFunction&lt;&#x3c4;_0_0, &#x3c4;_0_1, &#x3c4;_0_2, &#x3c4;_0_3&gt;(_: Swift.String, fn: (&#x3c4;_0_0, &#x3c4;_0_1, Swift.Optional&lt;&#x3c4;_0_2&gt;) -&gt; Swift.Optional&lt;&#x3c4;_0_3&gt;) -&gt; ()"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/JSValueBuilder.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "72"
+                  endingLineNumber = "72"
+                  offsetFromSymbolStart = "844">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5F72C901-A11B-4265-9506-FC4886E25884"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "ViewManager"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SolidNative/Modules/SNRender/SNRender.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "createViewByName(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F - e30fdec021d5f95f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.ViewManager.createViewByName(Swift.String) -&gt; Swift.String"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "F00E8AF7-5072-4E84-AC6C-6D3F71C23B7F - e30fdec021d5f95f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SolidNative.ViewManager.createViewByName(Swift.String) -&gt; Swift.String"
+                  moduleName = "SolidNative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Volumes/extreme-ssd/Github/solid-native/packages/new_ios/SolidNative/Modules/SNRender/SNRender.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "308">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
