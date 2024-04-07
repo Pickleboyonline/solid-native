@@ -69,6 +69,7 @@ class SolidNativeView {
             childPrevSibling.next = nil
         }
         element.parentElement = nil
+        props.parent = nil
         element.next = nil
         element.prev = nil
         // Update the nodes first child
@@ -111,6 +112,7 @@ class SolidNativeView {
         }
         
         element.parentElement = self
+        props.parent = nil
         
         updateChildrenInProps()
     }

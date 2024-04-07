@@ -1,7 +1,13 @@
 type TextProps = {
   children: JSX.Element;
+  style?: TextStyle;
+  bold?: boolean;
 };
 
-export function Text({ children }: TextProps) {
-  return <sn_text>{children}</sn_text>;
+type TextStyle = {
+  color?: "red" | "black";
+};
+
+export function Text({ children, ...rest }: TextProps) {
+  return <sn_text {...rest}>{children}</sn_text>;
 }

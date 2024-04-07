@@ -3,5 +3,5 @@ export type ViewProps = {
 };
 
 export function View({ children }: ViewProps) {
-  return <sn_view> {children}</sn_view>;
+  return <sn_view>{children}</sn_view>;
 }

@@ -14,6 +14,8 @@ class SolidNativeProps: ObservableObject {
     // TODO: Type this!
     @Published var children: [SolidNativeView] = [];
     
+    @Published var parent: SolidNativeView?
+    
     func getProp<T>(name: String, `default`: T) -> T {
         if let prop = values[name] as? T {
             return prop
@@ -27,6 +29,15 @@ class SolidNativeProps: ObservableObject {
         }
         return `default`
     }
+    
+    func getBool(name: String, `default`: Bool = false) -> Bool {
+        if let prop = (values[name] ?? nil) {
+            print("Found Bool!")
+            return prop.toBool()
+        }
+        return `default`
+    }
+    
     
     func getNumber(name: String, `default`: NSNumber = 0) -> NSNumber {
         if let prop = (values[name] ?? nil) {
