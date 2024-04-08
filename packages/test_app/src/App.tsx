@@ -18,7 +18,14 @@ export function App() {
     <View>
       <Text>
         Hello World!
-        <Text bold> Hello</Text>
+        <Text
+          fontSize={50}
+          color="#FF0000"
+          textDecorationLine="underline"
+          fontWeight="bold"
+        >
+          Hello
+        </Text>
       </Text>
     </View>
   );

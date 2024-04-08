@@ -16,12 +16,14 @@ class SolidNativeProps: ObservableObject {
     
     @Published var parent: SolidNativeView?
     
-    func getProp<T>(name: String, `default`: T) -> T {
+    func getProp<T>(name: String) -> T? {
         if let prop = values[name] as? T {
             return prop
         }
-        return `default`
+        return nil
     }
+    
+    
     
     func getString(name: String, `default`: String = "") -> String {
         if let prop = (values[name] ?? nil) {
