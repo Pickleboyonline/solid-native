@@ -16,6 +16,8 @@ class SolidNativeProps: ObservableObject {
     
     @Published var parent: SolidNativeView?
     
+    @Published var updateCount = 0;
+    
     func getProp<T>(name: String) -> T? {
         if let prop = values[name] as? T {
             return prop

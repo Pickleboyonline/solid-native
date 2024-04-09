@@ -15,7 +15,7 @@ class SNTextView: SolidNativeView {
   }
 
   override var isTextElement: Bool {
-    true
+      true
   }
 
   struct SNTextView: View {
@@ -35,7 +35,7 @@ class SNTextView: SolidNativeView {
 
 // Call for node without text parent and with children
 func dfs(start: SolidNativeProps) -> Text {
-  print("RUN!")
+  // print("RUN!")
   // If theres children, essentially we want the text of those children.
 
   // If no children, we return
@@ -46,17 +46,20 @@ func dfs(start: SolidNativeProps) -> Text {
     return processTextView(start)
   }
 
-  var txt = Text("")
+  var txt = dfs(start: start.children[0].props)
 
   for i in 0...(childrenCount - 1) {
+    if i == 0 {
+      continue
+    }
+
     let child = start.children[i]
+
     // Get other children and do the same
     let newText = dfs(start: child.props)
-    if i == 0 {
-      txt = newText
-    } else {
-      txt = txt + newText
-    }
+
+    txt = txt + newText
+
   }
 
   return styleTextViewFromSNView(props: start, text: txt)
@@ -87,52 +90,8 @@ func styleTextViewFromSNView(props: SolidNativeProps, text: Text) -> Text {
   }
 
   let fontSize = props.getNumber(name: "fontSize", default: 17.0)
-  // let fontStyle = props.getString(name: "fontStyle", default: "normal")
 
   styledText = styledText.font(.system(size: CGFloat(truncating: fontSize), weight: fontWieght))
-
-  return styledText
-
-  // Font (including family, size, style, and weight)  // Default font size if not specified
-
-  // Letter Spacing
-  if let letterSpacing: Double = props.getProp(name: "letterSpacing") {
-    styledText = styledText.kerning(CGFloat(letterSpacing))
-  }
-
-  // Line Height (SwiftUI does not directly support this for Text views, consider using a custom view if needed)
-
-  // Text Alignment
-  if let textAlign: String = props.getProp(name: "textAlign") {
-    // TODO: Process this
-    styledText = styledText.multilineTextAlignment(.center) as! Text
-  }
-
-  // Text Decoration (Underline, Strikethrough)
-  if let textDecorationLine: String = props.getProp(name: "textDecorationLine") {
-    styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
-  }
-
-  // Text Shadow
-  if let textShadowColorHex: String = props.getProp(name: "textShadowColor"),
-    // May not be correct
-    let uiColor = UIColor(named: textShadowColorHex)
-  {
-    // let shadowOffset = props.getSize(name: "textShadowOffset") ?? CGSize(width: 0, height: -1)  // Default to a slight upward shadow if not specified
-    // let shadowRadius = props.getDouble(name: "textShadowRadius") ?? 1.0
-    // styledText = styledText.shadow(
-    //  color: Color(uiColor), radius: CGFloat(shadowRadius), x: shadowOffset.width,
-    //   y: shadowOffset.height)
-  }
-
-  // Text Transform
-  if let textTransform: String = props.getProp(name: "textTransform") {
-    styledText = applyTextTransform(text: styledText, transform: textTransform)
-  }
-
-  // Properties such as `userSelect`, `writingDirectioniOS`, and `textDecorationStyleiOS` are more challenging to implement in SwiftUI.
-  // SwiftUI doesn't directly support `userSelect`, `writingDirection`, or detailed text decoration styles (`textDecorationStyleiOS`) as of my last update.
-  // Custom handling or alternative design decisions may be required for these properties.
 
   return styledText
 }
@@ -150,12 +109,6 @@ func applyTextDecoration(text: Text, decoration: String) -> Text {
     break
   }
   return newText
-}
-
-func applyTextTransform(text: Text, transform: String) -> Text {
-  // This is a placeholder implementation; you would need to extend it to actually transform the text content.
-  // SwiftUI's `Text` view doesn't directly support text transforms. You would typically modify the text string itself before creating the `Text` view.
-  return text
 }
 
 // Additional extensions for fontWeight, fontStyle, etc., can be modeled similar to the UIColor extension provided previously.

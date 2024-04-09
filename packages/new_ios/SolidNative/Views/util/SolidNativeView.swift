@@ -28,6 +28,25 @@ class SolidNativeView {
         // print("JS value type: " + String(value!.isString))
         assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
         props.values[name] = value
+        updateCount()
+    }
+    
+    // Forces parent component to render if this changes
+    // Used for nest text components
+    func updateCount() {
+        if !isTextElement {
+            return
+        }
+        var currentNode = self
+        var prevNode = self
+        // Go up chain,
+        while currentNode.isTextElement && currentNode.parentElement != nil {
+            if let parentElement = currentNode.parentElement {
+                prevNode = currentNode
+                currentNode = parentElement
+            }
+        }
+        prevNode.props.updateCount = (prevNode.props.updateCount + 1) % 10
     }
     
     
@@ -51,6 +70,7 @@ class SolidNativeView {
         
         children = newChildren
         props.children = newChildren
+        updateCount()
     }
     
     

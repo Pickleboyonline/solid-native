@@ -1,5 +1,6 @@
 import { createRenderer } from "solid-js/universal";
 import { SolidNativeRenderer } from "./modules/mod.ts";
+import { print } from "solid-native/core";
 
 type Node = {
   id: string;

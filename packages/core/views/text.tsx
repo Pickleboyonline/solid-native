@@ -1,3 +1,4 @@
+import { splitProps } from "solid-js";
 type TextProps = {
   children: JSX.Element;
 } & SolidNativeTextStyle;
@@ -51,6 +52,7 @@ type SolidNativeTextStyle = {
 //   textShadowRadius: 3,
 // };
 
-export function Text({ children, ...rest }: TextProps) {
-  return <sn_text {...rest}>{children}</sn_text>;
+export function Text(props: TextProps) {
+  const [local, rest] = splitProps(props, ["children"]);
+  return <sn_text {...rest}>{local.children}</sn_text>;
 }
