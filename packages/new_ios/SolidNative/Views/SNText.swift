@@ -167,7 +167,7 @@ func ellipsizeModeToTruncationMode(_ ellipsizeMode: String?) -> Text.TruncationM
   }
 }
 
-// I hate SwiftUI
+// I hate SwiftUI, why is there no hex color support?
 extension Color {
   init(hex string: String) {
     var string: String = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
