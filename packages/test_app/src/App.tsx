@@ -1,5 +1,5 @@
-import { For, createSignal, onMount } from "solid-js";
-import { print, Button, View, Text } from "solid-native/core";
+import { createSignal, onMount } from "solid-js";
+import { print, View, Text } from "solid-native/core";
 
 export function App() {
   // const [count, setCount] = createSignal(0);
@@ -31,9 +31,21 @@ export function App() {
     <View>
       <Text>
         Bruh
-        <Text fontWeight={isBold()}>Hello World:</Text>
+        <Text
+          style={{
+            fontWeight: isBold(),
+          }}
+        >
+          Hello World:
+        </Text>
       </Text>
-      <Text color={bool() ? "#4287f5" : "#8cb512"} fontWeight="bold">
+      <Text
+        style={{
+          color: bool() ? "#4287f5" : "#8cb512",
+          fontWeight: "bold",
+          fontStyle: "italic",
+        }}
+      >
         HELLO!
       </Text>
     </View>

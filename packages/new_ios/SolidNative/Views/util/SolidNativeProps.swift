@@ -25,8 +25,6 @@ class SolidNativeProps: ObservableObject {
         return nil
     }
     
-    
-    
     func getString(name: String, `default`: String = "") -> String {
         if let prop = (values[name] ?? nil) {
             return prop.toString()
@@ -36,7 +34,7 @@ class SolidNativeProps: ObservableObject {
     
     func getBool(name: String, `default`: Bool = false) -> Bool {
         if let prop = (values[name] ?? nil) {
-            print("Found Bool!")
+            //print("Found Bool!")
             return prop.toBool()
         }
         return `default`

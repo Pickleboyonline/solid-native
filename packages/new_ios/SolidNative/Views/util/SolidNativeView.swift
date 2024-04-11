@@ -25,7 +25,6 @@ class SolidNativeView {
     let props = SolidNativeProps()
     
     @objc public func setProp(_ name: String, _ value: JSValue?) {
-        // print("JS value type: " + String(value!.isString))
         assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
         props.values[name] = value
         updateCount()

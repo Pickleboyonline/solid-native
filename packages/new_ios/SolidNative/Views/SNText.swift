@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import JavaScriptCore
 
 class SNTextView: SolidNativeView {
 
@@ -73,25 +74,42 @@ func processTextView(_ props: SolidNativeProps) -> Text {
 func styleTextViewFromSNView(props: SolidNativeProps, text: Text) -> Text {
   var styledText = text
 
-  let fontWeight = props.getString(name: "fontWeight", default: "regular")
-  let color = props.getString(name: "color")
-
-  if color != "" {
-    styledText = styledText.foregroundColor(Color(hex: color))
-  }
-
-  let fontWieght = SwiftUIFontWeight(from: fontWeight)
-
-  // Text Decoration (Underline, Strikethrough)
-  let textDecorationLine = props.getString(name: "textDecorationLine")
-
-  if textDecorationLine != "" {
-    styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
-  }
-
-  let fontSize = props.getNumber(name: "fontSize", default: 17.0)
-
-  styledText = styledText.font(.system(size: CGFloat(truncating: fontSize), weight: fontWieght))
+  let style: JSValue? = props.getProp(name: "style")
+    
+    if let style = style, let styleDict = style.toDictionary() {
+        
+        if let color = styleDict["color"] as? String {
+            styledText = styledText.foregroundColor(Color(hex: color))
+        }
+        
+        let fontWeight = styleDict["fontWeight"] as? String ?? "regular"
+        let swiftUIFontWieght = toFontWeight(fontWeight)
+        
+        let fontSize = styleDict["fontSize"] as? Float ?? 17.0
+        
+        styledText = styledText.font(
+            .system(size: CGFloat(fontSize),
+                    weight: swiftUIFontWieght))
+    
+        
+        if let textDecorationLine = styleDict["textDecorationLine"] as? String {
+            styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
+        }
+        
+        if let fontStyle = styleDict["fontStyle"] as? String, fontStyle == "italic" {
+            styledText = styledText.italic()
+        }
+        
+        if let numberOfLines = styleDict["numberOfLines"] as? Int, numberOfLines >= 0 {
+            styledText = styledText.lineLimit(numberOfLines) as! Text
+        }
+        
+        if let ellipsizeMode = styleDict["ellipsizeMode"] as? String {
+            styledText = styledText.truncationMode(ellipsizeModeToTruncationMode(ellipsizeMode)) as! Text
+        }
+        
+    }
+  
 
   return styledText
 }
@@ -112,16 +130,44 @@ func applyTextDecoration(text: Text, decoration: String) -> Text {
 }
 
 // Additional extensions for fontWeight, fontStyle, etc., can be modeled similar to the UIColor extension provided previously.
-
-func SwiftUIFontWeight(from weight: String) -> Font.Weight {
-  switch weight {
-  case "bold": return .bold
-  case "medium": return .medium
-  case "light": return .light
-  default: return .regular
+func toFontWeight(_ fontWeight: String?) -> Font.Weight {
+  switch fontWeight {
+  case "100":
+    return .ultraLight
+  case "200":
+    return .thin
+  case "300", "light":
+    return .light
+  case "400", "normal":
+    return .regular
+  case "500", "medium":
+    return .medium
+  case "600":
+    return .semibold
+  case "700", "bold":
+    return .bold
+  case "800":
+    return .heavy
+  case "900":
+    return .black
+  default:
+    return .regular
   }
 }
 
+func ellipsizeModeToTruncationMode(_ ellipsizeMode: String?) -> Text.TruncationMode {
+  // TODO: Add support for "clip".
+  switch ellipsizeMode {
+  case "head":
+    return .head
+  case "middle":
+    return .middle
+  default:
+    return .tail
+  }
+}
+
+// I hate SwiftUI
 extension Color {
   init(hex string: String) {
     var string: String = string.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

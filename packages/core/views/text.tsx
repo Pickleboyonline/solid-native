@@ -1,7 +1,8 @@
 import { splitProps } from "solid-js";
 type TextProps = {
   children: JSX.Element;
-} & SolidNativeTextStyle;
+  style?: SolidNativeTextStyle;
+};
 
 type SolidNativeTextStyle = {
   color?: string; // Represented as a hex string, e.g., "#FFFFFF"
