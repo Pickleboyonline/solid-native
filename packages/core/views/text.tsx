@@ -40,19 +40,6 @@ type SolidNativeTextStyle = {
   userSelect?: "none" | "text" | "all" | "auto"; // Not applicable in native development
 };
 
-// Example of using the interface
-// const exampleStyle: SolidNativeTextStyle = {
-//   color: "#FF00FF",
-//   fontFamily: "Helvetica",
-//   fontSize: 16,
-//   fontWeight: "bold",
-//   textAlign: "center",
-//   textDecorationLine: "underline",
-//   textShadowColor: "#000000",
-//   textShadowOffset: { width: 2, height: 2 },
-//   textShadowRadius: 3,
-// };
-
 export function Text(props: TextProps) {
   const [local, rest] = splitProps(props, ["children"]);
   return <sn_text {...rest}>{local.children}</sn_text>;
