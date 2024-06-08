@@ -86,6 +86,8 @@ class SolidNativeView {
             firstChild = childNextSibling
         } else if let childPrevSibling = element.prev {
             childPrevSibling.next = nil
+        } else {
+            firstChild = nil
         }
         element.parentElement = nil
         props.parent = nil
