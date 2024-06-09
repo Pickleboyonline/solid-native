@@ -30,7 +30,7 @@ export function App() {
   return (
     <View>
       <Text>
-        {"Bruh " + count() + " "}
+        {"Counter: " + count() + " "}
         <Text
           style={{
             fontWeight: isBold(),
