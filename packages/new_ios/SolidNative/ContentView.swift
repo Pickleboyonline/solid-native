@@ -7,6 +7,7 @@
 
 import SwiftUI
 import YogaSwiftUI
+import Yoga
 
 struct ContentView: View {
     var body: some View {
@@ -18,8 +19,9 @@ struct ContentView: View {
                 }
                 Flex(direction: .row) {
                     Text("Row 1 Item 1")
+                        .marginTop(YGValue(value: 10, unit: .point))
                     Text("Row 1 Item 2")
-                }
+                }.position(.absolute)
                 
                 Text("Heslslo")
             }.background(Color.green)

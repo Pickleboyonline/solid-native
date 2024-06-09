@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,7 +14,7 @@
 		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
 		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
-		58335F302C150F8A005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F2F2C150F8A005EC584 /* YogaSwiftUI */; };
+		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
@@ -72,7 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58335F302C150F8A005EC584 /* YogaSwiftUI in Frameworks */,
+				58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +216,7 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
-				58335F2F2C150F8A005EC584 /* YogaSwiftUI */,
+				58335F322C1607E7005EC584 /* YogaSwiftUI */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -291,7 +291,7 @@
 			);
 			mainGroup = 5812F96A2B522228001BEE89;
 			packageReferences = (
-				58335F2E2C150F8A005EC584 /* XCRemoteSwiftPackageReference "Yoga-SwiftUI" */,
+				58335F312C1607E7005EC584 /* XCLocalSwiftPackageReference "../../../Yoga-SwiftUI" */,
 			);
 			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
 			projectDirPath = "";
@@ -671,21 +671,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		58335F2E2C150F8A005EC584 /* XCRemoteSwiftPackageReference "Yoga-SwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/tiepvuvan/Yoga-SwiftUI";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		58335F312C1607E7005EC584 /* XCLocalSwiftPackageReference "../../../Yoga-SwiftUI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../Yoga-SwiftUI";
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		58335F2F2C150F8A005EC584 /* YogaSwiftUI */ = {
+		58335F322C1607E7005EC584 /* YogaSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 58335F2E2C150F8A005EC584 /* XCRemoteSwiftPackageReference "Yoga-SwiftUI" */;
 			productName = YogaSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
