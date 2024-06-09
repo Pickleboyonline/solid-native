@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import YogaSwiftUI
 
 class SNView: SolidNativeView {
     
@@ -18,10 +19,13 @@ class SNView: SolidNativeView {
         @ObservedObject var props: SolidNativeProps
         
         var body: some View {
-            let children = props.getChildren()
-            ForEach(children, id: \.id) { child in
-                child.render()
+            Flex(direction: .column) {
+                let children = props.getChildren()
+                ForEach(children, id: \.id) { child in
+                    child.render()
+                }
             }
+
         }
     }
     

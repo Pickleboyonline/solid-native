@@ -1,32 +1,38 @@
-import { Application, Router } from "https://deno.land/x/oak@v12.6.2/mod.ts";
-import * as esbuild from "https://deno.land/x/esbuild@v0.19.11/mod.js";
+import { Application, Router } from "@oak/oak";
+import * as esbuild from "esbuid";
 
-import * as esbuildDenoLoader from "https://deno.land/x/esbuild_deno_loader@0.8.3/mod.ts";
-import { solidPlugin } from "npm:esbuild-plugin-solid@0.5.0";
+import * as esbuildDenoLoader from "@luca/esbuild-deno-loader";
+import { solidPlugin } from "esbuild-plugin-solid";
 
 const app = new Application();
 
 const router = new Router();
+
+const esbuildPlugins = (() => {
+  const configPath = import.meta
+    .resolve("./../../deno.json")
+    .replace("file://", "");
+
+  // @ts-ignore: Versions are OK, think its some Deno Global.URL type mismatch
+  return [
+    solidPlugin({
+      solid: {
+        moduleName: "solid-native-renderer",
+        generate: "universal",
+      },
+    }),
+    ...esbuildDenoLoader.denoPlugins({
+      configPath,
+    }),
+  ] as esbuild.Plugin[];
+})();
+
 router
   .get("/", async (ctx) => {
-    const configPath = import.meta
-      .resolve("./../../deno.json")
-      .replace("file://", "");
-
     console.log("Request!");
 
     const result = await esbuild.build({
-      plugins: [
-        solidPlugin({
-          solid: {
-            moduleName: "solid-native-renderer",
-            generate: "universal",
-          },
-        }),
-        ...esbuildDenoLoader.denoPlugins({
-          configPath,
-        }),
-      ],
+      plugins: esbuildPlugins,
       entryPoints: ["packages/test_app/index.ts"],
       bundle: true,
       write: false,
@@ -34,28 +40,14 @@ router
       outdir: "out",
     });
 
-    const contents = result.outputFiles[0].text;
+    const contents = result.outputFiles?.[0].text;
     ctx.response.body = contents;
   })
   .get("/source", async (ctx) => {
-    const configPath = import.meta
-      .resolve("./../../deno.json")
-      .replace("file://", "");
-
-    console.log("Request!");
+    console.log("Request Source!");
 
     const result = await esbuild.build({
-      plugins: [
-        solidPlugin({
-          solid: {
-            moduleName: "solid-native-renderer",
-            generate: "universal",
-          },
-        }),
-        ...esbuildDenoLoader.denoPlugins({
-          configPath,
-        }),
-      ],
+      plugins: esbuildPlugins,
       entryPoints: ["packages/test_app/index.ts"],
       bundle: true,
       write: false,

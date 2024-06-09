@@ -1,0 +1,24 @@
+{
+  "originHash" : "de35a6386086463170a529e992b205cb4c99fe2722f3d4f1b0d013d588a37b45",
+  "pins" : [
+    {
+      "identity" : "yoga",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tiepvuvan/yoga",
+      "state" : {
+        "branch" : "main",
+        "revision" : "10f985ad94f6b24ec701f80168e02550ec30c222"
+      }
+    },
+    {
+      "identity" : "yoga-swiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tiepvuvan/Yoga-SwiftUI",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f40d719c2c642482bf5f62bb52f60f190b627ad1"
+      }
+    }
+  ],
+  "version" : 3
+}
