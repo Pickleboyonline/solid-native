@@ -19,9 +19,9 @@ struct ContentView: View {
                 }
                 Flex(direction: .row) {
                     Text("Row 1 Item 1")
-                        .marginTop(YGValue(value: 10, unit: .point))
+                        .alignItems(.)
                     Text("Row 1 Item 2")
-                }.position(.absolute)
+                }
                 
                 Text("Heslslo")
             }.background(Color.green)
