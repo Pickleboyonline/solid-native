@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modules System</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Modules System/">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> notes</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a aria-current="page" href="/solid-native/notes/Modules System/">
+    
+    Modules System
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+  </ul>
+</nav>
+
+
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>notes</strong></li>
+    
+    
+    
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+            <h1>Modules System</h1>
+          
+
+          
+            <p>Module System Needs to be made.</p>
+<p>Needs the Core:</p>
+<ul>
+<li>Manages modules</li>
+</ul>
+<p>Requirements:</p>
+<ul>
+<li>From Swifts side, all i need is some function to get the root element at any time.</li>
+<li>Some root element should be there. At best, this is just some empty group that has no props. OR, just a special swift view.</li>
+<li>Modules:
+<ul>
+<li>Modules are objects that be looked up by the JS environment.</li>
+<li>Views are special modules.</li>
+<li>OR these can be separate.</li>
+<li>This is just a wrapper so JS can talk to Swift.</li>
+</ul>
+</li>
+<li>Renderer (for solidJS):
+<ul>
+<li>Is a tree structure with nodes that are swift ui components</li>
+</ul>
+</li>
+</ul>
+<p>Question:</p>
+<ul>
+<li>Should modules and views be separate?
+<ul>
+<li>Views are a wrapper for swift ui views. These have prop and state. Callbacks can be used to reference state.</li>
+<li>Modules are objects that are referenced by context.</li>
+<li>Core library provides way to access these modules.</li>
+<li>At the end of the day, from the JS perspective they simply access native code.
+<ul>
+<li>They simply are just code. Thus, they shouldn't require any special rendering.</li>
+<li>In fact, the rendering agent can be a module in itself.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>So, we need some way to give access to JS in a unified way with modules.</p>
+<p>What are views? Well, views themselves can adhere to this module framework since they get called on anyways. They just need special info</p>
+<p>However, the way these are accessed in Solid Can be challenging. I can either use a JSON serializable identifier or the object itself.</p>
+<p>Then there comes the issue that the root view must be linked to it. This is not a problem, since its already there.</p>
+<p>Summing this up, we get this:</p>
+<ul>
+<li>Module system is way for Swift and JS to talk to eachother. Think i want to make a module for a camera or something</li>
+<li>Views, should be their own thing. They must extend some class to be a view.</li>
+<li>Views and modules must be accessable via the JS layer. For views, there must be a way for JS to update props and call methods on it.
+<ul>
+<li>Now, heres the interesting thing. I can use a rendering module to do all of this. This module is registered in the core. Furthermore, it has an index of all the views in needed.</li>
+</ul>
+</li>
+</ul>
+<p>Ok, again:</p>
+<ul>
+<li>Modules are a way for JS-Native interop.</li>
+<li>Rendering:
+<ul>
+<li>Rendering is a module.</li>
+<li>Has registeristry of native modules that is statically linked.</li>
+<li>Access views via ID to set props and such.</li>
+<li>Views are a native ONLY thing. These really aren't exposed to the JS side like modules are.</li>
+</ul>
+</li>
+<li>JS needs some way to get modules in its context. Modules can either be lazy loaded or available at run time.
+<ul>
+<li>For now, initial instantiate at run time.</li>
+</ul>
+</li>
+<li>Core module is really only needed to set things up. It:
+<ul>
+<li>Has the JS context</li>
+<li>Downloads the JS</li>
+<li>Has the blank root view</li>
+<li>Attaches this view to the renderer module</li>
+<li>Hooks all known modules into global JS context</li>
+</ul>
+</li>
+</ul>
+<p>Ok so now we have these classes:</p>
+<ul>
+<li>Modules</li>
+<li>Views</li>
+<li>Core
+Thats it!</li>
+</ul>
+<p>Ok so the core has a registry of modules that it can can instanciate.
+The registry is needed to lookup modules by name in the JS code.
+When JS gets a native module, it's make a module.</p>
+<p>When module gets made, the JS side must be able to get some object that has functions in it.</p>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>
