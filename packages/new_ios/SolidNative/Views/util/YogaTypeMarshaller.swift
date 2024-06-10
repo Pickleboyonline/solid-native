@@ -6,9 +6,9 @@
 //
 
 import Foundation
+import JavaScriptCore
 import Yoga
 import YogaSwiftUI
-import JavaScriptCore
 
 public class YogaTypeMarshaller {
   // Helper methods for type conversions
@@ -111,8 +111,8 @@ public class YogaTypeMarshaller {
   }
 
   static func convertToYGPositionType(_ jsValue: JSValue?) -> YGPositionType? {
-      if let jsValue = jsValue, jsValue.isString {
-        switch jsValue.toString() {
+    if let jsValue = jsValue, jsValue.isString {
+      switch jsValue.toString() {
       case "relative":
         return .relative
       case "absolute":

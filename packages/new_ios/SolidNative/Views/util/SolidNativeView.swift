@@ -14,7 +14,6 @@ class SolidNativeView {
   dynamic var next: SolidNativeView?
   dynamic var prev: SolidNativeView?
   let id = UUID()
-    
 
   class var name: String {
     "sn_view"

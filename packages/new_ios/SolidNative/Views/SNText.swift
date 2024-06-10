@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import JavaScriptCore
+import SwiftUI
 
 class SNTextView: SolidNativeView {
 
@@ -16,7 +16,7 @@ class SNTextView: SolidNativeView {
   }
 
   override var isTextElement: Bool {
-      true
+    true
   }
 
   struct SNTextView: View {
@@ -75,41 +75,40 @@ func styleTextViewFromSNView(props: SolidNativeProps, text: Text) -> Text {
   var styledText = text
 
   let style: JSValue? = props.getProp(name: "style")
-    
-    if let style = style, let styleDict = style.toDictionary() {
-        
-        if let color = styleDict["color"] as? String {
-            styledText = styledText.foregroundColor(Color(hex: color))
-        }
-        
-        let fontWeight = styleDict["fontWeight"] as? String ?? "regular"
-        let swiftUIFontWieght = toFontWeight(fontWeight)
-        
-        let fontSize = styleDict["fontSize"] as? Float ?? 17.0
-        
-        styledText = styledText.font(
-            .system(size: CGFloat(fontSize),
-                    weight: swiftUIFontWieght))
-    
-        
-        if let textDecorationLine = styleDict["textDecorationLine"] as? String {
-            styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
-        }
-        
-        if let fontStyle = styleDict["fontStyle"] as? String, fontStyle == "italic" {
-            styledText = styledText.italic()
-        }
-        
-        if let numberOfLines = styleDict["numberOfLines"] as? Int, numberOfLines >= 0 {
-            styledText = styledText.lineLimit(numberOfLines) as! Text
-        }
-        
-        if let ellipsizeMode = styleDict["ellipsizeMode"] as? String {
-            styledText = styledText.truncationMode(ellipsizeModeToTruncationMode(ellipsizeMode)) as! Text
-        }
-        
+
+  if let style = style, let styleDict = style.toDictionary() {
+
+    if let color = styleDict["color"] as? String {
+      styledText = styledText.foregroundColor(Color(hex: color))
     }
-  
+
+    let fontWeight = styleDict["fontWeight"] as? String ?? "regular"
+    let swiftUIFontWieght = toFontWeight(fontWeight)
+
+    let fontSize = styleDict["fontSize"] as? Float ?? 17.0
+
+    styledText = styledText.font(
+      .system(
+        size: CGFloat(fontSize),
+        weight: swiftUIFontWieght))
+
+    if let textDecorationLine = styleDict["textDecorationLine"] as? String {
+      styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
+    }
+
+    if let fontStyle = styleDict["fontStyle"] as? String, fontStyle == "italic" {
+      styledText = styledText.italic()
+    }
+
+    if let numberOfLines = styleDict["numberOfLines"] as? Int, numberOfLines >= 0 {
+      styledText = styledText.lineLimit(numberOfLines) as! Text
+    }
+
+    if let ellipsizeMode = styleDict["ellipsizeMode"] as? String {
+      styledText = styledText.truncationMode(ellipsizeModeToTruncationMode(ellipsizeMode)) as! Text
+    }
+
+  }
 
   return styledText
 }
