@@ -1,5 +1,5 @@
-# solid-native
-React Native but for Solid.JS
+# Solid Native
+React Native but for Solid.JS, powered by Deno!
 
 React Native is nice, but it has the following issues:
 1. Difficult upgrades and installations
@@ -41,6 +41,9 @@ deno task start
 The bundler should then be running on port 8080.
 
 From there, open the iOS app in `packages/ios`. Run the app in the simulator and it should load the test app in `packages/test_app`. Note, live reload/hot reload is not supported yet, so re-run the iOS app when you make a change to the test app!
+
+## Docs
+Powered by [lume](https://lume.land/). Use the command `deno task lume:serve` to view a local instance of the docs or go to https://pickleboyonline.github.io/solid-native/. I plan on putting a roadmap there.
 
 ## TODO
 
