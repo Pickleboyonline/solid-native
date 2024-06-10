@@ -11,20 +11,21 @@ import Yoga
 
 struct ContentView: View {
     var body: some View {
-        Flex(direction: .column)  {
-            Flex(direction: .column) {
-                Flex(direction: .row) {
-                    Text("Row 1 Item 1")
-                    Text("Row 1 Item 2")
+        Flex(direction: .column, alignItems: .stretch)  {
+            Flex(direction: .column, alignItems: .flexStart) {
+                Group {
+                    Text("Row 1 Item 1").background(Color.purple)
                 }
-                Flex(direction: .row) {
-                    Text("Row 1 Item 1")
-                        .alignItems(.)
-                    Text("Row 1 Item 2")
+                
+                
+                Flex(direction: .row, alignItems: .stretch) {
+                    Text("Row 2 Item 1")
+                       //  .alignItems(.)
+                    Text("Row 2 Item 2")
                 }
                 
                 Text("Heslslo")
-            }.background(Color.green)
+            }.background(Color.green).alignItems(.flexStart)
         }.background(Color.gray)
     }
     

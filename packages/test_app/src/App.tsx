@@ -28,28 +28,33 @@ export function App() {
   });
 
   return (
-    <View>
-      <Text>
-        {"Counter: " + count() + " "}
+    <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, marginTop: 100, flexDirection: 'row' }}>
+        <Text>
+          {"Counter: " + count() + " "}
+          <Text
+            style={{
+              fontWeight: isBold(),
+              textDecorationLine: "underline",
+            }}
+          >
+            Hello World:
+          </Text>
+        </Text>
         <Text
           style={{
-            fontWeight: isBold(),
-            textDecorationLine: "underline",
+            color: bool() ? "#4287f5" : "#8cb512",
+            fontWeight: "bold",
+            fontStyle: "italic",
           }}
         >
-          Hello World:
+          HELLO!
         </Text>
-      </Text>
-      <Text
-        style={{
-          color: bool() ? "#4287f5" : "#8cb512",
-          fontWeight: "bold",
-          fontStyle: "italic",
-        }}
-      >
-        HELLO!
-      </Text>
-      <Button title="Flip Values" onPress={flipValues} />
+        <Button title="Flip Values" onPress={flipValues} />
+      </View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        Hello
+      </View>
     </View>
   );
 }

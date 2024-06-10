@@ -28,10 +28,11 @@ export type ViewLayoutStyle = {
   borderWidth?: number;
 }
 
-export type ViewProps = ViewLayoutStyle & {
+export type ViewProps = {
+  style?: ViewLayoutStyle
   children?: JSX.Element;
 };
 
-export function View({ children }: ViewProps) {
-  return <sn_view>{children}</sn_view>;
+export function View(props: ViewProps) {
+  return <sn_view {...props} />;
 }
