@@ -45,9 +45,9 @@ class SNView: SolidNativeView {
       ) {
         let children = props.getChildren()
         ForEach(children, id: \.id) { child in
-          child.render()
+           child.render()
         }
-      }.applySolidNativeLayout(props: props).ignoresSafeArea()
+      }.applySolidNativeLayout(props: props).applySolidNativeStyles(props: props).ignoresSafeArea()
     }
   }
 

@@ -29,7 +29,12 @@ export function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <View style={{ flex: 1, marginTop: 100, flexDirection: 'row' }}>
+      <View style={{
+        flex: 1,
+        backgroundColor: '#32a852',
+        flexDirection: 'row',
+        marginTop: 100
+      }}>
         <Text>
           {"Counter: " + count() + " "}
           <Text
@@ -52,8 +57,17 @@ export function App() {
         </Text>
         <Button title="Flip Values" onPress={flipValues} />
       </View>
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        Hello
+      <View style={{
+        flex: 1,
+        backgroundColor: '#7a2c91'
+      }}>
+        I'm purple
+      </View>
+      <View style={{
+        flex: 1,
+        backgroundColor: '#4287f5'
+      }}>
+        I'm blue
       </View>
     </View>
   );

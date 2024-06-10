@@ -18,6 +18,8 @@
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */; };
 		58BE0CE12C17034F00666362 /* SolidNativeLayoutViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */; };
+		58BE0CE32C1768C500666362 /* SolidNativeStyleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */; };
+		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
 		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
@@ -60,6 +62,8 @@
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaTypeMarshaller.swift; sourceTree = "<group>"; };
 		58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeLayoutViewModifier.swift; sourceTree = "<group>"; };
+		58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeStyleViewModifier.swift; sourceTree = "<group>"; };
+		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 		58CFF7472B5A1E1800BA84C7 /* SNRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRender.swift; sourceTree = "<group>"; };
 		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
@@ -193,6 +197,8 @@
 				58CFF7502B5A1E9B00BA84C7 /* SolidNativeView.swift */,
 				58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */,
 				58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */,
+				58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */,
+				58BE0CE52C17698500666362 /* Color+Modifier.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -349,9 +355,11 @@
 				58CFF7512B5A1E9B00BA84C7 /* SolidNativeView.swift in Sources */,
 				58BE0CE12C17034F00666362 /* SolidNativeLayoutViewModifier.swift in Sources */,
 				58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */,
+				58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */,
 				58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */,
 				58CFF75A2B5A5B2A00BA84C7 /* JSValueBuilder.swift in Sources */,
 				58CFF7572B5A2BA000BA84C7 /* SolidNativeModule.swift in Sources */,
+				58BE0CE32C1768C500666362 /* SolidNativeStyleViewModifier.swift in Sources */,
 				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
 				58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */,
 				58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */,

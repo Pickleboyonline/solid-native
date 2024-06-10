@@ -22,7 +22,7 @@ struct ContentView: View {
                     Text("Row 2 Item 1")
                        //  .alignItems(.)
                     Text("Row 2 Item 2")
-                }
+                }.padding(.top, 100)
                 
                 Text("Heslslo")
             }.background(Color.green).alignItems(.flexStart)

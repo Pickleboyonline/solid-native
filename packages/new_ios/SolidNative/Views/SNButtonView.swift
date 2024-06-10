@@ -27,7 +27,7 @@ class SNButtonView: SolidNativeView {
       let title = props.getString(name: "title")
       Button(title) {
         onPress()
-      }
+      }.applySolidNativeLayout(props: props).applySolidNativeStyles(props: props)
     }
   }
 
