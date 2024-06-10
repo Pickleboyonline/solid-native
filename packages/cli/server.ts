@@ -1,6 +1,6 @@
 import { Application, Router } from "@oak/oak";
 import * as esbuild from "esbuid";
-
+import file from "./../../deno.json" with { type: "json" };
 import * as esbuildDenoLoader from "@luca/esbuild-deno-loader";
 import { solidPlugin } from "esbuild-plugin-solid";
 

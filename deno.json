@@ -26,9 +26,6 @@
     "lib": [
       "dom",
       "deno.window"
-    ],
-    "types": [
-      "lume/types.ts"
     ]
   }
 }
