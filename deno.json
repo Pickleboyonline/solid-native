@@ -1,7 +1,11 @@
 {
   "tasks": {
     "solid_native": "deno run packages/cli/mod.ts",
-    "start": "deno run --allow-all packages/cli/server.ts"
+    "start": "deno run --allow-all packages/cli/server.ts",
+    "lume": "cd packages/docs && echo \"import 'lume/cli.ts'\" | deno run -A -",
+    "lume:build": "cd packages/docs && deno task lume && cd ../.. && rm -rf ./docs && mv ./packages/docs/_site ./docs",
+    "lume:serve": "cd packages/docs && deno task lume -s",
+    "lume:cms": "cd packages/docs && deno task lume cms"
   },
   "imports": {
     "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@0.10.3",
@@ -12,13 +16,19 @@
     "solid-js/jsx-runtime": "npm:solid-js@1.8.17/jsx-runtime",
     "solid-js/universal": "npm:solid-js@1.8.17/universal",
     "solid-native-renderer": "./packages/core/renderer.ts",
-    "solid-native/core": "./packages/core/mod.ts"
+    "solid-native/core": "./packages/core/mod.ts",
+    "lume/": "https://deno.land/x/lume@v2.2.1/",
+    "wiki/": "https://deno.land/x/lume_theme_simple_wiki@v0.8.2/",
+    "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.5.0/"
   },
   "compilerOptions": {
     "jsx": "precompile",
     "lib": [
       "dom",
       "deno.window"
+    ],
+    "types": [
+      "lume/types.ts"
     ]
   }
 }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content not found.</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/404.html">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+  </ul>
+</nav>
+
+
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+
+          
+            <h1>Content not found.</h1>
+<p>Go <a href="/solid-native/">home</a>.</p>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>
