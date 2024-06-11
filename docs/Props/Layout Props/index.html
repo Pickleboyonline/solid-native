@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Props</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Props/Layout Props/">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Components</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Button/">
+    
+    🚧  Button
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Text/">
+    
+    🚧  Text
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/View/">
+    
+    🚧 View
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Props</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a aria-current="page" href="/solid-native/Props/Layout Props/">
+    
+    Layout Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Shadow Props/">
+    
+    Shadow Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Text Style Props/">
+    
+    Text Style Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/View Style Props/">
+    
+    View Style Props
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> notes</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Expo-like Modules/">
+    
+    Expo-like Modules
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Module and Build System/">
+    
+    Module and Build System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Modules System/">
+    
+    Modules System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Navigation/">
+    
+    Navigation
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Refactors/">
+    
+    Refactors
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+  </ul>
+</nav>
+
+
+      
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#flex-container-props">Flex Container Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#flex-item-props">Flex Item Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#sizing-props">Sizing Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#margin-props">Margin Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#padding-props">Padding Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#positioning-props">Positioning Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#other-props">Other Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#gap-props">Gap Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>Props</strong></li>
+    
+    
+    
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+            <h1>Layout Props</h1>
+          
+
+          
+            <p>This roadmap outlines the necessary Flexbox props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="flex-container-props" tabindex="-1"><a href="#flex-container-props" class="header-anchor">Flex Container Props</a></h2>
+<ul>
+<li>[ ] <strong>alignContent</strong>: Controls the alignment of the lines in a flex container.
+<ul>
+<li>Type: <code>'flex-start' | 'flex-end' | 'center' | 'stretch' | 'space-between' | 'space-around' | 'space-evenly' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>alignItems</strong>: Aligns flex items along the cross axis.
+<ul>
+<li>Type: <code>FlexAlignType | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flexDirection</strong>: Defines the main axis direction (row or column).
+<ul>
+<li>Type: <code>'row' | 'column' | 'row-reverse' | 'column-reverse' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flexWrap</strong>: Controls whether the flex container is single-line or multi-line.
+<ul>
+<li>Type: <code>'wrap' | 'nowrap' | 'wrap-reverse' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>justifyContent</strong>: Aligns flex items along the main axis.
+<ul>
+<li>Type: <code>'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly' | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="flex-item-props" tabindex="-1"><a href="#flex-item-props" class="header-anchor">Flex Item Props</a></h2>
+<ul>
+<li>[ ] <strong>alignSelf</strong>: Overrides the <code>alignItems</code> value for a specific flex item.
+<ul>
+<li>Type: <code>'auto' | FlexAlignType | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flex</strong>: Shorthand for <code>flexGrow</code>, <code>flexShrink</code>, and <code>flexBasis</code>.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flexBasis</strong>: Sets the initial size of a flex item.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flexGrow</strong>: Defines the ability for a flex item to grow if necessary.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>flexShrink</strong>: Defines the ability for a flex item to shrink if necessary.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="sizing-props" tabindex="-1"><a href="#sizing-props" class="header-anchor">Sizing Props</a></h2>
+<ul>
+<li>[ ] <strong>width</strong>: Sets the width of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>height</strong>: Sets the height of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>maxWidth</strong>: Sets the maximum width of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>maxHeight</strong>: Sets the maximum height of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>minWidth</strong>: Sets the minimum width of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>minHeight</strong>: Sets the minimum height of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>aspectRatio</strong>: Defines the aspect ratio for an element.
+<ul>
+<li>Type: <code>number | string | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="margin-props" tabindex="-1"><a href="#margin-props" class="header-anchor">Margin Props</a></h2>
+<ul>
+<li>[ ] <strong>margin</strong>: Sets the margin on all sides of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginBottom</strong>: Sets the bottom margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginEnd</strong>: Sets the end margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginHorizontal</strong>: Sets the horizontal margins of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginLeft</strong>: Sets the left margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginRight</strong>: Sets the right margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginStart</strong>: Sets the start margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginTop</strong>: Sets the top margin of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>marginVertical</strong>: Sets the vertical margins of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="padding-props" tabindex="-1"><a href="#padding-props" class="header-anchor">Padding Props</a></h2>
+<ul>
+<li>[ ] <strong>padding</strong>: Sets the padding on all sides of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingBottom</strong>: Sets the bottom padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingEnd</strong>: Sets the end padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingHorizontal</strong>: Sets the horizontal paddings of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingLeft</strong>: Sets the left padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingRight</strong>: Sets the right padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingStart</strong>: Sets the start padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingTop</strong>: Sets the top padding of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>paddingVertical</strong>: Sets the vertical paddings of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="positioning-props" tabindex="-1"><a href="#positioning-props" class="header-anchor">Positioning Props</a></h2>
+<ul>
+<li>[ ] <strong>position</strong>: Sets the position type of an element.
+<ul>
+<li>Type: <code>'absolute' | 'relative' | 'static' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>top</strong>: Sets the top position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>right</strong>: Sets the right position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>bottom</strong>: Sets the bottom position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>left</strong>: Sets the left position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>start</strong>: Sets the start position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>end</strong>: Sets the end position of an element.
+<ul>
+<li>Type: <code>DimensionValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="other-props" tabindex="-1"><a href="#other-props" class="header-anchor">Other Props</a></h2>
+<ul>
+<li>[ ] <strong>borderWidth</strong>: Sets the border width on all sides of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBottomWidth</strong>: Sets the bottom border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderEndWidth</strong>: Sets the end border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderLeftWidth</strong>: Sets the left border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderRightWidth</strong>: Sets the right border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderStartWidth</strong>: Sets the start border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopWidth</strong>: Sets the top border width of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>display</strong>: Controls the display behavior of an element.
+<ul>
+<li>Type: <code>'none' | 'flex' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>overflow</strong>: Controls the overflow behavior of an element.
+<ul>
+<li>Type: <code>'visible' | 'hidden' | 'scroll' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>zIndex</strong>: Controls the stack order of an element.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>direction</strong>: Sets the directionality of text and elements.
+<ul>
+<li>Type: <code>'inherit' | 'ltr' | 'rtl' | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="gap-props" tabindex="-1"><a href="#gap-props" class="header-anchor">Gap Props</a></h2>
+<ul>
+<li>[ ] <strong>rowGap</strong>: Sets the gap between rows in a flex container.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>gap</strong>: Sets the gap between items in a flex container.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>columnGap</strong>: Sets the gap between columns in a flex container.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>

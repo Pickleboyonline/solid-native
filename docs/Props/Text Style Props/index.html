@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules System</title>
+    <title>Text Style Props</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Modules System/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Props/Text Style Props/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -146,7 +146,7 @@
     
 
 
-  <a href="/solid-native/Props/Text Style Props/">
+  <a aria-current="page" href="/solid-native/Props/Text Style Props/">
     
     Text Style Props
   </a>
@@ -217,7 +217,7 @@
     
 
 
-  <a aria-current="page" href="/solid-native/notes/Modules System/">
+  <a href="/solid-native/notes/Modules System/">
     
     Modules System
   </a>
@@ -265,6 +265,31 @@
 
 
       
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#ios-specific-props">iOS Specific Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#android-specific-props">Android Specific Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#common-text-style-props">Common Text Style Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
 
       <main class="main">
         <nav>
@@ -275,7 +300,7 @@
     
     
     
-    <li class="breadcrumb-item"><strong>notes</strong></li>
+    <li class="breadcrumb-item"><strong>Props</strong></li>
     
     
     
@@ -286,100 +311,135 @@
 
         <div class="body">
           
-            <h1>Modules System</h1>
+            <h1>Text Style Props</h1>
           
 
           
-            <p>Module System Needs to be made.</p>
-<p>Needs the Core:</p>
+            <p>This roadmap outlines the necessary Text style props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="ios-specific-props" tabindex="-1"><a href="#ios-specific-props" class="header-anchor">iOS Specific Props</a></h2>
 <ul>
-<li>Manages modules</li>
-</ul>
-<p>Requirements:</p>
+<li>[ ] <strong>fontVariant</strong>: Specifies font variants for text.
 <ul>
-<li>From Swifts side, all i need is some function to get the root element at any time.</li>
-<li>Some root element should be there. At best, this is just some empty group that has no props. OR, just a special swift view.</li>
-<li>Modules:
-<ul>
-<li>Modules are objects that be looked up by the JS environment.</li>
-<li>Views are special modules.</li>
-<li>OR these can be separate.</li>
-<li>This is just a wrapper so JS can talk to Swift.</li>
+<li>Type: <code>FontVariant[] | undefined</code></li>
 </ul>
 </li>
-<li>Renderer (for solidJS):
+<li>[ ] <strong>textDecorationColor</strong>: Sets the color of the text decoration.
 <ul>
-<li>Is a tree structure with nodes that are swift ui components</li>
+<li>Type: <code>ColorValue | undefined</code></li>
 </ul>
 </li>
+<li>[ ] <strong>textDecorationStyle</strong>: Sets the style of the text decoration (solid, double, dotted, dashed).
+<ul>
+<li>Type: <code>'solid' | 'double' | 'dotted' | 'dashed' | undefined</code></li>
 </ul>
-<p>Question:</p>
+</li>
+<li>[ ] <strong>writingDirection</strong>: Sets the writing direction for text.
 <ul>
-<li>Should modules and views be separate?
-<ul>
-<li>Views are a wrapper for swift ui views. These have prop and state. Callbacks can be used to reference state.</li>
-<li>Modules are objects that are referenced by context.</li>
-<li>Core library provides way to access these modules.</li>
-<li>At the end of the day, from the JS perspective they simply access native code.
-<ul>
-<li>They simply are just code. Thus, they shouldn't require any special rendering.</li>
-<li>In fact, the rendering agent can be a module in itself.</li>
+<li>Type: <code>'auto' | 'ltr' | 'rtl' | undefined</code></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<p>So, we need some way to give access to JS in a unified way with modules.</p>
-<p>What are views? Well, views themselves can adhere to this module framework since they get called on anyways. They just need special info</p>
-<p>However, the way these are accessed in Solid Can be challenging. I can either use a JSON serializable identifier or the object itself.</p>
-<p>Then there comes the issue that the root view must be linked to it. This is not a problem, since its already there.</p>
-<p>Summing this up, we get this:</p>
+<h2 id="android-specific-props" tabindex="-1"><a href="#android-specific-props" class="header-anchor">Android Specific Props</a></h2>
 <ul>
-<li>Module system is way for Swift and JS to talk to eachother. Think i want to make a module for a camera or something</li>
-<li>Views, should be their own thing. They must extend some class to be a view.</li>
-<li>Views and modules must be accessable via the JS layer. For views, there must be a way for JS to update props and call methods on it.
+<li>[ ] <strong>textAlignVertical</strong>: Sets the vertical alignment of text.
 <ul>
-<li>Now, heres the interesting thing. I can use a rendering module to do all of this. This module is registered in the core. Furthermore, it has an index of all the views in needed.</li>
+<li>Type: <code>'auto' | 'top' | 'bottom' | 'center' | undefined</code></li>
 </ul>
 </li>
-</ul>
-<p>Ok, again:</p>
+<li>[ ] <strong>verticalAlign</strong>: Sets the vertical alignment within the parent element.
 <ul>
-<li>Modules are a way for JS-Native interop.</li>
-<li>Rendering:
-<ul>
-<li>Rendering is a module.</li>
-<li>Has registeristry of native modules that is statically linked.</li>
-<li>Access views via ID to set props and such.</li>
-<li>Views are a native ONLY thing. These really aren't exposed to the JS side like modules are.</li>
+<li>Type: <code>'auto' | 'top' | 'bottom' | 'middle' | undefined</code></li>
 </ul>
 </li>
-<li>JS needs some way to get modules in its context. Modules can either be lazy loaded or available at run time.
+<li>[ ] <strong>includeFontPadding</strong>: Controls whether the text includes extra font padding.
 <ul>
-<li>For now, initial instantiate at run time.</li>
-</ul>
-</li>
-<li>Core module is really only needed to set things up. It:
-<ul>
-<li>Has the JS context</li>
-<li>Downloads the JS</li>
-<li>Has the blank root view</li>
-<li>Attaches this view to the renderer module</li>
-<li>Hooks all known modules into global JS context</li>
+<li>Type: <code>boolean | undefined</code></li>
 </ul>
 </li>
 </ul>
-<p>Ok so now we have these classes:</p>
+<h2 id="common-text-style-props" tabindex="-1"><a href="#common-text-style-props" class="header-anchor">Common Text Style Props</a></h2>
 <ul>
-<li>Modules</li>
-<li>Views</li>
-<li>Core
-Thats it!</li>
+<li>[ ] <strong>color</strong>: Sets the color of the text.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
 </ul>
-<p>Ok so the core has a registry of modules that it can can instanciate.
-The registry is needed to lookup modules by name in the JS code.
-When JS gets a native module, it's make a module.</p>
-<p>When module gets made, the JS side must be able to get some object that has functions in it.</p>
+</li>
+<li>[ ] <strong>fontFamily</strong>: Sets the font family for the text.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>fontSize</strong>: Sets the font size of the text.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>fontStyle</strong>: Sets the style of the font (normal, italic).
+<ul>
+<li>Type: <code>'normal' | 'italic' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>fontWeight</strong>: Specifies the font weight.
+<ul>
+<li>Type: <code>'normal' | 'bold' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 'ultralight' | 'thin' | 'light' | 'medium' | 'regular' | 'semibold' | 'condensedBold' | 'condensed' | 'heavy' | 'black' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>letterSpacing</strong>: Sets the spacing between characters.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>lineHeight</strong>: Sets the height of a line of text.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textAlign</strong>: Sets the alignment of text (auto, left, right, center, justify).
+<ul>
+<li>Type: <code>'auto' | 'left' | 'right' | 'center' | 'justify' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textDecorationLine</strong>: Sets the decoration line for text (none, underline, line-through, underline line-through).
+<ul>
+<li>Type: <code>'none' | 'underline' | 'line-through' | 'underline line-through' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textDecorationStyle</strong>: Sets the style of the text decoration (solid, double, dotted, dashed).
+<ul>
+<li>Type: <code>'solid' | 'double' | 'dotted' | 'dashed' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textDecorationColor</strong>: Sets the color of the text decoration.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textShadowColor</strong>: Sets the color of the text shadow.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textShadowOffset</strong>: Sets the offset for the text shadow.
+<ul>
+<li>Type: <code>{width: number; height: number} | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textShadowRadius</strong>: Sets the radius of the text shadow.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>textTransform</strong>: Controls the capitalization of text (none, capitalize, uppercase, lowercase).
+<ul>
+<li>Type: <code>'none' | 'capitalize' | 'uppercase' | 'lowercase' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>userSelect</strong>: Controls whether the text can be selected.
+<ul>
+<li>Type: <code>'auto' | 'none' | 'text' | 'contain' | 'all' | undefined</code></li>
+</ul>
+</li>
+</ul>
 
           
         </div>

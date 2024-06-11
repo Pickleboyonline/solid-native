@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solid Native</title>
+    <title>Refactors</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Refactors/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -245,7 +245,7 @@
     
 
 
-  <a href="/solid-native/notes/Refactors/">
+  <a aria-current="page" href="/solid-native/notes/Refactors/">
     
     Refactors
   </a>
@@ -271,6 +271,14 @@
   <ul class="breadcrumb">
     
     
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>notes</strong></li>
+    
+    
+    
     
   </ul>
 </nav>
@@ -278,10 +286,14 @@
 
         <div class="body">
           
+            <h1>Refactors</h1>
+          
 
           
-            <h1>Solid Native</h1>
-<p>A React Native alternative but for SolidJS, powered by Deno!</p>
+            <p>Need to improve the way types are marshaled between JS and Swift. Main types are usually some form of type conversion.</p>
+<p>An article about how optionals work in Swift: <a href="">https://www.hackingwithswift.com/articles/136/the-complete-guide-to-optionals-in-swift</a></p>
+<p>Side Note: Swift options are weird because the type information is not clearly shown and you have to use unwrap syntax to get the compiler to check it properly.</p>
+<p>Values are either numbers or string. They can also be a dictionary as well.</p>
 
           
         </div>

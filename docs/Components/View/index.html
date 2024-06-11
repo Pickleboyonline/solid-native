@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚧 View</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Components/View/">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Components</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Button/">
+    
+    🚧  Button
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Text/">
+    
+    🚧  Text
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a aria-current="page" href="/solid-native/Components/View/">
+    
+    🚧 View
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Props</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Layout Props/">
+    
+    Layout Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Shadow Props/">
+    
+    Shadow Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Text Style Props/">
+    
+    Text Style Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/View Style Props/">
+    
+    View Style Props
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> notes</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Expo-like Modules/">
+    
+    Expo-like Modules
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Module and Build System/">
+    
+    Module and Build System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Modules System/">
+    
+    Modules System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Navigation/">
+    
+    Navigation
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Refactors/">
+    
+    Refactors
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+  </ul>
+</nav>
+
+
+      
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#ios-specific-props">iOS Specific Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#apple-tv-specific-props">Apple TV Specific Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#android-specific-props">Android Specific Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#common-view-props">Common View Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>Components</strong></li>
+    
+    
+    
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+
+          
+            <h1>🚧 View</h1>
+<p>The base View Component. I'm tracking progress on this by its props.</p>
+<p>(Also uses Style, Layout and Shadow Props)</p>
+<h1>View Props:</h1>
+<p>This roadmap outlines the necessary View props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="ios-specific-props" tabindex="-1"><a href="#ios-specific-props" class="header-anchor">iOS Specific Props</a></h2>
+<ul>
+<li>[ ] <strong>shouldRasterizeIOS</strong>: Whether this view should be rendered as a bitmap before compositing. Useful for animations and interactions that do not modify this component's dimensions nor its children.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="apple-tv-specific-props" tabindex="-1"><a href="#apple-tv-specific-props" class="header-anchor">Apple TV Specific Props</a></h2>
+<ul>
+<li>[ ] <strong>isTVSelectable</strong>: When set to true, this view will be focusable and navigable using the Apple TV remote.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>hasTVPreferredFocus</strong>: May be set to true to force the Apple TV focus engine to move focus to this view.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tvParallaxProperties</strong>: Object with properties to control Apple TV parallax effects.
+<ul>
+<li>Type: <code>TVParallaxProperties | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tvParallaxShiftDistanceX</strong>: Used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tvParallaxShiftDistanceY</strong>: Used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tvParallaxTiltAngle</strong>: Used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tvParallaxMagnification</strong>: Used to change the appearance of the Apple TV parallax effect when this view goes in or out of focus.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="android-specific-props" tabindex="-1"><a href="#android-specific-props" class="header-anchor">Android Specific Props</a></h2>
+<ul>
+<li>[ ] <strong>collapsable</strong>: Views that are only used to layout their children or otherwise don't draw anything may be automatically removed from the native hierarchy as an optimization.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>renderToHardwareTextureAndroid</strong>: Whether this view should render itself (and all of its children) into a single hardware texture on the GPU. Useful for animations and interactions that only modify opacity, rotation, translation, and/or scale.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>focusable</strong>: Whether this <code>View</code> should be focusable with a non-touch input device, e.g., receive focus with a hardware keyboard.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>tabIndex</strong>: Indicates whether this <code>View</code> should be focusable with a non-touch input device, e.g., receive focus with a hardware keyboard.
+<ul>
+<li>Type: <code>0 | -1 | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="common-view-props" tabindex="-1"><a href="#common-view-props" class="header-anchor">Common View Props</a></h2>
+<ul>
+<li>[ ] <strong>children</strong>: Child components.
+<ul>
+<li>Type: <code>React.ReactNode | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>hitSlop</strong>: Defines how far a touch event can start away from the view.
+<ul>
+<li>Type: <code>null | Insets | number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>id</strong>: Used to reference react managed views from native code.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>needsOffscreenAlphaCompositing</strong>: Whether this view needs to be rendered offscreen and composited with an alpha to preserve correct colors and blending behavior.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>onLayout</strong>: Invoked on mount and layout changes.
+<ul>
+<li>Type: <code>((event: LayoutChangeEvent) =&gt; void) | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>pointerEvents</strong>: Controls how this view receives pointer events.
+<ul>
+<li>Type: <code>'box-none' | 'none' | 'box-only' | 'auto' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>removeClippedSubviews</strong>: Special performance property useful for scrolling content when there are many subviews.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>style</strong>: Style for the view.
+<ul>
+<li>Type: <code>StyleProp&lt;ViewStyle&gt; | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>testID</strong>: Used to locate this view in end-to-end tests.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nativeID</strong>: Used to reference react managed views from native code.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>

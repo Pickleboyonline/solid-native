@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solid Native</title>
+    <title>Shadow Props</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Props/Shadow Props/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -132,7 +132,7 @@
     
 
 
-  <a href="/solid-native/Props/Shadow Props/">
+  <a aria-current="page" href="/solid-native/Props/Shadow Props/">
     
     Shadow Props
   </a>
@@ -265,10 +265,31 @@
 
 
       
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#ios-specific-shadow-props">iOS Specific Shadow Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
 
       <main class="main">
         <nav>
   <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>Props</strong></li>
+    
     
     
     
@@ -278,10 +299,34 @@
 
         <div class="body">
           
+            <h1>Shadow Props</h1>
+          
 
           
-            <h1>Solid Native</h1>
-<p>A React Native alternative but for SolidJS, powered by Deno!</p>
+            <p>This roadmap outlines the necessary Shadow style props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="ios-specific-shadow-props" tabindex="-1"><a href="#ios-specific-shadow-props" class="header-anchor">iOS Specific Shadow Props</a></h2>
+<ul>
+<li>[ ] <strong>shadowColor</strong>: Sets the color of the shadow.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>shadowOffset</strong>: Sets the offset for the shadow.
+<ul>
+<li>Type: <code>Readonly&lt;{width: number; height: number}&gt; | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>shadowOpacity</strong>: Sets the opacity of the shadow.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>shadowRadius</strong>: Sets the blur radius of the shadow.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
 
           
         </div>

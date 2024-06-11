@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Style Props</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Props/View Style Props/">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Components</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Button/">
+    
+    🚧  Button
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Text/">
+    
+    🚧  Text
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/View/">
+    
+    🚧 View
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Props</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Layout Props/">
+    
+    Layout Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Shadow Props/">
+    
+    Shadow Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Text Style Props/">
+    
+    Text Style Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a aria-current="page" href="/solid-native/Props/View Style Props/">
+    
+    View Style Props
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> notes</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Expo-like Modules/">
+    
+    Expo-like Modules
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Module and Build System/">
+    
+    Module and Build System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Modules System/">
+    
+    Modules System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Navigation/">
+    
+    Navigation
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Refactors/">
+    
+    Refactors
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+  </ul>
+</nav>
+
+
+      
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#visibility-props">Visibility Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#color-props">Color Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#border-radius-props">Border Radius Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#border-style-props">Border Style Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#elevation-and-z-index-props">Elevation and Z-Index Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#interaction-props">Interaction Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>Props</strong></li>
+    
+    
+    
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+            <h1>View Style Props</h1>
+          
+
+          
+            <p>This roadmap outlines the necessary View style props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="visibility-props" tabindex="-1"><a href="#visibility-props" class="header-anchor">Visibility Props</a></h2>
+<ul>
+<li>[ ] <strong>backfaceVisibility</strong>: Controls whether the back face of the view is visible when rotated.
+<ul>
+<li>Type: <code>'visible' | 'hidden' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>opacity</strong>: Sets the opacity of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="color-props" tabindex="-1"><a href="#color-props" class="header-anchor">Color Props</a></h2>
+<ul>
+<li>[ ] <strong>backgroundColor</strong>: Sets the background color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBlockColor</strong>: Sets the block border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBlockEndColor</strong>: Sets the block end border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBlockStartColor</strong>: Sets the block start border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBottomColor</strong>: Sets the bottom border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderColor</strong>: Sets the border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderEndColor</strong>: Sets the end border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderLeftColor</strong>: Sets the left border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderRightColor</strong>: Sets the right border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderStartColor</strong>: Sets the start border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopColor</strong>: Sets the top border color of the view.
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="border-radius-props" tabindex="-1"><a href="#border-radius-props" class="header-anchor">Border Radius Props</a></h2>
+<ul>
+<li>[ ] <strong>borderBottomEndRadius</strong>: Sets the bottom end border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBottomLeftRadius</strong>: Sets the bottom left border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBottomRightRadius</strong>: Sets the bottom right border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderBottomStartRadius</strong>: Sets the bottom start border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderCurve</strong>: Sets the corner curve of the borders (iOS 13+).
+<ul>
+<li>Type: <code>'circular' | 'continuous' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderEndEndRadius</strong>: Sets the end end border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderEndStartRadius</strong>: Sets the end start border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderRadius</strong>: Sets the border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderStartEndRadius</strong>: Sets the start end border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderStartStartRadius</strong>: Sets the start start border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopEndRadius</strong>: Sets the top end border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopLeftRadius</strong>: Sets the top left border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopRightRadius</strong>: Sets the top right border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>borderTopStartRadius</strong>: Sets the top start border radius of the view.
+<ul>
+<li>Type: <code>AnimatableNumericValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="border-style-props" tabindex="-1"><a href="#border-style-props" class="header-anchor">Border Style Props</a></h2>
+<ul>
+<li>[ ] <strong>borderStyle</strong>: Sets the style of the border (solid, dotted, dashed).
+<ul>
+<li>Type: <code>'solid' | 'dotted' | 'dashed' | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="elevation-and-z-index-props" tabindex="-1"><a href="#elevation-and-z-index-props" class="header-anchor">Elevation and Z-Index Props</a></h2>
+<ul>
+<li>[ ] <strong>elevation</strong>: Sets the elevation of the view (Android only).
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="interaction-props" tabindex="-1"><a href="#interaction-props" class="header-anchor">Interaction Props</a></h2>
+<ul>
+<li>[ ] <strong>pointerEvents</strong>: Controls whether the view can be the target of touch events.
+<ul>
+<li>Type: <code>'box-none' | 'none' | 'box-only' | 'auto' | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>cursor</strong>: Sets the cursor type when hovering over the view.
+<ul>
+<li>Type: <code>CursorValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>

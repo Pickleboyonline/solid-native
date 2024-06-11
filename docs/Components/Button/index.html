@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solid Native</title>
+    <title>🚧  Button</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Components/Button/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -61,7 +61,7 @@
     
 
 
-  <a href="/solid-native/Components/Button/">
+  <a aria-current="page" href="/solid-native/Components/Button/">
     
     🚧  Button
   </a>
@@ -265,10 +265,49 @@
 
 
       
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#common-button-props">Common Button Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#accessibility-props">Accessibility Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#tv-focus-props">TV Focus Props</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#interaction-props">Interaction Props</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
 
       <main class="main">
         <nav>
   <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>Components</strong></li>
+    
     
     
     
@@ -280,8 +319,90 @@
           
 
           
-            <h1>Solid Native</h1>
-<p>A React Native alternative but for SolidJS, powered by Deno!</p>
+            <h1>🚧  Button</h1>
+<p>This roadmap outlines the necessary Button props to implement for SolidNative, along with their descriptions and type signatures.</p>
+<h2 id="common-button-props" tabindex="-1"><a href="#common-button-props" class="header-anchor">Common Button Props</a></h2>
+<ul>
+<li>[ ] <strong>title</strong>: Text to display inside the button. On Android, the given title will be converted to the uppercased form.
+<ul>
+<li>Type: <code>string</code></li>
+</ul>
+</li>
+<li>[ ] <strong>color</strong>: Color of the text (iOS) or background color of the button (Android).
+<ul>
+<li>Type: <code>ColorValue | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="accessibility-props" tabindex="-1"><a href="#accessibility-props" class="header-anchor">Accessibility Props</a></h2>
+<ul>
+<li>[ ] <strong>accessibilityLabel</strong>: Overrides the text that's read by the screen reader when the user interacts with the element.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>accessibilityState</strong>: Describes the current state of the element to the screen reader.
+<ul>
+<li>Type: <code>{ disabled?: boolean | undefined; selected?: boolean | undefined; checked?: boolean | "mixed" | undefined; busy?: boolean | undefined; expanded?: boolean | undefined; } | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="tv-focus-props" tabindex="-1"><a href="#tv-focus-props" class="header-anchor">TV Focus Props</a></h2>
+<ul>
+<li>[ ] <strong>hasTVPreferredFocus</strong>: May be set to true to force the Apple TV focus engine to move focus to this view.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nextFocusDown</strong>: Designates the next view to receive focus when the user navigates down.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nextFocusForward</strong>: Designates the next view to receive focus when the user navigates forward.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nextFocusLeft</strong>: Designates the next view to receive focus when the user navigates left.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nextFocusRight</strong>: Designates the next view to receive focus when the user navigates right.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>nextFocusUp</strong>: Designates the next view to receive focus when the user navigates up.
+<ul>
+<li>Type: <code>number | undefined</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="interaction-props" tabindex="-1"><a href="#interaction-props" class="header-anchor">Interaction Props</a></h2>
+<ul>
+<li>[ ] <strong>testID</strong>: Used to locate this view in end-to-end tests.
+<ul>
+<li>Type: <code>string | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>disabled</strong>: If true, disable all interactions for this component.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>onPress</strong>: This function is called when the button is pressed.
+<ul>
+<li>Type: <code>((event: GestureResponderEvent) =&gt; void) | undefined</code></li>
+</ul>
+</li>
+<li>[ ] <strong>touchSoundDisabled</strong>: If true, disable the touch sound for this component.
+<ul>
+<li>Type: <code>boolean | undefined</code></li>
+</ul>
+</li>
+</ul>
 
           
         </div>
