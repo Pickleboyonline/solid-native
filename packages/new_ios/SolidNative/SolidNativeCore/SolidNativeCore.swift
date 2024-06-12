@@ -8,6 +8,7 @@
 import Foundation
 import JavaScriptCore
 
+
 /**
  
  */
@@ -87,12 +88,13 @@ private class ModuleManager {
     func createModuleJsValueByName(_ name: String) -> JSValue? {
         // Should return a JS Value
         if let moduleType = moduleRegistry[name] {
-            let newModule = moduleType.init()
             
             if let jsValue = moduleJSValueRegistry[name] {
                 return jsValue
             } else {
+                let newModule = moduleType.init()
                 let jsValue = newModule.getJSValueRepresentation()
+                
                 moduleJSValueRegistry[name] = jsValue
                 return jsValue
             }
