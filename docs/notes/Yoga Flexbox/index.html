@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🚧  Button</title>
+    <title>Yoga Flexbox</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/Components/Button/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Yoga Flexbox/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -61,7 +61,7 @@
     
 
 
-  <a aria-current="page" href="/solid-native/Components/Button/">
+  <a href="/solid-native/Components/Button/">
     
     🚧  Button
   </a>
@@ -259,7 +259,7 @@
     
 
 
-  <a href="/solid-native/notes/Yoga Flexbox/">
+  <a aria-current="page" href="/solid-native/notes/Yoga Flexbox/">
     
     Yoga Flexbox
   </a>
@@ -279,37 +279,6 @@
 
 
       
-      <nav class="toc">
-        <h2>On this page</h2>
-        <ol>
-          
-          <li>
-            <a href="#common-button-props">Common Button Props</a>
-
-            
-          </li>
-          
-          <li>
-            <a href="#accessibility-props">Accessibility Props</a>
-
-            
-          </li>
-          
-          <li>
-            <a href="#tv-focus-props">TV Focus Props</a>
-
-            
-          </li>
-          
-          <li>
-            <a href="#interaction-props">Interaction Props</a>
-
-            
-          </li>
-          
-        </ol>
-      </nav>
-      
 
       <main class="main">
         <nav>
@@ -320,7 +289,7 @@
     
     
     
-    <li class="breadcrumb-item"><strong>Components</strong></li>
+    <li class="breadcrumb-item"><strong>notes</strong></li>
     
     
     
@@ -331,92 +300,36 @@
 
         <div class="body">
           
+            <h1>Yoga Flexbox</h1>
+          
 
           
-            <h1>🚧  Button</h1>
-<p>This roadmap outlines the necessary Button props to implement for SolidNative, along with their descriptions and type signatures.</p>
-<h2 id="common-button-props" tabindex="-1"><a href="#common-button-props" class="header-anchor">Common Button Props</a></h2>
+            <p>TODO: Essentially copy the way react fabric system works under the hood.
+Important Links:</p>
 <ul>
-<li>[ ] <strong>title</strong>: Text to display inside the button. On Android, the given title will be converted to the uppercased form.
-<ul>
-<li>Type: <code>string</code></li>
+<li><a href="https://reactnative.dev/architecture/fabric-renderer">https://reactnative.dev/architecture/fabric-renderer</a></li>
+<li><a href="https://www.yogalayout.dev/">https://www.yogalayout.dev/</a></li>
+<li><a href="https://github.com/software-mansion-labs/react-native-swiftui/tree/master/packages/react-native-swiftui/native/Views">https://github.com/software-mansion-labs/react-native-swiftui/tree/master/packages/react-native-swiftui/native/Views</a></li>
+<li><a href="https://github.com/software-mansion-labs/react-native-swiftui/tree/master">https://github.com/software-mansion-labs/react-native-swiftui/tree/master</a></li>
+<li><a href="https://blog.swmansion.com/swiftui-renderer-for-react-native-2b62fda38c9b">https://blog.swmansion.com/swiftui-renderer-for-react-native-2b62fda38c9b</a></li>
+<li><a href="https://blog.swmansion.com/swiftui-renderer-for-react-native-part-ii-161bad1d69e1">https://blog.swmansion.com/swiftui-renderer-for-react-native-part-ii-161bad1d69e1</a></li>
 </ul>
-</li>
-<li>[ ] <strong>color</strong>: Color of the text (iOS) or background color of the button (Android).
-<ul>
-<li>Type: <code>ColorValue | undefined</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="accessibility-props" tabindex="-1"><a href="#accessibility-props" class="header-anchor">Accessibility Props</a></h2>
-<ul>
-<li>[ ] <strong>accessibilityLabel</strong>: Overrides the text that's read by the screen reader when the user interacts with the element.
-<ul>
-<li>Type: <code>string | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>accessibilityState</strong>: Describes the current state of the element to the screen reader.
-<ul>
-<li>Type: <code>{ disabled?: boolean | undefined; selected?: boolean | undefined; checked?: boolean | "mixed" | undefined; busy?: boolean | undefined; expanded?: boolean | undefined; } | undefined</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="tv-focus-props" tabindex="-1"><a href="#tv-focus-props" class="header-anchor">TV Focus Props</a></h2>
-<ul>
-<li>[ ] <strong>hasTVPreferredFocus</strong>: May be set to true to force the Apple TV focus engine to move focus to this view.
-<ul>
-<li>Type: <code>boolean | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>nextFocusDown</strong>: Designates the next view to receive focus when the user navigates down.
-<ul>
-<li>Type: <code>number | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>nextFocusForward</strong>: Designates the next view to receive focus when the user navigates forward.
-<ul>
-<li>Type: <code>number | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>nextFocusLeft</strong>: Designates the next view to receive focus when the user navigates left.
-<ul>
-<li>Type: <code>number | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>nextFocusRight</strong>: Designates the next view to receive focus when the user navigates right.
-<ul>
-<li>Type: <code>number | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>nextFocusUp</strong>: Designates the next view to receive focus when the user navigates up.
-<ul>
-<li>Type: <code>number | undefined</code></li>
-</ul>
-</li>
-</ul>
-<h2 id="interaction-props" tabindex="-1"><a href="#interaction-props" class="header-anchor">Interaction Props</a></h2>
-<ul>
-<li>[ ] <strong>testID</strong>: Used to locate this view in end-to-end tests.
-<ul>
-<li>Type: <code>string | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>disabled</strong>: If true, disable all interactions for this component.
-<ul>
-<li>Type: <code>boolean | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>onPress</strong>: This function is called when the button is pressed.
-<ul>
-<li>Type: <code>((event: GestureResponderEvent) =&gt; void) | undefined</code></li>
-</ul>
-</li>
-<li>[ ] <strong>touchSoundDisabled</strong>: If true, disable the touch sound for this component.
-<ul>
-<li>Type: <code>boolean | undefined</code></li>
-</ul>
-</li>
-</ul>
+<p>Essentially, when a style is placed on a node we call yoga to have a node for it. This may be a bit tricky considering SolidJS idology.</p>
+<p>SolidJS works via mutations to the tree to update. But to render something, we need the information up front about the styles (one pass) on initial mount. Otherwise, we run into the problem of a view being present but no object is sent down.</p>
+<p>I have not seen this visibly, but i am just saying it can cause problems.</p>
+<p>React is better in that it knows the tree up front in every update the the VDOM. technically, my implimentation needs a VDOM of its own to manage the references to the views to update the props. However, as long as the system does it in one pass (SolidJS may group updates, im not exactly sure, because when i view somethings typically dont shift they render almost instantly.)</p>
+<p>WAIT never mind SolidJS builds the updates before attatching the views anyways. That makes sense. OK, so we just need to call to YOGA when we MOUNT or UPDATE a PROP on a dirty component.</p>
+<p>Because we are working with solid, we may be able to get some selectively out of this. In the render phase.</p>
+<p>In this new layout system, every component is in a ZStack with its offset and frame ajusted to YOGA dimensions. so Yoga needs to calculate params. Where does this happen? Well, it can happen in the RENDER module. The render module is a singleton that dispatches commands to the components based on IDs.</p>
+<p>So, the renderer will just need to maintain a yoga tree based on its methods. If a node has not been attachted, it will skip calculating layouts (i think yoga automatically does this, so your good.)</p>
+<p>The only thing to worry about is batching updates after the initial mount. If the update happens via the styles object thats not bad since its just one object but if its outside of that than a performance hit can be observed. That can be worked on later, but for now, its not that bad and probably wont be that noticeable.</p>
+<p>So the data flow looks like this:</p>
+<p>SolidJS =&gt; SolidNativeRenderer =&gt; Yoga(yoga may call some native methods for text and device dimensions) =&gt; A layout object =&gt; SolidNativeView which uses its layout for flexbox.</p>
+<p>In the SolidNativeRenderer, there needs to be something that recalculates the layout after each prop change if the component has mounted. If it hasn't mounted, wait until all its props have been updated (so really just calculate it when you draw it)</p>
+<p>The code for determining the size of text or views can be derrived from ChatGPT and the Software mansion blog.</p>
+<p>In terms of threading, all this is done on the main for now but we can move the solid native renderer prob on the background when performing Yoga layouts.</p>
+<p>I wanted to avoid using UIKit because apparantly you cant use it for widgets or apple watch, but thats not that bad. If i do use pure swiftUI, some parts are just not that feasible like rendering offscreen components. You can <em>technically</em> do with with a hidden zstack but that means having to render things twice on the main thread with some trick sync issues. Overall, because SwiftUI is meant to be used declaratively means I have to determine everything upfront including the layout.</p>
+<p>I could also just re-impliment the Yoga flexbox with SwiftUI native primatives but thats too much work in my opinion. ChatGPT probably wont be able to do something that complex so I cant rely on that either. Best option is just just repurpose Yoga, which should take a day or too, and i get the flexbox system for free basically.</p>
 
           
         </div>

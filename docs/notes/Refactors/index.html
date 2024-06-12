@@ -255,6 +255,20 @@
 
   </li>
   
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Yoga Flexbox/">
+    
+    Yoga Flexbox
+  </a>
+
+
+
+
+  </li>
+  
 </ul>
 
 
@@ -294,6 +308,17 @@
 <p>An article about how optionals work in Swift: <a href="">https://www.hackingwithswift.com/articles/136/the-complete-guide-to-optionals-in-swift</a></p>
 <p>Side Note: Swift options are weird because the type information is not clearly shown and you have to use unwrap syntax to get the compiler to check it properly.</p>
 <p>Values are either numbers or string. They can also be a dictionary as well.</p>
+<p>Also need to understand when a props is exictly undefined.</p>
+<p>Could also use closures with generics. Basically when you have a view, you can build a system for the props to update.</p>
+<p>So if a prop updates, theres a hook for it.</p>
+<p>something like</p>
+<pre class="language-ts" tabindex="0"><code class="language-ts">addProp("name", (propValue: Dictionary) =&gt; {
+
+})
+</code></pre>
+<p>Now, Swift can auto marshal types, the question is what happens with undefined and null behavior.</p>
+<p>Also, we need refs. (need to figure out how solidjs handles this).</p>
+<p>Expo Does a similar thing with their module system. I could change up my system to more mimic this now that i am more framework.</p>
 
           
         </div>
