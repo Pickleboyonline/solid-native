@@ -33,7 +33,7 @@ export function App() {
         flex: 1,
         backgroundColor: '#32a852',
         flexDirection: 'row',
-        marginTop: 100
+        // marginTop: 100
       }}>
         <Text>
           {"Counter: " + count() + " "}
@@ -59,13 +59,15 @@ export function App() {
       </View>
       <View style={{
         flex: 1,
-        backgroundColor: '#7a2c91'
+        backgroundColor: '#7a2c91',
+        paddingTop: 100
       }}>
         I'm purple
       </View>
       <View style={{
         flex: 1,
-        backgroundColor: '#4287f5'
+        backgroundColor: '#4287f5',
+        paddingTop: 100
       }}>
         I'm blue
       </View>

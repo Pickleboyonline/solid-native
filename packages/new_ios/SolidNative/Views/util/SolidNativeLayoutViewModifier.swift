@@ -178,25 +178,26 @@ private func applyLayoutStyles(
   if let paddingTop = YogaTypeMarshaller.convertToYGValue(
     style.objectForKeyedSubscript("paddingTop")
   ) {
-    styledView = AnyView(styledView.paddingTop(paddingTop))
+      styledView = AnyView(styledView.padding(.top, CGFloat(paddingTop.value) ))
   }
 
   if let paddingRight = YogaTypeMarshaller.convertToYGValue(
     style.objectForKeyedSubscript("paddingRight")
   ) {
-    styledView = AnyView(styledView.paddingRight(paddingRight))
+      
+      styledView = AnyView(styledView.padding(.trailing, CGFloat(paddingRight.value) ))
   }
 
   if let paddingBottom = YogaTypeMarshaller.convertToYGValue(
     style.objectForKeyedSubscript("paddingBottom")
   ) {
-    styledView = AnyView(styledView.paddingBottom(paddingBottom))
+      styledView = AnyView(styledView.padding(.bottom, CGFloat(paddingBottom.value) ))
   }
 
   if let paddingLeft = YogaTypeMarshaller.convertToYGValue(
     style.objectForKeyedSubscript("paddingLeft")
   ) {
-    styledView = AnyView(styledView.paddingLeft(paddingLeft))
+      styledView = AnyView(styledView.padding(.trailing, CGFloat(paddingLeft.value) ))
   }
 
   if let borderWidth = YogaTypeMarshaller.convertToCGFloat(
