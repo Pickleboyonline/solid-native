@@ -8,17 +8,15 @@
 import Foundation
 import JavaScriptCore
 
-class SolidNativeModule {
-    let jsContext = SolidNativeCore.shared.jsContext
-    let id = UUID()
-    class var name: String {
-        "SolidNativeModule"
-    }
-    
-    required init() {
-    }
-    
+protocol SolidNativeModule {
+    static var name: String {get}
+    init()
+    func getJSValueRepresentation() -> JSValue
+}
+
+
+extension SolidNativeModule {
     func getJSValueRepresentation() -> JSValue {
-        return JSValue(undefinedIn: jsContext)
+        JSValue(undefinedIn: SolidNativeCore.shared.jsContext)
     }
 }

@@ -19,35 +19,10 @@ class SNView: SolidNativeView {
     @ObservedObject var props: SolidNativeProps
 
     var body: some View {
-      let flexStyles = props.getPropAsJSValue(name: "style")
-      let direction =
-        YogaTypeMarshaller.convertToYGFlexDirection(
-          flexStyles?.objectForKeyedSubscript("flexDirection")) ?? .column
-      let justifyContent =
-        YogaTypeMarshaller.convertToYGJustify(_:)(
-          flexStyles?.objectForKeyedSubscript("justifyContent")) ?? .flexStart
-      let alignItems =
-        YogaTypeMarshaller.convertToYGAlign(flexStyles?.objectForKeyedSubscript("alignItems"))
-        ?? .stretch
-      let alignContent =
-        YogaTypeMarshaller.convertToYGAlign(flexStyles?.objectForKeyedSubscript("alignContent"))
-        ?? .flexStart
-      let wrap =
-        YogaTypeMarshaller.convertToYGWrap(_:)(flexStyles?.objectForKeyedSubscript("wrap"))
-        ?? .noWrap
-
-      Flex(
-        direction: direction,
-        justifyContent: justifyContent,
-        alignItems: alignItems,
-        alignContent: alignContent,
-        wrap: wrap
-      ) {
         let children = props.getChildren()
         ForEach(children, id: \.id) { child in
            child.render()
         }
-      }.applySolidNativeLayout(props: props).applySolidNativeStyles(props: props).ignoresSafeArea()
     }
   }
 
