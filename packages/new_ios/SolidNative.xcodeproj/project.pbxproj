@@ -14,20 +14,21 @@
 		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
 		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
+		5816CD132C1BA4D2009299BE /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */; };
+		5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD142C1BAEA1009299BE /* SolidNativeView.swift */; };
+		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
+		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
 		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
 		585436D52C1B70860055A99B /* RenderViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436D42C1B70860055A99B /* RenderViewNode.swift */; };
 		58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */; };
-		58BE0CE12C17034F00666362 /* SolidNativeLayoutViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */; };
-		58BE0CE32C1768C500666362 /* SolidNativeStyleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
 		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
-		58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */; };
+		58CFF74C2B5A1E4E00BA84C7 /* SNButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */; };
 		58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */; };
-		58CFF7512B5A1E9B00BA84C7 /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7502B5A1E9B00BA84C7 /* SolidNativeView.swift */; };
 		58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */; };
 		58CFF7572B5A2BA000BA84C7 /* SolidNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7562B5A2BA000BA84C7 /* SolidNativeModule.swift */; };
 		58CFF75A2B5A5B2A00BA84C7 /* JSValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7592B5A5B2A00BA84C7 /* JSValueBuilder.swift */; };
@@ -61,19 +62,20 @@
 		5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
 		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeViewWrapper.swift; sourceTree = "<group>"; };
+		5816CD142C1BAEA1009299BE /* SolidNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
+		5816CD162C1BB398009299BE /* LayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
+		5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
 		585436D42C1B70860055A99B /* RenderViewNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderViewNode.swift; sourceTree = "<group>"; };
 		58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaTypeMarshaller.swift; sourceTree = "<group>"; };
-		58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeLayoutViewModifier.swift; sourceTree = "<group>"; };
-		58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeStyleViewModifier.swift; sourceTree = "<group>"; };
 		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 		58CFF7472B5A1E1800BA84C7 /* SNRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRender.swift; sourceTree = "<group>"; };
 		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
-		58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButtonView.swift; sourceTree = "<group>"; };
+		58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButton.swift; sourceTree = "<group>"; };
 		58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
-		58CFF7502B5A1E9B00BA84C7 /* SolidNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
 		58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSTimers.swift; sourceTree = "<group>"; };
 		58CFF7562B5A2BA000BA84C7 /* SolidNativeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeModule.swift; sourceTree = "<group>"; };
 		58CFF7592B5A5B2A00BA84C7 /* JSValueBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSValueBuilder.swift; sourceTree = "<group>"; };
@@ -179,7 +181,7 @@
 			children = (
 				58CFF74D2B5A1E6300BA84C7 /* util */,
 				58CFF7492B5A1E4500BA84C7 /* SNView.swift */,
-				58CFF74B2B5A1E4E00BA84C7 /* SNButtonView.swift */,
+				58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */,
 				583FC9022B6F00FB005EE669 /* SNText.swift */,
 			);
 			path = Views;
@@ -198,12 +200,12 @@
 		58CFF74D2B5A1E6300BA84C7 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */,
 				58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */,
-				58CFF7502B5A1E9B00BA84C7 /* SolidNativeView.swift */,
 				58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */,
-				58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */,
-				58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */,
 				58BE0CE52C17698500666362 /* Color+Modifier.swift */,
+				5816CD142C1BAEA1009299BE /* SolidNativeView.swift */,
+				5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -213,6 +215,7 @@
 			children = (
 				58CFF7472B5A1E1800BA84C7 /* SNRender.swift */,
 				585436D42C1B70860055A99B /* RenderViewNode.swift */,
+				5816CD162C1BB398009299BE /* LayoutMetrics.swift */,
 			);
 			path = SNRender;
 			sourceTree = "<group>";
@@ -354,21 +357,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */,
+				5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */,
 				583FC9032B6F00FB005EE669 /* SNText.swift in Sources */,
 				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
+				5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */,
+				5816CD132C1BA4D2009299BE /* SolidNativeViewWrapper.swift in Sources */,
 				58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */,
 				58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */,
-				58CFF7512B5A1E9B00BA84C7 /* SolidNativeView.swift in Sources */,
-				58BE0CE12C17034F00666362 /* SolidNativeLayoutViewModifier.swift in Sources */,
 				58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */,
 				58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */,
 				58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */,
+				5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */,
 				58CFF75A2B5A5B2A00BA84C7 /* JSValueBuilder.swift in Sources */,
 				58CFF7572B5A2BA000BA84C7 /* SolidNativeModule.swift in Sources */,
-				58BE0CE32C1768C500666362 /* SolidNativeStyleViewModifier.swift in Sources */,
 				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
 				58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */,
-				58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */,
+				58CFF74C2B5A1E4E00BA84C7 /* SNButton.swift in Sources */,
 				585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */,
 				585436D52C1B70860055A99B /* RenderViewNode.swift in Sources */,
 			);

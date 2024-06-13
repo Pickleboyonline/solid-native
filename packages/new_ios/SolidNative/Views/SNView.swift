@@ -9,25 +9,16 @@ import Foundation
 import SwiftUI
 import YogaSwiftUI
 
-class SNView: SolidNativeView {
-
-  class override var name: String {
-    "sn_view"
-  }
-
-  struct _SNView: View {
-    @ObservedObject var props: SolidNativeProps
-
+struct SNView: SolidNativeView {
+    static var name: String { "sn_view" }
+    
+    var props: SolidNativeProps
+    
+    var children: SolidNativeChildren
+    
     var body: some View {
-        let children = props.getChildren()
         ForEach(children, id: \.id) { child in
-           child.render()
+            child.render()
         }
     }
-  }
-
-  override func render() -> AnyView {
-    return AnyView(_SNView(props: self.props))
-  }
-
 }

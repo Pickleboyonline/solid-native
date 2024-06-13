@@ -8,7 +8,9 @@
 import Foundation
 import JavaScriptCore
 import Yoga
-class SNRender: SolidNativeModule {
+
+
+final class SNRender: SolidNativeModule {
     class var name: String {
         "SNRender"
     }
@@ -29,6 +31,7 @@ class SNRender: SolidNativeModule {
         nodeRegistry = [rootNode.id: rootNode]
     }
 }
+
 
 
 extension SNRender {

@@ -24,7 +24,7 @@ class SNTextView: SolidNativeView {
     @ObservedObject var props: SolidNativeProps
 
     var body: some View {
-      dfs(start: props).applySolidNativeLayout(props: props).applySolidNativeStyles(props: props)
+      dfs(start: props)
     }
   }
 

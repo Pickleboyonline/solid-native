@@ -11,39 +11,6 @@ import Yoga
 import SwiftUI
 
 
-/// Temp protocol for eventual implimention
-/// Prob would have to be a class, because we need to get the definitions of them all
-/// Need to support "refs" basically js representation of class
-/// Callbacks are just refs
-protocol SolidNativeViewP {
-    var props: [String: Any] {get}
-    static var name: String {get}
-     var isTextElement: Bool {get}
-    associatedtype V: View
-    func render() -> V
-    init()
-}
-
-extension SolidNativeViewP {
-    var isTextElement: Bool {false}
-}
-
-class BaseSolidNativeView: SolidNativeViewP {
-    var props: [String : Any] = [:]
-    
-    required init() {
-        
-    }
-    static var name: String {"BaseSolidNativeView"}
-    
-    func render() -> some View {
-        HStack {
-            Text("Hi")
-        }
-    }
-}
-
-
 // TODO: Eventually move this to rust for all Android+iOS Support
 /// Handles
 class RenderViewNode {
@@ -63,12 +30,12 @@ class RenderViewNode {
     // TODO: Determine how props are handled
     var props: [String: JSValue] = [:]
     // TODO: Will prob have to be a class eventually for Rust/C++ interop
-    let view: any SolidNativeViewP
+    let viewWrapper: SolidNativeViewWrapper
     // TODO: Determine what effect this has on SolidJS
-    var isTextElement: Bool {view.isTextElement}
+    var isTextElement: Bool { viewWrapper.solidNativeViewType.isTextElement }
     
-    init(view: any SolidNativeViewP) {
-        self.view = view
+    init(viewWrapper: SolidNativeViewWrapper) {
+        self.viewWrapper = viewWrapper
     }
 }
 
@@ -85,11 +52,12 @@ extension RenderViewNode {
         children = newChildren
     }
     func setProp(_ name: String, _ value: Any) {
-        
+        // TODO: Updates props on view wrapper
     }
     func removeProp(_ name: String) {
-        
+        // TODO: Updates props on view wrapper
     }
+    
     
     func removeChild(_ childNode: RenderViewNode) {
         // Link the nodes prev and next of it
@@ -156,10 +124,11 @@ extension RenderViewNode {
 // MARK: Update Yoga Layout Style
 extension RenderViewNode {
     func updateYogaNodeStyle() {
-        
+        // TODO:
     }
     
     func updateNodeLayout() {
-        
+        // TODO: Pass layout on view wrapper
+        viewWrapper.layoutMetrics = LayoutMetrics()
     }
 }
