@@ -10,10 +10,11 @@ import JavaScriptCore
 import SwiftUI
 import Yoga
 
+// TODO: Convert this into a protocal
 class SolidNativeView {
   dynamic var next: SolidNativeView?
   dynamic var prev: SolidNativeView?
-  let id = UUID()
+    let id = UUID()
 
   class var name: String {
     "sn_view"
@@ -23,11 +24,17 @@ class SolidNativeView {
   }
 
   let props = SolidNativeProps()
+  
+  // Make a node
+  let yogaNodeRef = YGNodeNew()!
 
   @objc public func setProp(_ name: String, _ value: JSValue?) {
     assert(name != "children", "Err: User `removeChild` or `insertBefore` to update children!")
     props.values[name] = value
+    // TODO: Update yoga layout
+      
     updateCount()
+    
   }
 
   // Forces parent component to render if this changes
@@ -71,7 +78,7 @@ class SolidNativeView {
     updateCount()
   }
 
-  // O(1)
+
   func removeChild(_ element: SolidNativeView) {
     // Link the nodes prev and next of it
     if let childNextSibling = element.next,
@@ -97,12 +104,11 @@ class SolidNativeView {
     updateChildrenInProps()
   }
 
-  // O(1)
+
   func insertBefore(_ element: SolidNativeView, _ anchor: SolidNativeView?) {
     // If no anchor set first child to view (make head)
     //
     if let anchor = anchor {
-
       if anchor === firstChild {
         anchor.prev = element
         element.next = anchor
@@ -143,6 +149,7 @@ class SolidNativeView {
     false
   }
 
+    
   func render() -> AnyView {
     AnyView(EmptyView())
   }

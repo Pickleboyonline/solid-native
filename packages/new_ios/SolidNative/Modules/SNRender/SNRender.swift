@@ -31,6 +31,14 @@ class SNRender: SolidNativeModule {
     }
     
     override func getJSValueRepresentation() -> JSValue {
+        
+        // TODO: Basically any time something is updated, call to Yoga to calculate the layout on the root node.
+        // TODO: Then, we pass that info to the layout system. For the most part, this wont cause problem
+        // TODO: To get around this, we set any props (only thing that updates is update count)
+        // Call Yoga to calculate the nodes.
+        // If the node has new props, update its count after the layout has been done.
+        
+        // Update node => calculate layout => traverse tree to update props. 
         let builder = JSValueBuilder()
         
         builder.addSyncFunction("print") { (_ str: String) in

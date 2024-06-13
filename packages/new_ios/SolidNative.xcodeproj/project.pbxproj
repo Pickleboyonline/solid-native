@@ -16,6 +16,9 @@
 		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
 		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
+		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
+		585436D12C1A38610055A99B /* SolidNativeViewP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436D02C1A38610055A99B /* SolidNativeViewP.swift */; };
+		585436D32C1A48F80055A99B /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436D22C1A48F80055A99B /* SolidNativeViewWrapper.swift */; };
 		58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */; };
 		58BE0CE12C17034F00666362 /* SolidNativeLayoutViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */; };
 		58BE0CE32C1768C500666362 /* SolidNativeStyleViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */; };
@@ -60,6 +63,9 @@
 		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
 		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
+		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
+		585436D02C1A38610055A99B /* SolidNativeViewP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeViewP.swift; sourceTree = "<group>"; };
+		585436D22C1A48F80055A99B /* SolidNativeViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeViewWrapper.swift; sourceTree = "<group>"; };
 		58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaTypeMarshaller.swift; sourceTree = "<group>"; };
 		58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeLayoutViewModifier.swift; sourceTree = "<group>"; };
 		58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeStyleViewModifier.swift; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 			children = (
 				58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */,
 				58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */,
+				585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */,
 			);
 			path = SolidNativeCore;
 			sourceTree = "<group>";
@@ -199,6 +206,8 @@
 				58BE0CE02C17034F00666362 /* SolidNativeLayoutViewModifier.swift */,
 				58BE0CE22C1768C500666362 /* SolidNativeStyleViewModifier.swift */,
 				58BE0CE52C17698500666362 /* Color+Modifier.swift */,
+				585436D02C1A38610055A99B /* SolidNativeViewP.swift */,
+				585436D22C1A48F80055A99B /* SolidNativeViewWrapper.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -347,8 +356,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				585436D32C1A48F80055A99B /* SolidNativeViewWrapper.swift in Sources */,
 				58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */,
 				583FC9032B6F00FB005EE669 /* SNText.swift in Sources */,
+				585436D12C1A38610055A99B /* SolidNativeViewP.swift in Sources */,
 				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
 				58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */,
 				58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */,
@@ -363,6 +374,7 @@
 				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
 				58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */,
 				58CFF74C2B5A1E4E00BA84C7 /* SNButtonView.swift in Sources */,
+				585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
