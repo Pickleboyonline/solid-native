@@ -7,7 +7,7 @@
 
 import Foundation
 import JavaScriptCore
-
+import Yoga
 class SNRender: SolidNativeModule {
     class var name: String {
         "SNRender"
@@ -27,11 +27,33 @@ class SNRender: SolidNativeModule {
         viewTypes = [BaseSolidNativeView.name: BaseSolidNativeView.self]
         rootNode = RenderViewNode(view: BaseSolidNativeView())
         nodeRegistry = [rootNode.id: rootNode]
-    }    
+    }
 }
 
 
 extension SNRender {
+    func manageYogaStyles() {
+        // After each change to the dom, we need to caclculate the new yoga layout
+        // When something is changed, stage the change notification in a set
+        // TODO: Get device layout
+        // TODO: Handle orientation change
+        YGNodeCalculateLayout(rootNode.yogaNodeRef, .infinity, .infinity, .RTL)
+        
+        // Traverse tree, using dfs, determine if its dirty. if node is dirty,
+        // notifiy props of new layout system
+        // if node is dirty in the set, remove it and update it.
+        // we want layout + other props to update on the view at the same time.
+        // We call some function like (needs rerender) which will take care
+        // of letting the view system (like SwiftUI) know that an update needs to
+        // happen based on a props change.
+        rootNode.updateNodeLayout()
+        
+        
+        // After that, system is good.
+        // Have a set of staged changes
+        
+    }
+    
     /// Returns NodeID
     func createViewByName(_ name: String) -> String {
         if let viewType = viewTypes[name] {

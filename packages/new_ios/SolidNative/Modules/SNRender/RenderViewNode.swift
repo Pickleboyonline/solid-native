@@ -9,6 +9,8 @@ import Foundation
 import JavaScriptCore
 import Yoga
 import SwiftUI
+
+
 /// Temp protocol for eventual implimention
 /// Prob would have to be a class, because we need to get the definitions of them all
 /// Need to support "refs" basically js representation of class
@@ -154,6 +156,10 @@ extension RenderViewNode {
 // MARK: Update Yoga Layout Style
 extension RenderViewNode {
     func updateYogaNodeStyle() {
+        
+    }
+    
+    func updateNodeLayout() {
         
     }
 }

@@ -1,1 +1,3 @@
 .obsidian
+*.xcuserstate
+/packages/new_ios/SolidNative.xcodeproj/project.xcworkspace/xcuserdata
