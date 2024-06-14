@@ -24,12 +24,8 @@ class SolidNativeViewWrapper: ObservableObject {
     var children: SolidNativeChildren = []
     var layoutMetrics = LayoutMetrics()
     
-    init(revision: UInt, props: SolidNativeProps = SolidNativeProps(), view: any SolidNativeView.Type, children: SolidNativeChildren, layoutMetrics: LayoutMetrics = LayoutMetrics()) {
-        self.revision = revision
-        self.props = props
-        self.solidNativeViewType = view
-        self.children = children
-        self.layoutMetrics = layoutMetrics
+    init(viewType: any SolidNativeView.Type) {
+        self.solidNativeViewType = viewType
     }
     
     /// Notify SwiftUI of changes

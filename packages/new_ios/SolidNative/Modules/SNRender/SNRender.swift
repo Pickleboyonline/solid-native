@@ -8,7 +8,7 @@
 import Foundation
 import JavaScriptCore
 import Yoga
-
+import Tree
 
 final class SNRender: SolidNativeModule {
     class var name: String {
@@ -19,16 +19,17 @@ final class SNRender: SolidNativeModule {
     // TODO: This is really available via Core
     // TODO: Eventually, this needs to be abstracted further for
     // TODO: Rust implimentation.
-    var viewTypes: [String: any SolidNativeViewP.Type]
+    var viewTypes: [String: any SolidNativeView.Type]
     var rootNode: RenderViewNode
     
     var nodeRegistry: [String: RenderViewNode]
     
     
     required init() {
-        viewTypes = [BaseSolidNativeView.name: BaseSolidNativeView.self]
-        rootNode = RenderViewNode(view: BaseSolidNativeView())
+        viewTypes = [SNView.name: SNView.self]
+        rootNode = RenderViewNode(viewWrapper: SolidNativeViewWrapper(viewType: SNView.self ))
         nodeRegistry = [rootNode.id: rootNode]
+        let node = TreeNewNode(2)
     }
 }
 
@@ -60,7 +61,7 @@ extension SNRender {
     /// Returns NodeID
     func createViewByName(_ name: String) -> String {
         if let viewType = viewTypes[name] {
-            let node = RenderViewNode(view: viewType.init())
+            let node = RenderViewNode(viewWrapper: SolidNativeViewWrapper(viewType: viewType.self ))
             nodeRegistry[node.id] = node
             return node.id
         }
@@ -95,13 +96,13 @@ extension SNRender {
             if value.isNull || value.isUndefined {
                 node.removeProp(name.toString()!)
             } else {
-                node.setProp(name.toString()!, value.toObject()!)
+                node.setProp(name.toString()!, value)
             }
             
         }
         
         builder.addSyncFunction("isTextElement") { (_ id: String) in
-            return self.nodeRegistry[id]?.view.isTextElement
+            return self.nodeRegistry[id]?.viewWrapper.solidNativeViewType.isTextElement
         }
         
         builder.addSyncFunction("removeChild") { (_ id: String, childId: String) in

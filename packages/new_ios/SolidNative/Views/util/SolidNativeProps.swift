@@ -14,61 +14,31 @@ import SwiftUI
 /// Contains props and helpful conversions
 /// TODO: UPDATE ME!
 struct SolidNativeProps {
-    func getString(_ name: String) -> String {
-        ""
+    private var props: [String: JSValue] = [:]
+    
+    mutating func setProp(_ name: String, _ value: JSValue) {
+        self.props[name] = value
     }
+    
+    mutating func removeProp(_ name: String) {
+        self.props.removeValue(forKey: name)
+    }
+    
+    func getString(_ name: String, _ `default`: String = "") -> String {
+        self.props[name]?.toString() ?? `default`
+    }
+    
+    func getCGFloat(_ name: String, _ `default`: CGFloat = 0) -> CGFloat {
+        if let value = props[name],
+           value.isNumber,
+           let num = value.toNumber() {
+            return CGFloat(truncating: num)
+        }
+        return CGFloat()
+    }
+    
+    func getJSValue(_ name: String) -> JSValue? {
+        self.props[name]
+    }
+
 }
-
-
-//class SolidNativePropsOutdated: ObservableObject {
-//  @Published var values: [String: JSValue?] = [:]
-//  // TODO: Type this!
-//  @Published var children: [SolidNativeView] = []
-//
-//  @Published var parent: SolidNativeView?
-//
-//  @Published var updateCount = 0
-//
-//  func getProp<T>(name: String) -> T? {
-//    if let prop = values[name] as? T {
-//      return prop
-//    }
-//    return nil
-//  }
-//
-//  func getString(name: String, `default`: String = "") -> String {
-//    if let prop = (values[name] ?? nil) {
-//      return prop.toString()
-//    }
-//    return `default`
-//  }
-//
-//  func getBool(name: String, `default`: Bool = false) -> Bool {
-//    if let prop = (values[name] ?? nil) {
-//      //print("Found Bool!")
-//      return prop.toBool()
-//    }
-//    return `default`
-//  }
-//
-//  func getNumber(name: String, `default`: NSNumber = 0) -> NSNumber {
-//    if let prop = (values[name] ?? nil) {
-//      return prop.toNumber()
-//    }
-//    return `default`
-//  }
-//
-//  func getChildren() -> [SolidNativeView] {
-//    children
-//  }
-//
-//  func getPropAsJSValue(name: String) -> JSValue? {
-//    values[name] ?? nil
-//  }
-//
-//  func callCallbackWithArgs(name: String, args: [Any]) {
-//    if let callback = getPropAsJSValue(name: "onPress") {
-//      callback.call(withArguments: args)
-//    }
-//  }
-//}

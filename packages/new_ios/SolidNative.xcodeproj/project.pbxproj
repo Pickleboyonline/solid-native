@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,8 +18,11 @@
 		5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD142C1BAEA1009299BE /* SolidNativeView.swift */; };
 		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
+		5816CD1C2C1BFB46009299BE /* yoga in Frameworks */ = {isa = PBXBuildFile; productRef = 5816CD1B2C1BFB46009299BE /* yoga */; };
 		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
+		5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; };
+		5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
 		585436D52C1B70860055A99B /* RenderViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436D42C1B70860055A99B /* RenderViewNode.swift */; };
 		58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */; };
@@ -51,6 +54,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5812F9732B522228001BEE89 /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9762B522228001BEE89 /* SolidNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeApp.swift; sourceTree = "<group>"; };
@@ -67,6 +84,7 @@
 		5816CD162C1BB398009299BE /* LayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
 		5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
+		5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tree.xcframework; path = ../sn_go/Tree.xcframework; sourceTree = "<group>"; };
 		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
 		585436D42C1B70860055A99B /* RenderViewNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderViewNode.swift; sourceTree = "<group>"; };
 		58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaTypeMarshaller.swift; sourceTree = "<group>"; };
@@ -86,7 +104,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5816CD1C2C1BFB46009299BE /* yoga in Frameworks */,
 				58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */,
+				5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +134,7 @@
 				5812F9862B52222C001BEE89 /* SolidNativeTests */,
 				5812F9902B52222C001BEE89 /* SolidNativeUITests */,
 				5812F9742B522228001BEE89 /* Products */,
+				5840B7EE2C1C7A6C00C99A7F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -164,6 +185,14 @@
 				5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */,
 			);
 			path = SolidNativeUITests;
+			sourceTree = "<group>";
+		};
+		5840B7EE2C1C7A6C00C99A7F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		58CFF7422B5A147E00BA84C7 /* SolidNativeCore */ = {
@@ -230,6 +259,7 @@
 				5812F96F2B522228001BEE89 /* Sources */,
 				5812F9702B522228001BEE89 /* Frameworks */,
 				5812F9712B522228001BEE89 /* Resources */,
+				5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -238,6 +268,7 @@
 			name = SolidNative;
 			packageProductDependencies = (
 				58335F322C1607E7005EC584 /* YogaSwiftUI */,
+				5816CD1B2C1BFB46009299BE /* yoga */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -312,7 +343,6 @@
 			);
 			mainGroup = 5812F96A2B522228001BEE89;
 			packageReferences = (
-				58335F312C1607E7005EC584 /* XCLocalSwiftPackageReference "../../../Yoga-SwiftUI" */,
 			);
 			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
 			projectDirPath = "";
@@ -699,14 +729,11 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		58335F312C1607E7005EC584 /* XCLocalSwiftPackageReference "../../../Yoga-SwiftUI" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../../Yoga-SwiftUI";
-		};
-/* End XCLocalSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
+		5816CD1B2C1BFB46009299BE /* yoga */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = yoga;
+		};
 		58335F322C1607E7005EC584 /* YogaSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = YogaSwiftUI;
