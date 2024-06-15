@@ -6,12 +6,10 @@
 //
 
 import SwiftUI
-import Yoga
-import YogaSwiftUI
 
 struct ContentView: View {
   var body: some View {
-    Text("Hi")
+    Text("hi")
   }
 }
 

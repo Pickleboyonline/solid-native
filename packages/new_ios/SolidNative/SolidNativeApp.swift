@@ -6,19 +6,17 @@
 //
 
 import SwiftUI
-import YogaSwiftUI
 
 @main
 struct SolidNativeApp: App {
 
   init() {
-
       
   }
 
   var body: some Scene {
     WindowGroup {
-      SolidNativeCore.shared.rootElement.render()
+
     }
   }
 }

@@ -38,3 +38,6 @@ Thumbs.db
 # Other files and directories to ignore
 *.log
 *.tmp
+
+# Bindings
+out

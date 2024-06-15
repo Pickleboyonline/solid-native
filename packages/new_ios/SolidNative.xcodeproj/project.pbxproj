@@ -18,11 +18,7 @@
 		5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD142C1BAEA1009299BE /* SolidNativeView.swift */; };
 		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
-		5816CD1C2C1BFB46009299BE /* yoga in Frameworks */ = {isa = PBXBuildFile; productRef = 5816CD1B2C1BFB46009299BE /* yoga */; };
-		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
-		5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; };
-		5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
@@ -49,20 +45,6 @@
 			remoteInfo = SolidNative;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5812F9732B522228001BEE89 /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,9 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5816CD1C2C1BFB46009299BE /* yoga in Frameworks */,
-				58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */,
-				5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +122,7 @@
 		5812F9752B522228001BEE89 /* SolidNative */ = {
 			isa = PBXGroup;
 			children = (
+				5840B7F32C1E5C0100C99A7F /* Rust */,
 				58CFF7462B5A1E0500BA84C7 /* Modules */,
 				58CFF7452B5A1DFC00BA84C7 /* Views */,
 				58CFF7422B5A147E00BA84C7 /* SolidNativeCore */,
@@ -185,6 +165,13 @@
 				5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5840B7F32C1E5C0100C99A7F /* Rust */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Rust;
 			sourceTree = "<group>";
 		};
 		58CFF7422B5A147E00BA84C7 /* SolidNativeCore */ = {
@@ -247,7 +234,6 @@
 				5812F96F2B522228001BEE89 /* Sources */,
 				5812F9702B522228001BEE89 /* Frameworks */,
 				5812F9712B522228001BEE89 /* Resources */,
-				5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -255,8 +241,6 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
-				58335F322C1607E7005EC584 /* YogaSwiftUI */,
-				5816CD1B2C1BFB46009299BE /* yoga */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -712,17 +696,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5816CD1B2C1BFB46009299BE /* yoga */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = yoga;
-		};
-		58335F322C1607E7005EC584 /* YogaSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = YogaSwiftUI;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
 }

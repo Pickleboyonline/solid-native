@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import YogaSwiftUI
 
 struct SNView: SolidNativeView {
     static var name: String { "sn_view" }
