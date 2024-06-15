@@ -625,9 +625,11 @@ dependencies = [
 name = "native_core"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "deno_core",
  "slotmap",
  "taffy",
+ "thiserror",
  "tokio",
 ]
 
