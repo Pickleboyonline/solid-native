@@ -1,0 +1,1 @@
+cargo run --bin uniffi-bindgen generate --library target/release/libnative_core.dylib --language swift --out-dir out

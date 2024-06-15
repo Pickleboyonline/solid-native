@@ -10,3 +10,16 @@ slotmap = "1.0.7"
 taffy = "0.5.1"
 thiserror = "1.0.61"
 tokio = { version = "1.38.0", features = ["full"] }
+uniffi = { version = "0.28.0", features = ["cli"] }
+
+[build-dependencies]
+uniffi = { version = "0.28.0", features = ["build"] }
+
+
+[lib]
+crate-type = [ "staticlib" , "cdylib", "lib"]
+name = "native_core"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "uniffi-bindgen.rs"

@@ -6,6 +6,7 @@ use std::rc::Rc;
 // How to write functions
 #[op2(fast)]
 fn op_adder(num: f64) -> f64 {
+
     println!("Hi, im from rust!");
     num + 1.0
 }
