@@ -39,7 +39,7 @@ impl Tree {
     pub fn set_property(&mut self, node_id: NodeId, property_name: String, value: Option<Value>) {
         // Update prop in map
         // Since style comes in as one object, we can use that to just calculate the 
-        // self.taffy_tree.set_style(node, style)
+        // if its a stle just use that
     }
 
     pub fn is_text_node(&self, node_id: NodeId) -> bool {
@@ -63,6 +63,12 @@ impl Tree {
     }
 }
 
+/// Need to return a style.
+/// Start with the default
+/// Collect keys
+/// Pattern match and convert type
+/// Set on tyle
+/// Move style to caller
 fn compute_style_from_jsvalue() {
-    
+
 }
