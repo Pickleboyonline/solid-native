@@ -38,7 +38,7 @@ import JavaScriptCore
 /// getNativeModule can lookup any module.
 ///
 /// The object itself will contain another object called renderer.
-class SolidNativeCore {
+class _SolidNativeCore {
   static let shared = SolidNativeCore()
 
   let jsContext = JSContext()!

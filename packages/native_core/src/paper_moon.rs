@@ -1,4 +1,4 @@
-use std::{borrow::Borrow, collections::HashMap};
+use std::{borrow::Borrow, cell::RefCell, collections::HashMap, sync::Arc};
 
 use anyhow::{bail, Context, Ok, Result};
 use deno_core::v8::{self, Handle};
@@ -29,6 +29,7 @@ pub struct Tree {
     root_node_id: Option<NodeId>,
 }
 
+
 impl Tree {
     pub fn new() -> Self {
         Tree {
@@ -51,6 +52,9 @@ impl Tree {
         styled_node_id: Option<NodeId>,
         style_prop_entry: Option<(String, Value)>,
     ) -> Result<()> {
+
+        
+        // let s: &RefCell<Tree> = t.borrow();
         /*
         It is easy for the case of insert and remove, but setting props is tricker.
         When props are set, layout can change but we have to calculate the new layout.
@@ -128,6 +132,7 @@ impl Tree {
     }
 
     pub fn is_text_node(&self, node_id: NodeId) -> bool {
+        // TODO: Call reciever for this
         false
     }
 
@@ -140,11 +145,30 @@ impl Tree {
         Ok(())
     }
 
-    pub fn get_parent_node(&self, node_id: NodeId) {}
+    pub fn get_parent_node(&self, node_id: NodeId) -> Option<NodeId> {
+        self.taffy_tree.parent(node_id)
+    }
 
-    pub fn get_first_child(&self, node_id: NodeId) {}
+    pub fn get_first_child(&self, node_id: NodeId) -> Option<NodeId> {
+        self.taffy_tree.child_ids(node_id).nth(0)
+    }
 
-    pub fn get_next_sibling(&self, node_id: NodeId) {}
+    /// TODO: check that this works!
+    pub fn get_next_sibling(&self, node_id: NodeId) -> Option<NodeId> {
+        match self.get_parent_node(node_id) {
+            Some(parent) => {
+                let mut iter = self
+                    .taffy_tree
+                    .child_ids(parent)
+                    .skip_while(|id| *id != node_id)
+                    .skip(1); // .next();
+
+                // Return next si
+                iter.next()
+            }
+            None => None,
+        }
+    }
 }
 
 /// Need to return a style.

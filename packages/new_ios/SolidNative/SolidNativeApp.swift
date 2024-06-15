@@ -12,8 +12,8 @@ import YogaSwiftUI
 struct SolidNativeApp: App {
 
   init() {
-    // TODO: Make better
-    SolidNativeCore.shared.downloadAndRunJsBundleSync()
+
+      
   }
 
   var body: some Scene {
