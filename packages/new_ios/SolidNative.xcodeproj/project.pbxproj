@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -19,6 +19,7 @@
 		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
+		5840B8112C1E81B500C99A7F /* NativeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5840B8102C1E81B500C99A7F /* NativeCore */; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
@@ -62,7 +63,7 @@
 		5816CD162C1BB398009299BE /* LayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
 		5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
-		5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tree.xcframework; path = ../sn_go/Tree.xcframework; sourceTree = "<group>"; };
+		5840B8052C1E637100C99A7F /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
 		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
@@ -78,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5840B8112C1E81B500C99A7F /* NativeCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,7 @@
 				5812F9782B522228001BEE89 /* ContentView.swift */,
 				5812F97A2B52222B001BEE89 /* Assets.xcassets */,
 				5812F97C2B52222B001BEE89 /* Preview Content */,
+				5840B8052C1E637100C99A7F /* Header.h */,
 			);
 			path = SolidNative;
 			sourceTree = "<group>";
@@ -162,7 +165,6 @@
 		5840B7EE2C1C7A6C00C99A7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -241,6 +243,7 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
+				5840B8102C1E81B500C99A7F /* NativeCore */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -315,6 +318,7 @@
 			);
 			mainGroup = 5812F96A2B522228001BEE89;
 			packageReferences = (
+				5840B80F2C1E81B500C99A7F /* XCLocalSwiftPackageReference "../native_core/NativeCore" */,
 			);
 			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
 			projectDirPath = "";
@@ -536,6 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SolidNative/Preview Content\"";
+				DEVELOPMENT_TEAM = 7Z8F9MAKM5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -564,6 +569,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SolidNative/Preview Content\"";
+				DEVELOPMENT_TEAM = 7Z8F9MAKM5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -696,6 +702,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		5840B80F2C1E81B500C99A7F /* XCLocalSwiftPackageReference "../native_core/NativeCore" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../native_core/NativeCore;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5840B8102C1E81B500C99A7F /* NativeCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NativeCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
 }

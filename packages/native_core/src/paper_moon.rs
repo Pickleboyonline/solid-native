@@ -1,7 +1,6 @@
 use std::{borrow::Borrow, cell::RefCell, collections::HashMap, sync::Arc};
 
 use anyhow::{bail, Context, Ok, Result};
-use deno_core::v8::{self, Handle};
 use taffy::prelude::*;
 use thiserror::Error;
 
