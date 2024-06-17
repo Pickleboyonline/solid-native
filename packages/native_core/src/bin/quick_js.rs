@@ -1,87 +1,129 @@
-use rquickjs::{runtime, Context, Runtime};
+use rquickjs::loader::Bundle;
+use rquickjs::{embed, runtime, CatchResultExt, Context, Ctx, Exception, Function, Object, Runtime, Error, Value, Result};
+use uniffi::HandleAlloc;
+use std::cell::Cell;
+use std::rc::Rc;
+use std::sync::Arc;
 
-// https://duktape.org/ <= has debugger
-fn main() {
+
+macro_rules! expand_function {
+    (
+        $func_name:ident,
+        $ctx:ident : $ctx_ty:ty,
+        $( $arg:ident : $arg_ty:ty ),* $(,)?
+        => $ret_ty:ty $body:block
+    ) => {
+        {
+            fn $func_name($ctx: $ctx_ty, $( $arg : $arg_ty ),*) -> $ret_ty $body
+
+        let func = Function::new($ctx.clone(), $func_name)
+            .unwrap()
+            .with_name(stringify!($func_name))
+            .unwrap();
+
+        func
+        }
+    };
+}
+
+/*
+! load the `my_module. js` file and name it myModule
+! use when in prod or just have js file.
+! How to do bytecode =>
+static BUNDLE: Bundle = embed! {
+"myModule": "./my_module.js",
+};
+*/
+
+struct QuickJs {
+    runtime: Runtime,
+    context: Context,
+    value: Rc<Cell<u32>>,
+}
+
+impl QuickJs {
+    fn new() -> Self {
+        let runtime = Runtime::new().unwrap();
+
+        let context = Context::full(&runtime).unwrap();
+
+
+        Self {
+            runtime,
+            context,
+            value: Rc::new(Cell::new(10)),
+        }
+    }
+
+    fn run_js(&mut self) {
+        self.context.with(|ctx: Ctx| {
+            let value = self.value.clone();
+            let closure_ctx = ctx.clone();
+
+
+            // fn inc(ctx: Ctx) -> Result<Object> {
+            //     // Ok(Object::new(ctx).unwrap())
+            //     Err(Error::Exception)
+            // }
+
+            let inc = expand_function!(inc, ctx: Ctx, a: i32, b: i32 => i32 {
+                    // Err(Error::Exception)
+                a+b
+            });
+
+
+            ctx.globals().prop("inc", inc).unwrap();
+
+            let res: Value = ctx.eval("try { inc(7, 10 ) } catch (e) { 2 }").unwrap();
+
+            println!("Bruh: {:?}", res);
+            println!("Res: {:?}", ctx.catch());
+            println!("Res: {:?}", ctx.catch());
+            println!("Value: {}", self.value.get())
+        })
+    }
+
+    fn inc_value(&mut self) {
+        self.value.set(self.value.get() + 1);
+    }
+}
+
+
+fn adder(a: u32, b: u32) -> u32 {
+    println!("Hi from rust!");
+    a + b
+}
+
+/// Right now we are using QuickJS since it has better docs
+/// I recently learned C/C++ and build tools so I could use
+/// v8 or duktape, both have a debugger.
+/// TODO: Determine how big v8 executables are.
+/// Duktape has a size of ~1 MB => extremely tiny.
+/// You could also use v8 for debug apps and QuickJS for running
+/// https://duktape.org/ <= has debugger
+/// Duktape does have rust bindings but they are old.
+
+
+fn old_js() {
     let runtime = Runtime::new().unwrap();
 
     let context = Context::full(&runtime).unwrap();
 
     context.with(|ctx| {
-        let v: u64 = ctx.eval("1 + 2").unwrap();
+        let func = Function::new(ctx.clone(), adder)
+            .unwrap()
+            .with_name("adder")
+            .unwrap();
+
+        ctx.globals().prop("adder", func).unwrap();
+
+        let v: u64 = ctx.eval("adder(1,2)").unwrap();
 
         println!("Value: {}", v)
-    })
-    
+    });
 }
 
-// use deno_core::error::AnyError;
-// use deno_core::{extension, op2, PollEventLoopOptions};
-// use std::env;
-// use std::rc::Rc;
-
-// // How to write functions
-// #[op2(fast)]
-// fn op_adder(num: f64) -> f64 {
-
-//     println!("Hi, im from rust!");
-//     num + 1.0
-// }
-
-// async fn run_js(file_path: &str) -> Result<(), AnyError> {
-//     let main_module = deno_core::resolve_path(file_path, env::current_dir().unwrap().as_path())?;
-
-//     extension!(my_extension, ops = [op_adder]);
-//     /*
-//      * TODO: We need to improve runtime
-//      * - Expose renderer to runtime
-//      * - Expose set timeout.
-//      * - For now, we can just resolve the path from the URL since it support it like
-//      *   iOS variant JSCore
-//      * - Javascript HostObject thing for JSI like experience or just some macros.
-//      * - We use a library and hook into it via "JSI". Code in Rust.
-//      * - Project will prob just have a build macro that links binaries for rust
-//      * - Detemine Rust/Swift/Kotline interop with JSI and UniFFI
-//      *   UniFFI handles talking between Rust <=> Kotline/Swift.
-//      *
-//      * For now, dont worry about the module interop. Just get it working in this project in an ad-hoc fashion
-//      * Then refactor to modularize it.
-//      */
-//     let mut js_runtime = deno_core::JsRuntime::new(deno_core::RuntimeOptions {
-//         module_loader: Some(Rc::new(deno_core::FsModuleLoader)),
-//         extensions: vec![my_extension::init_ops_and_esm()],
-//         ..Default::default()
-//     });
-
-//     let mod_id = js_runtime.load_main_es_module(&main_module).await?;
-//     let result = js_runtime.mod_evaluate(mod_id);
-//     js_runtime
-//         .run_event_loop(PollEventLoopOptions::default())
-//         .await?;
-//     result.await
-// }
-
-
-// fn set_flags() {
-//     deno_core::v8_set_flags(vec![
-//         "".to_owned(),
-//         "--jitless".to_owned(),
-//         "--no-expose-wasm".to_owned(),
-//         // Enable to save memory to trade for performnace
-//         // "--lite-mode".to_owned()
-//     ]);
-// }
-
-// fn main() {
-//     // ! Immediatly configure the engine not to use jit. Prob need to have some check however as Android
-//     // ! can support it.
-//     // set_flags();
-
-//     let runtime = tokio::runtime::Builder::new_current_thread()
-//         .enable_all()
-//         .build()
-//         .unwrap();
-
-//     if let Err(error) = runtime.block_on(run_js("./example.js")) {
-//         eprintln!("error: {}", error);
-//     }
-// }
+fn main() {
+    let mut q = QuickJs::new();
+    q.run_js();
+}

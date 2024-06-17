@@ -5,8 +5,8 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0.86"
-deno_core = "0.289.0"
-rquickjs =  { version = "0.6.2", features = ["full", "bindgen", "dump-bytecode"] }
+reqwest = "0.12.4"
+rquickjs =  { version = "0.6.2", features = ["full", "bindgen"] }
 slotmap = "1.0.7"
 taffy = "0.5.1"
 thiserror = "1.0.61"

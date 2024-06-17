@@ -1,8 +1,8 @@
-use native_core::paper_moon::Tree;
+use native_core::paper_moon::Renderer;
 
 
 fn main () {
-    let t = Tree::new();
+    // let t = Renderer::new();
 
     // println!("Value: {:?}", t);
 }

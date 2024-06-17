@@ -16,24 +16,28 @@ type Prop = HashMap<String, Value>;
 
 /// Placeholder for foriegn function implimentation.
 /// Recieves changes about props, etc...
-struct ViewHostReciever {}
+/// Prob needs to be wrapped in an ARC to have it.
+/// Need multiple owners as it interfaces externally.
+pub trait ViewHostReceiver {
+    fn update_props(&self);
+}
 
 /// Owns all of what we need for the system.
 /// effectivly "owns" our system
 /// TODO: Do not maintain anything in the tree that we do not need.
-pub struct Tree {
+pub struct Renderer<T> where T: ViewHostReceiver  {
     taffy_tree: TaffyTree<()>,
     props: HashMap<NodeId, Prop>,
-    view_host_reciever: HashMap<NodeId, ViewHostReciever>,
+    view_host_receiver:  T,
     root_node_id: Option<NodeId>,
 }
 
 
-impl Tree {
-    pub fn new() -> Self {
-        Tree {
+impl<T> Renderer<T> where T: ViewHostReceiver {
+    pub fn new(view_host_receiver: T) -> Self {
+        Renderer {
             props: HashMap::new(),
-            view_host_reciever: HashMap::new(),
+            view_host_receiver,
             taffy_tree: TaffyTree::new(),
             root_node_id: None,
         }
@@ -51,8 +55,6 @@ impl Tree {
         styled_node_id: Option<NodeId>,
         style_prop_entry: Option<(String, Value)>,
     ) -> Result<()> {
-
-        
         // let s: &RefCell<Tree> = t.borrow();
         /*
         It is easy for the case of insert and remove, but setting props is tricker.
