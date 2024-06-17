@@ -1,10 +1,6 @@
-use rquickjs::loader::Bundle;
-use rquickjs::{embed, runtime, CatchResultExt, Context, Ctx, Exception, Function, Object, Runtime, Error, Value, Result};
-use uniffi::HandleAlloc;
+use rquickjs::{Context, Ctx, Function, Runtime, Value};
 use std::cell::Cell;
 use std::rc::Rc;
-use std::sync::Arc;
-
 
 macro_rules! expand_function {
     (
@@ -13,7 +9,7 @@ macro_rules! expand_function {
         $( $arg:ident : $arg_ty:ty ),* $(,)?
         => $ret_ty:ty $body:block
     ) => {
-        {
+    {
             fn $func_name($ctx: $ctx_ty, $( $arg : $arg_ty ),*) -> $ret_ty $body
 
         let func = Function::new($ctx.clone(), $func_name)
@@ -22,7 +18,7 @@ macro_rules! expand_function {
             .unwrap();
 
         func
-        }
+    }
     };
 }
 
@@ -47,7 +43,6 @@ impl QuickJs {
 
         let context = Context::full(&runtime).unwrap();
 
-
         Self {
             runtime,
             context,
@@ -57,20 +52,11 @@ impl QuickJs {
 
     fn run_js(&mut self) {
         self.context.with(|ctx: Ctx| {
-            let value = self.value.clone();
-            let closure_ctx = ctx.clone();
-
-
-            // fn inc(ctx: Ctx) -> Result<Object> {
-            //     // Ok(Object::new(ctx).unwrap())
-            //     Err(Error::Exception)
-            // }
 
             let inc = expand_function!(inc, ctx: Ctx, a: i32, b: i32 => i32 {
                     // Err(Error::Exception)
                 a+b
             });
-
 
             ctx.globals().prop("inc", inc).unwrap();
 
@@ -88,7 +74,6 @@ impl QuickJs {
     }
 }
 
-
 fn adder(a: u32, b: u32) -> u32 {
     println!("Hi from rust!");
     a + b
@@ -102,7 +87,6 @@ fn adder(a: u32, b: u32) -> u32 {
 /// You could also use v8 for debug apps and QuickJS for running
 /// https://duktape.org/ <= has debugger
 /// Duktape does have rust bindings but they are old.
-
 
 fn old_js() {
     let runtime = Runtime::new().unwrap();
