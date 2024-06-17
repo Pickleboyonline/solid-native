@@ -1,8 +1,8 @@
 package yoga
 
 /*
-#cgo CFLAGS: -I${SRCDIR}/../../yoga
-#cgo LDFLAGS: ${SRCDIR}/../../yoga/build/yoga/libyogacore.a -lc++
+#cgo CFLAGS: -I${SRCDIR}/../../external/yoga
+#cgo LDFLAGS: ${SRCDIR}/../../external/yoga/build/yoga/libyogacore.a -lc++
 #include <yoga/Yoga.h>
 */
 import "C"
