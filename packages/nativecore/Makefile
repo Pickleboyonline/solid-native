@@ -8,3 +8,14 @@ clean-build:
 
 build: clean-build
 	go build -o build/bin/main main.go
+
+build-yoga:
+	@echo "Cleaning Prev Yoga Build..."
+	cd extenal/yoga
+	rm -rf build
+	mkdir build
+	cd build
+	@echo "Building Yoga TODO: Get release flags..."
+	# Using arm64 build, change in make for your os!
+	cmake -DCMAKE_OSX_ARCHITECTURES=arm64 -DBUILD_SHARED_LIBS=OFF ..
+	make

@@ -27,7 +27,7 @@ type HostReceiver interface {
 	DoesNodeRequireMeasuring(nodeType string) bool
 	// TODO: Determine how to handle this.
 	OnLayoutChange(nodeId int, layoutMetric LayoutMetric)
-	OnPropUpdated(nodeId int)
+	OnPropUpdated(nodeId int, key string, value *JsValue)
 	OnChildrenChange(nodeId int)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId int)
@@ -100,9 +100,9 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 // Value can be a JSValue
 // or primative.
 // JS Value can be array
-func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string) {
+func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JsValue) {
 	// TODO: Send new value
-	s.hostReceiver.OnPropUpdated(nodeId)
+	s.hostReceiver.OnPropUpdated(nodeId, key, value)
 
 	// Update flex style and notify
 	if key == "style" {

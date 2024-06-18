@@ -12,6 +12,8 @@ func (s *SolidNativeMobile) registureRenderer() {
 	// Push global object, we'll use it later
 	s.dukContext.PushGlobalObject() // => [ globalThis ]
 
+	// ======= Setup functions
+
 	s.dukContext.PushObject() // => [globalThis obj]
 
 	// Start our functions for solid js. Honesly rn not sure how i want tos tructure the API
@@ -31,8 +33,31 @@ func (s *SolidNativeMobile) registureRenderer() {
 	})
 
 	addGoFunc("setProp", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
+		// Stack: [ nodeId key value ]
+		// Get second arg type
+		nodeId := ctx.GetInt(-3)
+		key := ctx.GetString(-2)
+		valueType := ctx.GetType(-1)
+
+		stashKeyName := fmt.Sprintf("props:%d:%s", nodeId, key)
+
+		// Primatives are easy since they are just a copy. However, objects are harder since
+		// we dont have direct access.
+		// What would be easier to to store a hashmap stash of stings in the form:
+		// "prop:${nodeId}:{propName}" : "value".
+		// This way the value can be accessed anywhere at anytime, and we can grab the value at
+		// any time.
+		// TODO: Understand how the syncing works accross threads. For now,
+		// we are doing single threaded stuff so this doesnt matter.
+
+		// Put the Stash on top:
+		ctx.PushGlobalStash()               // => [ nodeId key value stash ]
+		ctx.Replace(-3)                     // => [ nodeId stash value ]
+		ctx.PutPropString(-2, stashKeyName) // => [ nodeId stash ]
+		ctx.Pop()
+
+		s.SetNodeProp(nodeId, key, NewJsValue(valueType, stashKeyName, s))
+
 		return 0
 	})
 
