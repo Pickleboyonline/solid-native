@@ -8,33 +8,33 @@ package main
 // import "C"
 
 import (
-	"fmt"
-	mobiles "nativecore/lib/mobile"
-	"nativecore/lib/yoga"
-
-	"gopkg.in/olebedev/go-duktape.v3"
+	mobiles "nativecore/lib/snmobile"
 )
 
 // TODO: Get
 func main() {
+	m := mobiles.NewSolidNativeMobile(nil)
+	defer m.FreeMemory()
 
-	ctx := duktape.New()
-	ctx.PevalString(`2 + 4`)
-	result := ctx.GetNumber(-1)
-	ctx.Pop()
-	mobiles.Hello()
-	fmt.Println("result is:", result)
+	m.RunJs()
 
-	node := yoga.NewNode()
-	defer node.Free()
+	// ctx := duktape.New()
+	// ctx.PevalString(`2 + 4`)
+	// result := ctx.GetNumber(-1)
+	// ctx.Pop()
+	// mobiles.Hello()
+	// fmt.Println("result is:", result)
 
-	node.SetHeight(10)
+	// node := yoga.NewNode()
+	// defer node.Free()
 
-	node.CalculateLayout(100, 100, yoga.DirectionLTR)
+	// node.SetHeight(10)
 
-	fmt.Printf("Something %v\n", node.GetLayoutHeight())
+	// node.CalculateLayout(100, 100, yoga.DirectionLTR)
 
-	// To prevent memory leaks, don't forget to clean up after
-	// yourself when you're done using a context.
-	ctx.DestroyHeap()
+	// fmt.Printf("Something %v\n", node.GetLayoutHeight())
+
+	// // To prevent memory leaks, don't forget to clean up after
+	// // yourself when you're done using a context.
+	// ctx.DestroyHeap()
 }
