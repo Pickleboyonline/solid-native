@@ -5,7 +5,7 @@ import "gopkg.in/olebedev/go-duktape.v3"
 // Two things:
 // must be able to check the type with a function call
 // must be able to grab type.
-type JsValue struct {
+type JSValue struct {
 	valueType    duktape.Type
 	stashKeyName string
 	// Mainly used for access to ctx to retrieve stash
@@ -18,10 +18,52 @@ type JsValue struct {
 func NewJsValue(
 	valueType duktape.Type,
 	stashKeyName string,
-	solidNativeMobile *SolidNativeMobile) *JsValue {
-	return &JsValue{
+	solidNativeMobile *SolidNativeMobile) *JSValue {
+	return &JSValue{
 		valueType,
 		stashKeyName,
 		solidNativeMobile,
 	}
+}
+
+func (v *JSValue) IsString() bool {
+	return false
+}
+
+func (v *JSValue) GetString() string {
+	return ""
+}
+
+func (v *JSValue) IsNumber() bool {
+	return false
+}
+
+func (v *JSValue) GetNumber() float64 {
+	return 0
+}
+
+func (v *JSValue) IsObject() bool {
+	return false
+}
+
+func (v *JSValue) IsArray() bool {
+	return false
+}
+
+// Swift/Kotlin way of recieving values
+type JSValueEnumerator interface{}
+
+func (v *JSValue) GetArrayEnumerator() JSValueEnumerator {
+	return make([]byte, 0)
+}
+
+// TODO: Impliment
+func (v *JSValue) GetObjectForKey(key string) *JSValue {
+	return &JSValue{}
+}
+
+// This will remove the value from the stash making the
+// JS value no longer accessable.
+func (v *JSValue) Free() {
+
 }

@@ -5,7 +5,7 @@ TODO: Mobile will create an object here.
 package snmobile
 
 import (
-	"nativecore/lib/collections"
+	"fmt"
 	"nativecore/lib/yoga"
 
 	"github.com/google/uuid"
@@ -27,7 +27,7 @@ type HostReceiver interface {
 	DoesNodeRequireMeasuring(nodeType string) bool
 	// TODO: Determine how to handle this.
 	OnLayoutChange(nodeId int, layoutMetric LayoutMetric)
-	OnPropUpdated(nodeId int, key string, value *JsValue)
+	OnPropUpdated(nodeId int, key string, value *JSValue)
 	OnChildrenChange(nodeId int)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId int)
@@ -37,8 +37,8 @@ type HostReceiver interface {
 type SolidNativeMobile struct {
 	// Get chidren
 	nodeChildren  map[int][]int
-	yogaNodes     map[int]*yoga.Node
-	nodeStyleKeys map[int]*collections.Set
+	yogaNodes     map[int]*yoga.YGNode
+	nodeStyleKeys map[int]Set
 	hostReceiver  HostReceiver
 	dukContext    *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
@@ -49,13 +49,13 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 	ctx := duktape.New()
 	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
-		yogaNodes:    make(map[int]*yoga.Node),
+		yogaNodes:    make(map[int]*yoga.YGNode),
 		hostReceiver: hostReceiver,
 		dukContext:   ctx,
 		rootNodeId:   nil,
 		// We use this to keep track of when keys are removed
 		// Since Yoga works via mutation
-		nodeStyleKeys: make(map[int]*collections.Set),
+		nodeStyleKeys: make(map[int]Set),
 	}
 }
 
@@ -94,7 +94,7 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 	yogaNode := yoga.NewNode()
 	s.yogaNodes[id] = yogaNode
 	s.nodeChildren[id] = make([]int, 0)
-	s.nodeStyleKeys[id] = collections.NewSet()
+	s.nodeStyleKeys[id] = make(Set)
 	s.hostReceiver.OnNodeCreated(id, nodeType)
 	return id
 }
@@ -105,19 +105,80 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 // Value can be a JSValue
 // or primative.
 // JS Value can be array
-func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JsValue) {
+func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) error {
+	node, exists := s.yogaNodes[nodeId]
+
+	if !exists {
+		return fmt.Errorf("node does not exist with id %v", nodeId)
+	}
+
+	prevKeys, exists := s.nodeStyleKeys[nodeId]
+
+	// Silent error, fix it as needed. Should not happen however.
+	if !exists {
+		prevKeys = make(Set)
+		s.nodeStyleKeys[nodeId] = prevKeys
+	}
+
 	// TODO: Send new value
 	s.hostReceiver.OnPropUpdated(nodeId, key, value)
 
 	// Update flex style and notify
 	if key == "style" {
 		// TODO: Update yoga layout in node
-		s.updateFlexStyle()
-		s.updateLayoutAndNotify(collections.NewSet())
-		return
+		// Convert JS value to styles
+		styleMap, err := s.convertJSToKeysAndObjects(value)
+
+		if err != nil {
+			return err
+		}
+		updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
+		s.updateLayoutAndNotify(map[int]struct{}{
+			nodeId: {},
+		})
+		return nil
 	}
 
 	s.hostReceiver.OnUpdateRevisionCount(nodeId)
+	return nil
+}
+
+// "Upwraps" JS Value by enumerating over its keys
+// and values. Ensure this is an object, otherwise just return nothing.
+func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[string]JSValue, error) {
+	// Check whether its an object or array:
+	s.dukContext.PushGlobalStash() // Push stash => [ stash ]
+
+	s.dukContext.GetPropString(-1, value.stashKeyName) // => [ stash value ]
+
+	valueType := s.dukContext.GetType(-1) // => [ stash value ]
+
+	if !valueType.IsObject() {
+		return nil, fmt.Errorf("js value with key %s is not an object or does not exist", value.stashKeyName)
+	}
+
+	jsValueMap := make(map[string]JSValue)
+
+	// TODO: Check if 0 works or if i have to put in a flag
+	s.dukContext.Enum(-1, 0) // => [ stash value enum ]
+
+	for s.dukContext.Next(-1, true) {
+		// => [ ... enum key value ]
+		key := s.dukContext.GetString(-2)
+		keyStashName := uuid.New().String()
+
+		s.dukContext.PushGlobalStash() // => [ ... enum key value stash ]
+
+		s.dukContext.Replace(-3) // => [ ... enum stash value ]
+
+		s.dukContext.PutPropString(-2, keyStashName) // => [ ... enum stash ]
+
+		s.dukContext.Pop() // => [ ... enum ]
+
+		jsValueMap[key] = *NewJsValue(valueType, keyStashName, s)
+	}
+
+	return jsValueMap, nil
 }
 
 // Anchor is optional.
@@ -127,7 +188,7 @@ func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *
 	// TODO: Update children of something
 	s.hostReceiver.OnChildrenChange(parentId)
 
-	s.updateLayoutAndNotify(collections.NewSet())
+	s.updateLayoutAndNotify(map[int]struct{}{})
 }
 
 // Style is the only prop that relates to layout info
@@ -151,8 +212,6 @@ func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *
 // Serves as a way to mark which nodes are dirty since sometimes
 // the yoga layout does not change as a result. We still want to dispatch to the
 // host that something changed (update revision count)
-func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes *collections.Set) {
+func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) {
 
 }
-
-func (s *SolidNativeMobile) updateFlexStyle() {}
