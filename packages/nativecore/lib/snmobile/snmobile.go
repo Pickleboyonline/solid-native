@@ -12,11 +12,6 @@ import (
 	"gopkg.in/olebedev/go-duktape.v3"
 )
 
-type LayoutMetric struct {
-	X int
-	Y int
-}
-
 type HostReceiver interface {
 	// When JS creates a node (or even the Mobile side)
 	// this callback is executed
@@ -26,7 +21,7 @@ type HostReceiver interface {
 	// sending it over the wire
 	DoesNodeRequireMeasuring(nodeType string) bool
 	// TODO: Determine how to handle this.
-	OnLayoutChange(nodeId int, layoutMetric LayoutMetric)
+	OnLayoutChange(nodeId int, layoutMetrics *LayoutMetrics)
 	OnPropUpdated(nodeId int, key string, value *JSValue)
 	// TODO: Determine how to send the data over.
 	// Can work with bytes, but need to determine the size of the int
@@ -209,6 +204,8 @@ func (s *SolidNativeMobile) RemoveChild(parentId int, childNodeId int) {
 	delete(s.nodeStyleKeys, childNodeId)
 	delete(s.nodeParent, childNodeId)
 	childYogaNode.Free()
+
+	s.updateLayoutAndNotify(map[int]struct{}{})
 }
 
 func (s *SolidNativeMobile) GetParent(nodeId int) (parentId int, exists bool) {
@@ -282,8 +279,38 @@ func (s *SolidNativeMobile) GetNextSibling(nodeId int) (nextSiblingIndex int, ex
 // Serves as a way to mark which nodes are dirty since sometimes
 // the yoga layout does not change as a result. We still want to dispatch to the
 // host that something changed (update revision count)
-func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) {
+func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) error {
+	if s.rootNodeId == nil {
+		return fmt.Errorf("root node does not exist! cannot update layout")
+	}
+	rootNodeId := *s.rootNodeId
+	yogaRootNode := s.yogaNodes[rootNodeId]
 
+	yogaRootNode.CalculateLayout(yoga.YGUndefined, yoga.YGUndefined, yoga.DirectionLTR)
+
+	s.applyLayout(rootNodeId)
+
+	return nil
+}
+
+func (s *SolidNativeMobile) applyLayout(nodeId int) {
+	node := s.yogaNodes[nodeId]
+
+	if !node.GetHasNewLayout() {
+		return
+	}
+
+	node.SetHasNewLayout(false)
+
+	// TODO: Notify of new layout and update layout metrics
+	s.hostReceiver.OnLayoutChange(nodeId, convertYogaLayoutMetricToSNLayoutMetrics(
+		yoga.NewLayoutMetrics(node),
+	))
+	s.hostReceiver.OnUpdateRevisionCount(nodeId)
+
+	for _, n := range s.nodeChildren[nodeId] {
+		s.applyLayout(n)
+	}
 }
 
 // "Upwraps" JS Value by enumerating over its keys
