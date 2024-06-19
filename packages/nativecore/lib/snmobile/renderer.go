@@ -2,6 +2,7 @@ package snmobile
 
 import (
 	"fmt"
+	"log"
 
 	"gopkg.in/olebedev/go-duktape.v3"
 )
@@ -27,9 +28,16 @@ func (s *SolidNativeMobile) registureRenderer() {
 	}
 
 	addGoFunc("createNodeByName", func(ctx *duktape.Context) int {
+		// => [ nodeType ]
 		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
-		return 0
+
+		nodeId := s.CreateNode(nodeType)
+
+		log.Printf("New Node create of type %v with id %v", nodeType, nodeId)
+
+		ctx.PushInt(nodeId) // => [ nodeType nodeId ]
+
+		return 1 // Return top of stack
 	})
 
 	addGoFunc("setProp", func(ctx *duktape.Context) int {
@@ -39,6 +47,8 @@ func (s *SolidNativeMobile) registureRenderer() {
 		key := ctx.GetString(-2)
 		valueType := ctx.GetType(-1)
 
+		// We dont need to free this JS value from the stash
+		// since it gets hased to the same key
 		stashKeyName := fmt.Sprintf("props:%d:%s", nodeId, key)
 
 		// Primatives are easy since they are just a copy. However, objects are harder since
@@ -62,39 +72,89 @@ func (s *SolidNativeMobile) registureRenderer() {
 	})
 
 	addGoFunc("insertBefore", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
+		// => [parentId nodeId anchorId?]
+		parentId := ctx.GetInt(-3)
+		nodeId := ctx.GetInt(-2)
+		anchorType := ctx.GetType(-1)
+		isAnchorANumber := anchorType.IsNumber()
+
+		toIntPtr := func(i int) *int {
+			return &i
+		}
+
+		var anchorId *int
+
+		if isAnchorANumber {
+			anchorId = toIntPtr(ctx.GetInt(-1))
+		}
+
+		s.InsertBefore(parentId, nodeId, anchorId)
+		log.Printf("Node %v inserted under parent %v", nodeId, parentId)
 		return 0
 	})
 
 	addGoFunc("isTextElement", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
-		return 0
+		// => [nodeId]
+		nodeId := ctx.GetInt(-1)
+		isTextElement := s.hostReceiver.IsTextElement(nodeId)
+
+		ctx.PushBoolean(isTextElement)
+
+		return 1
 	})
 
 	addGoFunc("removeChild", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
+		// => [parentId nodeId]
+		parentId := ctx.GetInt(-2)
+		nodeId := ctx.GetInt(-1)
+
+		s.RemoveChild(parentId, nodeId)
 		return 0
 	})
 
 	addGoFunc("getParent", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
-		return 0
+		// => [nodeId]
+		nodeId := ctx.GetInt(-1)
+
+		parentId, exists := s.GetParent(nodeId)
+
+		if !exists {
+			return 0
+		}
+
+		ctx.PushInt(parentId) // => [nodeId parentId]
+
+		return 1
 	})
 
 	addGoFunc("getFirstChild", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
-		return 0
+		// => [nodeId]
+		nodeId := ctx.GetInt(-1)
+
+		firstChildId, exists := s.GetFirstChild(nodeId)
+
+		if !exists {
+			return 0
+		}
+
+		ctx.PushInt(firstChildId) // => [nodeId firstChildId]
+
+		return 1
 	})
 
-	addGoFunc("next", func(ctx *duktape.Context) int {
-		nodeType := ctx.GetString(-1)
-		fmt.Println("Node type: ", nodeType)
-		return 0
+	addGoFunc("getNextSibling", func(ctx *duktape.Context) int {
+		// => [nodeId]
+		nodeId := ctx.GetInt(-1)
+
+		nextSiblingId, exists := s.GetNextSibling(nodeId)
+
+		if !exists {
+			return 0
+		}
+
+		ctx.PushInt(nextSiblingId) // => [nodeId nextSiblingIndex]
+
+		return 1
 	})
 
 	// Final Step, but the renderer there:

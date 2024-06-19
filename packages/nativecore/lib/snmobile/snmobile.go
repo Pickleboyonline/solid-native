@@ -29,6 +29,7 @@ type HostReceiver interface {
 	OnChildrenChange(nodeId int)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId int)
+	IsTextElement(nodeId int) bool
 }
 
 // Houses important info.
@@ -100,6 +101,8 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 // Value can be a JSValue
 // or primative.
 // JS Value can be array
+// The old JS value associatted does not need to be freed because it has
+// a hashed ID. You only need to free JSValues with random temparary ones
 func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) error {
 	node, exists := s.yogaNodes[nodeId]
 
@@ -229,11 +232,11 @@ func (s *SolidNativeMobile) GetFirstChild(nodeId int) (firstChildId int, exists 
 	return firstChildId, exists
 }
 
-func (s *SolidNativeMobile) GetNextSibling(nodeId int) (nextSiblingIndex int, exists bool) {
+func (s *SolidNativeMobile) GetNextSibling(nodeId int) (int, bool) {
 	parentId, exists := s.GetParent(nodeId)
 
 	if !exists {
-		return nextSiblingIndex, false
+		return 0, false
 	}
 
 	parentChildrenIds := s.nodeChildren[parentId]
@@ -247,13 +250,13 @@ func (s *SolidNativeMobile) GetNextSibling(nodeId int) (nextSiblingIndex int, ex
 		}
 	}
 
-	nextSiblingIndex = childIndex + 1
+	nextSiblingIndex := childIndex + 1
 
 	if nextSiblingIndex >= parentChildrenIdLength {
-		return nextSiblingIndex, false
+		return 0, false
 	}
 
-	return nextSiblingIndex, true
+	return parentChildrenIds[nextSiblingIndex], true
 }
 
 // ================= Private Helper Methods =========================
