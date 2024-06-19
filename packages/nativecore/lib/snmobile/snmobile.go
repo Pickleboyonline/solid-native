@@ -36,10 +36,11 @@ type HostReceiver interface {
 // Houses important info.
 type SolidNativeMobile struct {
 	// Get chidren
-	nodeChildren map[int][]int
-	yogaNodes    map[int]*yoga.Node
-	hostReceiver HostReceiver
-	dukContext   *duktape.Context
+	nodeChildren  map[int][]int
+	yogaNodes     map[int]*yoga.Node
+	nodeStyleKeys map[int]*collections.Set
+	hostReceiver  HostReceiver
+	dukContext    *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
 	rootNodeId *int
 }
@@ -52,6 +53,9 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 		hostReceiver: hostReceiver,
 		dukContext:   ctx,
 		rootNodeId:   nil,
+		// We use this to keep track of when keys are removed
+		// Since Yoga works via mutation
+		nodeStyleKeys: make(map[int]*collections.Set),
 	}
 }
 
@@ -90,6 +94,7 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 	yogaNode := yoga.NewNode()
 	s.yogaNodes[id] = yogaNode
 	s.nodeChildren[id] = make([]int, 0)
+	s.nodeStyleKeys[id] = collections.NewSet()
 	s.hostReceiver.OnNodeCreated(id, nodeType)
 	return id
 }

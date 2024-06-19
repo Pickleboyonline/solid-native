@@ -7,6 +7,12 @@ package yoga
 */
 import "C"
 
+// SetWidth sets the width of the Yoga node
+func (n *Node) SetWidth(width float32) {
+	// Call works and compiles
+	C.YGNodeStyleSetWidth(n.node, C.float(width))
+}
+
 // Node represents a Yoga node
 type Node struct {
 	node C.YGNodeRef
@@ -20,11 +26,6 @@ func NewNode() *Node {
 // Free releases the resources allocated for the Yoga node
 func (n *Node) Free() {
 	C.YGNodeFree(n.node)
-}
-
-// SetWidth sets the width of the Yoga node
-func (n *Node) SetWidth(width float32) {
-	C.YGNodeStyleSetWidth(n.node, C.float(width))
 }
 
 // SetHeight sets the height of the Yoga node
