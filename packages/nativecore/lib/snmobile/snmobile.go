@@ -28,6 +28,9 @@ type HostReceiver interface {
 	// TODO: Determine how to handle this.
 	OnLayoutChange(nodeId int, layoutMetric LayoutMetric)
 	OnPropUpdated(nodeId int, key string, value *JSValue)
+	// TODO: Determine how to send the data over.
+	// Can work with bytes, but need to determine the size of the int
+	// to effectivly decode it.
 	OnChildrenChange(nodeId int)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId int)
@@ -39,6 +42,7 @@ type SolidNativeMobile struct {
 	nodeChildren  map[int][]int
 	yogaNodes     map[int]*yoga.YGNode
 	nodeStyleKeys map[int]Set
+	nodeParent    map[int]int
 	hostReceiver  HostReceiver
 	dukContext    *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
@@ -53,6 +57,7 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 		hostReceiver: hostReceiver,
 		dukContext:   ctx,
 		rootNodeId:   nil,
+		nodeParent:   make(map[int]int),
 		// We use this to keep track of when keys are removed
 		// Since Yoga works via mutation
 		nodeStyleKeys: make(map[int]Set),
@@ -68,10 +73,6 @@ func (s *SolidNativeMobile) RunJs() {
 // Yoga and JSContext need to be cleaned up before this object is deallocated
 func (s *SolidNativeMobile) FreeMemory() {
 	s.dukContext.DestroyHeap()
-}
-
-func (s *SolidNativeMobile) downloadAndRunJs() {
-	s.dukContext.EvalString("globalThis._SolidNativeRenderer.createNodeByName('sn_view')")
 }
 
 // TODO: Give iterator type to retreive all
@@ -96,17 +97,6 @@ func (s *SolidNativeMobile) CreateNode(nodeType string) int {
 	nodeId := s.createNodeAndDoNotNotifyHost()
 	s.hostReceiver.OnNodeCreated(nodeId, nodeType)
 	return nodeId
-}
-
-// Internal usage. Internally, we do not need to keep track of the node type
-// TODO: But i do need some mechanism for the measure function
-func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost() int {
-	id := int(uuid.New().ID())
-	yogaNode := yoga.NewNode()
-	s.yogaNodes[id] = yogaNode
-	s.nodeChildren[id] = make([]int, 0)
-	s.nodeStyleKeys[id] = make(Set)
-	return id
 }
 
 // Updates the host receiver about the props from the JS side
@@ -159,6 +149,143 @@ func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) 
 	return nil
 }
 
+// Anchor is optional.
+// TODO: Impliment Me!
+func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *int) {
+	// If there's an anchor, insert before the anchor
+
+	// Init to nil
+	var newChildrenIds []int
+	currentChildrenIds := s.nodeChildren[parentId]
+	parentYogaNode := s.yogaNodes[parentId]
+	newYogaNode := s.yogaNodes[newNodeId]
+
+	if anchorId != nil {
+		for ind, nodeId := range currentChildrenIds {
+			if nodeId == *anchorId {
+				parentYogaNode.InsertChild(newYogaNode, ind)
+				newChildrenIds = append(newChildrenIds, newNodeId, nodeId)
+			} else {
+				newChildrenIds = append(newChildrenIds, nodeId)
+			}
+		}
+	} else {
+		// Add to the end
+		newChildrenIds = append(newChildrenIds, currentChildrenIds...)
+		newChildrenIds = append(newChildrenIds, newNodeId)
+		ind := len(currentChildrenIds)
+		parentYogaNode.InsertChild(newYogaNode, ind)
+	}
+
+	// Update internal children
+	s.nodeChildren[parentId] = newChildrenIds
+	s.nodeParent[newNodeId] = parentId
+	// TODO: Send node over
+	s.hostReceiver.OnChildrenChange(parentId)
+
+	s.updateLayoutAndNotify(map[int]struct{}{})
+}
+
+func (s *SolidNativeMobile) RemoveChild(parentId int, childNodeId int) {
+	parentChildIds := s.nodeChildren[parentId]
+	newChildIds := make([]int, 0)
+
+	for _, nodeId := range parentChildIds {
+		if nodeId == childNodeId {
+			continue
+		}
+		newChildIds = append(newChildIds, nodeId)
+	}
+
+	s.nodeChildren[parentId] = newChildIds
+
+	// Cleanup on Yoga
+	parentYogaNode := s.yogaNodes[parentId]
+	childYogaNode := s.yogaNodes[childNodeId]
+
+	parentYogaNode.RemoveChild(childYogaNode)
+	delete(s.yogaNodes, childNodeId)
+	delete(s.nodeChildren, childNodeId)
+	delete(s.nodeStyleKeys, childNodeId)
+	delete(s.nodeParent, childNodeId)
+	childYogaNode.Free()
+}
+
+func (s *SolidNativeMobile) GetParent(nodeId int) (parentId int, exists bool) {
+	parentId, exists = s.nodeParent[nodeId]
+	return parentId, exists
+}
+
+func (s *SolidNativeMobile) GetFirstChild(nodeId int) (firstChildId int, exists bool) {
+	nodeChildren := s.nodeChildren[nodeId]
+
+	length := len(nodeChildren)
+
+	if length == 0 {
+		exists = false
+		return firstChildId, exists
+	}
+
+	firstChildId = nodeChildren[0]
+	exists = true
+
+	return firstChildId, exists
+}
+
+func (s *SolidNativeMobile) GetNextSibling(nodeId int) (nextSiblingIndex int, exists bool) {
+	parentId, exists := s.GetParent(nodeId)
+
+	if !exists {
+		return nextSiblingIndex, false
+	}
+
+	parentChildrenIds := s.nodeChildren[parentId]
+	parentChildrenIdLength := len(parentChildrenIds)
+	childIndex := 0
+
+	for i, n := range parentChildrenIds {
+		if n == nodeId {
+			childIndex = i
+			break
+		}
+	}
+
+	nextSiblingIndex = childIndex + 1
+
+	if nextSiblingIndex >= parentChildrenIdLength {
+		return nextSiblingIndex, false
+	}
+
+	return nextSiblingIndex, true
+}
+
+// ================= Private Helper Methods =========================
+
+// Style is the only prop that relates to layout info
+// Note: we want to batch layout + any other data change
+// Data change happens first
+// Then layout must be calc.
+// If node is dirty and traversed, send layout + data
+// If node was not data and data still needed to be send, send it over.
+// ! Generally, this happens over a single thread in the call stack
+// ! so SwiftUI/Compose shouldnt notice until call stack is empty, but just be
+// ! aware.
+// ! Example change:
+// 1. Font Size change
+// 2. Font size sent to
+//
+
+// Call after a prop is changed related to layout/style
+//
+// # modifiedNodes:
+//
+// Serves as a way to mark which nodes are dirty since sometimes
+// the yoga layout does not change as a result. We still want to dispatch to the
+// host that something changed (update revision count)
+func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) {
+
+}
+
 // "Upwraps" JS Value by enumerating over its keys
 // and values. Ensure this is an object, otherwise just return nothing.
 func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[string]JSValue, error) {
@@ -197,37 +324,17 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[strin
 	return jsValueMap, nil
 }
 
-// Anchor is optional.
-func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *int) {
-	// TODO: Update flex style
-
-	// TODO: Update children of something
-	s.hostReceiver.OnChildrenChange(parentId)
-
-	s.updateLayoutAndNotify(map[int]struct{}{})
+// Internal usage. Internally, we do not need to keep track of the node type
+// TODO: But i do need some mechanism for the measure function
+func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost() int {
+	id := int(uuid.New().ID())
+	yogaNode := yoga.NewNode()
+	s.yogaNodes[id] = yogaNode
+	s.nodeChildren[id] = make([]int, 0)
+	s.nodeStyleKeys[id] = make(Set)
+	return id
 }
 
-// Style is the only prop that relates to layout info
-// Note: we want to batch layout + any other data change
-// Data change happens first
-// Then layout must be calc.
-// If node is dirty and traversed, send layout + data
-// If node was not data and data still needed to be send, send it over.
-// ! Generally, this happens over a single thread in the call stack
-// ! so SwiftUI/Compose shouldnt notice until call stack is empty, but just be
-// ! aware.
-// ! Example change:
-// 1. Font Size change
-// 2. Font size sent to
-//
-
-// Call after a prop is changed related to layout/style
-//
-// # modifiedNodes:
-//
-// Serves as a way to mark which nodes are dirty since sometimes
-// the yoga layout does not change as a result. We still want to dispatch to the
-// host that something changed (update revision count)
-func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) {
-
+func (s *SolidNativeMobile) downloadAndRunJs() {
+	s.dukContext.EvalString("globalThis._SolidNativeRenderer.createNodeByName('sn_view')")
 }

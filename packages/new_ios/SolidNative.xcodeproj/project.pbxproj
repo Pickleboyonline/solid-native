@@ -124,7 +124,6 @@
 		5812F9752B522228001BEE89 /* SolidNative */ = {
 			isa = PBXGroup;
 			children = (
-				5840B7F32C1E5C0100C99A7F /* Rust */,
 				58CFF7462B5A1E0500BA84C7 /* Modules */,
 				58CFF7452B5A1DFC00BA84C7 /* Views */,
 				58CFF7422B5A147E00BA84C7 /* SolidNativeCore */,
@@ -167,13 +166,6 @@
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5840B7F32C1E5C0100C99A7F /* Rust */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Rust;
 			sourceTree = "<group>";
 		};
 		58CFF7422B5A147E00BA84C7 /* SolidNativeCore */ = {
