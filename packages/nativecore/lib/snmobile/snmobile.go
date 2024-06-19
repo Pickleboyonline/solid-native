@@ -83,19 +83,29 @@ func (s *SolidNativeMobile) RegistureModules() {}
 
 // Create root node and return its ID.
 // Not to be called on JS
-func (s *SolidNativeMobile) CreateRootNode(nodeType string) {
-
+// This removes the callback like effect and allows the host to create its root node immediatly
+// to present it to the screen.
+func (s *SolidNativeMobile) CreateRootNode() int {
+	return s.createNodeAndDoNotNotifyHost()
 }
 
 // Creates node and notifies mobile host reciever
 // to be typically called from JS side.
+// Returns Node ID (which is an int)
 func (s *SolidNativeMobile) CreateNode(nodeType string) int {
+	nodeId := s.createNodeAndDoNotNotifyHost()
+	s.hostReceiver.OnNodeCreated(nodeId, nodeType)
+	return nodeId
+}
+
+// Internal usage. Internally, we do not need to keep track of the node type
+// TODO: But i do need some mechanism for the measure function
+func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost() int {
 	id := int(uuid.New().ID())
 	yogaNode := yoga.NewNode()
 	s.yogaNodes[id] = yogaNode
 	s.nodeChildren[id] = make([]int, 0)
 	s.nodeStyleKeys[id] = make(Set)
-	s.hostReceiver.OnNodeCreated(id, nodeType)
 	return id
 }
 
@@ -120,19 +130,25 @@ func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) 
 		s.nodeStyleKeys[nodeId] = prevKeys
 	}
 
-	// TODO: Send new value
+	// Host Receiver will take in new JSValue for usage
+	// However, the view doesn't update until we use the
+	// `OnUpdateRevisionCount` method
 	s.hostReceiver.OnPropUpdated(nodeId, key, value)
 
-	// Update flex style and notify
+	// Update flex style and notify of new layout metrics
 	if key == "style" {
-		// TODO: Update yoga layout in node
-		// Convert JS value to styles
 		styleMap, err := s.convertJSToKeysAndObjects(value)
-
 		if err != nil {
 			return err
 		}
-		updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
+
+		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
+
+		s.nodeStyleKeys[nodeId] = newStyleKeys
+
+		// Call the layout function, which will update the layout metrics and send it over
+		// to the host. It will also notify dirty yoga nodes and update all the
+		// revision counts needed.
 		s.updateLayoutAndNotify(map[int]struct{}{
 			nodeId: {},
 		})
