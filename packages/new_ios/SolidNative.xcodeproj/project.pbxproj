@@ -20,7 +20,6 @@
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
-		58B56BE22C242CF100403C5B /* Snmobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B56BE12C242CF100403C5B /* Snmobile.xcframework */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
@@ -78,7 +77,6 @@
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		5840B8052C1E637100C99A7F /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
-		58B56BE12C242CF100403C5B /* Snmobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Snmobile.xcframework; path = ../nativecore/build/ios/Snmobile.xcframework; sourceTree = "<group>"; };
 		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
@@ -93,7 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58B56BE22C242CF100403C5B /* Snmobile.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,7 +175,6 @@
 		5840B7EE2C1C7A6C00C99A7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				58B56BE12C242CF100403C5B /* Snmobile.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
