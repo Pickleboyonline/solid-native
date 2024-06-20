@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import NativeCore
+
 
 struct ContentView: View {
   var body: some View {
       
-    Text("\(add(a: 1, b: 4))")
+    Text("")
   }
 }
 

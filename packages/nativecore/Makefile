@@ -1,7 +1,12 @@
-build-ios:
-	@# TODO: make build iOS script and ensure to go get correct binaries for go mobile
-	@# Command to ensure necessary deps: go get -d golang.org/x/mobile/cmd/gomobile
-	@echo hello world!
+build-mobile-pkg: clean-build
+	@# Command to ensure necessary deps:
+	@go get -d golang.org/x/mobile/cmd/gomobile
+	@mkdir -p build/android
+	@mkdir -p build/ios
+	@echo "Building iOS and Android Packages..." 
+	@gomobile bind -target=android -androidapi 34 -o build/android/snmobile.aar nativecore/lib/snmobile
+	@gomobile bind -target=ios,iossimulator -prefix SN -o build/ios/Snmobile.xcframework nativecore/lib/snmobile
+
 
 clean-build:
 	rm -rf ./build

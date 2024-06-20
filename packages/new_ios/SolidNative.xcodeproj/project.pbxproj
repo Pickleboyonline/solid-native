@@ -19,7 +19,6 @@
 		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
-		5840B8112C1E81B500C99A7F /* NativeCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5840B8102C1E81B500C99A7F /* NativeCore */; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
@@ -79,7 +78,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5840B8112C1E81B500C99A7F /* NativeCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +233,6 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
-				5840B8102C1E81B500C99A7F /* NativeCore */,
 			);
 			productName = SolidNative;
 			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
@@ -701,13 +698,6 @@
 			relativePath = ../native_core/NativeCore;
 		};
 /* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		5840B8102C1E81B500C99A7F /* NativeCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NativeCore;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
 }

@@ -31,7 +31,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		// => [ nodeType ]
 		nodeType := ctx.GetString(-1)
 
-		nodeId := s.CreateNode(nodeType)
+		nodeId := s.createNode(nodeType)
 
 		log.Printf("New Node create of type %v with id %v", nodeType, nodeId)
 
@@ -66,7 +66,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		ctx.PutPropString(-2, stashKeyName) // => [ nodeId stash ]
 		ctx.Pop()
 
-		s.SetNodeProp(nodeId, key, NewJsValue(valueType, stashKeyName, s))
+		s.setNodeProp(nodeId, key, NewJsValue(valueType, stashKeyName, s))
 
 		return 0
 	})
@@ -88,7 +88,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 			anchorId = toIntPtr(ctx.GetInt(-1))
 		}
 
-		s.InsertBefore(parentId, nodeId, anchorId)
+		s.insertBefore(parentId, nodeId, anchorId)
 		log.Printf("Node %v inserted under parent %v", nodeId, parentId)
 		return 0
 	})
@@ -108,7 +108,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		parentId := ctx.GetInt(-2)
 		nodeId := ctx.GetInt(-1)
 
-		s.RemoveChild(parentId, nodeId)
+		s.removeChild(parentId, nodeId)
 		return 0
 	})
 
@@ -116,7 +116,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		// => [nodeId]
 		nodeId := ctx.GetInt(-1)
 
-		parentId, exists := s.GetParent(nodeId)
+		parentId, exists := s.getParent(nodeId)
 
 		if !exists {
 			return 0
@@ -131,7 +131,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		// => [nodeId]
 		nodeId := ctx.GetInt(-1)
 
-		firstChildId, exists := s.GetFirstChild(nodeId)
+		firstChildId, exists := s.getFirstChild(nodeId)
 
 		if !exists {
 			return 0
@@ -146,7 +146,7 @@ func (s *SolidNativeMobile) registureRenderer() {
 		// => [nodeId]
 		nodeId := ctx.GetInt(-1)
 
-		nextSiblingId, exists := s.GetNextSibling(nodeId)
+		nextSiblingId, exists := s.getNextSibling(nodeId)
 
 		if !exists {
 			return 0

@@ -101,6 +101,6 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[strin
 	return jsValueMap, nil
 }
 
-func (s *SolidNativeMobile) downloadAndRunJs() {
-	s.dukContext.EvalString("globalThis._SolidNativeRenderer.createNodeByName('sn_view')")
+func (s *SolidNativeMobile) downloadAndRunJs(jsToEval string) error {
+	return s.dukContext.PevalString(jsToEval)
 }

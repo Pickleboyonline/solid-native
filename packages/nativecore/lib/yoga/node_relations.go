@@ -6,7 +6,7 @@ package yoga
 import "C"
 
 func (n *YGNode) InsertChild(childNode *YGNode, atIndex int) {
-	C.YGNodeInsertChild(n.node, childNode.node, C.ulong(atIndex))
+	C.YGNodeInsertChild(n.node, childNode.node, C.size_t(atIndex))
 }
 
 func (n *YGNode) RemoveChild(childNode *YGNode) {

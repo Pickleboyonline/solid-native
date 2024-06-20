@@ -16,7 +16,7 @@ func main() {
 	m := mobiles.NewSolidNativeMobile(nil)
 	defer m.FreeMemory()
 
-	m.RunJs()
+	// m.RunJs()
 
 	// ctx := duktape.New()
 	// ctx.PevalString(`2 + 4`)

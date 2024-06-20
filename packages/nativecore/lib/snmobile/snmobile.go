@@ -5,6 +5,7 @@ TODO: Mobile will create an object here.
 package snmobile
 
 import (
+	"fmt"
 	"nativecore/lib/yoga"
 
 	"gopkg.in/olebedev/go-duktape.v3"
@@ -34,6 +35,7 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 		dukContext:   ctx,
 		rootNodeId:   nil,
 		nodeParent:   make(map[int]int),
+		nodeChildren: make(map[int][]int),
 		// We use this to keep track of when keys are removed
 		// Since Yoga works via mutation
 		nodeStyleKeys:    make(map[int]Set),
@@ -42,9 +44,14 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 }
 
 // Registure core into system, download, and runs js.
-func (s *SolidNativeMobile) RunJs() {
+func (s *SolidNativeMobile) RunJs(jsToEval string) error {
+	s.dukContext.PushTimers()
+	s.dukContext.PushGlobalGoFunction("log", func(c *duktape.Context) int {
+		fmt.Println(c.SafeToString(-1))
+		return 0
+	})
 	s.registureRenderer()
-	s.downloadAndRunJs()
+	return s.downloadAndRunJs(jsToEval)
 }
 
 // Yoga and JSContext need to be cleaned up before this object is deallocated
