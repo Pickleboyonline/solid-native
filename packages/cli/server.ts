@@ -92,7 +92,7 @@ router
       bundle: true,
       write: false,
       sourcemap: true,
-      target: "ios16",
+      target: "es6",
       outdir: "out",
     });
 
