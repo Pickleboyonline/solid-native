@@ -13,6 +13,7 @@ const router = new Router();
 /**
  * Convert it to ES5 for duktape. Source maps not really working properly
  * Code on how to do it better: https://github.com/noyobo/esbuild-plugin-es5/blob/main/src/index.ts
+ * TODO: Get sourcemaps working
  * @returns
  */
 const swcPlugin = (): esbuild.Plugin => {
@@ -29,31 +30,6 @@ const swcPlugin = (): esbuild.Plugin => {
                 sourceMaps: (build.initialOptions.sourcemap) ? "inline" : false,
                 // minify: true,
               });
-              file.contents = Buffer.from(transformed.code, "utf-8");
-            } catch (error) {
-              console.error("SWC transform error:", error);
-              result.errors.push(
-                { text: (error as Error).message } as esbuild.Message,
-              );
-            }
-          }
-        }
-      });
-    },
-  };
-};
-
-const swcPluginWithSourceMaps = (): esbuild.Plugin => {
-  return {
-    name: "swc-plugin",
-    setup(build) {
-      build.onEnd(async (result) => {
-        if (result.errors.length) return;
-
-        for (const file of result.outputFiles || []) {
-          if (file.path.endsWith(".js")) {
-            try {
-              const transformed = await transform(file.text);
               file.contents = Buffer.from(transformed.code, "utf-8");
             } catch (error) {
               console.error("SWC transform error:", error);
