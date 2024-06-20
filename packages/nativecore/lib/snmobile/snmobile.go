@@ -20,13 +20,20 @@ type HostReceiver interface {
 	// measured while calculating layout before
 	// sending it over the wire
 	DoesNodeRequireMeasuring(nodeType string) bool
-	// TODO: Determine how to handle this.
+
+	// TODO: See if we need any other info to make measure call
+	MeasureNode(nodeId int) *Size
+
+	// Need this to setup root node and calculate layout.
+	GetDeviceScreenSize() *Size
+
 	OnLayoutChange(nodeId int, layoutMetrics *LayoutMetrics)
 	OnPropUpdated(nodeId int, key string, value *JSValue)
+
 	// TODO: Determine how to send the data over.
 	// Can work with bytes, but need to determine the size of the int
 	// to effectivly decode it.
-	OnChildrenChange(nodeId int)
+	OnChildrenChange(nodeId int, nodeIds *IntegerArray)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId int)
 	IsTextElement(nodeId int) bool
@@ -42,11 +49,13 @@ type SolidNativeMobile struct {
 	hostReceiver  HostReceiver
 	dukContext    *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
-	rootNodeId *int
+	rootNodeId       *int
+	deviceScreenSize *Size
 }
 
 func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 	ctx := duktape.New()
+
 	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
 		yogaNodes:    make(map[int]*yoga.YGNode),
@@ -56,7 +65,8 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 		nodeParent:   make(map[int]int),
 		// We use this to keep track of when keys are removed
 		// Since Yoga works via mutation
-		nodeStyleKeys: make(map[int]Set),
+		nodeStyleKeys:    make(map[int]Set),
+		deviceScreenSize: hostReceiver.GetDeviceScreenSize(),
 	}
 }
 
@@ -71,6 +81,11 @@ func (s *SolidNativeMobile) FreeMemory() {
 	s.dukContext.DestroyHeap()
 }
 
+// TODO: determine how this is implimneted and if i can just update the device dimensions
+func (s *SolidNativeMobile) OnOrientationChange() {
+
+}
+
 // TODO: Give iterator type to retreive all
 // native modules with reciever function.
 // May need to use flex for type conversion here.
@@ -82,22 +97,36 @@ func (s *SolidNativeMobile) RegistureModules() {}
 // Not to be called on JS
 // This removes the callback like effect and allows the host to create its root node immediatly
 // to present it to the screen.
-func (s *SolidNativeMobile) CreateRootNode() int {
-	return s.createNodeAndDoNotNotifyHost()
+//
+// Use the nodetype to tell whether we need to measure it or not
+func (s *SolidNativeMobile) CreateRootNode(nodeType string) int {
+	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
+
+	toInt := func(i int) *int {
+		return &i
+	}
+
+	s.rootNodeId = toInt(nodeId)
+
+	yogaNode := s.yogaNodes[nodeId]
+
+	// Ensure proper height/width
+	yogaNode.SetWidth(s.deviceScreenSize.Width)
+	yogaNode.SetHeight(s.deviceScreenSize.Height)
+
+	return nodeId
 }
 
 // Creates node and notifies mobile host reciever
 // to be typically called from JS side.
 // Returns Node ID (which is an int)
 func (s *SolidNativeMobile) CreateNode(nodeType string) int {
-	nodeId := s.createNodeAndDoNotNotifyHost()
+	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
 	s.hostReceiver.OnNodeCreated(nodeId, nodeType)
 	return nodeId
 }
 
 // Updates the host receiver about the props from the JS side
-// TODO: Determine how to send it over. & update to take value
-// TODO: Prob will need some JSValue like object to hold any object.
 // Value can be a JSValue
 // or primative.
 // JS Value can be array
@@ -129,6 +158,11 @@ func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) 
 		if err != nil {
 			return err
 		}
+		// Ensure we free the values afterwords since we only need them to compute
+		// the flex styles
+		for _, value := range styleMap {
+			defer value.Free()
+		}
 
 		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
 
@@ -148,7 +182,6 @@ func (s *SolidNativeMobile) SetNodeProp(nodeId int, key string, value *JSValue) 
 }
 
 // Anchor is optional.
-// TODO: Impliment Me!
 func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *int) {
 	// If there's an anchor, insert before the anchor
 
@@ -179,7 +212,9 @@ func (s *SolidNativeMobile) InsertBefore(parentId int, newNodeId int, anchorId *
 	s.nodeChildren[parentId] = newChildrenIds
 	s.nodeParent[newNodeId] = parentId
 	// TODO: Send node over
-	s.hostReceiver.OnChildrenChange(parentId)
+	s.hostReceiver.OnChildrenChange(parentId, &IntegerArray{
+		integers: newChildrenIds,
+	})
 
 	s.updateLayoutAndNotify(map[int]struct{}{})
 }
@@ -289,7 +324,7 @@ func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}
 	rootNodeId := *s.rootNodeId
 	yogaRootNode := s.yogaNodes[rootNodeId]
 
-	yogaRootNode.CalculateLayout(yoga.YGUndefined, yoga.YGUndefined, yoga.DirectionLTR)
+	yogaRootNode.CalculateLayout(s.deviceScreenSize.Width, s.deviceScreenSize.Height, yoga.DirectionLTR)
 
 	s.applyLayout(rootNodeId)
 
@@ -305,7 +340,6 @@ func (s *SolidNativeMobile) applyLayout(nodeId int) {
 
 	node.SetHasNewLayout(false)
 
-	// TODO: Notify of new layout and update layout metrics
 	s.hostReceiver.OnLayoutChange(nodeId, convertYogaLayoutMetricToSNLayoutMetrics(
 		yoga.NewLayoutMetrics(node),
 	))
@@ -352,17 +386,6 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[strin
 	}
 
 	return jsValueMap, nil
-}
-
-// Internal usage. Internally, we do not need to keep track of the node type
-// TODO: But i do need some mechanism for the measure function
-func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost() int {
-	id := int(uuid.New().ID())
-	yogaNode := yoga.NewNode()
-	s.yogaNodes[id] = yogaNode
-	s.nodeChildren[id] = make([]int, 0)
-	s.nodeStyleKeys[id] = make(Set)
-	return id
 }
 
 func (s *SolidNativeMobile) downloadAndRunJs() {

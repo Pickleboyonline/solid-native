@@ -109,3 +109,12 @@ const (
 	GutterRow    Gutter = C.YGGutterRow
 	GutterAll    Gutter = C.YGGutterAll
 )
+
+// MeasureMode represents the measure mode enum in Yoga.
+type MeasureMode int
+
+const (
+	MeasureModeUndefined MeasureMode = C.YGMeasureModeUndefined
+	MeasureModeExactly   MeasureMode = C.YGMeasureModeExactly
+	MeasureModeAtMost    MeasureMode = C.YGMeasureModeAtMost
+)

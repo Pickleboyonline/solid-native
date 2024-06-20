@@ -25,3 +25,14 @@ func convertYogaLayoutMetricToSNLayoutMetrics(l yoga.LayoutMetrics) *LayoutMetri
 		ContentBottomInset: l.ContentInsets.Bottom,
 	}
 }
+
+// Required for measure function return
+type Size struct {
+	Width  float32
+	Height float32
+}
+
+// Make Swift/Kotlin compadible initializer to return reference
+func NewSize(width, height float32) *Size {
+	return &Size{Width: width, Height: height}
+}
