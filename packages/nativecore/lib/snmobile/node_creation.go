@@ -14,6 +14,9 @@ type IntegerArray struct {
 }
 
 func (e *IntegerArray) Length() int {
+	if e.integers == nil {
+		return 0
+	}
 	return len(e.integers)
 }
 

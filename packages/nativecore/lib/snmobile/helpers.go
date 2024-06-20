@@ -2,7 +2,9 @@ package snmobile
 
 import (
 	"fmt"
+	"io"
 	"nativecore/lib/yoga"
+	"net/http"
 
 	"github.com/google/uuid"
 )
@@ -101,6 +103,25 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[strin
 	return jsValueMap, nil
 }
 
-func (s *SolidNativeMobile) downloadAndRunJs(jsToEval string) error {
+func (s *SolidNativeMobile) downloadAndRunJs(url string) error {
+
+	// Make a GET request
+	response, err := http.Get(url)
+	if err != nil {
+		fmt.Println("Error making GET request:", err)
+		return err
+	}
+	defer response.Body.Close()
+
+	// Read the response body
+	body, err := io.ReadAll(response.Body)
+	if err != nil {
+		fmt.Println("Error reading response body:", err)
+		return err
+	}
+
+	// Print the retrieved text
+	jsToEval := string(body)
+
 	return s.dukContext.PevalString(jsToEval)
 }

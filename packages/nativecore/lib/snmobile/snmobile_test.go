@@ -28,7 +28,7 @@ func TestCreateNode(t *testing.T) {
 	}
 	`
 
-	err := snm.RunJs(js)
+	err := snm.EvalJs(js)
 
 	if err != nil {
 		t.Fatalf("error: %v", err)
@@ -47,7 +47,7 @@ func CreateRootNode(t *testing.T) {
 	}
 	`
 
-	err := snm.RunJs(js)
+	err := snm.EvalJs(js)
 
 	if err != nil {
 		t.Fatalf("error: %v", err)

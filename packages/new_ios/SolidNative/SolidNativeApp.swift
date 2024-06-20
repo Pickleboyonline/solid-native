@@ -10,13 +10,23 @@ import Snmobile
 
 @main
 struct SolidNativeApp: App {
+    
+    let core: SolidNativeCore
+    
     init() {
-        // let s = SNSnmobileSolidNativeMobile(nil)
+        core = SolidNativeCore()
+        
+        do {
+            try core.start(jsUrl: "http://localhost:8080/")
+        } catch {
+            print("Unexpected error: \(error).")
+        }
+        
     }
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            core.getRootNode().render()
         }
     }
 }

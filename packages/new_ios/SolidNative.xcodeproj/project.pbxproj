@@ -18,13 +18,12 @@
 		58EC2B912C24A8F100D5FA11 /* SNButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B902C24A8F100D5FA11 /* SNButton.swift */; };
 		58EC2B932C24A90700D5FA11 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B922C24A90700D5FA11 /* SNText.swift */; };
 		58EC2BA42C24A97300D5FA11 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */; };
-		58EC2BA52C24A97300D5FA11 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */; };
 		58EC2BA62C24A97300D5FA11 /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */; };
-		58EC2BA72C24A97300D5FA11 /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */; };
 		58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */; };
 		58EC2BAD2C24A9AF00D5FA11 /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */; };
 		58EC2BAE2C24A9AF00D5FA11 /* SolidNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */; };
 		58EC2BB12C24AAA400D5FA11 /* Snmobile in Frameworks */ = {isa = PBXBuildFile; productRef = 58EC2BB02C24AAA400D5FA11 /* Snmobile */; };
+		58EC2BB42C24D56100D5FA11 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BB32C24D56100D5FA11 /* SolidNativeCore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,12 +59,11 @@
 		58EC2B902C24A8F100D5FA11 /* SNButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButton.swift; sourceTree = "<group>"; };
 		58EC2B922C24A90700D5FA11 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
-		58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
 		58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
-		58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
 		58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeViewWrapper.swift; sourceTree = "<group>"; };
 		58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
 		58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeModule.swift; sourceTree = "<group>"; };
+		58EC2BB32C24D56100D5FA11 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +115,7 @@
 		58B56C2D2C24A70800403C5B /* SolidNative */ = {
 			isa = PBXGroup;
 			children = (
+				58EC2BB22C24D55000D5FA11 /* Core */,
 				58EC2BA92C24A99500D5FA11 /* Modules */,
 				58B56C592C24A87500403C5B /* Views */,
 				58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */,
@@ -168,8 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */,
-				58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */,
-				58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */,
 				58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */,
 				58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */,
 			);
@@ -191,6 +188,14 @@
 				58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */,
 			);
 			path = SNRender;
+			sourceTree = "<group>";
+		};
+		58EC2BB22C24D55000D5FA11 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				58EC2BB32C24D56100D5FA11 /* SolidNativeCore.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,10 +335,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				58EC2BA42C24A97300D5FA11 /* Color+Modifier.swift in Sources */,
-				58EC2BA52C24A97300D5FA11 /* SolidNativeProps.swift in Sources */,
+				58EC2BB42C24D56100D5FA11 /* SolidNativeCore.swift in Sources */,
 				58EC2BAE2C24A9AF00D5FA11 /* SolidNativeModule.swift in Sources */,
 				58EC2B8F2C24A8A400D5FA11 /* SNView.swift in Sources */,
-				58EC2BA72C24A97300D5FA11 /* SolidNativeChildren.swift in Sources */,
 				58EC2BAD2C24A9AF00D5FA11 /* LayoutMetrics.swift in Sources */,
 				58B56C312C24A70800403C5B /* ContentView.swift in Sources */,
 				58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */,

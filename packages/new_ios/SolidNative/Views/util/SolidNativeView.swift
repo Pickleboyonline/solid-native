@@ -16,13 +16,17 @@ protocol SolidNativeView: View where Body: View  {
     /// Needs to be in lower snake case
     static var name: String {get}
     static var isTextElement: Bool {get}
+    /// Used for things like text and textinput
+    static var doesRequireMeasuring: Bool {get}
     var props: SolidNativeProps {get}
     var children: SolidNativeChildren {get}
+    static func measureNode()
     init(props: SolidNativeProps, children: SolidNativeChildren)
 }
 
 extension SolidNativeView {
     static var isTextElement: Bool {false}
+    static var doesRequireMeasuring: Bool { false }
 }
 
 

@@ -43,15 +43,28 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 	}
 }
 
-// Registure core into system, download, and runs js.
-func (s *SolidNativeMobile) RunJs(jsToEval string) error {
+// TODO: Give iterator type to retreive all
+// native modules with reciever function.
+// May need to use flex for type conversion here.
+func (s *SolidNativeMobile) RegistureModules() {
 	s.dukContext.PushTimers()
 	s.dukContext.PushGlobalGoFunction("log", func(c *duktape.Context) int {
 		fmt.Println(c.SafeToString(-1))
 		return 0
 	})
 	s.registureRenderer()
-	return s.downloadAndRunJs(jsToEval)
+}
+
+// Registure core into system, download, and runs js.
+func (s *SolidNativeMobile) RunJsFromServer(url string) error {
+	s.RegistureModules()
+	return s.downloadAndRunJs(url)
+}
+
+// Registure core into system, download, and runs js.
+func (s *SolidNativeMobile) EvalJs(jsToEval string) error {
+	s.RegistureModules()
+	return s.dukContext.PevalString(jsToEval)
 }
 
 // Yoga and JSContext need to be cleaned up before this object is deallocated
@@ -63,11 +76,6 @@ func (s *SolidNativeMobile) FreeMemory() {
 func (s *SolidNativeMobile) OnOrientationChange() {
 
 }
-
-// TODO: Give iterator type to retreive all
-// native modules with reciever function.
-// May need to use flex for type conversion here.
-func (s *SolidNativeMobile) RegistureModules() {}
 
 // Create root node and return its ID.
 // Not to be called on JS

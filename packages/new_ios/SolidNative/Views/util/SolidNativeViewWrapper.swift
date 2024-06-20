@@ -7,7 +7,10 @@
 
 import Foundation
 import SwiftUI
+import Snmobile
 
+typealias SolidNativeProps = [String: SNSnmobileJSValue]
+typealias SolidNativeChildren = SNSnmobileIntegerArray
 
 /// Manages Flex Layout. Nodes take in a wrapper. Wrapper takes in view struct def to instanciate
 /// View takes in view types. (Managed in render for now)
@@ -19,17 +22,18 @@ class SolidNativeViewWrapper: ObservableObject {
     let id = UUID().uuidString
     
     // Props + Children only info needed. Pass that down to
-    var props = SolidNativeProps()
+    var props: SolidNativeProps = [:]
     var solidNativeViewType: any SolidNativeView.Type
-    var children: SolidNativeChildren = []
-    var layoutMetrics = LayoutMetrics()
+    var children: SolidNativeChildren = SNSnmobileIntegerArray()
+    var layoutMetrics = SNSnmobileLayoutMetrics()
     
     init(viewType: any SolidNativeView.Type) {
         self.solidNativeViewType = viewType
     }
     
+
     /// Notify SwiftUI of changes
-    func notifyChanges() {
+    func updateRevisionCount() {
         revision += 1
     }
     
@@ -37,14 +41,15 @@ class SolidNativeViewWrapper: ObservableObject {
         /// Causes the update in swiftUI
         @ObservedObject
         var wrapper: SolidNativeViewWrapper
+        
         let view: any SolidNativeView
         
         func layout(_ view: some View) -> some View {
           let layoutMetrics = wrapper.layoutMetrics
           return view
             .frame(
-              width: layoutMetrics.width,
-              height: layoutMetrics.height,
+              width: CGFloat(layoutMetrics.width),
+              height: CGFloat(layoutMetrics.height),
               alignment: .topLeading
             )
         }
@@ -63,7 +68,7 @@ class SolidNativeViewWrapper: ObservableObject {
         }
         
         var body: some View {
-            EmptyView()
+            AnyView(layout(view))
         }
     }
     
