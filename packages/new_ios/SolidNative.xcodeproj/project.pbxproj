@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -24,6 +24,7 @@
 		58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */; };
 		58EC2BAD2C24A9AF00D5FA11 /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */; };
 		58EC2BAE2C24A9AF00D5FA11 /* SolidNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */; };
+		58EC2BB12C24AAA400D5FA11 /* Snmobile in Frameworks */ = {isa = PBXBuildFile; productRef = 58EC2BB02C24AAA400D5FA11 /* Snmobile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58EC2BB12C24AAA400D5FA11 /* Snmobile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,6 +209,9 @@
 			dependencies = (
 			);
 			name = SolidNative;
+			packageProductDependencies = (
+				58EC2BB02C24AAA400D5FA11 /* Snmobile */,
+			);
 			productName = SolidNative;
 			productReference = 58B56C2B2C24A70800403C5B /* SolidNative.app */;
 			productType = "com.apple.product-type.application";
@@ -279,6 +284,9 @@
 				Base,
 			);
 			mainGroup = 58B56C222C24A70800403C5B;
+			packageReferences = (
+				58EC2BAF2C24AAA300D5FA11 /* XCLocalSwiftPackageReference "../nativecore/ios" */,
+			);
 			productRefGroup = 58B56C2C2C24A70800403C5B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -681,6 +689,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		58EC2BAF2C24AAA300D5FA11 /* XCLocalSwiftPackageReference "../nativecore/ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../nativecore/ios;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		58EC2BB02C24AAA400D5FA11 /* Snmobile */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Snmobile;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58B56C232C24A70800403C5B /* Project object */;
 }
