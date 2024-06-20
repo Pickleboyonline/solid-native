@@ -20,6 +20,7 @@
 		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
 		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
 		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
+		58B56BE22C242CF100403C5B /* Snmobile.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B56BE12C242CF100403C5B /* Snmobile.xcframework */; };
 		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
 		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
 		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
@@ -46,6 +47,19 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		58B56BDE2C242BF500403C5B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5812F9732B522228001BEE89 /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5812F9762B522228001BEE89 /* SolidNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeApp.swift; sourceTree = "<group>"; };
@@ -64,6 +78,7 @@
 		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
 		5840B8052C1E637100C99A7F /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
+		58B56BE12C242CF100403C5B /* Snmobile.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Snmobile.xcframework; path = ../nativecore/build/ios/Snmobile.xcframework; sourceTree = "<group>"; };
 		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
 		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
 		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
@@ -78,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58B56BE22C242CF100403C5B /* Snmobile.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,6 +178,7 @@
 		5840B7EE2C1C7A6C00C99A7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58B56BE12C242CF100403C5B /* Snmobile.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -226,6 +243,7 @@
 				5812F96F2B522228001BEE89 /* Sources */,
 				5812F9702B522228001BEE89 /* Frameworks */,
 				5812F9712B522228001BEE89 /* Resources */,
+				58B56BDE2C242BF500403C5B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -308,6 +326,7 @@
 			mainGroup = 5812F96A2B522228001BEE89;
 			packageReferences = (
 				5840B80F2C1E81B500C99A7F /* XCLocalSwiftPackageReference "../native_core/NativeCore" */,
+				58B56BE32C24308600403C5B /* XCRemoteSwiftPackageReference "yoga" */,
 			);
 			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
 			projectDirPath = "";
@@ -698,6 +717,17 @@
 			relativePath = ../native_core/NativeCore;
 		};
 /* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		58B56BE32C24308600403C5B /* XCRemoteSwiftPackageReference "yoga" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/yoga.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
 }

@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import Snmobile
 
 @main
 struct SolidNativeApp: App {
 
   init() {
+      let s = SNSnmobileSize(20, height: 30)!
       
+      print(s.width)
   }
 
   var body: some Scene {
