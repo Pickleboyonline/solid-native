@@ -2,19 +2,23 @@
 //  ContentView.swift
 //  SolidNative
 //
-//  Created by Imran Shitta-Bey on 1/12/24.
+//  Created by Imran Shitta-Bey on 6/20/24.
 //
 
 import SwiftUI
-import Yoga
-import YogaSwiftUI
 
 struct ContentView: View {
-  var body: some View {
-    Text("Hi")
-  }
+    var body: some View {
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundStyle(.tint)
+            Text("Hello, world!")
+        }
+        .padding()
+    }
 }
 
 #Preview {
-  ContentView()
+    ContentView()
 }

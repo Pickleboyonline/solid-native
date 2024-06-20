@@ -2,11 +2,10 @@
 //  SolidNativeTests.swift
 //  SolidNativeTests
 //
-//  Created by Imran Shitta-Bey on 1/12/24.
+//  Created by Imran Shitta-Bey on 6/20/24.
 //
 
 import XCTest
-@testable import SolidNative
 
 final class SolidNativeTests: XCTestCase {
 
@@ -28,7 +27,7 @@ final class SolidNativeTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
-        self.measure {
+        measure {
             // Put the code you want to measure the time of here.
         }
     }

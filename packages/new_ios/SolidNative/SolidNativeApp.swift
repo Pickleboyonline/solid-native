@@ -2,23 +2,21 @@
 //  SolidNativeApp.swift
 //  SolidNative
 //
-//  Created by Imran Shitta-Bey on 1/12/24.
+//  Created by Imran Shitta-Bey on 6/20/24.
 //
 
 import SwiftUI
-import YogaSwiftUI
+import Snmobile
 
 @main
 struct SolidNativeApp: App {
-
-  init() {
-    // TODO: Make better
-    SolidNativeCore.shared.downloadAndRunJsBundleSync()
-  }
-
-  var body: some Scene {
-    WindowGroup {
-      SolidNativeCore.shared.rootElement.render()
+    init() {
+        // let s = SNSnmobileSolidNativeMobile(nil)
     }
-  }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
 }

@@ -1,0 +1,1 @@
+GN_ARGS='enable_ios_bitcode_=true ios_deployment_target="10" is_component_build=false target_cpu="arm64" target_os="ios" use_custom_libcxx=false v8_use_external_startup_data=false v8_enable_pointer_compression=false' V8_FROM_SOURCE=1 cargo build --target aarch64-apple-ios -vv

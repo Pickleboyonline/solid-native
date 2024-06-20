@@ -3,121 +3,88 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9762B522228001BEE89 /* SolidNativeApp.swift */; };
-		5812F9792B522228001BEE89 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9782B522228001BEE89 /* ContentView.swift */; };
-		5812F97B2B52222B001BEE89 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5812F97A2B52222B001BEE89 /* Assets.xcassets */; };
-		5812F97E2B52222B001BEE89 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5812F97D2B52222B001BEE89 /* Preview Assets.xcassets */; };
-		5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9872B52222C001BEE89 /* SolidNativeTests.swift */; };
-		5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */; };
-		5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */; };
-		5816CD132C1BA4D2009299BE /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */; };
-		5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD142C1BAEA1009299BE /* SolidNativeView.swift */; };
-		5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD162C1BB398009299BE /* LayoutMetrics.swift */; };
-		5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */; };
-		5816CD1C2C1BFB46009299BE /* yoga in Frameworks */ = {isa = PBXBuildFile; productRef = 5816CD1B2C1BFB46009299BE /* yoga */; };
-		58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 58335F322C1607E7005EC584 /* YogaSwiftUI */; };
-		583FC9032B6F00FB005EE669 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583FC9022B6F00FB005EE669 /* SNText.swift */; };
-		5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; };
-		5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */; };
-		585436D52C1B70860055A99B /* RenderViewNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585436D42C1B70860055A99B /* RenderViewNode.swift */; };
-		58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */; };
-		58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BE0CE52C17698500666362 /* Color+Modifier.swift */; };
-		58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */; };
-		58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7472B5A1E1800BA84C7 /* SNRender.swift */; };
-		58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7492B5A1E4500BA84C7 /* SNView.swift */; };
-		58CFF74C2B5A1E4E00BA84C7 /* SNButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */; };
-		58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */; };
-		58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */; };
-		58CFF7572B5A2BA000BA84C7 /* SolidNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7562B5A2BA000BA84C7 /* SolidNativeModule.swift */; };
-		58CFF75A2B5A5B2A00BA84C7 /* JSValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CFF7592B5A5B2A00BA84C7 /* JSValueBuilder.swift */; };
+		58B56C2F2C24A70800403C5B /* SolidNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */; };
+		58B56C312C24A70800403C5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C302C24A70800403C5B /* ContentView.swift */; };
+		58B56C332C24A70900403C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58B56C322C24A70900403C5B /* Assets.xcassets */; };
+		58B56C372C24A70900403C5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58B56C362C24A70900403C5B /* Preview Assets.xcassets */; };
+		58B56C412C24A70900403C5B /* SolidNativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C402C24A70900403C5B /* SolidNativeTests.swift */; };
+		58B56C4B2C24A70900403C5B /* SolidNativeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C4A2C24A70900403C5B /* SolidNativeUITests.swift */; };
+		58B56C4D2C24A70900403C5B /* SolidNativeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C4C2C24A70900403C5B /* SolidNativeUITestsLaunchTests.swift */; };
+		58EC2B8F2C24A8A400D5FA11 /* SNView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B8E2C24A8A400D5FA11 /* SNView.swift */; };
+		58EC2B912C24A8F100D5FA11 /* SNButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B902C24A8F100D5FA11 /* SNButton.swift */; };
+		58EC2B932C24A90700D5FA11 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B922C24A90700D5FA11 /* SNText.swift */; };
+		58EC2BA42C24A97300D5FA11 /* Color+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */; };
+		58EC2BA52C24A97300D5FA11 /* SolidNativeProps.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */; };
+		58EC2BA62C24A97300D5FA11 /* SolidNativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */; };
+		58EC2BA72C24A97300D5FA11 /* SolidNativeChildren.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */; };
+		58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */; };
+		58EC2BAD2C24A9AF00D5FA11 /* LayoutMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */; };
+		58EC2BAE2C24A9AF00D5FA11 /* SolidNativeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */; };
+		58EC2BB12C24AAA400D5FA11 /* Snmobile in Frameworks */ = {isa = PBXBuildFile; productRef = 58EC2BB02C24AAA400D5FA11 /* Snmobile */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5812F9842B52222C001BEE89 /* PBXContainerItemProxy */ = {
+		58B56C3D2C24A70900403C5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5812F96B2B522228001BEE89 /* Project object */;
+			containerPortal = 58B56C232C24A70800403C5B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5812F9722B522228001BEE89;
+			remoteGlobalIDString = 58B56C2A2C24A70800403C5B;
 			remoteInfo = SolidNative;
 		};
-		5812F98E2B52222C001BEE89 /* PBXContainerItemProxy */ = {
+		58B56C472C24A70900403C5B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 5812F96B2B522228001BEE89 /* Project object */;
+			containerPortal = 58B56C232C24A70800403C5B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5812F9722B522228001BEE89;
+			remoteGlobalIDString = 58B56C2A2C24A70800403C5B;
 			remoteInfo = SolidNative;
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				5840B7F12C1C7A6C00C99A7F /* Tree.xcframework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		5812F9732B522228001BEE89 /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5812F9762B522228001BEE89 /* SolidNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeApp.swift; sourceTree = "<group>"; };
-		5812F9782B522228001BEE89 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		5812F97A2B52222B001BEE89 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5812F97D2B52222B001BEE89 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5812F9832B52222C001BEE89 /* SolidNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5812F9872B52222C001BEE89 /* SolidNativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeTests.swift; sourceTree = "<group>"; };
-		5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
-		5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeViewWrapper.swift; sourceTree = "<group>"; };
-		5816CD142C1BAEA1009299BE /* SolidNativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
-		5816CD162C1BB398009299BE /* LayoutMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
-		5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
-		583FC9022B6F00FB005EE669 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
-		5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Tree.xcframework; path = ../sn_go/Tree.xcframework; sourceTree = "<group>"; };
-		585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSolidNativeCore.swift; sourceTree = "<group>"; };
-		585436D42C1B70860055A99B /* RenderViewNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderViewNode.swift; sourceTree = "<group>"; };
-		58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YogaTypeMarshaller.swift; sourceTree = "<group>"; };
-		58BE0CE52C17698500666362 /* Color+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
-		58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeCore.swift; sourceTree = "<group>"; };
-		58CFF7472B5A1E1800BA84C7 /* SNRender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNRender.swift; sourceTree = "<group>"; };
-		58CFF7492B5A1E4500BA84C7 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
-		58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButton.swift; sourceTree = "<group>"; };
-		58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
-		58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSTimers.swift; sourceTree = "<group>"; };
-		58CFF7562B5A2BA000BA84C7 /* SolidNativeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeModule.swift; sourceTree = "<group>"; };
-		58CFF7592B5A5B2A00BA84C7 /* JSValueBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSValueBuilder.swift; sourceTree = "<group>"; };
+		58B56C2B2C24A70800403C5B /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeApp.swift; sourceTree = "<group>"; };
+		58B56C302C24A70800403C5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		58B56C322C24A70900403C5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		58B56C342C24A70900403C5B /* SolidNative.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SolidNative.entitlements; sourceTree = "<group>"; };
+		58B56C362C24A70900403C5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		58B56C3C2C24A70900403C5B /* SolidNativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58B56C402C24A70900403C5B /* SolidNativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeTests.swift; sourceTree = "<group>"; };
+		58B56C462C24A70900403C5B /* SolidNativeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SolidNativeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		58B56C4A2C24A70900403C5B /* SolidNativeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITests.swift; sourceTree = "<group>"; };
+		58B56C4C2C24A70900403C5B /* SolidNativeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		58EC2B8E2C24A8A400D5FA11 /* SNView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNView.swift; sourceTree = "<group>"; };
+		58EC2B902C24A8F100D5FA11 /* SNButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNButton.swift; sourceTree = "<group>"; };
+		58EC2B922C24A90700D5FA11 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
+		58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Modifier.swift"; sourceTree = "<group>"; };
+		58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeProps.swift; sourceTree = "<group>"; };
+		58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeView.swift; sourceTree = "<group>"; };
+		58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeChildren.swift; sourceTree = "<group>"; };
+		58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeViewWrapper.swift; sourceTree = "<group>"; };
+		58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutMetrics.swift; sourceTree = "<group>"; };
+		58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SolidNativeModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5812F9702B522228001BEE89 /* Frameworks */ = {
+		58B56C282C24A70800403C5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5816CD1C2C1BFB46009299BE /* yoga in Frameworks */,
-				58335F332C1607E7005EC584 /* YogaSwiftUI in Frameworks */,
-				5840B7F02C1C7A6C00C99A7F /* Tree.xcframework in Frameworks */,
+				58EC2BB12C24AAA400D5FA11 /* Snmobile in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F9802B52222C001BEE89 /* Frameworks */ = {
+		58B56C392C24A70900403C5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F98A2B52222C001BEE89 /* Frameworks */ = {
+		58B56C432C24A70900403C5B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,124 +94,101 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5812F96A2B522228001BEE89 = {
+		58B56C222C24A70800403C5B = {
 			isa = PBXGroup;
 			children = (
-				5812F9752B522228001BEE89 /* SolidNative */,
-				5812F9862B52222C001BEE89 /* SolidNativeTests */,
-				5812F9902B52222C001BEE89 /* SolidNativeUITests */,
-				5812F9742B522228001BEE89 /* Products */,
-				5840B7EE2C1C7A6C00C99A7F /* Frameworks */,
+				58B56C2D2C24A70800403C5B /* SolidNative */,
+				58B56C3F2C24A70900403C5B /* SolidNativeTests */,
+				58B56C492C24A70900403C5B /* SolidNativeUITests */,
+				58B56C2C2C24A70800403C5B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		5812F9742B522228001BEE89 /* Products */ = {
+		58B56C2C2C24A70800403C5B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5812F9732B522228001BEE89 /* SolidNative.app */,
-				5812F9832B52222C001BEE89 /* SolidNativeTests.xctest */,
-				5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */,
+				58B56C2B2C24A70800403C5B /* SolidNative.app */,
+				58B56C3C2C24A70900403C5B /* SolidNativeTests.xctest */,
+				58B56C462C24A70900403C5B /* SolidNativeUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5812F9752B522228001BEE89 /* SolidNative */ = {
+		58B56C2D2C24A70800403C5B /* SolidNative */ = {
 			isa = PBXGroup;
 			children = (
-				58CFF7462B5A1E0500BA84C7 /* Modules */,
-				58CFF7452B5A1DFC00BA84C7 /* Views */,
-				58CFF7422B5A147E00BA84C7 /* SolidNativeCore */,
-				5812F9762B522228001BEE89 /* SolidNativeApp.swift */,
-				5812F9782B522228001BEE89 /* ContentView.swift */,
-				5812F97A2B52222B001BEE89 /* Assets.xcassets */,
-				5812F97C2B52222B001BEE89 /* Preview Content */,
+				58EC2BA92C24A99500D5FA11 /* Modules */,
+				58B56C592C24A87500403C5B /* Views */,
+				58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */,
+				58B56C302C24A70800403C5B /* ContentView.swift */,
+				58B56C322C24A70900403C5B /* Assets.xcassets */,
+				58B56C342C24A70900403C5B /* SolidNative.entitlements */,
+				58B56C352C24A70900403C5B /* Preview Content */,
 			);
 			path = SolidNative;
 			sourceTree = "<group>";
 		};
-		5812F97C2B52222B001BEE89 /* Preview Content */ = {
+		58B56C352C24A70900403C5B /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				5812F97D2B52222B001BEE89 /* Preview Assets.xcassets */,
+				58B56C362C24A70900403C5B /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		5812F9862B52222C001BEE89 /* SolidNativeTests */ = {
+		58B56C3F2C24A70900403C5B /* SolidNativeTests */ = {
 			isa = PBXGroup;
 			children = (
-				5812F9872B52222C001BEE89 /* SolidNativeTests.swift */,
+				58B56C402C24A70900403C5B /* SolidNativeTests.swift */,
 			);
 			path = SolidNativeTests;
 			sourceTree = "<group>";
 		};
-		5812F9902B52222C001BEE89 /* SolidNativeUITests */ = {
+		58B56C492C24A70900403C5B /* SolidNativeUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5812F9912B52222C001BEE89 /* SolidNativeUITests.swift */,
-				5812F9932B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift */,
+				58B56C4A2C24A70900403C5B /* SolidNativeUITests.swift */,
+				58B56C4C2C24A70900403C5B /* SolidNativeUITestsLaunchTests.swift */,
 			);
 			path = SolidNativeUITests;
 			sourceTree = "<group>";
 		};
-		5840B7EE2C1C7A6C00C99A7F /* Frameworks */ = {
+		58B56C592C24A87500403C5B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				5840B7EF2C1C7A6C00C99A7F /* Tree.xcframework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		58CFF7422B5A147E00BA84C7 /* SolidNativeCore */ = {
-			isa = PBXGroup;
-			children = (
-				58CFF7432B5A149300BA84C7 /* SolidNativeCore.swift */,
-				58CFF7522B5A1F0E00BA84C7 /* JSTimers.swift */,
-				585436CE2C1A2DF50055A99B /* NewSolidNativeCore.swift */,
-			);
-			path = SolidNativeCore;
-			sourceTree = "<group>";
-		};
-		58CFF7452B5A1DFC00BA84C7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				58CFF74D2B5A1E6300BA84C7 /* util */,
-				58CFF7492B5A1E4500BA84C7 /* SNView.swift */,
-				58CFF74B2B5A1E4E00BA84C7 /* SNButton.swift */,
-				583FC9022B6F00FB005EE669 /* SNText.swift */,
+				58EC2B942C24A92500D5FA11 /* util */,
+				58EC2B8E2C24A8A400D5FA11 /* SNView.swift */,
+				58EC2B902C24A8F100D5FA11 /* SNButton.swift */,
+				58EC2B922C24A90700D5FA11 /* SNText.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		58CFF7462B5A1E0500BA84C7 /* Modules */ = {
+		58EC2B942C24A92500D5FA11 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				58CFF7582B5A5B1200BA84C7 /* SNRender */,
-				58CFF7562B5A2BA000BA84C7 /* SolidNativeModule.swift */,
-				58CFF7592B5A5B2A00BA84C7 /* JSValueBuilder.swift */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		58CFF74D2B5A1E6300BA84C7 /* util */ = {
-			isa = PBXGroup;
-			children = (
-				5816CD122C1BA4D2009299BE /* SolidNativeViewWrapper.swift */,
-				58CFF74E2B5A1E7900BA84C7 /* SolidNativeProps.swift */,
-				58BE0CDE2C1702F600666362 /* YogaTypeMarshaller.swift */,
-				58BE0CE52C17698500666362 /* Color+Modifier.swift */,
-				5816CD142C1BAEA1009299BE /* SolidNativeView.swift */,
-				5816CD182C1BBB84009299BE /* SolidNativeChildren.swift */,
+				58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */,
+				58EC2BA22C24A97300D5FA11 /* SolidNativeChildren.swift */,
+				58EC2BA02C24A97300D5FA11 /* SolidNativeProps.swift */,
+				58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */,
+				58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
 		};
-		58CFF7582B5A5B1200BA84C7 /* SNRender */ = {
+		58EC2BA92C24A99500D5FA11 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				58CFF7472B5A1E1800BA84C7 /* SNRender.swift */,
-				585436D42C1B70860055A99B /* RenderViewNode.swift */,
-				5816CD162C1BB398009299BE /* LayoutMetrics.swift */,
+				58EC2BAB2C24A9AF00D5FA11 /* SNRender */,
+				58EC2BAC2C24A9AF00D5FA11 /* SolidNativeModule.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		58EC2BAB2C24A9AF00D5FA11 /* SNRender */ = {
+			isa = PBXGroup;
+			children = (
+				58EC2BAA2C24A9AF00D5FA11 /* LayoutMetrics.swift */,
 			);
 			path = SNRender;
 			sourceTree = "<group>";
@@ -252,14 +196,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5812F9722B522228001BEE89 /* SolidNative */ = {
+		58B56C2A2C24A70800403C5B /* SolidNative */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5812F9972B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNative" */;
+			buildConfigurationList = 58B56C502C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNative" */;
 			buildPhases = (
-				5812F96F2B522228001BEE89 /* Sources */,
-				5812F9702B522228001BEE89 /* Frameworks */,
-				5812F9712B522228001BEE89 /* Resources */,
-				5840B7F22C1C7A6C00C99A7F /* Embed Frameworks */,
+				58B56C272C24A70800403C5B /* Sources */,
+				58B56C282C24A70800403C5B /* Frameworks */,
+				58B56C292C24A70800403C5B /* Resources */,
 			);
 			buildRules = (
 			);
@@ -267,73 +210,72 @@
 			);
 			name = SolidNative;
 			packageProductDependencies = (
-				58335F322C1607E7005EC584 /* YogaSwiftUI */,
-				5816CD1B2C1BFB46009299BE /* yoga */,
+				58EC2BB02C24AAA400D5FA11 /* Snmobile */,
 			);
 			productName = SolidNative;
-			productReference = 5812F9732B522228001BEE89 /* SolidNative.app */;
+			productReference = 58B56C2B2C24A70800403C5B /* SolidNative.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5812F9822B52222C001BEE89 /* SolidNativeTests */ = {
+		58B56C3B2C24A70900403C5B /* SolidNativeTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5812F99A2B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNativeTests" */;
+			buildConfigurationList = 58B56C532C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNativeTests" */;
 			buildPhases = (
-				5812F97F2B52222C001BEE89 /* Sources */,
-				5812F9802B52222C001BEE89 /* Frameworks */,
-				5812F9812B52222C001BEE89 /* Resources */,
+				58B56C382C24A70900403C5B /* Sources */,
+				58B56C392C24A70900403C5B /* Frameworks */,
+				58B56C3A2C24A70900403C5B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5812F9852B52222C001BEE89 /* PBXTargetDependency */,
+				58B56C3E2C24A70900403C5B /* PBXTargetDependency */,
 			);
 			name = SolidNativeTests;
 			productName = SolidNativeTests;
-			productReference = 5812F9832B52222C001BEE89 /* SolidNativeTests.xctest */;
+			productReference = 58B56C3C2C24A70900403C5B /* SolidNativeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5812F98C2B52222C001BEE89 /* SolidNativeUITests */ = {
+		58B56C452C24A70900403C5B /* SolidNativeUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5812F99D2B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */;
+			buildConfigurationList = 58B56C562C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */;
 			buildPhases = (
-				5812F9892B52222C001BEE89 /* Sources */,
-				5812F98A2B52222C001BEE89 /* Frameworks */,
-				5812F98B2B52222C001BEE89 /* Resources */,
+				58B56C422C24A70900403C5B /* Sources */,
+				58B56C432C24A70900403C5B /* Frameworks */,
+				58B56C442C24A70900403C5B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				5812F98F2B52222C001BEE89 /* PBXTargetDependency */,
+				58B56C482C24A70900403C5B /* PBXTargetDependency */,
 			);
 			name = SolidNativeUITests;
 			productName = SolidNativeUITests;
-			productReference = 5812F98D2B52222C001BEE89 /* SolidNativeUITests.xctest */;
+			productReference = 58B56C462C24A70900403C5B /* SolidNativeUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5812F96B2B522228001BEE89 /* Project object */ = {
+		58B56C232C24A70800403C5B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
-					5812F9722B522228001BEE89 = {
-						CreatedOnToolsVersion = 15.1;
+					58B56C2A2C24A70800403C5B = {
+						CreatedOnToolsVersion = 15.4;
 					};
-					5812F9822B52222C001BEE89 = {
-						CreatedOnToolsVersion = 15.1;
-						TestTargetID = 5812F9722B522228001BEE89;
+					58B56C3B2C24A70900403C5B = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 58B56C2A2C24A70800403C5B;
 					};
-					5812F98C2B52222C001BEE89 = {
-						CreatedOnToolsVersion = 15.1;
-						TestTargetID = 5812F9722B522228001BEE89;
+					58B56C452C24A70900403C5B = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 58B56C2A2C24A70800403C5B;
 					};
 				};
 			};
-			buildConfigurationList = 5812F96E2B522228001BEE89 /* Build configuration list for PBXProject "SolidNative" */;
+			buildConfigurationList = 58B56C262C24A70800403C5B /* Build configuration list for PBXProject "SolidNative" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -341,38 +283,39 @@
 				en,
 				Base,
 			);
-			mainGroup = 5812F96A2B522228001BEE89;
+			mainGroup = 58B56C222C24A70800403C5B;
 			packageReferences = (
+				58EC2BAF2C24AAA300D5FA11 /* XCLocalSwiftPackageReference "../nativecore/ios" */,
 			);
-			productRefGroup = 5812F9742B522228001BEE89 /* Products */;
+			productRefGroup = 58B56C2C2C24A70800403C5B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5812F9722B522228001BEE89 /* SolidNative */,
-				5812F9822B52222C001BEE89 /* SolidNativeTests */,
-				5812F98C2B52222C001BEE89 /* SolidNativeUITests */,
+				58B56C2A2C24A70800403C5B /* SolidNative */,
+				58B56C3B2C24A70900403C5B /* SolidNativeTests */,
+				58B56C452C24A70900403C5B /* SolidNativeUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5812F9712B522228001BEE89 /* Resources */ = {
+		58B56C292C24A70800403C5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5812F97E2B52222B001BEE89 /* Preview Assets.xcassets in Resources */,
-				5812F97B2B52222B001BEE89 /* Assets.xcassets in Resources */,
+				58B56C372C24A70900403C5B /* Preview Assets.xcassets in Resources */,
+				58B56C332C24A70900403C5B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F9812B52222C001BEE89 /* Resources */ = {
+		58B56C3A2C24A70900403C5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F98B2B52222C001BEE89 /* Resources */ = {
+		58B56C442C24A70900403C5B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -382,66 +325,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5812F96F2B522228001BEE89 /* Sources */ = {
+		58B56C272C24A70800403C5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				58CFF7532B5A1F0E00BA84C7 /* JSTimers.swift in Sources */,
-				5816CD192C1BBB84009299BE /* SolidNativeChildren.swift in Sources */,
-				583FC9032B6F00FB005EE669 /* SNText.swift in Sources */,
-				5812F9792B522228001BEE89 /* ContentView.swift in Sources */,
-				5816CD172C1BB398009299BE /* LayoutMetrics.swift in Sources */,
-				5816CD132C1BA4D2009299BE /* SolidNativeViewWrapper.swift in Sources */,
-				58CFF7442B5A149300BA84C7 /* SolidNativeCore.swift in Sources */,
-				58CFF74F2B5A1E7900BA84C7 /* SolidNativeProps.swift in Sources */,
-				58BE0CDF2C1702F600666362 /* YogaTypeMarshaller.swift in Sources */,
-				58BE0CE62C17698500666362 /* Color+Modifier.swift in Sources */,
-				58CFF7482B5A1E1800BA84C7 /* SNRender.swift in Sources */,
-				5816CD152C1BAEA1009299BE /* SolidNativeView.swift in Sources */,
-				58CFF75A2B5A5B2A00BA84C7 /* JSValueBuilder.swift in Sources */,
-				58CFF7572B5A2BA000BA84C7 /* SolidNativeModule.swift in Sources */,
-				5812F9772B522228001BEE89 /* SolidNativeApp.swift in Sources */,
-				58CFF74A2B5A1E4500BA84C7 /* SNView.swift in Sources */,
-				58CFF74C2B5A1E4E00BA84C7 /* SNButton.swift in Sources */,
-				585436CF2C1A2DF50055A99B /* NewSolidNativeCore.swift in Sources */,
-				585436D52C1B70860055A99B /* RenderViewNode.swift in Sources */,
+				58EC2BA42C24A97300D5FA11 /* Color+Modifier.swift in Sources */,
+				58EC2BA52C24A97300D5FA11 /* SolidNativeProps.swift in Sources */,
+				58EC2BAE2C24A9AF00D5FA11 /* SolidNativeModule.swift in Sources */,
+				58EC2B8F2C24A8A400D5FA11 /* SNView.swift in Sources */,
+				58EC2BA72C24A97300D5FA11 /* SolidNativeChildren.swift in Sources */,
+				58EC2BAD2C24A9AF00D5FA11 /* LayoutMetrics.swift in Sources */,
+				58B56C312C24A70800403C5B /* ContentView.swift in Sources */,
+				58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */,
+				58EC2B912C24A8F100D5FA11 /* SNButton.swift in Sources */,
+				58EC2BA62C24A97300D5FA11 /* SolidNativeView.swift in Sources */,
+				58B56C2F2C24A70800403C5B /* SolidNativeApp.swift in Sources */,
+				58EC2B932C24A90700D5FA11 /* SNText.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F97F2B52222C001BEE89 /* Sources */ = {
+		58B56C382C24A70900403C5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5812F9882B52222C001BEE89 /* SolidNativeTests.swift in Sources */,
+				58B56C412C24A70900403C5B /* SolidNativeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5812F9892B52222C001BEE89 /* Sources */ = {
+		58B56C422C24A70900403C5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5812F9922B52222C001BEE89 /* SolidNativeUITests.swift in Sources */,
-				5812F9942B52222C001BEE89 /* SolidNativeUITestsLaunchTests.swift in Sources */,
+				58B56C4B2C24A70900403C5B /* SolidNativeUITests.swift in Sources */,
+				58B56C4D2C24A70900403C5B /* SolidNativeUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5812F9852B52222C001BEE89 /* PBXTargetDependency */ = {
+		58B56C3E2C24A70900403C5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5812F9722B522228001BEE89 /* SolidNative */;
-			targetProxy = 5812F9842B52222C001BEE89 /* PBXContainerItemProxy */;
+			target = 58B56C2A2C24A70800403C5B /* SolidNative */;
+			targetProxy = 58B56C3D2C24A70900403C5B /* PBXContainerItemProxy */;
 		};
-		5812F98F2B52222C001BEE89 /* PBXTargetDependency */ = {
+		58B56C482C24A70900403C5B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 5812F9722B522228001BEE89 /* SolidNative */;
-			targetProxy = 5812F98E2B52222C001BEE89 /* PBXContainerItemProxy */;
+			target = 58B56C2A2C24A70800403C5B /* SolidNative */;
+			targetProxy = 58B56C472C24A70900403C5B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5812F9952B52222C001BEE89 /* Debug */ = {
+		58B56C4E2C24A70900403C5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -493,18 +429,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		5812F9962B52222C001BEE89 /* Release */ = {
+		58B56C4F2C24A70900403C5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -550,73 +484,86 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		5812F9982B52222C001BEE89 /* Debug */ = {
+		58B56C512C24A70900403C5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SolidNative/SolidNative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SolidNative/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		5812F9992B52222C001BEE89 /* Release */ = {
+		58B56C522C24A70900403C5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SolidNative/SolidNative.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SolidNative/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNative;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		5812F99B2B52222C001BEE89 /* Debug */ = {
+		58B56C542C24A70900403C5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -624,10 +571,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNativeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -635,7 +585,7 @@
 			};
 			name = Debug;
 		};
-		5812F99C2B52222C001BEE89 /* Release */ = {
+		58B56C552C24A70900403C5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -643,10 +593,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNativeTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -654,16 +607,20 @@
 			};
 			name = Release;
 		};
-		5812F99E2B52222C001BEE89 /* Debug */ = {
+		58B56C572C24A70900403C5B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNativeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -671,16 +628,20 @@
 			};
 			name = Debug;
 		};
-		5812F99F2B52222C001BEE89 /* Release */ = {
+		58B56C582C24A70900403C5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.SolidNativeUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -691,54 +652,57 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5812F96E2B522228001BEE89 /* Build configuration list for PBXProject "SolidNative" */ = {
+		58B56C262C24A70800403C5B /* Build configuration list for PBXProject "SolidNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5812F9952B52222C001BEE89 /* Debug */,
-				5812F9962B52222C001BEE89 /* Release */,
+				58B56C4E2C24A70900403C5B /* Debug */,
+				58B56C4F2C24A70900403C5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5812F9972B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNative" */ = {
+		58B56C502C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNative" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5812F9982B52222C001BEE89 /* Debug */,
-				5812F9992B52222C001BEE89 /* Release */,
+				58B56C512C24A70900403C5B /* Debug */,
+				58B56C522C24A70900403C5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5812F99A2B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNativeTests" */ = {
+		58B56C532C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNativeTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5812F99B2B52222C001BEE89 /* Debug */,
-				5812F99C2B52222C001BEE89 /* Release */,
+				58B56C542C24A70900403C5B /* Debug */,
+				58B56C552C24A70900403C5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5812F99D2B52222C001BEE89 /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */ = {
+		58B56C562C24A70900403C5B /* Build configuration list for PBXNativeTarget "SolidNativeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5812F99E2B52222C001BEE89 /* Debug */,
-				5812F99F2B52222C001BEE89 /* Release */,
+				58B56C572C24A70900403C5B /* Debug */,
+				58B56C582C24A70900403C5B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCSwiftPackageProductDependency section */
-		5816CD1B2C1BFB46009299BE /* yoga */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = yoga;
+/* Begin XCLocalSwiftPackageReference section */
+		58EC2BAF2C24AAA300D5FA11 /* XCLocalSwiftPackageReference "../nativecore/ios" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../nativecore/ios;
 		};
-		58335F322C1607E7005EC584 /* YogaSwiftUI */ = {
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		58EC2BB02C24AAA400D5FA11 /* Snmobile */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = YogaSwiftUI;
+			productName = Snmobile;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 5812F96B2B522228001BEE89 /* Project object */;
+	rootObject = 58B56C232C24A70800403C5B /* Project object */;
 }

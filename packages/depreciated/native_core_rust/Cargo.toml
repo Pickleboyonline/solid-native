@@ -1,0 +1,26 @@
+[package]
+name = "native_core"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0.86"
+reqwest = "0.12.4"
+rquickjs =  { version = "0.6.2", features = ["full", "bindgen"] }
+slotmap = "1.0.7"
+taffy = "0.5.1"
+thiserror = "1.0.61"
+tokio = { version = "1.38.0", features = ["full"] }
+uniffi = { version = "0.28.0", features = ["cli"] }
+
+[build-dependencies]
+uniffi = { version = "0.28.0", features = ["build"] }
+
+
+[lib]
+crate-type = [ "staticlib" , "cdylib", "lib"]
+name = "native_core"
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "uniffi-bindgen.rs"

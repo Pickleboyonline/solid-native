@@ -14,9 +14,3 @@ protocol SolidNativeModule {
     func getJSValueRepresentation() -> JSValue
 }
 
-
-extension SolidNativeModule {
-    func getJSValueRepresentation() -> JSValue {
-        JSValue(undefinedIn: SolidNativeCore.shared.jsContext)
-    }
-}
