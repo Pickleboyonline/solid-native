@@ -11,7 +11,7 @@ import Snmobile
 @main
 struct SolidNativeApp: App {
     init() {
-        let s = SNSnmobileSize(10, height: 10)
+        // let s = SNSnmobileSolidNativeMobile(nil)
     }
     
     var body: some Scene {
