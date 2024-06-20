@@ -157,6 +157,13 @@ func (s *SolidNativeMobile) registureRenderer() {
 		return 1
 	})
 
+	addGoFunc("getRootView", func(ctx *duktape.Context) int {
+
+		ctx.PushInt(*s.rootNodeId) // => [nodeId rootNodeId]
+
+		return 1
+	})
+
 	// Final Step, but the renderer there:
 	s.dukContext.PutPropString(-2, "_SolidNativeRenderer") // => [global]
 	s.dukContext.Pop()                                     // => []

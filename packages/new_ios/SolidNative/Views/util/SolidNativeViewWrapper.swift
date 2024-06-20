@@ -12,9 +12,36 @@ import Snmobile
 typealias SolidNativeProps = [String: SNSnmobileJSValue]
 typealias SolidNativeChildren = SNSnmobileIntegerArray
 
+
+extension SNSnmobileIntegerArray: RandomAccessCollection {
+    public typealias Element = SolidNativeViewWrapper
+    public typealias Index = Int
+    
+    public var startIndex: Index {
+        return 0
+    }
+    
+    public var endIndex: Index {
+        return length()
+    }
+    
+    public subscript(position: Index) -> Element {
+        let nodeId = get(position)
+        return SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
+    }
+    
+    public func index(after i: Index) -> Index {
+        return i + 1
+    }
+    
+    public func index(before i: Index) -> Index {
+        return i - 1
+    }
+}
+
 /// Manages Flex Layout. Nodes take in a wrapper. Wrapper takes in view struct def to instanciate
 /// View takes in view types. (Managed in render for now)
-class SolidNativeViewWrapper: ObservableObject {
+public class SolidNativeViewWrapper: ObservableObject {
     @Published
     var revision: UInt = 0
     

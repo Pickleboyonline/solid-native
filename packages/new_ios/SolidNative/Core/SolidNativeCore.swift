@@ -9,7 +9,16 @@ import Foundation
 import Snmobile
 import UIKit
 
+var SharedSolidNativeCore: SolidNativeCore!
+
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
+
+    public override init() {
+        super.init()
+        if SharedSolidNativeCore == nil {
+            SharedSolidNativeCore = self
+        }
+    }
     
     var snmobile: SNSnmobileSolidNativeMobile!
     

@@ -2,8 +2,13 @@ import { createRenderer } from "solid-js/universal";
 import { SolidNativeRenderer } from "./modules/mod.ts";
 
 type Node = {
-  id: string;
+  id: number;
 };
+
+/**
+ * Cache in map for possible reference checking in SolidJs
+ */
+const wrappedNodeMap = new Map<number, Node>();
 
 /**
  * When the SolidJS renderer encounters a string or text, it makes a text component.
@@ -14,7 +19,18 @@ type Node = {
  * @param id
  * @returns
  */
-const wrapNodeIdInNode = (id: string): Node => ({ id });
+const wrapNodeIdInNode = (id: number): Node => {
+  const node = wrappedNodeMap.get(id);
+
+  if (node) {
+    return node;
+  }
+  const newNode = { id };
+
+  wrappedNodeMap.set(id, newNode);
+
+  return newNode;
+};
 
 export const {
   render: solidRender,
@@ -70,7 +86,7 @@ export const {
     return undefined;
   },
   getNextSibling({ id }) {
-    const nextSiblingId = SolidNativeRenderer.next(id);
+    const nextSiblingId = SolidNativeRenderer.getNextSibling(id);
     if (nextSiblingId) {
       return wrapNodeIdInNode(nextSiblingId);
     }

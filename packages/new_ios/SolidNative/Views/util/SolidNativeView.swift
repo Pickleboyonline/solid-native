@@ -27,6 +27,9 @@ protocol SolidNativeView: View where Body: View  {
 extension SolidNativeView {
     static var isTextElement: Bool {false}
     static var doesRequireMeasuring: Bool { false }
+    static func measureNode() {
+        
+    }
 }
 
 

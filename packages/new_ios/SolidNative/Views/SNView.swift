@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SNView: SolidNativeView {
+    
     static var name: String { "sn_view" }
     
     var props: SolidNativeProps
