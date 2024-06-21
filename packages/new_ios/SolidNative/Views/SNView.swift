@@ -18,7 +18,10 @@ struct SNView: SolidNativeView {
     
     var body: some View {
         ForEach(children, id: \.id) { child in
-            child.render()
+            
+            child.render().onAppear() {
+                print(child.layoutMetrics.height)
+            }
         }
     }
 }

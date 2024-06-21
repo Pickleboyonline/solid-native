@@ -1,4 +1,4 @@
 import { render } from "solid-native/core";
-import { App } from "./src/App.tsx";
+import { DukatapeApp } from "./src/DuktapeApp.tsx";
 
-render(App);
+render(DukatapeApp);

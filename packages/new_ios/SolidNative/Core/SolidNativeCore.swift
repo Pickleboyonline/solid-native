@@ -22,13 +22,13 @@ var SharedSolidNativeCore: SolidNativeCore!
     
     var snmobile: SNSnmobileSolidNativeMobile!
     
-    var viewWrapperRegistry: [Int:SolidNativeViewWrapper] = [:]
+    var viewWrapperRegistry: [String:SolidNativeViewWrapper] = [:]
     
     let viewTypeRegistry: [String: any SolidNativeView.Type] = [
         SNView.name:SNView.self
     ]
     
-    var rootNodeId: Int?
+    var rootNodeId: String?
     
     func start(jsUrl: String) throws {
         snmobile = SNSnmobileSolidNativeMobile(self)!
@@ -67,35 +67,36 @@ extension SolidNativeCore {
         return SNSnmobileSize(Float(screenWidth), height: Float(screenHeight))
     }
     
-    public func isTextElement(_ nodeId: Int) -> Bool {
-        viewWrapperRegistry[nodeId]!.solidNativeViewType.isTextElement
+    public func isTextElement(_ nodeId: String?) -> Bool {
+        viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
     }
     
     /// TODO: Impliment
-    public func measureNode(_ nodeId: Int) -> SNSnmobileSize? {
+    public func measureNode(_ nodeId: String?) -> SNSnmobileSize? {
         return SNSnmobileSize(0, height: 0)
     }
     
-    public func onChildrenChange(_ nodeId: Int, nodeIds: SNSnmobileIntegerArray?) {
-        viewWrapperRegistry[nodeId]!.children = nodeIds!
+    public func onChildrenChange(_ nodeId: String?, nodeIds: SNSnmobileStringArray?) {
+        print("Node Ids: \(String(describing: nodeIds?.length()))")
+        viewWrapperRegistry[nodeId!]!.children = nodeIds!
     }
     
-    public func onLayoutChange(_ nodeId: Int, layoutMetrics: SNSnmobileLayoutMetrics?) {
-        viewWrapperRegistry[nodeId]!.layoutMetrics = layoutMetrics!
+    public func onLayoutChange(_ nodeId: String?, layoutMetrics: SNSnmobileLayoutMetrics?) {
+        viewWrapperRegistry[nodeId!]!.layoutMetrics = layoutMetrics!
     }
     
-    public func onNodeCreated(_ nodeId: Int, nodeType: String?) {
+    public func onNodeCreated(_ nodeId: String?, nodeType: String?) {
         let viewType = viewTypeRegistry[nodeType!]!
         
-        viewWrapperRegistry[nodeId] = SolidNativeViewWrapper(viewType: viewType)
+        viewWrapperRegistry[nodeId!] = SolidNativeViewWrapper(viewType: viewType)
     }
     
-    public func onPropUpdated(_ nodeId: Int, key: String?, value: SNSnmobileJSValue?) {
-        viewWrapperRegistry[nodeId]!.props[key!] = value!
+    public func onPropUpdated(_ nodeId: String?, key: String?, value: SNSnmobileJSValue?) {
+        viewWrapperRegistry[nodeId!]!.props[key!] = value!
     }
     
-    public func onUpdateRevisionCount(_ nodeId: Int) {
-        viewWrapperRegistry[nodeId]!.updateRevisionCount()
+    public func onUpdateRevisionCount(_ nodeId: String?) {
+        viewWrapperRegistry[nodeId!]!.updateRevisionCount()
     }
     
 }

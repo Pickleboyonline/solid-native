@@ -21,7 +21,8 @@ struct SNButton: SolidNativeView {
     }
     
     var body: some View {
-        let title = props.getString("title")
+        let title = props["text"]?.getString() ?? ""
+
         Button(title) {
             onPress()
         }

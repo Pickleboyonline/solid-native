@@ -2,13 +2,13 @@ import { createRenderer } from "solid-js/universal";
 import { SolidNativeRenderer } from "./modules/mod.ts";
 
 type Node = {
-  id: number;
+  id: string;
 };
 
 /**
  * Cache in map for possible reference checking in SolidJs
  */
-const wrappedNodeMap = new Map<number, Node>();
+const wrappedNodeMap = new Map<string, Node>();
 
 /**
  * When the SolidJS renderer encounters a string or text, it makes a text component.
@@ -19,7 +19,7 @@ const wrappedNodeMap = new Map<number, Node>();
  * @param id
  * @returns
  */
-const wrapNodeIdInNode = (id: number): Node => {
+const wrapNodeIdInNode = (id: string): Node => {
   const node = wrappedNodeMap.get(id);
 
   if (node) {

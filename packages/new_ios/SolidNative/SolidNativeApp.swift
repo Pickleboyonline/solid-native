@@ -17,7 +17,7 @@ struct SolidNativeApp: App {
         core = SolidNativeCore()
         
         do {
-            try core.start(jsUrl: "http://localhost:8080/")
+            try core.start(jsUrl: "http://localhost:8080")
         } catch {
             print("Unexpected error: \(error).")
         }

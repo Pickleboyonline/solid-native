@@ -3,7 +3,8 @@ import * as esbuild from "esbuid";
 import * as esbuildDenoLoader from "@luca/esbuild-deno-loader";
 import { solidPlugin } from "esbuild-plugin-solid";
 
-import { transform } from "npm:@swc/core";
+import { Options, Output } from "npm:@swc/types";
+import { transform, transformFile } from "npm:@swc/core";
 import { Buffer } from "node:buffer";
 
 const app = new Application();
@@ -20,14 +21,36 @@ const swcPlugin = (): esbuild.Plugin => {
   return {
     name: "swc-plugin",
     setup(build) {
+      // build.onLoad({ filter: /\.([tj]sx?|mjs)$/ }, async (args) => {
+      //   const opts: Options = {
+      //     env: {
+      //       mode: "usage",
+      //       coreJs: "3.22",
+      //     },
+      //   };
+      //   const results = (await transformFile(args.path, opts)) as Output;
+
+      //   return {
+      //     contents: results.code.replaceAll(
+      //       `import "core-js`,
+      //       `import "npm:core-js`,
+      //     ),
+      //     loader: "js",
+      //   };
+      // });
+
       build.onEnd(async (result) => {
         if (result.errors.length) return;
 
         for (const file of result.outputFiles || []) {
           if (file.path.endsWith(".js")) {
             try {
+              // Deno.writeTextFile("data.js", file.text);
               const transformed = await transform(file.text, {
                 sourceMaps: (build.initialOptions.sourcemap) ? "inline" : false,
+                jsc: {
+                  target: "es5",
+                },
                 // minify: true,
               });
               file.contents = Buffer.from(transformed.code, "utf-8");
@@ -92,7 +115,7 @@ router
       bundle: true,
       write: false,
       sourcemap: true,
-      target: "es6",
+      target: "es5",
       outdir: "out",
     });
 

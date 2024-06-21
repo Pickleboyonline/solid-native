@@ -1,34 +1,40 @@
 package snmobile
 
 import (
+	"log"
 	"testing"
 )
 
 type MockHostReceiver struct{}
 
-func (m *MockHostReceiver) OnNodeCreated(nodeId int, nodeType string)               {}
-func (m *MockHostReceiver) DoesNodeRequireMeasuring(nodeType string) bool           { return false }
-func (m *MockHostReceiver) MeasureNode(nodeId int) *Size                            { return &Size{Width: 100, Height: 100} }
-func (m *MockHostReceiver) GetDeviceScreenSize() *Size                              { return &Size{Width: 375, Height: 667} }
-func (m *MockHostReceiver) OnLayoutChange(nodeId int, layoutMetrics *LayoutMetrics) {}
-func (m *MockHostReceiver) OnPropUpdated(nodeId int, key string, value *JSValue)    {}
-func (m *MockHostReceiver) OnChildrenChange(nodeId int, nodeIds *IntegerArray)      {}
-func (m *MockHostReceiver) OnUpdateRevisionCount(nodeId int)                        {}
-func (m *MockHostReceiver) IsTextElement(nodeId int) bool                           { return false }
+func (m *MockHostReceiver) OnNodeCreated(nodeId string, nodeType string)               {}
+func (m *MockHostReceiver) DoesNodeRequireMeasuring(nodeType string) bool              { return false }
+func (m *MockHostReceiver) MeasureNode(nodeId string) *Size                            { return &Size{Width: 100, Height: 100} }
+func (m *MockHostReceiver) GetDeviceScreenSize() *Size                                 { return &Size{Width: 375, Height: 667} }
+func (m *MockHostReceiver) OnLayoutChange(nodeId string, layoutMetrics *LayoutMetrics) {}
+func (m *MockHostReceiver) OnPropUpdated(nodeId string, key string, value *JSValue)    {}
+func (m *MockHostReceiver) OnChildrenChange(nodeId string, nodeIds *StringArray)       {}
+func (m *MockHostReceiver) OnUpdateRevisionCount(nodeId string)                        {}
+func (m *MockHostReceiver) IsTextElement(nodeId string) bool                           { return false }
 
 func TestCreateNode(t *testing.T) {
 	hostReceiver := &MockHostReceiver{}
 	snm := NewSolidNativeMobile(hostReceiver)
 	defer snm.FreeMemory()
 
-	js := `
-	var id = _SolidNativeRenderer.createNodeByName("sn_view");
-	if (typeof id !== 'number') {
-	throw new Error('id was not created!')
-	}
-	`
+	id := snm.CreateRootNode("sn_view")
 
-	err := snm.EvalJs(js)
+	log.Println("Root node with id ", id)
+
+	snm.RegistureModules()
+
+	err := snm.EvalJs("log('' + _SolidNativeRenderer.getRootView())")
+
+	if err != nil {
+		t.Fatalf("jslog error: %v", err)
+	}
+
+	err = snm.downloadAndRunJs("http://localhost:8080")
 
 	if err != nil {
 		t.Fatalf("error: %v", err)
@@ -80,11 +86,11 @@ func TestInsertBefore(t *testing.T) {
 	parentId := snm.createNode("parentNode")
 	childId := snm.createNode("childNode")
 
-	snm.insertBefore(parentId, childId, nil)
+	snm.insertBefore(parentId, childId, "")
 
 	children := snm.nodeChildren[parentId]
 	if len(children) != 1 || children[0] != childId {
-		t.Fatalf("Node %d was not inserted correctly under parent %d", childId, parentId)
+		t.Fatalf("Node %s was not inserted correctly under parent %s", childId, parentId)
 	}
 }
 
@@ -96,11 +102,11 @@ func TestRemoveChild(t *testing.T) {
 	parentId := snm.createNode("parentNode")
 	childId := snm.createNode("childNode")
 
-	snm.insertBefore(parentId, childId, nil)
+	snm.insertBefore(parentId, childId, "")
 	snm.removeChild(parentId, childId)
 
 	if _, exists := snm.yogaNodes[childId]; exists {
-		t.Fatalf("Child node %d was not removed correctly from parent %d", childId, parentId)
+		t.Fatalf("Child node %s was not removed correctly from parent %s", childId, parentId)
 	}
 }
 
@@ -112,6 +118,6 @@ func TestUpdateLayoutAndNotify(t *testing.T) {
 	rootNodeId := snm.CreateRootNode("rootNode")
 	childId := snm.createNode("childNode")
 
-	snm.insertBefore(rootNodeId, childId, nil)
+	snm.insertBefore(rootNodeId, childId, "")
 
 }

@@ -1,19 +1,19 @@
 import { getNativeModule } from "solid-native/core";
 
 type SolidNativeRenderer = {
-  getRootView: () => number;
-  getFirstChild: (node: number) => number | undefined;
-  getParent: (node: number) => number | undefined;
-  setProp: (node: number, key: string, value: unknown) => void;
-  isTextElement: (node: number) => boolean;
-  removeChild: (node: number, child: number) => void;
-  insertBefore: (node: number, child: number, anchor?: number) => void;
-  getNextSibling: (node: number) => number | undefined;
+  getRootView: () => string;
+  getFirstChild: (node: string) => string | undefined;
+  getParent: (node: string) => string | undefined;
+  setProp: (node: string, key: string, value: unknown) => void;
+  isTextElement: (node: string) => boolean;
+  removeChild: (node: string, child: string) => void;
+  insertBefore: (node: string, child: string, anchor?: string) => void;
+  getNextSibling: (node: string) => string | undefined;
   /**
    * @param name Node Type Name
    * @returns Node ID
    */
-  createNodeByName: (name: string) => number;
+  createNodeByName: (name: string) => string;
 };
 
 export const SolidNativeRenderer = getNativeModule<SolidNativeRenderer>(

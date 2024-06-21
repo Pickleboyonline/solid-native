@@ -1,6 +1,8 @@
 package snmobile
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // ===================  JS Stuff =======================
 // Used on JS Renderer. Maybe make into its own struct?
@@ -8,7 +10,7 @@ import "fmt"
 // Creates node and notifies mobile host reciever
 // to be typically called from JS side.
 // Returns Node ID (which is an int)
-func (s *SolidNativeMobile) createNode(nodeType string) int {
+func (s *SolidNativeMobile) createNode(nodeType string) string {
 	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
 	s.hostReceiver.OnNodeCreated(nodeId, nodeType)
 	return nodeId
@@ -20,7 +22,7 @@ func (s *SolidNativeMobile) createNode(nodeType string) int {
 // JS Value can be array
 // The old JS value associatted does not need to be freed because it has
 // a hashed ID. You only need to free JSValues with random temparary ones
-func (s *SolidNativeMobile) setNodeProp(nodeId int, key string, value *JSValue) error {
+func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValue) error {
 	node, exists := s.yogaNodes[nodeId]
 
 	if !exists {
@@ -59,7 +61,7 @@ func (s *SolidNativeMobile) setNodeProp(nodeId int, key string, value *JSValue) 
 		// Call the layout function, which will update the layout metrics and send it over
 		// to the host. It will also notify dirty yoga nodes and update all the
 		// revision counts needed.
-		s.updateLayoutAndNotify(map[int]struct{}{
+		s.updateLayoutAndNotify(map[string]struct{}{
 			nodeId: {},
 		})
 		return nil
@@ -70,18 +72,18 @@ func (s *SolidNativeMobile) setNodeProp(nodeId int, key string, value *JSValue) 
 }
 
 // Anchor is optional.
-func (s *SolidNativeMobile) insertBefore(parentId int, newNodeId int, anchorId *int) {
+func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anchorId string) {
 	// If there's an anchor, insert before the anchor
 
 	// Init to nil
-	var newChildrenIds []int
+	var newChildrenIds []string
 	currentChildrenIds := s.nodeChildren[parentId]
 	parentYogaNode := s.yogaNodes[parentId]
 	newYogaNode := s.yogaNodes[newNodeId]
 
-	if anchorId != nil {
+	if anchorId != "" {
 		for ind, nodeId := range currentChildrenIds {
-			if nodeId == *anchorId {
+			if nodeId == anchorId {
 				parentYogaNode.InsertChild(newYogaNode, ind)
 				newChildrenIds = append(newChildrenIds, newNodeId, nodeId)
 			} else {
@@ -93,6 +95,7 @@ func (s *SolidNativeMobile) insertBefore(parentId int, newNodeId int, anchorId *
 		newChildrenIds = append(newChildrenIds, currentChildrenIds...)
 		newChildrenIds = append(newChildrenIds, newNodeId)
 		ind := len(currentChildrenIds)
+
 		parentYogaNode.InsertChild(newYogaNode, ind)
 	}
 
@@ -100,16 +103,16 @@ func (s *SolidNativeMobile) insertBefore(parentId int, newNodeId int, anchorId *
 	s.nodeChildren[parentId] = newChildrenIds
 	s.nodeParent[newNodeId] = parentId
 	// TODO: Send node over
-	s.hostReceiver.OnChildrenChange(parentId, &IntegerArray{
-		integers: newChildrenIds,
+	s.hostReceiver.OnChildrenChange(parentId, &StringArray{
+		strings: newChildrenIds,
 	})
 
-	s.updateLayoutAndNotify(map[int]struct{}{})
+	s.updateLayoutAndNotify(map[string]struct{}{})
 }
 
-func (s *SolidNativeMobile) removeChild(parentId int, childNodeId int) {
+func (s *SolidNativeMobile) removeChild(parentId string, childNodeId string) {
 	parentChildIds := s.nodeChildren[parentId]
-	newChildIds := make([]int, 0)
+	newChildIds := make([]string, 0)
 
 	for _, nodeId := range parentChildIds {
 		if nodeId == childNodeId {
@@ -131,15 +134,15 @@ func (s *SolidNativeMobile) removeChild(parentId int, childNodeId int) {
 	delete(s.nodeParent, childNodeId)
 	childYogaNode.Free()
 
-	s.updateLayoutAndNotify(map[int]struct{}{})
+	s.updateLayoutAndNotify(map[string]struct{}{})
 }
 
-func (s *SolidNativeMobile) getParent(nodeId int) (parentId int, exists bool) {
+func (s *SolidNativeMobile) getParent(nodeId string) (parentId string, exists bool) {
 	parentId, exists = s.nodeParent[nodeId]
 	return parentId, exists
 }
 
-func (s *SolidNativeMobile) getFirstChild(nodeId int) (firstChildId int, exists bool) {
+func (s *SolidNativeMobile) getFirstChild(nodeId string) (firstChildId string, exists bool) {
 	nodeChildren := s.nodeChildren[nodeId]
 
 	length := len(nodeChildren)
@@ -155,11 +158,11 @@ func (s *SolidNativeMobile) getFirstChild(nodeId int) (firstChildId int, exists 
 	return firstChildId, exists
 }
 
-func (s *SolidNativeMobile) getNextSibling(nodeId int) (int, bool) {
+func (s *SolidNativeMobile) getNextSibling(nodeId string) (string, bool) {
 	parentId, exists := s.getParent(nodeId)
 
 	if !exists {
-		return 0, false
+		return "", false
 	}
 
 	parentChildrenIds := s.nodeChildren[parentId]
@@ -176,7 +179,7 @@ func (s *SolidNativeMobile) getNextSibling(nodeId int) (int, bool) {
 	nextSiblingIndex := childIndex + 1
 
 	if nextSiblingIndex >= parentChildrenIdLength {
-		return 0, false
+		return "", false
 	}
 
 	return parentChildrenIds[nextSiblingIndex], true

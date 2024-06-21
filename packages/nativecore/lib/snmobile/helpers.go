@@ -32,11 +32,11 @@ import (
 // Serves as a way to mark which nodes are dirty since sometimes
 // the yoga layout does not change as a result. We still want to dispatch to the
 // host that something changed (update revision count)
-func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}) error {
-	if s.rootNodeId == nil {
+func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[string]struct{}) error {
+	if s.rootNodeId == "" {
 		return fmt.Errorf("root node does not exist! cannot update layout")
 	}
-	rootNodeId := *s.rootNodeId
+	rootNodeId := s.rootNodeId
 	yogaRootNode := s.yogaNodes[rootNodeId]
 
 	yogaRootNode.CalculateLayout(s.deviceScreenSize.Width, s.deviceScreenSize.Height, yoga.DirectionLTR)
@@ -46,7 +46,7 @@ func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[int]struct{}
 	return nil
 }
 
-func (s *SolidNativeMobile) applyLayout(nodeId int) {
+func (s *SolidNativeMobile) applyLayout(nodeId string) {
 	node := s.yogaNodes[nodeId]
 
 	if !node.GetHasNewLayout() {
@@ -122,6 +122,8 @@ func (s *SolidNativeMobile) downloadAndRunJs(url string) error {
 
 	// Print the retrieved text
 	jsToEval := string(body)
+
+	// fmt.Print(jsToEval)
 
 	return s.dukContext.PevalString(jsToEval)
 }

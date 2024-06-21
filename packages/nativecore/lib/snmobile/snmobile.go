@@ -14,14 +14,14 @@ import (
 // Houses important info.
 type SolidNativeMobile struct {
 	// Get chidren
-	nodeChildren  map[int][]int
-	yogaNodes     map[int]*yoga.YGNode
-	nodeStyleKeys map[int]Set
-	nodeParent    map[int]int
+	nodeChildren  map[string][]string
+	yogaNodes     map[string]*yoga.YGNode
+	nodeStyleKeys map[string]Set
+	nodeParent    map[string]string
 	hostReceiver  HostReceiver
 	dukContext    *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
-	rootNodeId       *int
+	rootNodeId       string
 	deviceScreenSize *Size
 }
 
@@ -30,15 +30,15 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 
 	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
-		yogaNodes:    make(map[int]*yoga.YGNode),
+		yogaNodes:    make(map[string]*yoga.YGNode),
 		hostReceiver: hostReceiver,
 		dukContext:   ctx,
-		rootNodeId:   nil,
-		nodeParent:   make(map[int]int),
-		nodeChildren: make(map[int][]int),
+		rootNodeId:   "",
+		nodeParent:   make(map[string]string),
+		nodeChildren: make(map[string][]string),
 		// We use this to keep track of when keys are removed
 		// Since Yoga works via mutation
-		nodeStyleKeys:    make(map[int]Set),
+		nodeStyleKeys:    make(map[string]Set),
 		deviceScreenSize: hostReceiver.GetDeviceScreenSize(),
 	}
 }
@@ -83,14 +83,10 @@ func (s *SolidNativeMobile) OnOrientationChange() {
 // to present it to the screen.
 //
 // Use the nodetype to tell whether we need to measure it or not
-func (s *SolidNativeMobile) CreateRootNode(nodeType string) int {
+func (s *SolidNativeMobile) CreateRootNode(nodeType string) string {
 	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
 
-	toInt := func(i int) *int {
-		return &i
-	}
-
-	s.rootNodeId = toInt(nodeId)
+	s.rootNodeId = nodeId
 
 	yogaNode := s.yogaNodes[nodeId]
 

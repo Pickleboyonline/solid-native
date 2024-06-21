@@ -10,10 +10,10 @@ import SwiftUI
 import Snmobile
 
 typealias SolidNativeProps = [String: SNSnmobileJSValue]
-typealias SolidNativeChildren = SNSnmobileIntegerArray
+typealias SolidNativeChildren = SNSnmobileStringArray
 
 
-extension SNSnmobileIntegerArray: RandomAccessCollection {
+extension SNSnmobileStringArray: RandomAccessCollection {
     public typealias Element = SolidNativeViewWrapper
     public typealias Index = Int
     
@@ -51,7 +51,7 @@ public class SolidNativeViewWrapper: ObservableObject {
     // Props + Children only info needed. Pass that down to
     var props: SolidNativeProps = [:]
     var solidNativeViewType: any SolidNativeView.Type
-    var children: SolidNativeChildren = SNSnmobileIntegerArray()
+    var children: SolidNativeChildren = SNSnmobileStringArray()
     var layoutMetrics = SNSnmobileLayoutMetrics()
     
     init(viewType: any SolidNativeView.Type) {
