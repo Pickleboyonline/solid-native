@@ -17,12 +17,20 @@ struct SNView: SolidNativeView {
     var children: SolidNativeChildren
     
     var body: some View {
-        Text("")
-        ForEach(children, id: \.id) { child in
-            child.render().onAppear() {
-                print(child.layoutMetrics.width)
+        ZStack(alignment: .topLeading) {
+            ForEach(children, id: \.id) { child in
+                child.render()
             }
         }
+        // TODO: Place gestures:
+        /*
+         .onTapGesture {
+           self.eventEmitter.dispatchEvent("tap")
+         }
+         .onLongPressGesture {
+           self.eventEmitter.dispatchEvent("longPress")
+         }
+         */
     }
 }
 

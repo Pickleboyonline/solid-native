@@ -9,60 +9,66 @@ import (
 type Set map[string]struct{}
 
 // UpdateNodeStyle updates the YGNode based on the JSValue style object.
-func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map[string]JSValue, prevKeys Set) Set {
+func UpdateNodeStyle(node *yoga.YGNode, styleJSValueMap map[string]JSValue, prevKeys Set) Set {
 	// Define default value functions
+	// TODO: Determine if 0 is OK, and if i need to use YGUndefined or something
 	defaultValueSetters := map[string]func(){
-		"alignContent":      func() { node.SetAlignContent(yoga.AlignStretch) },
-		"alignItems":        func() { node.SetAlignItems(yoga.AlignStretch) },
-		"alignSelf":         func() { node.SetAlignSelf(yoga.AlignAuto) },
-		"aspectRatio":       func() { node.SetAspectRatio(0) },
-		"borderBottomWidth": func() { node.SetBorder(yoga.EdgeBottom, 0) },
-		"borderEndWidth":    func() { node.SetBorder(yoga.EdgeEnd, 0) },
-		"borderLeftWidth":   func() { node.SetBorder(yoga.EdgeLeft, 0) },
-		"borderRightWidth":  func() { node.SetBorder(yoga.EdgeRight, 0) },
-		"borderStartWidth":  func() { node.SetBorder(yoga.EdgeStart, 0) },
-		"borderTopWidth":    func() { node.SetBorder(yoga.EdgeTop, 0) },
-		"borderWidth":       func() { node.SetBorder(yoga.EdgeAll, 0) },
-		"bottom":            func() { node.SetPosition(yoga.EdgeBottom, 0) },
+		"alignContent": func() { node.SetAlignContent(yoga.AlignStretch) },
+		"alignItems":   func() { node.SetAlignItems(yoga.AlignStretch) },
+		"alignSelf":    func() { node.SetAlignSelf(yoga.AlignAuto) },
+		"aspectRatio":  func() { node.SetAspectRatio(yoga.YGUndefined) },
+		"borderBottomWidth": func() {
+			node.SetBorder(yoga.EdgeBottom,
+				yoga.YGUndefined,
+				// 0
+			)
+		},
+		"borderEndWidth":    func() { node.SetBorder(yoga.EdgeEnd, yoga.YGUndefined) },
+		"borderLeftWidth":   func() { node.SetBorder(yoga.EdgeLeft, yoga.YGUndefined) },
+		"borderRightWidth":  func() { node.SetBorder(yoga.EdgeRight, yoga.YGUndefined) },
+		"borderStartWidth":  func() { node.SetBorder(yoga.EdgeStart, yoga.YGUndefined) },
+		"borderTopWidth":    func() { node.SetBorder(yoga.EdgeTop, yoga.YGUndefined) },
+		"borderWidth":       func() { node.SetBorder(yoga.EdgeAll, yoga.YGUndefined) },
+		"bottom":            func() { node.SetPosition(yoga.EdgeBottom, yoga.YGUndefined) },
 		"display":           func() { node.SetDisplay(yoga.DisplayFlex) },
-		"end":               func() { node.SetPosition(yoga.EdgeEnd, 0) },
-		"flex":              func() { node.SetFlex(0) },
+		"end":               func() { node.SetPosition(yoga.EdgeEnd, yoga.YGUndefined) },
+		"flex":              func() { node.SetFlex(yoga.YGUndefined) },
 		"flexBasis":         func() { node.SetFlexBasisAuto() },
 		"flexDirection":     func() { node.SetFlexDirection(yoga.FlexDirectionColumn) },
-		"flexGrow":          func() { node.SetFlexGrow(0) },
-		"flexShrink":        func() { node.SetFlexShrink(0) },
+		"flexGrow":          func() { node.SetFlexGrow(yoga.YGUndefined) },
+		"flexShrink":        func() { node.SetFlexShrink(yoga.YGUndefined) },
 		"flexWrap":          func() { node.SetFlexWrap(yoga.WrapNoWrap) },
-		"gap":               func() { node.SetGap(yoga.GutterAll, 0) },
+		"gap":               func() { node.SetGap(yoga.GutterAll, yoga.YGUndefined) },
 		"height":            func() { node.SetHeightAuto() },
 		"justifyContent":    func() { node.SetJustifyContent(yoga.JustifyFlexStart) },
-		"left":              func() { node.SetPosition(yoga.EdgeLeft, 0) },
-		"margin":            func() { node.SetMargin(yoga.EdgeAll, 0) },
-		"marginBottom":      func() { node.SetMargin(yoga.EdgeBottom, 0) },
-		"marginEnd":         func() { node.SetMargin(yoga.EdgeEnd, 0) },
-		"marginHorizontal":  func() { node.SetMargin(yoga.EdgeHorizontal, 0) },
-		"marginLeft":        func() { node.SetMargin(yoga.EdgeLeft, 0) },
-		"marginRight":       func() { node.SetMargin(yoga.EdgeRight, 0) },
-		"marginStart":       func() { node.SetMargin(yoga.EdgeStart, 0) },
-		"marginTop":         func() { node.SetMargin(yoga.EdgeTop, 0) },
-		"marginVertical":    func() { node.SetMargin(yoga.EdgeVertical, 0) },
+		"left":              func() { node.SetPosition(yoga.EdgeLeft, yoga.YGUndefined) },
+		"margin":            func() { node.SetMargin(yoga.EdgeAll, yoga.YGUndefined) },
+		"marginBottom":      func() { node.SetMargin(yoga.EdgeBottom, yoga.YGUndefined) },
+		"marginEnd":         func() { node.SetMargin(yoga.EdgeEnd, yoga.YGUndefined) },
+		"marginHorizontal":  func() { node.SetMargin(yoga.EdgeHorizontal, yoga.YGUndefined) },
+		"marginLeft":        func() { node.SetMargin(yoga.EdgeLeft, yoga.YGUndefined) },
+		"marginRight":       func() { node.SetMargin(yoga.EdgeRight, yoga.YGUndefined) },
+		"marginStart":       func() { node.SetMargin(yoga.EdgeStart, yoga.YGUndefined) },
+		"marginTop":         func() { node.SetMargin(yoga.EdgeTop, yoga.YGUndefined) },
+		"marginVertical":    func() { node.SetMargin(yoga.EdgeVertical, yoga.YGUndefined) },
 		"maxHeight":         func() { node.SetMaxHeight(yoga.YGValueUndefined.GetValue()) },
 		"maxWidth":          func() { node.SetMaxWidth(yoga.YGValueUndefined.GetValue()) },
 		"minHeight":         func() { node.SetMinHeight(yoga.YGValueUndefined.GetValue()) },
 		"minWidth":          func() { node.SetMinWidth(yoga.YGValueUndefined.GetValue()) },
 		"overflow":          func() { node.SetOverflow(yoga.OverflowVisible) },
-		"padding":           func() { node.SetPadding(yoga.EdgeAll, 0) },
-		"paddingBottom":     func() { node.SetPadding(yoga.EdgeBottom, 0) },
-		"paddingEnd":        func() { node.SetPadding(yoga.EdgeEnd, 0) },
-		"paddingHorizontal": func() { node.SetPadding(yoga.EdgeHorizontal, 0) },
-		"paddingLeft":       func() { node.SetPadding(yoga.EdgeLeft, 0) },
-		"paddingRight":      func() { node.SetPadding(yoga.EdgeRight, 0) },
-		"paddingStart":      func() { node.SetPadding(yoga.EdgeStart, 0) },
-		"paddingTop":        func() { node.SetPadding(yoga.EdgeTop, 0) },
-		"paddingVertical":   func() { node.SetPadding(yoga.EdgeVertical, 0) },
+		"padding":           func() { node.SetPadding(yoga.EdgeAll, yoga.YGUndefined) },
+		"paddingBottom":     func() { node.SetPadding(yoga.EdgeBottom, yoga.YGUndefined) },
+		"paddingEnd":        func() { node.SetPadding(yoga.EdgeEnd, yoga.YGUndefined) },
+		"paddingHorizontal": func() { node.SetPadding(yoga.EdgeHorizontal, yoga.YGUndefined) },
+		"paddingLeft":       func() { node.SetPadding(yoga.EdgeLeft, yoga.YGUndefined) },
+		"paddingRight":      func() { node.SetPadding(yoga.EdgeRight, yoga.YGUndefined) },
+		"paddingStart":      func() { node.SetPadding(yoga.EdgeStart, yoga.YGUndefined) },
+		"paddingTop":        func() { node.SetPadding(yoga.EdgeTop, yoga.YGUndefined) },
+		"paddingVertical":   func() { node.SetPadding(yoga.EdgeVertical, yoga.YGUndefined) },
 		"position":          func() { node.SetPositionType(yoga.PositionTypeStatic) },
-		"right":             func() { node.SetPosition(yoga.EdgeRight, 0) },
-		"start":             func() { node.SetPosition(yoga.EdgeStart, 0) },
-		"top":               func() { node.SetPosition(yoga.EdgeTop, 0) },
+		"right":             func() { node.SetPosition(yoga.EdgeRight, yoga.YGUndefined) },
+		"start":             func() { node.SetPosition(yoga.EdgeStart, yoga.YGUndefined) },
+		"top":               func() { node.SetPosition(yoga.EdgeTop, yoga.YGUndefined) },
 		"width":             func() { node.SetWidthAuto() },
 		"zIndex":            func() { /* No direct Yoga equivalent */ },
 		"direction":         func() { node.SetStyleDirection(yoga.DirectionInherit) },
@@ -159,7 +165,11 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				node.SetBorder(yoga.EdgeAll, float32(value.GetNumber()))
 			}
 		case "bottom":
-			handleDimension(node, value, yoga.EdgeBottom)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeBottom, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeBottom, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeBottom, num) },
+			})
 		case "display":
 			if value.IsString() {
 				switch value.GetString() {
@@ -170,13 +180,21 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				}
 			}
 		case "end":
-			handleDimension(node, value, yoga.EdgeEnd)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeEnd, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeEnd, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeEnd, num) },
+			})
 		case "flex":
 			if value.IsNumber() {
 				node.SetFlex(float32(value.GetNumber()))
 			}
 		case "flexBasis":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    node.SetFlexBasisAuto,
+				onPercent: node.SetFlexBasisPercent,
+				onNumber:  node.SetFlexBasis,
+			})
 		case "flexDirection":
 			if value.IsString() {
 				switch value.GetString() {
@@ -237,33 +255,95 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				}
 			}
 		case "left":
-			handleDimension(node, value, yoga.EdgeLeft)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeLeft, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeLeft, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeLeft, num) },
+			})
 		case "margin":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto: func() {
+					node.SetMarginAuto(yoga.EdgeAll)
+				},
+				onPercent: func(percent float32) {
+					node.SetMarginPercent(yoga.EdgeAll, percent)
+				},
+				onNumber: func(num float32) {
+					node.SetMargin(yoga.EdgeAll, num)
+				},
+			})
 		case "marginBottom":
-			handleDimension(node, value, yoga.EdgeBottom)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeBottom, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeBottom, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeBottom, num) },
+			})
 		case "marginEnd":
-			handleDimension(node, value, yoga.EdgeEnd)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeEnd, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeEnd, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeEnd, num) },
+			})
 		case "marginHorizontal":
-			handleDimension(node, value, yoga.EdgeHorizontal)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeHorizontal, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeHorizontal, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeHorizontal, num) },
+			})
 		case "marginLeft":
-			handleDimension(node, value, yoga.EdgeLeft)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeLeft, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeLeft, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeLeft, num) },
+			})
 		case "marginRight":
-			handleDimension(node, value, yoga.EdgeRight)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeRight, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeRight, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeRight, num) },
+			})
 		case "marginStart":
-			handleDimension(node, value, yoga.EdgeStart)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeStart, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeStart, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeStart, num) },
+			})
 		case "marginTop":
-			handleDimension(node, value, yoga.EdgeTop)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeTop, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeTop, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeTop, num) },
+			})
 		case "marginVertical":
-			handleDimension(node, value, yoga.EdgeVertical)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMargin(yoga.EdgeVertical, 0) },
+				onPercent: func(percent float32) { node.SetMarginPercent(yoga.EdgeVertical, percent) },
+				onNumber:  func(num float32) { node.SetMargin(yoga.EdgeVertical, num) },
+			})
 		case "maxHeight":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMaxHeight(yoga.YGValueAuto.GetValue()) },
+				onPercent: node.SetMaxHeightPercent,
+				onNumber:  node.SetMaxHeight,
+			})
 		case "maxWidth":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMaxWidth(yoga.YGValueAuto.GetValue()) },
+				onPercent: node.SetMaxWidthPercent,
+				onNumber:  node.SetMaxWidth,
+			})
 		case "minHeight":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMinHeight(yoga.YGValueAuto.GetValue()) },
+				onPercent: node.SetMinHeightPercent,
+				onNumber:  node.SetMinHeight,
+			})
 		case "minWidth":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetMinWidth(yoga.YGValueAuto.GetValue()) },
+				onPercent: node.SetMinWidthPercent,
+				onNumber:  node.SetMinWidth,
+			})
 		case "overflow":
 			if value.IsString() {
 				switch value.GetString() {
@@ -276,23 +356,59 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				}
 			}
 		case "padding":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeAll, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeAll, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeAll, num) },
+			})
 		case "paddingBottom":
-			handleDimension(node, value, yoga.EdgeBottom)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeBottom, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeBottom, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeBottom, num) },
+			})
 		case "paddingEnd":
-			handleDimension(node, value, yoga.EdgeEnd)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeEnd, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeEnd, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeEnd, num) },
+			})
 		case "paddingHorizontal":
-			handleDimension(node, value, yoga.EdgeHorizontal)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeHorizontal, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeHorizontal, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeHorizontal, num) },
+			})
 		case "paddingLeft":
-			handleDimension(node, value, yoga.EdgeLeft)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeLeft, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeLeft, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeLeft, num) },
+			})
 		case "paddingRight":
-			handleDimension(node, value, yoga.EdgeRight)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeRight, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeRight, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeRight, num) },
+			})
 		case "paddingStart":
-			handleDimension(node, value, yoga.EdgeStart)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeStart, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeStart, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeStart, num) },
+			})
 		case "paddingTop":
-			handleDimension(node, value, yoga.EdgeTop)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeTop, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeTop, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeTop, num) },
+			})
 		case "paddingVertical":
-			handleDimension(node, value, yoga.EdgeVertical)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPadding(yoga.EdgeVertical, 0) },
+				onPercent: func(percent float32) { node.SetPaddingPercent(yoga.EdgeVertical, percent) },
+				onNumber:  func(num float32) { node.SetPadding(yoga.EdgeVertical, num) },
+			})
 		case "position":
 			if value.IsString() {
 				switch value.GetString() {
@@ -305,11 +421,23 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				}
 			}
 		case "right":
-			handleDimension(node, value, yoga.EdgeRight)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeRight, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeRight, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeRight, num) },
+			})
 		case "start":
-			handleDimension(node, value, yoga.EdgeStart)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeStart, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeStart, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeStart, num) },
+			})
 		case "top":
-			handleDimension(node, value, yoga.EdgeTop)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    func() { node.SetPosition(yoga.EdgeTop, 0) },
+				onPercent: func(percent float32) { node.SetPositionPercent(yoga.EdgeTop, percent) },
+				onNumber:  func(num float32) { node.SetPosition(yoga.EdgeTop, num) },
+			})
 		case "width":
 			handleDimensionValue(value, dimensionValueHandlers{
 				onAuto:    node.SetWidthAuto,
@@ -360,37 +488,6 @@ func handleDimensionValue(value JSValue, h dimensionValueHandlers) {
 	} else if value.IsNumber() {
 		numVal := float32(value.GetNumber())
 		h.onNumber(numVal)
-	}
-}
-
-// handleDimension is a helper function to handle dimension values.
-func handleDimension(node *yoga.YGNode, value JSValue, edge yoga.Edge) {
-	if value.IsString() {
-		strVal := value.GetString()
-		if strVal == "auto" {
-			switch edge {
-			case yoga.EdgeAll:
-				node.SetFlexBasisAuto()
-			case yoga.EdgeLeft, yoga.EdgeTop, yoga.EdgeRight, yoga.EdgeBottom, yoga.EdgeStart, yoga.EdgeEnd:
-				node.SetPosition(edge, 0) // Yoga does not support 'auto' for position, setting default
-			}
-		} else if len(strVal) > 0 && strVal[len(strVal)-1] == '%' {
-			percentVal := parsePercent(strVal)
-			switch edge {
-			case yoga.EdgeAll:
-				node.SetFlexBasisPercent(percentVal)
-			default:
-				node.SetPositionPercent(edge, percentVal)
-			}
-		}
-	} else if value.IsNumber() {
-		numVal := float32(value.GetNumber())
-		switch edge {
-		case yoga.EdgeAll:
-			node.SetFlexBasis(numVal)
-		default:
-			node.SetPosition(edge, numVal)
-		}
 	}
 }
 
