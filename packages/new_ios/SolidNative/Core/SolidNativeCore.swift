@@ -11,6 +11,12 @@ import UIKit
 
 var SharedSolidNativeCore: SolidNativeCore!
 
+@objc public class SwiftPrinter: NSObject, SNSnmobileMobilePrinterProtocol {
+    public func write(toMobilePrinter input: String?) {
+        print(input ?? "")
+    }
+}
+
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
 
     public override init() {
@@ -33,9 +39,13 @@ var SharedSolidNativeCore: SolidNativeCore!
     func start(jsUrl: String) throws {
         snmobile = SNSnmobileSolidNativeMobile(self)!
         
+        snmobile.setPrinter(SwiftPrinter())
+        
         let nodeId = snmobile.createRootNode("sn_view")
         
         viewWrapperRegistry[nodeId] = SolidNativeViewWrapper(viewType: SNView.self)
+        
+        
         
         rootNodeId = nodeId
         
@@ -92,6 +102,7 @@ extension SolidNativeCore {
     }
     
     public func onPropUpdated(_ nodeId: String?, key: String?, value: SNSnmobileJSValue?) {
+        print("For node \(nodeId) key changed! \(key)")
         viewWrapperRegistry[nodeId!]!.props[key!] = value!
     }
     

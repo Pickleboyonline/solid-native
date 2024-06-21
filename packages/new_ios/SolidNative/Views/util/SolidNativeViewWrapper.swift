@@ -66,8 +66,8 @@ public class SolidNativeViewWrapper: ObservableObject {
     
     struct _SolidNativeViewWrapper: View {
         /// Causes the update in swiftUI
-        @ObservedObject
-        var wrapper: SolidNativeViewWrapper
+        
+        @ObservedObject var wrapper: SolidNativeViewWrapper
         
         let view: any SolidNativeView
         
@@ -83,19 +83,26 @@ public class SolidNativeViewWrapper: ObservableObject {
 
         func style<InputType: View>(_ view: InputType) -> some View {
           let props = wrapper.props
+            var backgroundColor = Color.clear
+            
+            if let bg = props["backgroundColor"],
+               bg.isString() {
+                backgroundColor = Color(hex: bg.getString())
+            }
+        
+            
           // let backgroundColor = props.color("backgroundColor", .clear)
           // let foregroundColor = props.color("color", .white)
           // let opacity = props.double("opacity", 1.0)
 
-          return view
-            // .background(backgroundColor)
+          return view.background(backgroundColor)
             // .foregroundColor(foregroundColor)
             // .overlay(Border())
             // .opacity(opacity)
         }
         
         var body: some View {
-            AnyView(layout(view))
+            AnyView(style(layout(view))).edgesIgnoringSafeArea(.all)
         }
     }
     

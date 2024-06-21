@@ -17,10 +17,10 @@ struct SNView: SolidNativeView {
     var children: SolidNativeChildren
     
     var body: some View {
+        Text("")
         ForEach(children, id: \.id) { child in
-            
             child.render().onAppear() {
-                print(child.layoutMetrics.height)
+                print(child.layoutMetrics.width)
             }
         }
     }

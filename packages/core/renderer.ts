@@ -1,5 +1,6 @@
 import { createRenderer } from "solid-js/universal";
 import { SolidNativeRenderer } from "./modules/mod.ts";
+import { log } from "./lib/log.ts";
 
 type Node = {
   id: string;
@@ -46,6 +47,7 @@ export const {
   mergeProps,
 } = createRenderer<Node>({
   createElement(nodeName) {
+    log("Hi");
     const id = SolidNativeRenderer.createNodeByName(nodeName);
     return wrapNodeIdInNode(id);
   },
@@ -59,6 +61,10 @@ export const {
     SolidNativeRenderer.setProp(id, "text", value);
   },
   setProperty({ id }, propertyName, value) {
+    log(
+      `JS: Set Prop: ID ${id} KEY ${propertyName} ` +
+        JSON.stringify(value, null, 4),
+    );
     SolidNativeRenderer.setProp(id, propertyName, value);
   },
   insertNode({ id: parentId }, { id: nodeId }, anchor) {

@@ -4,8 +4,8 @@ build-mobile-pkg: clean-build
 	@mkdir -p build/android
 	@mkdir -p build/ios
 	@echo "Building iOS and Android Packages..." 
-	@gomobile bind -target=android -androidapi 34 -o build/android/snmobile.aar nativecore/lib/snmobile
-	@gomobile bind -target=ios,iossimulator,macos -prefix SN -o build/ios/Snmobile.xcframework nativecore/lib/snmobile
+	@# gomobile bind -target=android -androidapi 34 -o build/android/snmobile.aar nativecore/lib/snmobile
+	@gomobile bind -target=ios,iossimulator -prefix SN -o build/ios/Snmobile.xcframework nativecore/lib/snmobile
 
 
 clean-build:

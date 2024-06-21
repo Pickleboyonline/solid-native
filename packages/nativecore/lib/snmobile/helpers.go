@@ -93,11 +93,13 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[strin
 
 		s.dukContext.Replace(-3) // => [ ... enum stash value ]
 
+		entryValueType := s.dukContext.GetType(-1)
+
 		s.dukContext.PutPropString(-2, keyStashName) // => [ ... enum stash ]
 
 		s.dukContext.Pop() // => [ ... enum ]
 
-		jsValueMap[key] = *NewJsValue(valueType, keyStashName, s)
+		jsValueMap[key] = *NewJsValue(entryValueType, keyStashName, s)
 	}
 
 	return jsValueMap, nil

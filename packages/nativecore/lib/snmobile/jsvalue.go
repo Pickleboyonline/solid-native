@@ -15,6 +15,7 @@ type JSValue struct {
 // DO NOT create from Mobile side
 // Only create if it's already in stash.
 // However if not in stash wont return anything
+// TODO: Optimize this, if its a primative, just make a copy into the interface
 func NewJsValue(
 	valueType duktape.Type,
 	stashKeyName string,
@@ -27,27 +28,31 @@ func NewJsValue(
 }
 
 func (v *JSValue) IsString() bool {
-	return false
+	return v.valueType.IsString()
 }
 
 func (v *JSValue) GetString() string {
-	return ""
+	v.solidNativeMobile.dukContext.PushGlobalStash()                 // => [stash]
+	v.solidNativeMobile.dukContext.GetPropString(-1, v.stashKeyName) // => [stash value]
+	str := v.solidNativeMobile.dukContext.GetString(-1)              // => [stash value]
+	v.solidNativeMobile.dukContext.Pop2()                            // => []
+	return str
 }
 
 func (v *JSValue) IsNumber() bool {
-	return false
+	return v.valueType.IsNumber()
 }
 
 func (v *JSValue) GetNumber() float64 {
-	return 0
+	v.solidNativeMobile.dukContext.PushGlobalStash()                 // => [stash]
+	v.solidNativeMobile.dukContext.GetPropString(-1, v.stashKeyName) // => [stash value]
+	num := v.solidNativeMobile.dukContext.GetNumber(-1)              // => [stash value]
+	v.solidNativeMobile.dukContext.Pop2()                            // => []
+	return num
 }
 
 func (v *JSValue) IsObject() bool {
-	return false
-}
-
-func (v *JSValue) IsArray() bool {
-	return false
+	return v.valueType.IsObject()
 }
 
 // Swift/Kotlin way of recieving values

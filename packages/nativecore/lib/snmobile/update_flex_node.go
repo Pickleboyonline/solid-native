@@ -2,6 +2,7 @@ package snmobile
 
 import (
 	"fmt"
+	"log"
 	"nativecore/lib/yoga"
 )
 
@@ -72,6 +73,7 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 	// Process the style object
 	for key, value := range styleJSValueMap {
 		newKeys[key] = struct{}{}
+		log.Println("Key Set: ", key, value.valueType)
 		switch key {
 		case "alignContent":
 			if value.IsString() {
@@ -212,7 +214,11 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 				node.SetGap(yoga.GutterAll, float32(value.GetNumber()))
 			}
 		case "height":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    node.SetHeightAuto,
+				onPercent: node.SetHeightPercent,
+				onNumber:  node.SetHeight,
+			})
 		case "justifyContent":
 			if value.IsString() {
 				switch value.GetString() {
@@ -305,7 +311,11 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 		case "top":
 			handleDimension(node, value, yoga.EdgeTop)
 		case "width":
-			handleDimension(node, value, yoga.EdgeAll)
+			handleDimensionValue(value, dimensionValueHandlers{
+				onAuto:    node.SetWidthAuto,
+				onPercent: node.SetWidthPercent,
+				onNumber:  node.SetWidth,
+			})
 		case "direction":
 			if value.IsString() {
 				switch value.GetString() {
@@ -328,7 +338,29 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 			}
 		}
 	}
+
 	return newKeys
+}
+
+type dimensionValueHandlers struct {
+	onAuto    func()
+	onPercent func(percent float32)
+	onNumber  func(num float32)
+}
+
+func handleDimensionValue(value JSValue, h dimensionValueHandlers) {
+	if value.IsString() {
+		strVal := value.GetString()
+		if strVal == "auto" {
+			h.onAuto()
+		} else if len(strVal) > 0 && strVal[len(strVal)-1] == '%' {
+			percentVal := parsePercent(strVal)
+			h.onPercent(percentVal)
+		}
+	} else if value.IsNumber() {
+		numVal := float32(value.GetNumber())
+		h.onNumber(numVal)
+	}
 }
 
 // handleDimension is a helper function to handle dimension values.

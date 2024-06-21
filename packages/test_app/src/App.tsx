@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import { print, View, Text, Button } from "solid-native/core";
+import { log, View, Text, Button } from "solid-native/core";
 import { createEffect } from "solid-js";
 
 export function App() {
@@ -11,7 +11,7 @@ export function App() {
   const [bool, setBool] = createSignal(false);
 
   onMount(() => {
-    print("App Mounted!");
+    log("App Mounted!");
   });
 
   const flipValues = () => {
@@ -24,7 +24,7 @@ export function App() {
   };
 
   createEffect(() => {
-    print("bool has changed!" + bool());
+    log("bool has changed!" + bool());
   });
 
   return (

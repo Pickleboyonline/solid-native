@@ -34,7 +34,6 @@ func (s *SolidNativeMobile) registureRenderer() {
 		nodeId := s.createNode(nodeType)
 
 		log.Printf("New Node create of type %v with id %v", nodeType, nodeId)
-
 		ctx.PushString(nodeId) // => [ nodeType nodeId ]
 
 		return 1 // Return top of stack
