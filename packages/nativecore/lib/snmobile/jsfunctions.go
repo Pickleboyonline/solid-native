@@ -44,15 +44,7 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 
 	// Update flex style and notify of new layout metrics
 	if key == "style" {
-		styleMap, err := s.convertJSToKeysAndObjects(value)
-		if err != nil {
-			return err
-		}
-		// Ensure we free the values afterwords since we only need them to compute
-		// the flex styles
-		for _, value := range styleMap {
-			defer value.Free()
-		}
+		styleMap := s.convertJSToKeysAndObjects(value)
 
 		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
 

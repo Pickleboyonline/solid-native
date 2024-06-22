@@ -5,8 +5,6 @@ import (
 	"io"
 	"nativecore/lib/yoga"
 	"net/http"
-
-	"github.com/google/uuid"
 )
 
 // ================= Private Helper Methods =========================
@@ -67,42 +65,24 @@ func (s *SolidNativeMobile) applyLayout(nodeId string) {
 
 // "Upwraps" JS Value by enumerating over its keys
 // and values. Ensure this is an object, otherwise just return nothing.
-func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) (map[string]JSValue, error) {
-	// Check whether its an object or array:
-	s.dukContext.PushGlobalStash() // Push stash => [ stash ]
-
-	s.dukContext.GetPropString(-1, value.stashKeyName) // => [ stash value ]
-
-	valueType := s.dukContext.GetType(-1) // => [ stash value ]
-
-	if !valueType.IsObject() {
-		return nil, fmt.Errorf("js value with key %s is not an object or does not exist", value.stashKeyName)
-	}
+func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) map[string]JSValue {
 
 	jsValueMap := make(map[string]JSValue)
 
-	// TODO: Check if 0 works or if i have to put in a flag
-	s.dukContext.Enum(-1, 0) // => [ stash value enum ]
+	internalMap, ok := value.data.(map[string]interface{})
 
-	for s.dukContext.Next(-1, true) {
-		// => [ ... enum key value ]
-		key := s.dukContext.GetString(-2)
-		keyStashName := uuid.New().String()
-
-		s.dukContext.PushGlobalStash() // => [ ... enum key value stash ]
-
-		s.dukContext.Replace(-3) // => [ ... enum stash value ]
-
-		entryValueType := s.dukContext.GetType(-1)
-
-		s.dukContext.PutPropString(-2, keyStashName) // => [ ... enum stash ]
-
-		s.dukContext.Pop() // => [ ... enum ]
-
-		jsValueMap[key] = *NewJsValue(entryValueType, keyStashName, s)
+	// Value is undefined, return nothing
+	if !ok {
+		return jsValueMap
 	}
 
-	return jsValueMap, nil
+	for key, v := range internalMap {
+		jsValueMap[key] = JSValue{
+			data: v,
+		}
+	}
+
+	return jsValueMap
 }
 
 func (s *SolidNativeMobile) downloadAndRunJs(url string) error {

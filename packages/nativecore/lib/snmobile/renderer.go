@@ -1,7 +1,7 @@
 package snmobile
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 
 	"gopkg.in/olebedev/go-duktape.v3"
@@ -44,28 +44,30 @@ func (s *SolidNativeMobile) registureRenderer() {
 		// Get second arg type
 		nodeId := ctx.GetString(-3)
 		key := ctx.GetString(-2)
-		valueType := ctx.GetType(-1)
 
-		// We dont need to free this JS value from the stash
-		// since it gets hased to the same key
-		stashKeyName := fmt.Sprintf("props:%s:%s", nodeId, key)
+		if ctx.IsFunction(-1) {
+			log.Printf("Key \"%v\" for node %v was set with a function. Skipping as not supported...", key, nodeId)
+			return 0
+		}
 
-		// Primatives are easy since they are just a copy. However, objects are harder since
-		// we dont have direct access.
-		// What would be easier to to store a hashmap stash of stings in the form:
-		// "prop:${nodeId}:{propName}" : "value".
-		// This way the value can be accessed anywhere at anytime, and we can grab the value at
-		// any time.
-		// TODO: Understand how the syncing works accross threads. For now,
-		// we are doing single threaded stuff so this doesnt matter.
+		if ctx.IsUndefined(-1) {
+			// We pass in an undefined thing here.
+			s.setNodeProp(nodeId, key,
+				&JSValue{})
+		}
 
-		// Put the Stash on top:
-		ctx.PushGlobalStash()               // => [ nodeId key value stash ]
-		ctx.Replace(-3)                     // => [ nodeId stash value ]
-		ctx.PutPropString(-2, stashKeyName) // => [ nodeId stash ]
-		ctx.Pop()
+		encodedJson := ctx.JsonEncode(-1)
 
-		s.setNodeProp(nodeId, key, NewJsValue(valueType, stashKeyName, s))
+		var unmarshaledValue interface{}
+
+		json.Unmarshal([]byte(encodedJson), &unmarshaledValue)
+
+		log.Printf("Json of prop: %v", unmarshaledValue)
+
+		s.setNodeProp(nodeId, key,
+			&JSValue{
+				data: unmarshaledValue,
+			})
 
 		return 0
 	})

@@ -91,18 +91,31 @@ private struct _SolidNativeViewWrapper: View {
 
     func style<InputType: View>(_ view: InputType) -> some View {
       let props = wrapper.props
-        var backgroundColor = Color.clear
+      var backgroundColor = Color.clear
         
-        if let bg = props["backgroundColor"],
-           bg.isString() {
-            backgroundColor = Color(hex: bg.getString())
+        var foregroundColor = Color.white
+        var opacity = 1.0
+        
+        
+        if let style = props["style"],
+           style.isObject() {
+            
+            if let bg = style.getForKey("backgroundColor"),
+               bg.isString() {
+                backgroundColor = Color(hex: bg.getString())
+            }
+            
+            if let fg = style.getForKey("color"),
+               fg.isString() {
+                foregroundColor = Color(hex: fg.getString())
+            }
+            
+            if let o = style.getForKey("opacity"),
+               o.isNumber() {
+                opacity = o.getNumber()
+            }
         }
     
-        let foregroundColor = Color.white
-        let opacity = 1.0
-      // let backgroundColor = props.color("backgroundColor", .clear)
-      // let foregroundColor = props.color("color", .white)
-      // let opacity = props.double("opacity", 1.0)
 
       return view.background(backgroundColor)
          .foregroundColor(foregroundColor)

@@ -102,7 +102,7 @@ extension SolidNativeCore {
     }
     
     public func onPropUpdated(_ nodeId: String?, key: String?, value: SNSnmobileJSValue?) {
-        print("For node \(nodeId) key changed! \(key)")
+        // print("For node \(nodeId) key changed! \(key)")
         viewWrapperRegistry[nodeId!]!.props[key!] = value!
     }
     

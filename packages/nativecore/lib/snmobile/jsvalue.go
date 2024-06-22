@@ -1,74 +1,56 @@
 package snmobile
 
-import "gopkg.in/olebedev/go-duktape.v3"
-
 // Two things:
 // must be able to check the type with a function call
 // must be able to grab type.
 type JSValue struct {
-	valueType    duktape.Type
-	stashKeyName string
-	// Mainly used for access to ctx to retrieve stash
-	solidNativeMobile *SolidNativeMobile
-}
-
-// DO NOT create from Mobile side
-// Only create if it's already in stash.
-// However if not in stash wont return anything
-// TODO: Optimize this, if its a primative, just make a copy into the interface
-func NewJsValue(
-	valueType duktape.Type,
-	stashKeyName string,
-	solidNativeMobile *SolidNativeMobile) *JSValue {
-	return &JSValue{
-		valueType,
-		stashKeyName,
-		solidNativeMobile,
-	}
+	// Anything
+	data interface{}
 }
 
 func (v *JSValue) IsString() bool {
-	return v.valueType.IsString()
+	_, ok := v.data.(string)
+	return ok
 }
 
 func (v *JSValue) GetString() string {
-	v.solidNativeMobile.dukContext.PushGlobalStash()                 // => [stash]
-	v.solidNativeMobile.dukContext.GetPropString(-1, v.stashKeyName) // => [stash value]
-	str := v.solidNativeMobile.dukContext.GetString(-1)              // => [stash value]
-	v.solidNativeMobile.dukContext.Pop2()                            // => []
+	str := v.data.(string)
 	return str
 }
 
 func (v *JSValue) IsNumber() bool {
-	return v.valueType.IsNumber()
+	switch v.data.(type) {
+	case int:
+		return true
+	case float32:
+		return true
+	case float64:
+		return true
+	default:
+		return false
+	}
 }
 
 func (v *JSValue) GetNumber() float64 {
-	v.solidNativeMobile.dukContext.PushGlobalStash()                 // => [stash]
-	v.solidNativeMobile.dukContext.GetPropString(-1, v.stashKeyName) // => [stash value]
-	num := v.solidNativeMobile.dukContext.GetNumber(-1)              // => [stash value]
-	v.solidNativeMobile.dukContext.Pop2()                            // => []
-	return num
+	switch v.data.(type) {
+	case int:
+		return float64(v.data.(int))
+	case float32:
+		return float64(v.data.(float32))
+	case float64:
+		return v.data.(float64)
+	default:
+		return 0
+	}
 }
 
 func (v *JSValue) IsObject() bool {
-	return v.valueType.IsObject()
-}
-
-// Swift/Kotlin way of recieving values
-type JSValueEnumerator interface{}
-
-func (v *JSValue) GetArrayEnumerator() JSValueEnumerator {
-	return make([]byte, 0)
+	_, ok := v.data.(map[string]interface{})
+	return ok
 }
 
 // TODO: Impliment
-func (v *JSValue) GetObjectForKey(key string) *JSValue {
-	return &JSValue{}
-}
-
-// This will remove the value from the stash making the
-// JS value no longer accessable.
-func (v *JSValue) Free() {
-
+func (v *JSValue) GetJSValueForKey(key string) *JSValue {
+	obj := v.data.(map[string]interface{})
+	return &JSValue{data: obj[key]}
 }

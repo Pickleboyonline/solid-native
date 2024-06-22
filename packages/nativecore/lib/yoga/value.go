@@ -44,5 +44,5 @@ var (
 	YGValueUndefined = YGValue{Value: float32(C.YGValueUndefined.value), Unit: YGUnit(C.YGValueUndefined.unit)}
 	YGValueZero      = YGValue{Value: float32(C.YGValueZero.value), Unit: YGUnit(C.YGValueZero.unit)}
 	// TODO: Figure out if this works lol
-	YGUndefined = C.YGUndefined
+	// YGUndefined any = C.YGUndefined
 )
