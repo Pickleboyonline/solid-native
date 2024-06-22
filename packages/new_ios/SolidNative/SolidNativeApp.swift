@@ -18,11 +18,6 @@ struct SolidNativeApp: App {
         
         do {
             try core.start(jsUrl: "http://10.0.0.175:8080")
-            
-//            for var (key, view) in core.viewWrapperRegistry {
-//                print("For Key", key)
-//                print(view.layoutMetrics.width, view.layoutMetrics.height)
-//            }
         } catch {
             print("Unexpected error: \(error).")
         }
