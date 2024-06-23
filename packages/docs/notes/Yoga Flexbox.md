@@ -1,3 +1,6 @@
+This task is done, below are just some notes.
+
+---
 TODO: Essentially copy the way react fabric system works under the hood.
 Important Links:
 - [https://reactnative.dev/architecture/fabric-renderer](https://reactnative.dev/architecture/fabric-renderer)

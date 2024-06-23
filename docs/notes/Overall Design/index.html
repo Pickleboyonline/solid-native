@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overall Design</title>
+
+    <meta name="supported-color-schemes" content="light dark">
+    <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
+
+    <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Overall Design/">
+    
+  <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
+<link rel="icon" sizes="any" href="/solid-native/favicon.svg" type="image/svg+xml">
+</head>
+
+  <body>
+    <div class="container">
+      <div class="toolbar">
+        <div id="search" class="search"></div>
+        <script>
+          let theme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light");
+          document.documentElement.dataset.theme = theme;
+          function changeTheme() {
+            theme = theme === "dark" ? "light" : "dark";
+            localStorage.setItem("theme", theme);
+            document.documentElement.dataset.theme = theme;
+          }
+        </script>
+        <button class="button theme" onclick="changeTheme()">
+          <span class="icon">◐</span>
+        </button>
+      </div>
+
+      <nav class="menu-container">
+  
+
+  
+    
+      <a class="menu-highlight" href="/solid-native/">Solid Native</a>
+    
+  
+
+  <ul class="menu">
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Components</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Button/">
+    
+    🚧  Button
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/Text/">
+    
+    🚧  Text
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Components/View/">
+    
+    🚧 View
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> Props</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Layout Props/">
+    
+    Layout Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Shadow Props/">
+    
+    Shadow Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/Text Style Props/">
+    
+    Text Style Props
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/Props/View Style Props/">
+    
+    View Style Props
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+    <li>
+      
+
+
+  <strong><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--color-dim)" viewbox="0 0 256 256"><path d="M245,110.64A16,16,0,0,0,232,104H216V88a16,16,0,0,0-16-16H130.67L102.94,51.2a16.14,16.14,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V208h0a8,8,0,0,0,8,8H211.1a8,8,0,0,0,7.59-5.47l28.49-85.47A16.05,16.05,0,0,0,245,110.64ZM93.34,64l27.73,20.8a16.12,16.12,0,0,0,9.6,3.2H200v16H69.77a16,16,0,0,0-15.18,10.94L40,158.7V64Zm112,136H43.1l26.67-80H232Z"></path></svg></span> notes</strong>
+
+
+
+<ul>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Expo-like Modules/">
+    
+    Expo-like Modules
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Module and Build System/">
+    
+    Module and Build System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Modules System/">
+    
+    Modules System
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Navigation/">
+    
+    Navigation
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a aria-current="page" href="/solid-native/notes/Overall Design/">
+    
+    Overall Design
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Refactors/">
+    
+    Refactors
+  </a>
+
+
+
+
+  </li>
+  
+  <li>
+    
+
+
+  <a href="/solid-native/notes/Yoga Flexbox/">
+    
+    Yoga Flexbox
+  </a>
+
+
+
+
+  </li>
+  
+</ul>
+
+
+    </li>
+  
+  </ul>
+</nav>
+
+
+      
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          
+          <li>
+            <a href="#solid-native%3A">Solid Native:</a>
+
+            
+          </li>
+          
+          <li>
+            <a href="#new-overview%3A">New Overview:</a>
+
+            
+          </li>
+          
+        </ol>
+      </nav>
+      
+
+      <main class="main">
+        <nav>
+  <ul class="breadcrumb">
+    
+    
+    <li class="breadcrumb-item"><a href="/solid-native/">Solid Native</a></li>
+    
+    
+    
+    <li class="breadcrumb-item"><strong>notes</strong></li>
+    
+    
+    
+    
+  </ul>
+</nav>
+
+
+        <div class="body">
+          
+            <h1>Overall Design</h1>
+          
+
+          
+            <h2 id="solid-native%3A" tabindex="-1"><a href="#solid-native%3A" class="header-anchor">Solid Native:</a></h2>
+<p>System complexity increasing lol. Need to get Yoga Layout, which covers a lot of use cases.</p>
+<p>In the expo module system, the have a module function that provides a definition that describes the view.</p>
+<p>Rendering Pipe:</p>
+<ol>
+<li>Javascript Engine is setup for runtime (like setTimeout)
+<ol>
+<li>Runtime exposes Swift code to run</li>
+</ol>
+</li>
+<li>Downloads JS and runs script</li>
+<li>For solidJS swift must be exposed to create a view system
+<ol>
+<li>Call this the shadow tree</li>
+<li>Each element in the tree is the:
+<ol>
+<li>Node, which is the ID</li>
+<li>Name to create element type</li>
+<li>Properties (map of data)</li>
+<li>And parent node</li>
+</ol>
+</li>
+<li>By the API calls, a tree must be implimented</li>
+</ol>
+</li>
+<li>SolidJS does not handle rendering, and can be though to incrimentally update the view tree</li>
+<li>Every time it updates the view tree, we must recalculate the layout.</li>
+<li>Layout Metrics are passed to render system (swiftUI)</li>
+<li>SwiftUI handles rendering props declaratively</li>
+</ol>
+<p>Now, based on that have the following spec:</p>
+<ul>
+<li>Runtime Functions in global namespace
+<ul>
+<li>Can be things like <code>fetch</code>, set Timeout, etc...</li>
+</ul>
+</li>
+<li>Render system?
+<ul>
+<li>Is this a module or runtime global?</li>
+<li>Render system exposes methods to manipulate Shadow VDOM</li>
+</ul>
+</li>
+<li>Each node in the VDOM houses:
+<ul>
+<li>name</li>
+<li>props</li>
+<li>id</li>
+<li>children</li>
+<li>graph system</li>
+</ul>
+</li>
+<li>Each VDOM type must be accessable to the render system by runtime lookup (registry)
+<ul>
+<li>Mount Phase:
+<ul>
+<li>Node is created</li>
+<li>Props are defined</li>
+<li>Mounted to root tree</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RENDERING:
+<ul>
+<li>Rendering is done via swiftUI in a declarative fashion. This means once the data is available and the child is mounted, rendering happens. So, data needs to be available.</li>
+<li>Calculate the layout info after each node is defined.</li>
+<li>Once layout is calculated, update the tree.</li>
+<li>I am fairly certain that YOGA can mark when its available.</li>
+<li>Ok so theres shadow layout data and layout data.</li>
+<li>So really there are two tree's =&gt; one for representing general props and one for yoga layout.</li>
+<li>We need yoga layout info for each mount phase. So, this info needs to be available before mounting</li>
+<li>Mutate props, and recalculate yoga layout.</li>
+<li>Yoga takes care of rendering system</li>
+<li>When yoga is done, we update the layout metrics for the props for that.</li>
+<li>So, it looks like this:
+<ul>
+<li>SolidShadowTree change =&gt; Queue render to Yoga on bg thread =&gt; Yoga traverses tree =&gt; If change happens, update the Node layout props =&gt; SwiftUI renders it</li>
+<li>Lets say that render system traverses the tree, grabbing its associated yoga node. Essentially BFS</li>
+<li>Really, we just need to update the layout system.</li>
+<li>For SwiftUI, we don't render anything if layout information is not available</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>On the view system, how does that work?
+<ul>
+<li>Well, we know each view/node requires certain wrappers to maintain layout and border styles.</li>
+<li>Each view must be registered via a definition file. Somehow this is statically linked to the system.</li>
+<li>Modules and Views can be considered one, in that everything is a module, but some modules can also be used as views if they have the view definition</li>
+<li>Thus, we get a module registry and a view registry.</li>
+<li>The renderer must be able to see the view registry.</li>
+<li>Thus, I will say that the renderer is NOT a module but a core runtime element.
+<ul>
+<li>Basically, there are modules and there are core framework.</li>
+<li>The distinction is that there are some special functions properties that are associated with the core that manage how the base app works.
+<ul>
+<li>These are things like javascript runtime management</li>
+<li>View registry</li>
+<li>Module registry management</li>
+</ul>
+</li>
+<li>Anytime when these must be accessed, they take the form of something else.</li>
+<li>HOWEVER, you could add some flexibility, in the native modules and views are allowed to have access to those elements.</li>
+<li>^^ Naw, its too complex. Also renderer needs to know the root element. I created a hacky implimentation of this. Basically,
+Ok lets say you have a native module, we look for anything that extend the class, import it and generate a file that has a class that will call the definitions of every module you make.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Now, that definition class would have to be accessable to the render system. Also, mind that the root view is part of core, but it also need to be in the render system.</p>
+<p>So, yeah, renderer is NOT a expernal module in that sense.</p>
+<p>To recap:</p>
+<p>Components:</p>
+<ul>
+<li>Javascript</li>
+<li>Core
+<ul>
+<li>Renderer
+<ul>
+<li>Functions related to managing view system</li>
+</ul>
+</li>
+<li>JS Engine</li>
+<li>Module Registry</li>
+<li>View Registry</li>
+</ul>
+</li>
+<li>SwiftUI
+<ul>
+<li>Declaratively responded to JS</li>
+</ul>
+</li>
+</ul>
+<p>Module registry can be access and instanciated from the definition, which can build a JSValue for that module. The class itself is made and is associated JSValue is made via the defintion. This method needs to run prior to initialization. So, essentially to create the registry we make objects of the modules. We then compute their name. If its accessed, the JSValue is made.</p>
+<p>When the definition is made, we make its views as well.</p>
+<p>This happens during initialization.</p>
+<p>The renderer is exposed via JS runtime. it knows the view definitions.</p>
+<p>When a node is created, it needs to address the following:</p>
+<ul>
+<li>Yoga Node</li>
+<li>Prop management</li>
+<li>Yoga Layout calculations and prop drilling</li>
+<li>SwiftUI wrappers to deal with layout</li>
+<li>Wrap associated view definition for system.</li>
+<li>Question =&gt; Should view be struct or class? Or just a base swiftui view?
+<ul>
+<li>In this framework, views can just be struct defs that get passed a SolidNative prop</li>
+<li>Can extend the view struct</li>
+<li>No need for observable object, since, thats in the view definition. The struct takes care of that.</li>
+<li>Text is sepecial because child components are "shadowed" and do not exist. However, since all the info is in the props (including children refrences, we need not worry about this and can calcualte it in the same way.</li>
+</ul>
+</li>
+</ul>
+<p>Core System:</p>
+<ul>
+<li>Builds JS system and download core</li>
+<li>Renderer will give chain of objects to call for system (effectively the wrapper node objects that handle layout, view styles, etc...)</li>
+<li>Ok understanding =&gt; How to expose methods to JS Land?
+<ul>
+<li>Some methods are directly the global namespace (think console.log =&gt; print and setTimeout)</li>
+<li>some methods are core and some are external modules:
+<ul>
+<li>Now, the core is interesting because some methods may want to access core library stuff.</li>
+<li>Thats OK ig, just import and access the shared instance tbh</li>
+<li>On the JS side, just call the function.</li>
+<li>Methods are exposed with the <code>_ModuleName</code></li>
+<li>Some modules are exposed via the core library and some are via the external module system</li>
+<li>What I am getting at is that everything can be in the global namespace</li>
+<li>However, if you want dynamic object allocation when accessing the values, then it may be smart to allocate that in a different system (think a require)</li>
+<li>Some systems are not dynamic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>WAIT we can decouple the view system and the render system</p>
+<h2 id="new-overview%3A" tabindex="-1"><a href="#new-overview%3A" class="header-anchor">New Overview:</a></h2>
+<p>Data/Component Wise:</p>
+<ul>
+<li>JS Engine
+<ul>
+<li>Methods to control it</li>
+</ul>
+</li>
+<li>Module registry
+<ul>
+<li>Adding a module to it requires some macros but for now its not needed</li>
+</ul>
+</li>
+<li>View Registry</li>
+<li>Render System:
+<ul>
+<li>Can be nde of view registry.
+<ul>
+<li>Only needs to know the name and props, both serializable things</li>
+<li>Calculate yoga layout after perfoming mutation</li>
+<li>Can possibply be stored in a dictionary
+<ul>
+<li>Flattened view</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Only calls upon views when mounted per se</li>
+<li>^^ Need to determine how to do this?</li>
+<li>Some linking between NATIVE side of things + Rendering</li>
+</ul>
+</li>
+<li>Module system:
+<ul>
+<li>Must be able to grab from namespace</li>
+</ul>
+</li>
+</ul>
+<p>System must be able to registure new modules on the fly using code gen. Theres a file local to the project that can grab all the defs and expose to runtime or something.</p>
+<p>=&gt; Can take native script approach</p>
+<hr>
+<p>Above is a future update. For now, we just need yoga layouts. So i'll pass on changing it for semantics if the functionality remains the same. Dont need 1:1 copy of RN if we can make it simplier</p>
+<p>Just be concerned with Yoga layouts for now.</p>
+
+          
+        </div>
+
+        
+      </main>
+
+      
+    </div>
+  
+
+</body></html>
