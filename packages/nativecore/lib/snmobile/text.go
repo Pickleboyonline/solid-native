@@ -25,5 +25,7 @@ The wrappers control the styles, and the inner wrappers override the styles of t
 
 Steps:
 - Define base data type of text in slice/array
-- Make algor
+- Make algorithm to generate it
+- essentially, its a list of text and associated styles. Essentially, we keep the logic cross platform
+and reduce native implementation workload.
 */

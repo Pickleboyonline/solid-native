@@ -20,14 +20,14 @@ protocol SolidNativeView: View where Body: View  {
     static var doesRequireMeasuring: Bool {get}
     var props: SolidNativeProps {get}
     var children: SolidNativeChildren {get}
-    static func measureNode()
+    static func measureNode(_ nodeId: String)
     init(props: SolidNativeProps, children: SolidNativeChildren)
 }
 
 extension SolidNativeView {
     static var isTextElement: Bool {false}
     static var doesRequireMeasuring: Bool { false }
-    static func measureNode() {
+    static func measureNode(_ nodeId: String) {
         
     }
 }

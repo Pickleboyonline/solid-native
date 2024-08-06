@@ -10,6 +10,14 @@ struct SNText: SolidNativeView {
         true
     }
     
+    static func measureNode(nodeId: String) {
+        // TODO: Need to make function that:
+        // Grabs View Wrapper from node ID
+        // TODO: Make some cache any type on the wrapper for state
+        
+        // For text, it has to make a UIKit text element tfor this.
+    }
+    
     var props: SolidNativeProps
     var children: SolidNativeChildren
 

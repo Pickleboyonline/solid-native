@@ -493,7 +493,6 @@ func (s *SolidNativeMobile) applyLayout(nodeId string) {
 // "Upwraps" JS Value by enumerating over its keys
 // and values. Ensure this is an object, otherwise just return nothing.
 func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) map[string]JSValue {
-
 	jsValueMap := make(map[string]JSValue)
 
 	internalMap, ok := value.data.(map[string]interface{})
@@ -513,7 +512,6 @@ func (s *SolidNativeMobile) convertJSToKeysAndObjects(value *JSValue) map[string
 }
 
 func (s *SolidNativeMobile) downloadAndRunJs(url string) error {
-
 	// Make a GET request
 	response, err := http.Get(url)
 	if err != nil {
