@@ -1,169 +1,135 @@
-////
-////  SNTextView.swift
-////  solid_native_ios_playground
-////
-////  Created by Imran Shitta-Bey on 6/12/23.
-////
-//
-//import Foundation
-//import JavaScriptCore
-//import SwiftUI
-//
-//class SNTextView: SolidNativeView {
-//
-//  class override var name: String {
-//    "sn_text"
-//  }
-//
-//  override var isTextElement: Bool {
-//    true
-//  }
-//
-//  struct SNTextView: View {
-//
-//    @ObservedObject var props: SolidNativeProps
-//
-//    var body: some View {
-//      dfs(start: props)
-//    }
-//  }
-//
-//  override func render() -> AnyView {
-//    print("Render text with value:" + props.getString(name: "text"))
-//    return AnyView(SNTextView(props: self.props))
-//  }
-//
-//}
-//
-//// Call for node without text parent and with children
-//func dfs(start: SolidNativeProps) -> Text {
-//  // print("RUN!")
-//  // If theres children, essentially we want the text of those children.
-//
-//  // If no children, we return
-//
-//  let childrenCount = start.getChildren().count
-//
-//  if childrenCount == 0 {
-//    return processTextView(start)
-//  }
-//
-//  var txt = dfs(start: start.children[0].props)
-//
-//  for i in 0...(childrenCount - 1) {
-//    if i == 0 {
-//      continue
-//    }
-//
-//    let child = start.children[i]
-//
-//    // Get other children and do the same
-//    let newText = dfs(start: child.props)
-//
-//    txt = txt + newText
-//
-//  }
-//
-//  return styleTextViewFromSNView(props: start, text: txt)
-//}
-//
-//// Convert view with no children to text
-//func processTextView(_ props: SolidNativeProps) -> Text {
-//  return Text(props.getString(name: "text"))
-//}
-//
-//func styleTextViewFromSNView(props: SolidNativeProps, text: Text) -> Text {
-//  var styledText = text
-//
-//  let style: JSValue? = props.getProp(name: "style")
-//
-//  if let style = style, let styleDict = style.toDictionary() {
-//
-//    if let color = styleDict["color"] as? String {
-//      styledText = styledText.foregroundColor(Color(hex: color))
-//    }
-//
-//    let fontWeight = styleDict["fontWeight"] as? String ?? "regular"
-//    let swiftUIFontWieght = toFontWeight(fontWeight)
-//
-//    let fontSize = styleDict["fontSize"] as? Float ?? 17.0
-//
-//    styledText = styledText.font(
-//      .system(
-//        size: CGFloat(fontSize),
-//        weight: swiftUIFontWieght))
-//
-//    if let textDecorationLine = styleDict["textDecorationLine"] as? String {
-//      styledText = applyTextDecoration(text: styledText, decoration: textDecorationLine)
-//    }
-//
-//    if let fontStyle = styleDict["fontStyle"] as? String, fontStyle == "italic" {
-//      styledText = styledText.italic()
-//    }
-//
-//    if let numberOfLines = styleDict["numberOfLines"] as? Int, numberOfLines >= 0 {
-//      styledText = styledText.lineLimit(numberOfLines) as! Text
-//    }
-//
-//    if let ellipsizeMode = styleDict["ellipsizeMode"] as? String {
-//      styledText = styledText.truncationMode(ellipsizeModeToTruncationMode(ellipsizeMode)) as! Text
-//    }
-//
-//  }
-//
-//  return styledText
-//}
-//
-//// Helper functions and extensions to support the additional properties
-//
-//func applyTextDecoration(text: Text, decoration: String) -> Text {
-//  var newText = text
-//  switch decoration {
-//  case "underline":
-//    newText = newText.underline()
-//  case "line-through":
-//    newText = newText.strikethrough()
-//  default:
-//    break
-//  }
-//  return newText
-//}
-//
-//// Additional extensions for fontWeight, fontStyle, etc., can be modeled similar to the UIColor extension provided previously.
-//func toFontWeight(_ fontWeight: String?) -> Font.Weight {
-//  switch fontWeight {
-//  case "100":
-//    return .ultraLight
-//  case "200":
-//    return .thin
-//  case "300", "light":
-//    return .light
-//  case "400", "normal":
-//    return .regular
-//  case "500", "medium":
-//    return .medium
-//  case "600":
-//    return .semibold
-//  case "700", "bold":
-//    return .bold
-//  case "800":
-//    return .heavy
-//  case "900":
-//    return .black
-//  default:
-//    return .regular
-//  }
-//}
-//
-//func ellipsizeModeToTruncationMode(_ ellipsizeMode: String?) -> Text.TruncationMode {
-//  // TODO: Add support for "clip".
-//  switch ellipsizeMode {
-//  case "head":
-//    return .head
-//  case "middle":
-//    return .middle
-//  default:
-//    return .tail
-//  }
-//}
-//
+import Foundation
+import SwiftUI
+import Snmobile
+
+struct SNText: SolidNativeView {
+    static var name: String {
+        "sn_text"
+    }
+    static var isTextElement: Bool {
+        true
+    }
+    
+    var props: SolidNativeProps
+    var children: SolidNativeChildren
+
+    func textStyle(from style: SNSnmobileJSValue) -> Font {
+        var font = Font.system(size: 14)
+
+        if let fontFamily = style.getForKey("fontFamily"), fontFamily.isString() {
+            let family = fontFamily.getString()
+            if let fontSize = style.getForKey("fontSize"), fontSize.isNumber() {
+                font = Font.custom(family, size: CGFloat(fontSize.getNumber()))
+            } else {
+                font = Font.custom(family, size: 14)
+            }
+        } else if let fontSize = style.getForKey("fontSize"), fontSize.isNumber() {
+            font = Font.system(size: CGFloat(fontSize.getNumber()))
+        }
+
+        if let fontStyle = style.getForKey("fontStyle"), fontStyle.isString() {
+            if fontStyle.getString() == "italic" {
+                font = font.italic()
+            }
+        }
+
+        if let fontWeight = style.getForKey("fontWeight"), fontWeight.isString() {
+            switch fontWeight.getString() {
+            case "bold":
+                font = font.weight(.bold)
+            case "100":
+                font = font.weight(.ultraLight)
+            case "200":
+                font = font.weight(.thin)
+            case "300":
+                font = font.weight(.light)
+            case "400":
+                font = font.weight(.regular)
+            case "500":
+                font = font.weight(.medium)
+            case "600":
+                font = font.weight(.semibold)
+            case "700":
+                font = font.weight(.bold)
+            case "800":
+                font = font.weight(.heavy)
+            case "900":
+                font = font.weight(.black)
+            default:
+                break
+            }
+        }
+
+        return font
+    }
+
+    func color(from style: SNSnmobileJSValue) -> Color {
+        if let colorValue = style.getForKey("color"), colorValue.isString() {
+            return Color(hex: colorValue.getString())
+        }
+        return Color.black
+    }
+
+    func applyTextStyles(_ text: Text, style: SNSnmobileJSValue) -> Text {
+        var styledText = text.font(textStyle(from: style))
+        
+        styledText = styledText.foregroundColor(color(from: style))
+        
+        if let letterSpacing = style.getForKey("letterSpacing"), letterSpacing.isNumber() {
+            styledText = styledText.kerning(CGFloat(letterSpacing.getNumber()))
+        }
+        
+        if let lineHeight = style.getForKey("lineHeight"), lineHeight.isNumber() {
+            styledText = styledText.lineSpacing(CGFloat(lineHeight.getNumber())) as! Text
+        }
+        
+        if let textAlign = style.getForKey("textAlign"), textAlign.isString() {
+            switch textAlign.getString() {
+            case "left":
+                styledText = styledText.multilineTextAlignment(.leading) as! Text
+            case "right":
+                styledText = styledText.multilineTextAlignment(.trailing) as! Text
+            case "center":
+                styledText = styledText.multilineTextAlignment(.center) as! Text
+            default:
+                break
+            }
+        }
+        
+
+
+        return styledText
+    }
+    
+    
+
+    var body: some View {
+        if let txt = props["text"],
+           txt.isString() {
+            var textView = Text(txt.getString())
+            
+            if let style = props["style"], style.isObject() {
+
+                if let textTransform = style.getForKey("textTransform"), textTransform.isString() {
+                    switch textTransform.getString() {
+                    case "uppercase":
+                        textView = Text(txt.getString().uppercased())
+                    case "lowercase":
+                        textView = Text(txt.getString().lowercased())
+                    case "capitalize":
+                        textView = Text(txt.getString().capitalized(with: nil))
+                    default:
+                        break
+                    }
+                }
+                
+                textView = applyTextStyles(textView, style: style)
+            }
+            
+            return AnyView(textView)
+        } else {
+            return AnyView(EmptyView())
+        }
+    }
+}
+

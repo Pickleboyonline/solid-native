@@ -10,27 +10,27 @@ type SolidNativeTextStyle = {
   fontSize?: number; // Font size in points
   fontStyle?: "normal" | "italic"; // Only 'normal' and 'italic' are generally supported in most systems
   fontWeight?:
-    | "normal"
-    | "bold"
-    | "100"
-    | "200"
-    | "300"
-    | "400"
-    | "500"
-    | "600"
-    | "700"
-    | "800"
-    | "900";
+  | "normal"
+  | "bold"
+  | "100"
+  | "200"
+  | "300"
+  | "400"
+  | "500"
+  | "600"
+  | "700"
+  | "800"
+  | "900";
   fontVariant?: string[]; // Not directly supported in SwiftUI. Might need special handling or be ignored.
   letterSpacing?: number; // Space between characters in points
   lineHeight?: number; // Not directly supported in SwiftUI Text views
   textAlign?: "auto" | "left" | "right" | "center" | "justify"; // 'justify' might need special handling
   textDecorationColor?: string; // Represented as a hex string
   textDecorationLine?:
-    | "none"
-    | "underline"
-    | "line-through"
-    | "underline line-through";
+  | "none"
+  | "underline"
+  | "line-through"
+  | "underline line-through";
   textDecorationStyle?: "solid" | "double" | "dotted" | "dashed"; // Not directly supported in SwiftUI, consider alternatives
   textShadowColor?: string; // Represented as a hex string
   textShadowOffset?: { width: number; height: number };
