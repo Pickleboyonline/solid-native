@@ -9,8 +9,10 @@ type MockHostReceiver struct{}
 
 func (m *MockHostReceiver) OnNodeCreated(nodeId string, nodeType string)  {}
 func (m *MockHostReceiver) DoesNodeRequireMeasuring(nodeType string) bool { return false }
-func (m *MockHostReceiver) MeasureNode(nodeId string) *Size               { return &Size{Width: 100, Height: 100} }
-func (m *MockHostReceiver) GetDeviceScreenSize() *Size                    { return &Size{Width: 375, Height: 667} }
+func (m *MockHostReceiver) MeasureNode(nodeId string, size *Size, sizeMode *SizeMode) *Size {
+	return &Size{Width: 100, Height: 100}
+}
+func (m *MockHostReceiver) GetDeviceScreenSize() *Size { return &Size{Width: 375, Height: 667} }
 func (m *MockHostReceiver) OnLayoutChange(nodeId string, layoutMetrics *LayoutMetrics) {
 	log.Printf("Layout for node id %v changed: %#v", nodeId, *layoutMetrics)
 }

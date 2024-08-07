@@ -32,6 +32,11 @@ type Size struct {
 	Height float32
 }
 
+type SizeMode struct {
+	WidthMode  int
+	HeightMode int
+}
+
 // Make Swift/Kotlin compadible initializer to return reference
 func NewSize(width, height float32) *Size {
 	return &Size{Width: width, Height: height}

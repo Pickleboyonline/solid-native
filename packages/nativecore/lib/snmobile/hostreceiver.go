@@ -11,7 +11,7 @@ type HostReceiver interface {
 	DoesNodeRequireMeasuring(nodeType string) bool
 
 	// TODO: See if we need any other info to make measure call
-	MeasureNode(nodeId string) *Size
+	MeasureNode(nodeId string, proposedSize *Size, sizeMode *SizeMode) *Size
 
 	// Need this to setup root node and calculate layout.
 	GetDeviceScreenSize() *Size

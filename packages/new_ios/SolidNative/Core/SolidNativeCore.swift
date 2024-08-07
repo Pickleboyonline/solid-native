@@ -19,6 +19,8 @@ var SharedSolidNativeCore: SolidNativeCore!
 
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
 
+    
+
     public override init() {
         super.init()
         if SharedSolidNativeCore == nil {
@@ -83,9 +85,10 @@ extension SolidNativeCore {
         viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
     }
     
-    /// TODO: Impliment
-    public func measureNode(_ nodeId: String?) -> SNSnmobileSize? {
-        return SNSnmobileSize(0, height: 0)
+
+    // TODO: Impliment
+    public func measureNode(_ nodeId: String?, proposedSize: SNSnmobileSize?, sizeMode: SNSnmobileSizeMode?) -> SNSnmobileSize? {
+        SNSnmobileSize(0, height: 0)
     }
     
     public func onChildrenChange(_ nodeId: String?, nodeIds: SNSnmobileStringArray?) {

@@ -11,11 +11,17 @@ struct SNText: SolidNativeView {
     }
     
     static func measureNode(nodeId: String) {
+        SharedSolidNativeCore.viewWrapperRegistry[nodeId]
         // TODO: Need to make function that:
         // Grabs View Wrapper from node ID
         // TODO: Make some cache any type on the wrapper for state
         
         // For text, it has to make a UIKit text element tfor this.
+        
+        let attibutes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
+        
+        let text = "Hello World!"
+        
     }
     
     var props: SolidNativeProps
@@ -141,3 +147,20 @@ struct SNText: SolidNativeView {
     }
 }
 
+
+private func sizeOfString(_ string: String, withAttributes attributes: [NSAttributedString.Key: Any], constrainedToWidth width: CGFloat? = nil) -> CGSize {
+    var size = (string as NSString).size(withAttributes: attributes)
+    
+    if let width = width {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = string.boundingRect(
+            with: constraintRect,
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: attributes,
+            context: nil
+        )
+        size = boundingBox.size
+    }
+    
+    return size
+}
