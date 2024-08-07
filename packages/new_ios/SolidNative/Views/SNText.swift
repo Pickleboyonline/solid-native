@@ -10,18 +10,37 @@ struct SNText: SolidNativeView {
         true
     }
     
-    static func measureNode(nodeId: String) {
-        SharedSolidNativeCore.viewWrapperRegistry[nodeId]
+    static func measureNode(nodeId: String) -> SNSnmobileSize {
+        let textNode = SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
         // TODO: Need to make function that:
         // Grabs View Wrapper from node ID
         // TODO: Make some cache any type on the wrapper for state
         
+        var fontSize = UIFont.systemFontSize
+        if let styles = textNode.props["style"] {
+            if let size = styles.getForKey("fontSize"), size.isNumber() {
+                fontSize = size.getNumber()
+            }
+        }
         // For text, it has to make a UIKit text element tfor this.
+        /*
+         Attributes that matter:
+         - Font (.font)
+         - Paragraph Style (.paragraphStyle)
+         - Kern (.kern)
+         */
+        let attibutes = [NSAttributedString.Key.font: fontSize]
         
-        let attibutes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]
+        let displayedText = {
+            if let text = textNode.props["text"], text.isString() {
+                return text.getString()
+            }
+            return ""
+        }()
         
-        let text = "Hello World!"
+        let size = sizeOfString(displayedText, withAttributes: attibutes)
         
+        return SNSnmobileSize(Float(size.width), height: Float(size.height))!
     }
     
     var props: SolidNativeProps

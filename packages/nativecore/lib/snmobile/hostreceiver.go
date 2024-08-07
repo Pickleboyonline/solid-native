@@ -5,6 +5,9 @@ type HostReceiver interface {
 	// When JS creates a node (or even the Mobile side)
 	// this callback is executed
 	OnNodeCreated(nodeId string, nodeType string)
+	// Will/MUST be called after the children change and are notified
+	OnNodeRemoved(nodeId string)
+
 	// Some nodes, like text & text input, need to be
 	// measured while calculating layout before
 	// sending it over the wire

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Snmobile
 
 /// Temp protocol for eventual implimention
 /// Prob would have to be a class, because we need to get the definitions of them all
@@ -20,15 +21,15 @@ protocol SolidNativeView: View where Body: View  {
     static var doesRequireMeasuring: Bool {get}
     var props: SolidNativeProps {get}
     var children: SolidNativeChildren {get}
-    static func measureNode(_ nodeId: String)
+    static func measureNode(_ nodeId: String) -> SNSnmobileSize
     init(props: SolidNativeProps, children: SolidNativeChildren)
 }
 
 extension SolidNativeView {
     static var isTextElement: Bool {false}
     static var doesRequireMeasuring: Bool { false }
-    static func measureNode(_ nodeId: String) {
-        
+    static func measureNode(_ nodeId: String) -> SNSnmobileSize {
+        .init(0, height: 0)!
     }
 }
 

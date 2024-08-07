@@ -8,6 +8,7 @@ import (
 type MockHostReceiver struct{}
 
 func (m *MockHostReceiver) OnNodeCreated(nodeId string, nodeType string)  {}
+func (m *MockHostReceiver) OnNodeRemoved(nodeId string)                   {}
 func (m *MockHostReceiver) DoesNodeRequireMeasuring(nodeType string) bool { return false }
 func (m *MockHostReceiver) MeasureNode(nodeId string, size *Size, sizeMode *SizeMode) *Size {
 	return &Size{Width: 100, Height: 100}

@@ -3,6 +3,7 @@ package snmobile
 // Two things:
 // must be able to check the type with a function call
 // must be able to grab type.
+// TODO: Make iterable (return JSValueArray)
 type JSValue struct {
 	// Anything
 	data interface{}

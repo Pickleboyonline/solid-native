@@ -106,6 +106,13 @@ extension SolidNativeCore {
         viewWrapperRegistry[nodeId!] = SolidNativeViewWrapper(viewType: viewType)
     }
     
+    // TODO: Impliment me!
+    public func onNodeRemoved(_ nodeId: String?) {
+        // let viewType = viewTypeRegistry[nodeType!]!
+        
+        // viewWrapperRegistry[nodeId!] = SolidNativeViewWrapper(viewType: viewType)
+    }
+    
     public func onPropUpdated(_ nodeId: String?, key: String?, value: SNSnmobileJSValue?) {
         // print("For node \(nodeId) key changed! \(key)")
         viewWrapperRegistry[nodeId!]!.props[key!] = value!
