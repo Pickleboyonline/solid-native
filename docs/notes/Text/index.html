@@ -2,14 +2,14 @@
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation</title>
+    <title>Text</title>
 
     <meta name="supported-color-schemes" content="light dark">
     <meta name="theme-color" content="hsl(220, 20%, 100%)" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="hsl(220, 20%, 10%)" media="(prefers-color-scheme: dark)">
 
     <link rel="stylesheet" href="/solid-native/pagefind/pagefind-ui.css"><link rel="stylesheet" href="/solid-native/styles.css">
-    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Navigation/">
+    <link rel="canonical" href="https://pickleboyonline.github.com/solid-native/notes/Text/">
     
   <script type="text/javascript" src="/solid-native/pagefind/pagefind-ui.js"></script><script type="text/javascript">window.addEventListener('DOMContentLoaded',()=>{new PagefindUI({"element":"#search","showImages":false,"excerptLength":0,"showEmptyFilters":true,"showSubResults":false,"resetStyles":true,"bundlePath":"/solid-native/pagefind/","baseUrl":"/solid-native/"});});</script><link rel="icon" sizes="48x48" href="/solid-native/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/solid-native/apple-touch-icon.png">
@@ -231,7 +231,7 @@
     
 
 
-  <a aria-current="page" href="/solid-native/notes/Navigation/">
+  <a href="/solid-native/notes/Navigation/">
     
     Navigation
   </a>
@@ -273,7 +273,7 @@
     
 
 
-  <a href="/solid-native/notes/Text/">
+  <a aria-current="page" href="/solid-native/notes/Text/">
     
     Text
   </a>
@@ -328,11 +328,22 @@
 
         <div class="body">
           
-            <h1>Navigation</h1>
+            <h1>Text</h1>
           
 
           
-            <p class="emptyState">The page <code>/notes/Navigation/</code> is empty</p>
+            <p>Need to create a <code>measureNode</code> function for the text component (and text layout).</p>
+<p>Essentially, I need to create a function that receives the props of text. For now, we'll get fontSize.</p>
+<p>Ok, now I was able to get the font size of a text component.</p>
+<p>I'll try to replicate what the text view is doing when its contrained like that. Maybe its being clipped?</p>
+<p>Not exactly sure what react native does if the text is overflown.</p>
+<p>Yoga does know size, but it needs to work on the text itself and its rendering process.</p>
+<p>Expected behavior:
+Text should clip when the frame is below, similar to how the other system works.</p>
+<p>Text DOES clip and respect measurements.
+Its really more an issue of UIKit size vs SwiftUI. Need to ensure the styles match up, but otherwise fine.</p>
+<p>Done =&gt; just need to ensure swiftui fonts are same defaults as UIKits, but otherwise code i wrote is fine.</p>
+
           
         </div>
 

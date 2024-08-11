@@ -31,7 +31,7 @@ func TestCreateNode(t *testing.T) {
 
 	log.Println("Root node with id ", id)
 
-	snm.RegistureModules()
+	snm.RegisterModules()
 
 	err := snm.EvalJs("log('' + _SolidNativeRenderer.getRootView())")
 

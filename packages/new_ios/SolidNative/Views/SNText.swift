@@ -10,16 +10,20 @@ struct SNText: SolidNativeView {
         true
     }
     
-    static func measureNode(nodeId: String) -> SNSnmobileSize {
+    static var doesRequireMeasuring: Bool {
+        true
+    }
+    
+    static func measureNode(_ nodeId: String) -> SNSnmobileSize {
         let textNode = SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
         // TODO: Need to make function that:
         // Grabs View Wrapper from node ID
         // TODO: Make some cache any type on the wrapper for state
         
-        var fontSize = UIFont.systemFontSize
+        var fontSize: CGFloat = UIFont.systemFontSize
         if let styles = textNode.props["style"] {
             if let size = styles.getForKey("fontSize"), size.isNumber() {
-                fontSize = size.getNumber()
+                fontSize = CGFloat(size.getNumber())
             }
         }
         // For text, it has to make a UIKit text element tfor this.
@@ -29,7 +33,7 @@ struct SNText: SolidNativeView {
          - Paragraph Style (.paragraphStyle)
          - Kern (.kern)
          */
-        let attibutes = [NSAttributedString.Key.font: fontSize]
+        let attibutes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: fontSize)]
         
         let displayedText = {
             if let text = textNode.props["text"], text.isString() {
@@ -39,7 +43,9 @@ struct SNText: SolidNativeView {
         }()
         
         let size = sizeOfString(displayedText, withAttributes: attibutes)
-        
+        // Yoga only cares about height here:
+        print(size)
+        // return SNSnmobileSize(149.70703125, height: 10)!
         return SNSnmobileSize(Float(size.width), height: Float(size.height))!
     }
     
@@ -159,15 +165,16 @@ struct SNText: SolidNativeView {
                 textView = applyTextStyles(textView, style: style)
             }
             
-            return AnyView(textView)
+            return AnyView(textView.font( Font(UIFont.systemFont(ofSize: UIFont.systemFontSize)) ))
         } else {
             return AnyView(EmptyView())
         }
     }
 }
 
-
+// TODO: Ensure styles match with SwiftUI.
 private func sizeOfString(_ string: String, withAttributes attributes: [NSAttributedString.Key: Any], constrainedToWidth width: CGFloat? = nil) -> CGSize {
+    // var size = (string as NSString).size(withAttributes: [ .font: UIFont.systemFont(ofSize: 5)])
     var size = (string as NSString).size(withAttributes: attributes)
     
     if let width = width {

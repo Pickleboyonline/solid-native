@@ -71,7 +71,8 @@ var SharedSolidNativeCore: SolidNativeCore!
 // Conform to Protocol
 extension SolidNativeCore {
     public func doesNodeRequireMeasuring(_ nodeType: String?) -> Bool {
-        viewTypeRegistry[nodeType!]!.doesRequireMeasuring
+        let doesRequire = viewTypeRegistry[nodeType!]!.doesRequireMeasuring
+        return doesRequire
     }
     
     public func getDeviceScreenSize() -> SNSnmobileSize? {
@@ -88,7 +89,10 @@ extension SolidNativeCore {
 
     // TODO: Impliment
     public func measureNode(_ nodeId: String?, proposedSize: SNSnmobileSize?, sizeMode: SNSnmobileSizeMode?) -> SNSnmobileSize? {
-        SNSnmobileSize(0, height: 0)
+        let node = viewWrapperRegistry[nodeId!]!
+        let size = node.solidNativeViewType.measureNode(nodeId!)
+        print("Size: ", size.height)
+        return size
     }
     
     public func onChildrenChange(_ nodeId: String?, nodeIds: SNSnmobileStringArray?) {
@@ -97,6 +101,7 @@ extension SolidNativeCore {
     }
     
     public func onLayoutChange(_ nodeId: String?, layoutMetrics: SNSnmobileLayoutMetrics?) {
+        print("Layout Metrics: ", layoutMetrics?.width, layoutMetrics?.height)
         viewWrapperRegistry[nodeId!]!.layoutMetrics = layoutMetrics!
     }
     

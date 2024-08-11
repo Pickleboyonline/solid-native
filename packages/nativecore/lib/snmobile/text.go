@@ -29,3 +29,13 @@ Steps:
 - essentially, its a list of text and associated styles. Essentially, we keep the logic cross platform
 and reduce native implementation workload.
 */
+
+type TypeDescriptor struct {
+	text   string
+	styles map[string]interface{}
+}
+
+// Given a text component, we want to go up to its parent
+func updateTextComponent() {
+
+}

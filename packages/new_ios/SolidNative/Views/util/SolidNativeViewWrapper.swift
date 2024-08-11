@@ -119,11 +119,12 @@ private struct _SolidNativeViewWrapper: View {
 
       return view.background(backgroundColor)
          .foregroundColor(foregroundColor)
-         .overlay(Border())
+         // .overlay(Border())
          .opacity(opacity)
     }
     
     var body: some View {
+        // TODO: Is there someway to remove the `AnyView` here?
         AnyView(
             style(layout(view))
                 .offset(

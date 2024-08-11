@@ -18,12 +18,13 @@ import (
 // Houses important info.
 type SolidNativeMobile struct {
 	// Get chidren
-	nodeChildren  map[string][]string
-	yogaNodes     map[string]*yoga.YGNode
-	nodeStyleKeys map[string]Set
-	nodeParent    map[string]string
-	hostReceiver  HostReceiver
-	dukContext    *duktape.Context
+	// nodeChildren  map[string][]string
+	// yogaNodes     map[string]*yoga.YGNode
+	// nodeStyleKeys map[string]Set
+	// nodeParent    map[string]string
+	nodeContainers map[string]*NodeContainer
+	hostReceiver   HostReceiver
+	dukContext     *duktape.Context
 	// Set to -1 initally, need to set before calulcating layouts
 	rootNodeId       string
 	deviceScreenSize *Size
@@ -34,40 +35,35 @@ func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 
 	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
-		yogaNodes:    make(map[string]*yoga.YGNode),
-		hostReceiver: hostReceiver,
-		dukContext:   ctx,
-		rootNodeId:   "",
-		nodeParent:   make(map[string]string),
-		nodeChildren: make(map[string][]string),
-		// We use this to keep track of when keys are removed
-		// Since Yoga works via mutation
-		nodeStyleKeys:    make(map[string]Set),
+		hostReceiver:     hostReceiver,
+		dukContext:       ctx,
+		rootNodeId:       "",
 		deviceScreenSize: hostReceiver.GetDeviceScreenSize(),
+		nodeContainers:   map[string]*NodeContainer{},
 	}
 }
 
-// TODO: Give iterator type to retreive all
-// native modules with reciever function.
+// TODO: Give iterator type to retrieve all
+// native modules with receiver function.
 // May need to use flex for type conversion here.
-func (s *SolidNativeMobile) RegistureModules() {
+func (s *SolidNativeMobile) RegisterModules() {
 	s.dukContext.PushTimers()
 	s.dukContext.PushGlobalGoFunction("log", func(c *duktape.Context) int {
 		fmt.Println(c.SafeToString(-1))
 		return 0
 	})
-	s.registureRenderer()
+	s.registerRenderer()
 }
 
 // Registure core into system, download, and runs js.
 func (s *SolidNativeMobile) RunJsFromServer(url string) error {
-	s.RegistureModules()
+	s.RegisterModules()
 	return s.downloadAndRunJs(url)
 }
 
 // Registure core into system, download, and runs js.
 func (s *SolidNativeMobile) EvalJs(jsToEval string) error {
-	s.RegistureModules()
+	s.RegisterModules()
 	return s.dukContext.PevalString(jsToEval)
 }
 
@@ -88,22 +84,22 @@ func (s *SolidNativeMobile) OnOrientationChange() {
 //
 // Use the nodetype to tell whether we need to measure it or not
 func (s *SolidNativeMobile) CreateRootNode(nodeType string) string {
-	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
+	nodeContainer := s.createNodeAndDoNotNotifyHost(nodeType)
 
-	s.rootNodeId = nodeId
+	s.rootNodeId = nodeContainer.id
 
-	yogaNode := s.yogaNodes[nodeId]
+	yogaNode := nodeContainer.yogaNode
 
 	// Ensure proper height/width
 	yogaNode.SetWidth(s.deviceScreenSize.Width)
 	yogaNode.SetHeight(s.deviceScreenSize.Height)
 
-	return nodeId
+	return nodeContainer.id
 }
 
 // Internal function to setup the rendeder
 //   - How to throw errors: https://duktape.org/api.html#concepts.9
-func (s *SolidNativeMobile) registureRenderer() {
+func (s *SolidNativeMobile) registerRenderer() {
 	// Push global object, we'll use it later
 	s.dukContext.PushGlobalObject() // => [ globalThis ]
 
@@ -268,9 +264,9 @@ func (s *SolidNativeMobile) registureRenderer() {
 // to be typically called from JS side.
 // Returns Node ID (which is an int)
 func (s *SolidNativeMobile) createNode(nodeType string) string {
-	nodeId := s.createNodeAndDoNotNotifyHost(nodeType)
-	s.hostReceiver.OnNodeCreated(nodeId, nodeType)
-	return nodeId
+	nodeContainer := s.createNodeAndDoNotNotifyHost(nodeType)
+	s.hostReceiver.OnNodeCreated(nodeContainer.id, nodeType)
+	return nodeContainer.id
 }
 
 // Updates the host receiver about the props from the JS side
@@ -280,19 +276,13 @@ func (s *SolidNativeMobile) createNode(nodeType string) string {
 // The old JS value associatted does not need to be freed because it has
 // a hashed ID. You only need to free JSValues with random temparary ones
 func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValue) error {
-	node, exists := s.yogaNodes[nodeId]
+	nodeContainer, exists := s.nodeContainers[nodeId]
 
 	if !exists {
 		return fmt.Errorf("node does not exist with id %v", nodeId)
 	}
 
-	prevKeys, exists := s.nodeStyleKeys[nodeId]
-
-	// Silent error, fix it as needed. Should not happen however.
-	if !exists {
-		prevKeys = make(Set)
-		s.nodeStyleKeys[nodeId] = prevKeys
-	}
+	prevKeys := nodeContainer.yogaStyleKeys
 
 	// Host Receiver will take in new JSValue for usage
 	// However, the view doesn't update until we use the
@@ -303,9 +293,9 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 	if key == "style" {
 		styleMap := s.convertJSToKeysAndObjects(value)
 
-		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(node, styleMap, prevKeys)
+		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(nodeContainer.yogaNode, styleMap, prevKeys)
 
-		s.nodeStyleKeys[nodeId] = newStyleKeys
+		nodeContainer.yogaStyleKeys = newStyleKeys
 
 		// Call the layout function, which will update the layout metrics and send it over
 		// to the host. It will also notify dirty yoga nodes and update all the
@@ -324,34 +314,44 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anchorId string) {
 	// If there's an anchor, insert before the anchor
 
+	parentNodeContainer := s.nodeContainers[parentId]
+	newNodeContainer := s.nodeContainers[newNodeId]
+
 	// Init to nil
-	var newChildrenIds []string
-	currentChildrenIds := s.nodeChildren[parentId]
-	parentYogaNode := s.yogaNodes[parentId]
-	newYogaNode := s.yogaNodes[newNodeId]
+	var newChildren []*NodeContainer
+
+	currentParentChildren := parentNodeContainer.children
+	parentYogaNode := parentNodeContainer.yogaNode
+	newYogaNode := newNodeContainer.yogaNode
 
 	if anchorId != "" {
-		for ind, nodeId := range currentChildrenIds {
-			if nodeId == anchorId {
-				parentYogaNode.InsertChild(newYogaNode, ind)
-				newChildrenIds = append(newChildrenIds, newNodeId, nodeId)
+		for i, n := range currentParentChildren {
+			if n.id == anchorId {
+				parentYogaNode.InsertChild(newYogaNode, i)
+				newChildren = append(newChildren, newNodeContainer, n)
 			} else {
-				newChildrenIds = append(newChildrenIds, nodeId)
+				newChildren = append(newChildren, n)
 			}
 		}
 	} else {
 		// Add to the end
-		newChildrenIds = append(newChildrenIds, currentChildrenIds...)
-		newChildrenIds = append(newChildrenIds, newNodeId)
-		ind := len(currentChildrenIds)
+		newChildren = append(newChildren, currentParentChildren...)
+		newChildren = append(newChildren, newNodeContainer)
+		ind := len(currentParentChildren)
 
 		parentYogaNode.InsertChild(newYogaNode, ind)
 	}
 
 	// Update internal children
-	s.nodeChildren[parentId] = newChildrenIds
-	s.nodeParent[newNodeId] = parentId
-	// TODO: Send node over
+	parentNodeContainer.children = newChildren
+	newNodeContainer.parent = parentNodeContainer
+
+	newChildrenIds := make([]string, 0, len(newChildren))
+
+	for _, n := range newChildren {
+		newChildrenIds = append(newChildrenIds, n.id)
+	}
+
 	s.hostReceiver.OnChildrenChange(parentId, &StringArray{
 		strings: newChildrenIds,
 	})
@@ -360,51 +360,61 @@ func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anch
 }
 
 func (s *SolidNativeMobile) removeChild(parentId string, childNodeId string) {
-	parentChildIds := s.nodeChildren[parentId]
-	newChildIds := make([]string, 0)
+	parentNodeContainer := s.nodeContainers[parentId]
+	childNodeContainer := s.nodeContainers[childNodeId]
 
-	for _, nodeId := range parentChildIds {
-		if nodeId == childNodeId {
+	parentChildren := parentNodeContainer.children
+	newChildren := make([]*NodeContainer, 0, len(parentChildren)-1)
+	newChildIds := make([]string, 0, len(parentChildren)-1)
+
+	for _, n := range parentChildren {
+		if n.id == childNodeId {
 			continue
 		}
-		newChildIds = append(newChildIds, nodeId)
+		newChildIds = append(newChildIds, n.id)
+		newChildren = append(newChildren, n)
 	}
 
-	s.nodeChildren[parentId] = newChildIds
+	parentNodeContainer.children = newChildren
 
 	// Cleanup on Yoga
-	parentYogaNode := s.yogaNodes[parentId]
-	childYogaNode := s.yogaNodes[childNodeId]
+	parentYogaNode := parentNodeContainer.yogaNode
+	childYogaNode := childNodeContainer.yogaNode
 
 	parentYogaNode.RemoveChild(childYogaNode)
-	delete(s.yogaNodes, childNodeId)
-	delete(s.nodeChildren, childNodeId)
-	delete(s.nodeStyleKeys, childNodeId)
-	delete(s.nodeParent, childNodeId)
+
+	delete(s.nodeContainers, childNodeId)
+
 	childYogaNode.Free()
 
 	s.updateLayoutAndNotify(map[string]struct{}{})
 }
 
-func (s *SolidNativeMobile) getParent(nodeId string) (parentId string, exists bool) {
-	parentId, exists = s.nodeParent[nodeId]
-	return parentId, exists
+// Returns parentId and whether or not it exists
+func (s *SolidNativeMobile) getParent(nodeId string) (string, bool) {
+
+	nodeContainer := s.nodeContainers[nodeId]
+
+	if nodeContainer.parent == nil {
+		return "", false
+	}
+
+	return nodeContainer.parent.id, true
 }
 
-func (s *SolidNativeMobile) getFirstChild(nodeId string) (firstChildId string, exists bool) {
-	nodeChildren := s.nodeChildren[nodeId]
+// Returns first child id and whether or not it exists
+func (s *SolidNativeMobile) getFirstChild(nodeId string) (string, bool) {
+	nodeChildren := s.nodeContainers[nodeId].children
 
 	length := len(nodeChildren)
 
 	if length == 0 {
-		exists = false
-		return firstChildId, exists
+		return "", false
 	}
 
-	firstChildId = nodeChildren[0]
-	exists = true
+	firstChild := nodeChildren[0]
 
-	return firstChildId, exists
+	return firstChild.id, true
 }
 
 func (s *SolidNativeMobile) getNextSibling(nodeId string) (string, bool) {
@@ -414,12 +424,12 @@ func (s *SolidNativeMobile) getNextSibling(nodeId string) (string, bool) {
 		return "", false
 	}
 
-	parentChildrenIds := s.nodeChildren[parentId]
-	parentChildrenIdLength := len(parentChildrenIds)
+	parentChildren := s.nodeContainers[parentId].children
+	parentChildrenIdLength := len(parentChildren)
 	childIndex := 0
 
-	for i, n := range parentChildrenIds {
-		if n == nodeId {
+	for i, n := range parentChildren {
+		if n.id == nodeId {
 			childIndex = i
 			break
 		}
@@ -431,7 +441,7 @@ func (s *SolidNativeMobile) getNextSibling(nodeId string) (string, bool) {
 		return "", false
 	}
 
-	return parentChildrenIds[nextSiblingIndex], true
+	return parentChildren[nextSiblingIndex].id, true
 }
 
 // ================= Private Helper Methods =========================
@@ -462,7 +472,7 @@ func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[string]struc
 		return fmt.Errorf("root node does not exist! cannot update layout")
 	}
 	rootNodeId := s.rootNodeId
-	yogaRootNode := s.yogaNodes[rootNodeId]
+	yogaRootNode := s.nodeContainers[rootNodeId].yogaNode
 
 	yogaRootNode.CalculateLayout(s.deviceScreenSize.Width, s.deviceScreenSize.Height, yoga.DirectionLTR)
 
@@ -472,21 +482,23 @@ func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[string]struc
 }
 
 func (s *SolidNativeMobile) applyLayout(nodeId string) {
-	node := s.yogaNodes[nodeId]
+	node := s.nodeContainers[nodeId]
 
-	if !node.GetHasNewLayout() {
+	yogaNode := node.yogaNode
+
+	if !yogaNode.GetHasNewLayout() {
 		return
 	}
 
-	node.SetHasNewLayout(false)
+	yogaNode.SetHasNewLayout(false)
 
 	s.hostReceiver.OnLayoutChange(nodeId, convertYogaLayoutMetricToSNLayoutMetrics(
-		yoga.NewLayoutMetrics(node),
+		yoga.NewLayoutMetrics(yogaNode),
 	))
 	s.hostReceiver.OnUpdateRevisionCount(nodeId)
 
-	for _, n := range s.nodeChildren[nodeId] {
-		s.applyLayout(n)
+	for _, n := range node.children {
+		s.applyLayout(n.id)
 	}
 }
 
