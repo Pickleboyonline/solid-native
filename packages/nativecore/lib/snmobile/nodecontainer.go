@@ -16,17 +16,19 @@ type NodeContainer struct {
 	// to default values if not set anymore
 	yogaStyleKeys Set
 
+	isText bool
 	// TODO: Maybe add a `prev` and `next`reference so prev and next
 	// TODO: sibling lookups are O(1)
 }
 
 // Creates NodeContainer with defaults for the pointer map and array types
 // along with a unique ID
-func newNodeContainer() NodeContainer {
+func newNodeContainer(isText bool) NodeContainer {
 	return NodeContainer{
 		id:            uuid.NewString(),
 		yogaNode:      yoga.NewNode(),
 		children:      make([]*NodeContainer, 0),
 		yogaStyleKeys: Set{},
+		isText:        isText,
 	}
 }

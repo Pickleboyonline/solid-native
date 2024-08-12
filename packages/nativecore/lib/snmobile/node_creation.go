@@ -8,7 +8,8 @@ import (
 // Will update NodeContainer map
 // TODO: But i do need some mechanism for the measure function
 func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost(nodeType string) *NodeContainer {
-	nodeContainer := newNodeContainer()
+	isText := s.hostReceiver.IsTextElementByNodeType(nodeType)
+	nodeContainer := newNodeContainer(isText)
 
 	// TODO: check if node type needs measure function.
 

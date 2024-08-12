@@ -184,7 +184,7 @@ func (s *SolidNativeMobile) registerRenderer() {
 	addGoFunc("isTextElement", func(ctx *duktape.Context) int {
 		// => [nodeId]
 		nodeId := ctx.GetString(-1)
-		isTextElement := s.hostReceiver.IsTextElement(nodeId)
+		isTextElement := s.hostReceiver.IsTextElementByNodeId(nodeId)
 
 		ctx.PushBoolean(isTextElement)
 
@@ -310,6 +310,8 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 	return nil
 }
 
+// ===================  UI Mutation =======================
+
 // Anchor is optional.
 func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anchorId string) {
 	// If there's an anchor, insert before the anchor
@@ -401,6 +403,8 @@ func (s *SolidNativeMobile) getParent(nodeId string) (string, bool) {
 
 	return nodeContainer.parent.id, true
 }
+
+// ===================  UI Mutation =======================
 
 // Returns first child id and whether or not it exists
 func (s *SolidNativeMobile) getFirstChild(nodeId string) (string, bool) {

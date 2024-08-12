@@ -28,5 +28,8 @@ type HostReceiver interface {
 	OnChildrenChange(nodeId string, nodeIds *StringArray)
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId string)
-	IsTextElement(nodeId string) bool
+	// TODO: Change to node type instead
+	IsTextElementByNodeId(nodeId string) bool
+	// TODO: Change to node type instead
+	IsTextElementByNodeType(nodeType string) bool
 }
