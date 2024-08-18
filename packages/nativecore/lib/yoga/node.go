@@ -20,6 +20,10 @@ func (n *YGNode) Free() {
 	C.YGNodeFree(n.node)
 }
 
+func (n *YGNode) MarkDirty() {
+	C.YGNodeMarkDirty(n.node)
+}
+
 // SetStyleDirection sets the direction style of the Yoga node.
 func (n *YGNode) SetStyleDirection(direction Direction) {
 	C.YGNodeStyleSetDirection(n.node, C.YGDirection(direction))

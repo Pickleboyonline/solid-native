@@ -25,7 +25,9 @@ type NodeContainer struct {
 	styleMap map[string]JSValue
 
 	isText bool
-
+	// Text Value
+	// Technically a prop but we have it here for easy access for `TextDescriptor` construction
+	text string
 	// TODO: Maybe add a `prev` and `next`reference so prev and next
 	// TODO: sibling lookups are O(1)
 }

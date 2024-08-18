@@ -26,6 +26,9 @@ type HostReceiver interface {
 	// Can work with bytes, but need to determine the size of the int
 	// to effectivly decode it.
 	OnChildrenChange(nodeId string, nodeIds *StringArray)
+
+	OnNodeTextDescriptorsChange(nodeId string, textDescriptors *TextDescriptorArray)
+
 	// Signifies when its time to update JetpackCompose/SwiftUI
 	OnUpdateRevisionCount(nodeId string)
 	// TODO: Change to node type instead

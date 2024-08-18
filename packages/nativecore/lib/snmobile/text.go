@@ -35,8 +35,12 @@ and reduce native implementation workload.
 */
 
 type TextDescriptor struct {
-	text   string
-	styles map[string]interface{}
+	Text   string
+	styles map[string]JSValue
+}
+
+func (t *TextDescriptor) GetStylesAsJSValue() *JSValue {
+	return &JSValue{data: t.styles}
 }
 
 // Given a text component, we want to go up to its parent
@@ -47,7 +51,10 @@ type TextDescriptor struct {
 //
 // TODO: Determine how to handle NodeDescriptor Yoga Nodes
 // TODO: Most likely just wont have one to begin with.
-func updateTextComponent(node *NodeContainer) {
+// TODO: Mark node as dirty when update parent changes.
+//
+// - Returns the text descriptor and the parent node. DOES NOT MAKE MUTATIONS ON NODES
+func generateTextDescriptor(node *NodeContainer) ([]TextDescriptor, *NodeContainer) {
 	parentNode := node
 
 	// Get top level node of text
@@ -86,12 +93,34 @@ func updateTextComponent(node *NodeContainer) {
 	}
 
 	applyStyles := func(currentNode *NodeContainer) {
-		// TODO: Basically just iterate over the keys and set the values equal to it
+		if currentNode.styleMap == nil {
+			return
+		}
+		for key, value := range currentNode.styleMap {
+			stylesBuffer[key] = value
+		}
 	}
 
 	revertStyles := func(currentNode *NodeContainer, previousNode *NodeContainer) {
-		// TODO: Iterate over currentNode queue and set the previousNode value to it
-		// TODO: If it does not have a value, simply remove it from the current styles
+		if currentNode.styleMap == nil {
+			return
+		}
+
+		if previousNode.styleMap == nil {
+			for key := range currentNode.styleMap {
+				delete(stylesBuffer, key)
+			}
+			return
+		}
+
+		for key := range currentNode.styleMap {
+			prevNodeValue, exists := previousNode.styleMap[key]
+			if exists {
+				stylesBuffer[key] = prevNodeValue
+			} else {
+				delete(stylesBuffer, key)
+			}
+		}
 	}
 
 	for len(queue) != 0 {
@@ -131,61 +160,75 @@ func updateTextComponent(node *NodeContainer) {
 			continue
 		}
 
+		// Make a new styles so that everything does point to the same buffer.
+		// ? Maybe a better way to do this?
+		newStylesBuffer := map[string]JSValue{}
+
+		for key, value := range stylesBuffer {
+			newStylesBuffer[key] = value
+		}
+
 		// Does not have children, which means its a text node
 		// Go ahead and add it to the list, we are done.
 		// TODO: Make proper text descriptor
-		textDescriptors = append(textDescriptors, TextDescriptor{})
+		textDescriptors = append(textDescriptors, TextDescriptor{
+			Text:   node.text,
+			styles: newStylesBuffer,
+		})
 		dequeueQueue()
 
 	}
 
-	// QUEUE || EXPANDED || PROCESSED_TEXT_DESCRIPTION
-	// [1] || [] || []
-	// [2, 3] || [1] || []
-	// [4, 2, 3] || [2, 1] || []
-	// [2, 3]  || [2, 1] || [4]
-	// [2, 3]  || [2, 1] || [4] => Must revert changes of 2, back to 1. In this case its just a simple reversion but later could be more difficult.
-	// => General reversion just means to take styles of previous expansion of the keys of the 2, Which isn't that bad.
-	// We revert, pop (both on queue and expanded queue) when we know its been expanded
-	// [3]  || [1] || [4]
-	// [5, 3]  || [3, 1] || [4]
-	// [5, 3]  || [3, 1] || [4, 5]
-	// [3]  || [3, 1] || [4, 5] => If already expanded and last one, just break, we are done!
-	// [3]  || [1, 2, 3] || [4, 5] => ^^^ Exit
-
-	/**
-	<Text style={{color:"red"}}> <= 1
-		<Text style={{color:"blue"}}>4</Text> <=2
-		<Text style={{color:"blue"}}>5</Text> <=3
-	</Text>
-	*/
-
-	// Goal: Generate an array of TextDescriptors that determine the props.
-	// Need to know whether node is a text component or not so we know to dispatch it.
-	// determine on text node creation.
-	// TODO: When a text component has a parent text component, DO NOT notify the host of that component
-	// Child text components are a "Shadow nodes" and the host platform is only aware of the parent.
-	// That being said, text components should NOT have a yoga node, only the upper most actually has a relationship in the tree
-	// Anyways, lets continue to the algorithm
-
-	// Next, we traverse up to the top text component tree to find the parent text component.
-	// There are two types of text nodes: containers and actualText. Containers can have children but not text. ActualText has no children, only one parent, and text
-
-	// Our job is to determine the styles. Note that inner styles always override parent styles. Another thing is that the final
-	// TextDiscriptor array is only ActualText nodes.
-
-	// Algorithm:
-
-	// Find parent text node, such that the parent is not a text node. If the node is the parent, or the node has no parents, assume given node is parent.
-
-	// Whether a node is a container or not depends on whether it has children. If children, update the styles, and add to queue. Also mark that weve expanded children.
-	// If we know that there are children and the node has been expanded, "process it" and remove it from queue
-
-	// ? Question, how is Yoga going to handle styles? may need to look at RN for this. Naive approach is to make root node have only yoga node.
-	// ? But, then some styles are not going to be there. I would say it makes it a lot easier if top text node is treated like the only node.
-	// ? If one needs more complex layouts, wrap with regular view and use flexbox. I THINK RN does allow children to have flexbox styles,
-	// ? But they tend to not work as reliably compared to wrapping with views. Can experiment with RN later.
-	// ! ^^^ Need to figure this out before working on this more.
-	// TODO: Determine how RN handles text, yoga styles, and shadow text nodes (does it dispatch it to host platform?)
-
+	return textDescriptors, parentNode
 }
+
+// Some notes on operation:
+
+// QUEUE || EXPANDED || PROCESSED_TEXT_DESCRIPTION
+// [1] || [] || []
+// [2, 3] || [1] || []
+// [4, 2, 3] || [2, 1] || []
+// [2, 3]  || [2, 1] || [4]
+// [2, 3]  || [2, 1] || [4] => Must revert changes of 2, back to 1. In this case its just a simple reversion but later could be more difficult.
+// => General reversion just means to take styles of previous expansion of the keys of the 2, Which isn't that bad.
+// We revert, pop (both on queue and expanded queue) when we know its been expanded
+// [3]  || [1] || [4]
+// [5, 3]  || [3, 1] || [4]
+// [5, 3]  || [3, 1] || [4, 5]
+// [3]  || [3, 1] || [4, 5] => If already expanded and last one, just break, we are done!
+// [3]  || [1, 2, 3] || [4, 5] => ^^^ Exit
+
+/**
+<Text style={{color:"red"}}> <= 1
+	<Text style={{color:"blue"}}>4</Text> <=2
+	<Text style={{color:"blue"}}>5</Text> <=3
+</Text>
+*/
+
+// Goal: Generate an array of TextDescriptors that determine the props.
+// Need to know whether node is a text component or not so we know to dispatch it.
+// determine on text node creation.
+// TODO: When a text component has a parent text component, DO NOT notify the host of that component
+// Child text components are a "Shadow nodes" and the host platform is only aware of the parent.
+// That being said, text components should NOT have a yoga node, only the upper most actually has a relationship in the tree
+// Anyways, lets continue to the algorithm
+
+// Next, we traverse up to the top text component tree to find the parent text component.
+// There are two types of text nodes: containers and actualText. Containers can have children but not text. ActualText has no children, only one parent, and text
+
+// Our job is to determine the styles. Note that inner styles always override parent styles. Another thing is that the final
+// TextDiscriptor array is only ActualText nodes.
+
+// Algorithm:
+
+// Find parent text node, such that the parent is not a text node. If the node is the parent, or the node has no parents, assume given node is parent.
+
+// Whether a node is a container or not depends on whether it has children. If children, update the styles, and add to queue. Also mark that weve expanded children.
+// If we know that there are children and the node has been expanded, "process it" and remove it from queue
+
+// ? Question, how is Yoga going to handle styles? may need to look at RN for this. Naive approach is to make root node have only yoga node.
+// ? But, then some styles are not going to be there. I would say it makes it a lot easier if top text node is treated like the only node.
+// ? If one needs more complex layouts, wrap with regular view and use flexbox. I THINK RN does allow children to have flexbox styles,
+// ? But they tend to not work as reliably compared to wrapping with views. Can experiment with RN later.
+// ! ^^^ Need to figure this out before working on this more.
+// TODO: Determine how RN handles text, yoga styles, and shadow text nodes (does it dispatch it to host platform?)

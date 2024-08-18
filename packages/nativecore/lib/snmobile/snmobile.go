@@ -298,13 +298,20 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 		nodeContainer.styleMap = newStyleMap
 
 		// TODO: Update the text styles here.
+		if nodeContainer.isText {
+			s.updateHostOfTextDescriptor(nodeContainer)
+		}
 
 		// Call the layout function, which will update the layout metrics and send it over
 		// to the host. It will also notify dirty yoga nodes and update all the
 		// revision counts needed.
-		s.updateLayoutAndNotify(map[string]struct{}{
-			nodeId: {},
-		})
+		s.updateLayoutAndNotify()
+		return nil
+	}
+
+	if key == "text" && nodeContainer.isText {
+		s.updateHostOfTextDescriptor(nodeContainer)
+		s.updateLayoutAndNotify()
 		return nil
 	}
 
@@ -316,6 +323,10 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 
 // Anchor is optional.
 func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anchorId string) {
+	// If its a text node we need special handling.
+	// If the parent is a text node, do NOT attach a Yoga node. but DO keep the node in the tree.
+	// Also, we do NOT need to
+
 	// If there's an anchor, insert before the anchor
 
 	parentNodeContainer := s.nodeContainers[parentId]
@@ -328,10 +339,18 @@ func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anch
 	parentYogaNode := parentNodeContainer.yogaNode
 	newYogaNode := newNodeContainer.yogaNode
 
+	// Will not insert yoga node if its a text component
+	insertChildYogaNode := func(insertionIndex int) {
+		if parentNodeContainer.isText {
+			return
+		}
+		parentYogaNode.InsertChild(newYogaNode, insertionIndex)
+	}
+
 	if anchorId != "" {
 		for i, n := range currentParentChildren {
 			if n.id == anchorId {
-				parentYogaNode.InsertChild(newYogaNode, i)
+				insertChildYogaNode(i)
 				newChildren = append(newChildren, newNodeContainer, n)
 			} else {
 				newChildren = append(newChildren, n)
@@ -343,24 +362,28 @@ func (s *SolidNativeMobile) insertBefore(parentId string, newNodeId string, anch
 		newChildren = append(newChildren, newNodeContainer)
 		ind := len(currentParentChildren)
 
-		parentYogaNode.InsertChild(newYogaNode, ind)
+		insertChildYogaNode(ind)
 	}
 
 	// Update internal children
 	parentNodeContainer.children = newChildren
 	newNodeContainer.parent = parentNodeContainer
 
-	newChildrenIds := make([]string, 0, len(newChildren))
+	if !parentNodeContainer.isText {
+		newChildrenIds := make([]string, 0, len(newChildren))
 
-	for _, n := range newChildren {
-		newChildrenIds = append(newChildrenIds, n.id)
+		for _, n := range newChildren {
+			newChildrenIds = append(newChildrenIds, n.id)
+		}
+
+		s.hostReceiver.OnChildrenChange(parentId, &StringArray{
+			values: newChildrenIds,
+		})
+	} else {
+		s.updateHostOfTextDescriptor(parentNodeContainer)
 	}
 
-	s.hostReceiver.OnChildrenChange(parentId, &StringArray{
-		strings: newChildrenIds,
-	})
-
-	s.updateLayoutAndNotify(map[string]struct{}{})
+	s.updateLayoutAndNotify()
 }
 
 func (s *SolidNativeMobile) removeChild(parentId string, childNodeId string) {
@@ -385,13 +408,34 @@ func (s *SolidNativeMobile) removeChild(parentId string, childNodeId string) {
 	parentYogaNode := parentNodeContainer.yogaNode
 	childYogaNode := childNodeContainer.yogaNode
 
-	parentYogaNode.RemoveChild(childYogaNode)
+	// If parent is a text node, dont worry about removing the child, it doesn't exist
+	// (see insertBefore)
+	if !parentNodeContainer.isText {
+		parentYogaNode.RemoveChild(childYogaNode)
+	}
 
 	delete(s.nodeContainers, childNodeId)
 
 	childYogaNode.Free()
 
-	s.updateLayoutAndNotify(map[string]struct{}{})
+	// Need to:
+	// - Update the text descriptors (if that parent is a text)
+	// - Notify the host that the children have changed and the node is removed. (parent)
+	//		- NOTE: If the parent is a text node and its parent is not, that means that
+	//				Does not have children, so no notification is necessary.
+	//				So, basically if its a
+
+	if !parentNodeContainer.isText {
+		s.hostReceiver.OnChildrenChange(parentId, &StringArray{
+			values: newChildIds,
+		})
+		s.hostReceiver.OnNodeRemoved(childNodeId)
+	} else {
+		// Same as
+		s.updateHostOfTextDescriptor(parentNodeContainer)
+	}
+
+	s.updateLayoutAndNotify()
 }
 
 // Returns parentId and whether or not it exists
@@ -452,28 +496,13 @@ func (s *SolidNativeMobile) getNextSibling(nodeId string) (string, bool) {
 
 // ================= Private Helper Methods =========================
 
-// Style is the only prop that relates to layout info
-// Note: we want to batch layout + any other data change
-// Data change happens first
-// Then layout must be calc.
-// If node is dirty and traversed, send layout + data
-// If node was not data and data still needed to be send, send it over.
-// ! Generally, this happens over a single thread in the call stack
-// ! so SwiftUI/Compose shouldnt notice until call stack is empty, but just be
-// ! aware.
-// ! Example change:
-// 1. Font Size change
-// 2. Font size sent to
-//
-
 // Call after a prop is changed related to layout/style
 //
-// # modifiedNodes:
+// # Note:
 //
-// Serves as a way to mark which nodes are dirty since sometimes
-// the yoga layout does not change as a result. We still want to dispatch to the
-// host that something changed (update revision count)
-func (s *SolidNativeMobile) updateLayoutAndNotify(modifiedNodes map[string]struct{}) error {
+// Be sure to mark a node as dirty with the `YGNode.MarkDirty` function
+// If you've update something that causes the MeasureFunction to return a different result
+func (s *SolidNativeMobile) updateLayoutAndNotify() error {
 	if s.rootNodeId == "" {
 		return fmt.Errorf("root node does not exist! cannot update layout")
 	}
@@ -551,4 +580,18 @@ func (s *SolidNativeMobile) downloadAndRunJs(url string) error {
 	// fmt.Print(jsToEval)
 
 	return s.dukContext.PevalString(jsToEval)
+}
+
+// Note that `parentNodeContainer` need be a text node, but does not have to be the parent of the
+// text sub tree.
+func (s *SolidNativeMobile) updateHostOfTextDescriptor(parentNodeContainer *NodeContainer) {
+	// We now need to update the text descriptor on the parent text node (within the text node subview tree)
+	textDescriptors, parentNodeInTextSubTree := generateTextDescriptor(parentNodeContainer)
+	// Need to mark dirty so Yoga will want to recalculate the layout.
+	// Once the Host gets text descriptors it's measure function will return the appropriate size
+	// when we calculate the yoga layout
+	parentNodeInTextSubTree.yogaNode.MarkDirty()
+	s.hostReceiver.OnNodeTextDescriptorsChange(parentNodeInTextSubTree.id, &TextDescriptorArray{
+		values: textDescriptors,
+	})
 }
