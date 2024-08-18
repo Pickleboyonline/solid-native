@@ -282,7 +282,7 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 		return fmt.Errorf("node does not exist with id %v", nodeId)
 	}
 
-	prevKeys := nodeContainer.yogaStyleKeys
+	prevStyleMap := nodeContainer.styleMap
 
 	// Host Receiver will take in new JSValue for usage
 	// However, the view doesn't update until we use the
@@ -291,11 +291,13 @@ func (s *SolidNativeMobile) setNodeProp(nodeId string, key string, value *JSValu
 
 	// Update flex style and notify of new layout metrics
 	if key == "style" {
-		styleMap := s.convertJSToKeysAndObjects(value)
+		newStyleMap := s.convertJSToKeysAndObjects(value)
 
-		newStyleKeys := updateNodeStyleAndReturnNewStyleKeys(nodeContainer.yogaNode, styleMap, prevKeys)
+		updateNodeStyleAndReturnNewStyleKeys(nodeContainer.yogaNode, newStyleMap, prevStyleMap)
 
-		nodeContainer.yogaStyleKeys = newStyleKeys
+		nodeContainer.styleMap = newStyleMap
+
+		// TODO: Update the text styles here.
 
 		// Call the layout function, which will update the layout metrics and send it over
 		// to the host. It will also notify dirty yoga nodes and update all the

@@ -8,7 +8,7 @@ import (
 type Set map[string]struct{}
 
 // UpdateNodeStyle updates the YGNode based on the JSValue style object.
-func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map[string]JSValue, prevKeys Set) Set {
+func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, newStyleMap map[string]JSValue, prevStyleMap map[string]JSValue) {
 	// Define default value functions
 	// TODO: Get to be able to set something as undefined
 	defaultValueSetters := map[string]func(){
@@ -76,7 +76,7 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 	newKeys := make(map[string]struct{})
 
 	// Process the style object
-	for key, value := range styleJSValueMap {
+	for key, value := range newStyleMap {
 		newKeys[key] = struct{}{}
 
 		switch key {
@@ -458,15 +458,14 @@ func updateNodeStyleAndReturnNewStyleKeys(node *yoga.YGNode, styleJSValueMap map
 	}
 
 	// Reset styles that are no longer present
-	for key := range prevKeys {
-		if _, exists := styleJSValueMap[key]; !exists {
+	for key := range prevStyleMap {
+		if _, exists := newStyleMap[key]; !exists {
 			if setter, found := defaultValueSetters[key]; found {
 				setter()
 			}
 		}
 	}
 
-	return newKeys
 }
 
 type dimensionValueHandlers struct {

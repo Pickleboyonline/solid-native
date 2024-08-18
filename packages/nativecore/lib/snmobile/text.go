@@ -1,5 +1,9 @@
 package snmobile
 
+import (
+	"slices"
+)
+
 /*
 TODO:
 We need to create a text struct that outlines the applied text styles given a peice of text.
@@ -30,7 +34,7 @@ Steps:
 and reduce native implementation workload.
 */
 
-type TypeDescriptor struct {
+type TextDescriptor struct {
 	text   string
 	styles map[string]interface{}
 }
@@ -40,7 +44,122 @@ type TypeDescriptor struct {
 //   - InsertBefore
 //   - RemoveChild
 //   - SetNodeProp
-func updateTextComponent() {
+//
+// TODO: Determine how to handle NodeDescriptor Yoga Nodes
+// TODO: Most likely just wont have one to begin with.
+func updateTextComponent(node *NodeContainer) {
+	parentNode := node
+
+	// Get top level node of text
+	for {
+		if parentNode.parent == nil {
+			break
+		}
+
+		if !parentNode.parent.isText {
+			break
+		}
+
+		parentNode = parentNode.parent
+	}
+
+	// More of a stack
+	textDescriptors := make([]TextDescriptor, 0)
+
+	// Used to determine whether the node has been fully processed.
+	hasExpandedChildrenMap := map[*NodeContainer]struct{}{}
+
+	queue := make([]*NodeContainer, 0)
+
+	// Used to maintain styles
+	expandedQueue := make([]*NodeContainer, 0)
+
+	// Used for new text
+	stylesBuffer := map[string]JSValue{}
+
+	// bruh
+	dequeueQueue := func() {
+		queue = slices.Delete(queue, 0, 1)
+	}
+	dequeueExpandedQueue := func() {
+		expandedQueue = slices.Delete(expandedQueue, 0, 1)
+	}
+
+	applyStyles := func(currentNode *NodeContainer) {
+		// TODO: Basically just iterate over the keys and set the values equal to it
+	}
+
+	revertStyles := func(currentNode *NodeContainer, previousNode *NodeContainer) {
+		// TODO: Iterate over currentNode queue and set the previousNode value to it
+		// TODO: If it does not have a value, simply remove it from the current styles
+	}
+
+	for len(queue) != 0 {
+		// If node has children, its not text.
+		currentNode := queue[0]
+
+		_, hasExpanded := hasExpandedChildrenMap[currentNode]
+
+		// Node is last in queue and already expanded. We can go ahead and end it.
+		if hasExpanded && len(queue) == 1 {
+			break
+		}
+
+		// Node has already expanded, which means we need to revert its styles
+		// and pop from stack
+		if hasExpanded {
+			// This requires the current and previous expanded node
+			currentExpandedNode := currentNode
+			prevExpandedNode := expandedQueue[1]
+			revertStyles(currentExpandedNode, prevExpandedNode)
+
+			// Go ahead an dequeue the expanded and queue
+			dequeueExpandedQueue()
+			dequeueQueue()
+			continue
+		}
+
+		// Node has children and is this a container and has no
+		// underlying text.
+		if len(currentNode.children) != 0 {
+			dequeueQueue()
+			queue = slices.Insert(queue, 0, currentNode.children...)
+			// Mark that its been expanded so we don't reprocess it.
+			hasExpandedChildrenMap[currentNode] = struct{}{}
+			expandedQueue = slices.Insert(expandedQueue, 0, currentNode)
+			applyStyles(currentNode)
+			continue
+		}
+
+		// Does not have children, which means its a text node
+		// Go ahead and add it to the list, we are done.
+		// TODO: Make proper text descriptor
+		textDescriptors = append(textDescriptors, TextDescriptor{})
+		dequeueQueue()
+
+	}
+
+	// QUEUE || EXPANDED || PROCESSED_TEXT_DESCRIPTION
+	// [1] || [] || []
+	// [2, 3] || [1] || []
+	// [4, 2, 3] || [2, 1] || []
+	// [2, 3]  || [2, 1] || [4]
+	// [2, 3]  || [2, 1] || [4] => Must revert changes of 2, back to 1. In this case its just a simple reversion but later could be more difficult.
+	// => General reversion just means to take styles of previous expansion of the keys of the 2, Which isn't that bad.
+	// We revert, pop (both on queue and expanded queue) when we know its been expanded
+	// [3]  || [1] || [4]
+	// [5, 3]  || [3, 1] || [4]
+	// [5, 3]  || [3, 1] || [4, 5]
+	// [3]  || [3, 1] || [4, 5] => If already expanded and last one, just break, we are done!
+	// [3]  || [1, 2, 3] || [4, 5] => ^^^ Exit
+
+	/**
+	<Text style={{color:"red"}}> <= 1
+		<Text style={{color:"blue"}}>4</Text> <=2
+		<Text style={{color:"blue"}}>5</Text> <=3
+	</Text>
+	*/
+
 	// Goal: Generate an array of TextDescriptors that determine the props.
 	// Need to know whether node is a text component or not so we know to dispatch it.
 	// determine on text node creation.

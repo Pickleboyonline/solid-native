@@ -20,7 +20,8 @@ func (m *MockHostReceiver) OnLayoutChange(nodeId string, layoutMetrics *LayoutMe
 func (m *MockHostReceiver) OnPropUpdated(nodeId string, key string, value *JSValue) {}
 func (m *MockHostReceiver) OnChildrenChange(nodeId string, nodeIds *StringArray)    {}
 func (m *MockHostReceiver) OnUpdateRevisionCount(nodeId string)                     {}
-func (m *MockHostReceiver) IsTextElement(nodeId string) bool                        { return false }
+func (m *MockHostReceiver) IsTextElementByNodeId(nodeId string) bool                { return false }
+func (m *MockHostReceiver) IsTextElementByNodeType(nodeType string) bool            { return false }
 
 func TestCreateNode(t *testing.T) {
 	hostReceiver := &MockHostReceiver{}
