@@ -10,7 +10,7 @@ type JSValue struct {
 }
 
 // Easier way to make a JSValue
-// Not accessable from host platform (if Swift/ObjC or Kotlin/Java)
+// Not accessible from host platform (if Swift/ObjC or Kotlin/Java)
 func NewJSValue(data any) JSValue {
 	return JSValue{data}
 }
@@ -56,8 +56,28 @@ func (v *JSValue) IsObject() bool {
 	return ok
 }
 
-// TODO: Impliment
 func (v *JSValue) GetJSValueForKey(key string) *JSValue {
-	obj := v.data.(map[string]interface{})
+	obj, ok := v.data.(map[string]interface{})
+
+	if !ok {
+		return &JSValue{}
+	}
+
 	return &JSValue{data: obj[key]}
+}
+
+func (v *JSValue) GetObjectKeys() *StringArray {
+	m, ok := v.data.(map[string]interface{})
+
+	if !ok {
+		return &StringArray{}
+	}
+
+	keys := []string{}
+
+	for k := range m {
+		keys = append(keys, k)
+	}
+
+	return &StringArray{values: keys}
 }
