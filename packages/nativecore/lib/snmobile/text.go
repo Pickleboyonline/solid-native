@@ -1,9 +1,5 @@
 package snmobile
 
-import (
-	"slices"
-)
-
 /*
 TODO:
 We need to create a text struct that outlines the applied text styles given a peice of text.
@@ -71,121 +67,93 @@ func generateTextDescriptor(node *NodeContainer) ([]TextDescriptor, *NodeContain
 	}
 
 	// More of a stack
-	textDescriptors := make([]TextDescriptor, 0)
-
-	// Used to determine whether the node has been fully processed.
-	hasExpandedChildrenMap := map[*NodeContainer]struct{}{}
-
-	queue := make([]*NodeContainer, 0)
-
-	// Used to maintain styles
-	expandedQueue := make([]*NodeContainer, 0)
-
-	// Used for new text
-	stylesBuffer := map[string]JSValue{}
-
-	// bruh
-	dequeueQueue := func() {
-		queue = slices.Delete(queue, 0, 1)
-	}
-	dequeueExpandedQueue := func() {
-		expandedQueue = slices.Delete(expandedQueue, 0, 1)
-	}
-
-	applyStyles := func(currentNode *NodeContainer) {
-		if currentNode.styleMap == nil {
-			return
-		}
-		for key, value := range currentNode.styleMap {
-			stylesBuffer[key] = value
-		}
-	}
-
-	revertStyles := func(currentNode *NodeContainer, previousNode *NodeContainer) {
-		if currentNode.styleMap == nil {
-			return
-		}
-
-		if previousNode.styleMap == nil {
-			for key := range currentNode.styleMap {
-				delete(stylesBuffer, key)
-			}
-			return
-		}
-
-		for key := range currentNode.styleMap {
-			prevNodeValue, exists := previousNode.styleMap[key]
-			if exists {
-				stylesBuffer[key] = prevNodeValue
-			} else {
-				delete(stylesBuffer, key)
-			}
-		}
-	}
-
-	for len(queue) != 0 {
-		// If node has children, its not text.
-		currentNode := queue[0]
-
-		_, hasExpanded := hasExpandedChildrenMap[currentNode]
-
-		// Node is last in queue and already expanded. We can go ahead and end it.
-		if hasExpanded && len(queue) == 1 {
-			break
-		}
-
-		// Node has already expanded, which means we need to revert its styles
-		// and pop from stack
-		if hasExpanded {
-			// This requires the current and previous expanded node
-			currentExpandedNode := currentNode
-			prevExpandedNode := expandedQueue[1]
-			revertStyles(currentExpandedNode, prevExpandedNode)
-
-			// Go ahead an dequeue the expanded and queue
-			dequeueExpandedQueue()
-			dequeueQueue()
-			continue
-		}
-
-		// Node has children and is this a container and has no
-		// underlying text.
-		if len(currentNode.children) != 0 {
-			dequeueQueue()
-			queue = slices.Insert(queue, 0, currentNode.children...)
-			// Mark that its been expanded so we don't reprocess it.
-			hasExpandedChildrenMap[currentNode] = struct{}{}
-			expandedQueue = slices.Insert(expandedQueue, 0, currentNode)
-			applyStyles(currentNode)
-			continue
-		}
-
-		// Make a new styles so that everything does point to the same buffer.
-		// ? Maybe a better way to do this?
-		newStylesBuffer := map[string]JSValue{}
-
-		for key, value := range stylesBuffer {
-			newStylesBuffer[key] = value
-		}
-
-		// Does not have children, which means its a text node
-		// Go ahead and add it to the list, we are done.
-		// TODO: Make proper text descriptor
-		textDescriptors = append(textDescriptors, TextDescriptor{
-			Text:   node.text,
-			styles: newStylesBuffer,
-		})
-		dequeueQueue()
-
-	}
+	textDescriptors := generateTextDescriptorRecursively(parentNode, nil)
 
 	return textDescriptors, parentNode
+}
+
+// Pass in parent, get text descriptor. Another benifit is that you can use channels for
+// Fan out, fan in.
+// Node -> []TextDescriptor
+// Styles can be `nil`. If it is, it will try to use the styles from the node (node always has empty styles, so
+// long as you made it with the `newNodeContainer`)
+func generateTextDescriptorRecursively(node *NodeContainer, styles map[string]JSValue) []TextDescriptor {
+	// Could make better by making cap == node.children length
+	var textDescriptor []TextDescriptor
+
+	// In general, we want override incoming styles. They can be nil
+	var newStyles map[string]JSValue
+
+	if styles == nil {
+		newStyles = node.styleMap
+	} else if node.styleMap == nil || len(node.styleMap) == 0 {
+		newStyles = styles
+	} else {
+		newStyles = map[string]JSValue{}
+		// Override them
+		for k, v := range styles {
+			newStyles[k] = v
+		}
+
+		for k, v := range node.styleMap {
+			newStyles[k] = v
+		}
+	}
+
+	if (node.children == nil || len(node.children) == 0) && node.text != "" {
+		textDescriptor = []TextDescriptor{
+			{
+				Text:   node.text,
+				styles: newStyles,
+			},
+		}
+		return textDescriptor
+	}
+
+	textDescriptor = make([]TextDescriptor, 0, len(node.children))
+
+	type ChannelResult struct {
+		index int
+		data  []TextDescriptor
+	}
+
+	resultChan := make(chan ChannelResult)
+	resultsBuffer := make([][]TextDescriptor, len(node.children))
+
+	// TODO: determine if channel is better here.
+	for i, n := range node.children {
+		go func(i int, n *NodeContainer) {
+			resultChan <- ChannelResult{
+				index: i,
+				data:  generateTextDescriptorRecursively(n, newStyles),
+			}
+		}(i, n)
+	}
+
+	for range node.children {
+		res := <-resultChan
+		resultsBuffer[res.index] = res.data
+	}
+
+	close(resultChan)
+
+	for _, d := range resultsBuffer {
+		textDescriptor = append(textDescriptor, d...)
+	}
+
+	return textDescriptor
+}
+
+// Same but immutable
+func generateTextDescriptorImmutable(node *NodeContainer) []TextDescriptor {
+	// textDescriptor :=
+	return make([]TextDescriptor, 0)
 }
 
 // Some notes on operation:
 
 // QUEUE || EXPANDED || PROCESSED_TEXT_DESCRIPTION
-// [1] || [] || []
+
 // [2, 3] || [1] || []
 // [4, 2, 3] || [2, 1] || []
 // [2, 3]  || [2, 1] || [4]
@@ -232,3 +200,114 @@ func generateTextDescriptor(node *NodeContainer) ([]TextDescriptor, *NodeContain
 // ? But they tend to not work as reliably compared to wrapping with views. Can experiment with RN later.
 // ! ^^^ Need to figure this out before working on this more.
 // TODO: Determine how RN handles text, yoga styles, and shadow text nodes (does it dispatch it to host platform?)
+
+// Code for queue method:
+/**
+
+
+// Used to determine whether the node has been fully processed.
+hasExpandedChildrenMap := map[*NodeContainer]struct{}{}
+
+queue := []*NodeContainer{parentNode}
+
+// Used to maintain styles
+expandedQueue := make([]*NodeContainer, 0)
+
+// Used for new text
+stylesBuffer := map[string]JSValue{}
+
+// bruh
+dequeueQueue := func() {
+	queue = slices.Delete(queue, 0, 1)
+}
+dequeueExpandedQueue := func() {
+	expandedQueue = slices.Delete(expandedQueue, 0, 1)
+}
+
+applyStyles := func(currentNode *NodeContainer) {
+	if currentNode.styleMap == nil {
+		return
+	}
+	for key, value := range currentNode.styleMap {
+		stylesBuffer[key] = value
+	}
+}
+
+revertStyles := func(currentNode *NodeContainer, previousNode *NodeContainer) {
+	if currentNode.styleMap == nil {
+		return
+	}
+
+	if previousNode.styleMap == nil {
+		for key := range currentNode.styleMap {
+			delete(stylesBuffer, key)
+		}
+		return
+	}
+
+	for key := range currentNode.styleMap {
+		prevNodeValue, exists := previousNode.styleMap[key]
+		if exists {
+			stylesBuffer[key] = prevNodeValue
+		} else {
+			delete(stylesBuffer, key)
+		}
+	}
+}
+
+for len(queue) != 0 {
+	// If node has children, its not text.
+	currentNode := queue[0]
+
+	_, hasExpanded := hasExpandedChildrenMap[currentNode]
+
+	// Node is last in queue and already expanded. We can go ahead and end it.
+	if hasExpanded && len(queue) == 1 {
+		break
+	}
+
+	// Node has already expanded, which means we need to revert its styles
+	// and pop from stack
+	if hasExpanded {
+		// This requires the current and previous expanded node
+		currentExpandedNode := currentNode
+		prevExpandedNode := expandedQueue[1]
+		revertStyles(currentExpandedNode, prevExpandedNode)
+
+		// Go ahead an dequeue the expanded and queue
+		dequeueExpandedQueue()
+		dequeueQueue()
+		continue
+	}
+
+	// Node has children and is this a container and has no
+	// underlying text.
+	if len(currentNode.children) != 0 {
+		// dequeueQueue()
+		queue = slices.Insert(queue, 0, currentNode.children...)
+		// Mark that its been expanded so we don't reprocess it.
+		hasExpandedChildrenMap[currentNode] = struct{}{}
+		expandedQueue = slices.Insert(expandedQueue, 0, currentNode)
+		applyStyles(currentNode)
+		continue
+	}
+
+	// Make a new styles so that everything does point to the same buffer.
+	// ? Maybe a better way to do this?
+	newStylesBuffer := map[string]JSValue{}
+
+	for key, value := range stylesBuffer {
+		newStylesBuffer[key] = value
+	}
+
+	// Does not have children, which means its a text node
+	// Go ahead and add it to the list, we are done.
+	// TODO: Make proper text descriptor
+	textDescriptors = append(textDescriptors, TextDescriptor{
+		Text:   currentNode.text,
+		styles: newStylesBuffer,
+	})
+	dequeueQueue()
+
+}
+*/

@@ -9,6 +9,12 @@ type JSValue struct {
 	data interface{}
 }
 
+// Easier way to make a JSValue
+// Not accessable from host platform (if Swift/ObjC or Kotlin/Java)
+func NewJSValue(data any) JSValue {
+	return JSValue{data}
+}
+
 func (v *JSValue) IsString() bool {
 	_, ok := v.data.(string)
 	return ok

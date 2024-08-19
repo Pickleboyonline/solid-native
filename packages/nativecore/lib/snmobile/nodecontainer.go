@@ -22,6 +22,8 @@ type NodeContainer struct {
 	// ? style normalization
 	// ? There are some text specific props: https://reactnative.dev/docs/text
 	// ? But not sure which ones can actually be normalized like that.
+	//
+	// ! NOTE: text and styleMaps are mutually exclusive.
 	styleMap map[string]JSValue
 
 	isText bool

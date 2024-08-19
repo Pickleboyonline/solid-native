@@ -17,15 +17,10 @@ import (
 
 // Houses important info.
 type SolidNativeMobile struct {
-	// Get chidren
-	// nodeChildren  map[string][]string
-	// yogaNodes     map[string]*yoga.YGNode
-	// nodeStyleKeys map[string]Set
-	// nodeParent    map[string]string
 	nodeContainers map[string]*NodeContainer
 	hostReceiver   HostReceiver
 	dukContext     *duktape.Context
-	// Set to -1 initally, need to set before calulcating layouts
+	// Set to "" initially, need to set before calculating layouts
 	rootNodeId       string
 	deviceScreenSize *Size
 }

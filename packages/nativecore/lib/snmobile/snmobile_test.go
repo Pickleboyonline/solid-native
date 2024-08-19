@@ -7,6 +7,11 @@ import (
 
 type MockHostReceiver struct{}
 
+// OnNodeTextDescriptorsChange implements HostReceiver.
+func (m *MockHostReceiver) OnNodeTextDescriptorsChange(nodeId string, textDescriptors *TextDescriptorArray) {
+	panic("unimplemented")
+}
+
 func (m *MockHostReceiver) OnNodeCreated(nodeId string, nodeType string)  {}
 func (m *MockHostReceiver) OnNodeRemoved(nodeId string)                   {}
 func (m *MockHostReceiver) DoesNodeRequireMeasuring(nodeType string) bool { return false }
