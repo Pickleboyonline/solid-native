@@ -26,5 +26,9 @@ func (s *SolidNativeMobile) createNodeAndDoNotNotifyHost(nodeType string) *NodeC
 			})
 	}
 
-	return &nodeContainer
+	nodeReference := &nodeContainer
+
+	s.nodeContainers[nodeReference.id] = nodeReference
+
+	return nodeReference
 }

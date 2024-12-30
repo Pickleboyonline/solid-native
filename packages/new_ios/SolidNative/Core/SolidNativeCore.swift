@@ -18,6 +18,8 @@ var SharedSolidNativeCore: SolidNativeCore!
 }
 
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
+
+    
     public func onNodeTextDescriptorsChange(_ nodeId: String?, textDescriptors: SNSnmobileTextDescriptorArray?) {
         
     }
@@ -88,8 +90,7 @@ extension SolidNativeCore {
         viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
     }
     
-    public func isTextElementByNodeType(_ nodeType: String?) -> Bool {
-        // viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
+    public func isTextElement(byNodeType nodeType: String?) -> Bool {
         viewTypeRegistry[nodeType!]!.isTextElement
     }
     
