@@ -5,8 +5,8 @@ let package = Package(
   name: "Snmobile",
   platforms: [
     // .macOS(.v10_14), .iOS(.v13),
-     .iOS(.v13),
-     .macOS(.v10_14)
+    .iOS(.v13),
+    .macOS(.v10_14),
   ],
   products: [
     .library(
@@ -15,7 +15,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/facebook/yoga.git", from: "3.0.0")
+    .package(url: "https://github.com/facebook/yoga.git", from: "3.1.0")
   ],
   targets: [
     .binaryTarget(

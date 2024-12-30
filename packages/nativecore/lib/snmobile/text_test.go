@@ -6,37 +6,6 @@ import (
 	"testing"
 )
 
-func Test_generateTextDescriptor(t *testing.T) {
-	type args struct {
-		node *NodeContainer
-	}
-	tests := []struct {
-		name  string
-		args  args
-		want  []TextDescriptor
-		want1 *NodeContainer
-	}{
-		// TODO: Add test cases.
-		{
-			name: "",
-			args: args{
-				node: nil,
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got1 := generateTextDescriptor(tt.args.node)
-			if !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("generateTextDescriptor() got = %v, want %v", got, tt.want)
-			}
-			if !reflect.DeepEqual(got1, tt.want1) {
-				t.Errorf("generateTextDescriptor() got1 = %v, want %v", got1, tt.want1)
-			}
-		})
-	}
-}
-
 // How to test me:
 // go test -timeout 30s -v -run ^TestParentTextDescriptor$ nativecore/lib/snmobile
 func TestParentTextDescriptor(t *testing.T) {
@@ -163,6 +132,6 @@ func TestOverridingStylesTextDescriptor(t *testing.T) {
 		t.Errorf("generateTextDescriptor(): \ngot1 = %v \nwant = %v", textDescriptor, want)
 	}
 
-	fmt.Printf("Text Desriptor: %#v \n", textDescriptor)
+	fmt.Printf("Text Descriptor: %#v \n", textDescriptor)
 
 }

@@ -19,10 +19,10 @@ protocol SolidNativeView: View where Body: View  {
     static var isTextElement: Bool {get}
     /// Used for things like text and textinput
     static var doesRequireMeasuring: Bool {get}
-    var props: SolidNativeProps {get}
-    var children: SolidNativeChildren {get}
+
     static func measureNode(_ nodeId: String) -> SNSnmobileSize
-    init(props: SolidNativeProps, children: SolidNativeChildren)
+    init(wrapper: SolidNativeViewWrapper)
+    var wrapper: SolidNativeViewWrapper {get}
 }
 
 extension SolidNativeView {
@@ -30,6 +30,12 @@ extension SolidNativeView {
     static var doesRequireMeasuring: Bool { false }
     static func measureNode(_ nodeId: String) -> SNSnmobileSize {
         .init(0, height: 0)!
+    }
+    var props: SolidNativeProps {
+        wrapper.props
+    }
+    var children: SolidNativeChildren {
+        wrapper.children
     }
 }
 

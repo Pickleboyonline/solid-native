@@ -12,9 +12,7 @@ struct SNView: SolidNativeView {
     
     static var name: String { "sn_view" }
     
-    var props: SolidNativeProps
-    
-    var children: SolidNativeChildren
+    let wrapper: SolidNativeViewWrapper
     
     var body: some View {
         ZStack(alignment: .topLeading) {

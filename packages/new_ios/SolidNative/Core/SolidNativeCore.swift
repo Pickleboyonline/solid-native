@@ -18,7 +18,9 @@ var SharedSolidNativeCore: SolidNativeCore!
 }
 
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
-
+    public func onNodeTextDescriptorsChange(_ nodeId: String?, textDescriptors: SNSnmobileTextDescriptorArray?) {
+        
+    }
     
 
     public override init() {
@@ -53,7 +55,7 @@ var SharedSolidNativeCore: SolidNativeCore!
         
         rootNodeId = nodeId
         
-        snmobile.registureModules()
+        snmobile.registerModules()
         
         try snmobile.runJs(fromServer: jsUrl)
         
@@ -82,8 +84,13 @@ extension SolidNativeCore {
         return SNSnmobileSize(Float(screenWidth), height: Float(screenHeight))
     }
     
-    public func isTextElement(_ nodeId: String?) -> Bool {
+    public func isTextElementByNodeId(_ nodeId: String?) -> Bool {
         viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
+    }
+    
+    public func isTextElementByNodeType(_ nodeType: String?) -> Bool {
+        // viewWrapperRegistry[nodeId!]!.solidNativeViewType.isTextElement
+        viewTypeRegistry[nodeType!]!.isTextElement
     }
     
 

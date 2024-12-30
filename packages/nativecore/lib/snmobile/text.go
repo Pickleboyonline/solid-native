@@ -68,7 +68,7 @@ func generateTextDescriptor(node *NodeContainer) ([]TextDescriptor, *NodeContain
 	return textDescriptors, parentNode
 }
 
-// Pass in parent, get text descriptor. Another benifit is that you can use channels for
+// Pass in parent, get text descriptor. Another benefit is that you can use channels for
 // Fan out, fan in.
 // Node -> []TextDescriptor
 // Styles can be `nil`. If it is, it will try to use the styles from the node (node always has empty styles, so

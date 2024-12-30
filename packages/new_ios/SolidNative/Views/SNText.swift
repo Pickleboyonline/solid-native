@@ -44,13 +44,12 @@ struct SNText: SolidNativeView {
         
         let size = sizeOfString(displayedText, withAttributes: attibutes)
         // Yoga only cares about height here:
-        print(size)
+        // print(size)
         // return SNSnmobileSize(149.70703125, height: 10)!
         return SNSnmobileSize(Float(size.width), height: Float(size.height))!
     }
     
-    var props: SolidNativeProps
-    var children: SolidNativeChildren
+    let wrapper: SolidNativeViewWrapper
 
     func textStyle(from style: SNSnmobileJSValue) -> Font {
         var font = Font.system(size: 14)

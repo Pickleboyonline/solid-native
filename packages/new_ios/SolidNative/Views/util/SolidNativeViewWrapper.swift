@@ -67,7 +67,7 @@ public class SolidNativeViewWrapper: ObservableObject {
     
     
     func render() -> some View {
-        _SolidNativeViewWrapper(wrapper: self, view: solidNativeViewType.init(props: props, children: children))
+        _SolidNativeViewWrapper(wrapper: self, view: solidNativeViewType.init(wrapper: self))
     }
 }
 

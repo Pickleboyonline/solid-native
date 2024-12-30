@@ -12,9 +12,7 @@ import SwiftUI
 struct SNButton: SolidNativeView {
     static var name: String = "sn_button"
     
-    var props: SolidNativeProps
-    
-    var children: SolidNativeChildren
+    let wrapper: SolidNativeViewWrapper
     
     func onPress() {
         print("Hello World!")
