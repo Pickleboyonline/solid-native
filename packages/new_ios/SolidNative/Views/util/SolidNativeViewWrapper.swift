@@ -6,38 +6,11 @@
 //
 
 import Foundation
-import SwiftUI
 import Snmobile
+import SwiftUI
 
 typealias SolidNativeProps = [String: SNSnmobileJSValue]
 typealias SolidNativeChildren = SNSnmobileStringArray
-
-
-extension SNSnmobileStringArray: RandomAccessCollection {
-    public typealias Element = SolidNativeViewWrapper
-    public typealias Index = Int
-    
-    public var startIndex: Index {
-        return 0
-    }
-    
-    public var endIndex: Index {
-        return length()
-    }
-    
-    public subscript(position: Index) -> Element {
-        let nodeId = get(position)
-        return SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
-    }
-    
-    public func index(after i: Index) -> Index {
-        return i + 1
-    }
-    
-    public func index(before i: Index) -> Index {
-        return i - 1
-    }
-}
 
 /// Manages Flex Layout. Nodes take in a wrapper. Wrapper takes in view struct def to instanciate
 /// View takes in view types. (Managed in render for now)
@@ -59,7 +32,6 @@ public class SolidNativeViewWrapper: ObservableObject {
         self.solidNativeViewType = viewType
     }
     
-
     /// Notify SwiftUI of changes
     func updateRevisionCount() {
         revision += 1
@@ -75,11 +47,10 @@ public class SolidNativeViewWrapper: ObservableObject {
         }
     }
     
-     @ViewBuilder func render() -> some View {
-         _SolidNativeViewWrapper(wrapper: self, view: getSolidNativeView())
+    @ViewBuilder func render() -> some View {
+        _SolidNativeViewWrapper(wrapper: self, view: getSolidNativeView())
     }
 }
-
 
 private struct _SolidNativeViewWrapper: View {
     /// Causes the update in swiftUI
@@ -89,47 +60,48 @@ private struct _SolidNativeViewWrapper: View {
     let view: any SolidNativeView
     
     func layout(_ view: some View) -> some View {
-      let layoutMetrics = wrapper.layoutMetrics
-      return view
-        .frame(
-          width: CGFloat(layoutMetrics.width),
-          height: CGFloat(layoutMetrics.height),
-          alignment: .topLeading
-        )
+        let layoutMetrics = wrapper.layoutMetrics
+        return view
+            .frame(
+                width: CGFloat(layoutMetrics.width),
+                height: CGFloat(layoutMetrics.height),
+                alignment: .topLeading
+            )
     }
 
     func style(_ view: some View) -> some View {
-      let props = wrapper.props
-      var backgroundColor = Color.clear
+        let props = wrapper.props
+        var backgroundColor = Color.clear
         
         var foregroundColor = Color.white
         var opacity = 1.0
         
-        
         if let style = props["style"],
-           style.isObject() {
-            
+           style.isObject()
+        {
             if let bg = style.getForKey("backgroundColor"),
-               bg.isString() {
+               bg.isString()
+            {
                 backgroundColor = Color(hex: bg.getString())
             }
             
             if let fg = style.getForKey("color"),
-               fg.isString() {
+               fg.isString()
+            {
                 foregroundColor = Color(hex: fg.getString())
             }
             
             if let o = style.getForKey("opacity"),
-               o.isNumber() {
+               o.isNumber()
+            {
                 opacity = o.getNumber()
             }
         }
     
-
-      return view.background(backgroundColor)
-         .foregroundColor(foregroundColor)
-         .overlay(Border())
-         .opacity(opacity)
+        return view.background(backgroundColor)
+            .foregroundColor(foregroundColor)
+            .overlay(Border())
+            .opacity(opacity)
     }
     
     var body: some View {
@@ -139,61 +111,58 @@ private struct _SolidNativeViewWrapper: View {
                 x: CGFloat(wrapper.layoutMetrics.x),
                 y: CGFloat(wrapper.layoutMetrics.y)
             ).ignoresSafeArea(.all))
-
     }
     
     func Border() -> some View {
-      // TODO: Pull from props
-      let width = 0.0
-      let color = Color.clear
+        // TODO: Pull from props
+        let width = 0.0
+        let color = Color.clear
 
-      return (
-        Rectangle()
-          .fill(Color.clear)
-          .overlay(
+        return
             Rectangle()
-              .frame(
-                width: nil,
-                height: width,
-                alignment: .top
-              )
-              .foregroundColor(color),
-            alignment: .top
-          )
-          .overlay(
-            Rectangle()
-              .frame(
-                width: width,
-                height: nil,
-                alignment: .trailing
-              )
-              .foregroundColor(color),
-            alignment: .trailing
-          )
-          .overlay(
-            Rectangle()
-              .frame(
-                width: nil,
-                height: width,
-                alignment: .bottom
-              )
-              .foregroundColor(color),
-            alignment: .bottom
-          )
-          .overlay(
-            Rectangle()
-              .frame(
-                width: width,
-                height: nil,
-                alignment: .leading
-              )
-              .foregroundColor(color),
-            alignment: .leading
-          )
-      )
+                .fill(Color.clear)
+                .overlay(
+                    Rectangle()
+                        .frame(
+                            width: nil,
+                            height: width,
+                            alignment: .top
+                        )
+                        .foregroundColor(color),
+                    alignment: .top
+                )
+                .overlay(
+                    Rectangle()
+                        .frame(
+                            width: width,
+                            height: nil,
+                            alignment: .trailing
+                        )
+                        .foregroundColor(color),
+                    alignment: .trailing
+                )
+                .overlay(
+                    Rectangle()
+                        .frame(
+                            width: nil,
+                            height: width,
+                            alignment: .bottom
+                        )
+                        .foregroundColor(color),
+                    alignment: .bottom
+                )
+                .overlay(
+                    Rectangle()
+                        .frame(
+                            width: width,
+                            height: nil,
+                            alignment: .leading
+                        )
+                        .foregroundColor(color),
+                    alignment: .leading
+                )
     }
 }
-
 
 /**
  Full border implementation:

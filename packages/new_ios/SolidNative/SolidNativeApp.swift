@@ -5,12 +5,11 @@
 //  Created by Imran Shitta-Bey on 6/20/24.
 //
 
-import SwiftUI
 import Snmobile
+import SwiftUI
 
 @main
 struct SolidNativeApp: App {
-    
     let core: SolidNativeCore
     
     init() {
@@ -21,7 +20,6 @@ struct SolidNativeApp: App {
         } catch {
             print("Unexpected error: \(error).")
         }
-        
     }
     
     var body: some Scene {

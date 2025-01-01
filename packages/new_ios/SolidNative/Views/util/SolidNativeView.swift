@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import Snmobile
+import SwiftUI
 
 /// Temp protocol for eventual implimention
 /// Prob would have to be a class, because we need to get the definitions of them all
@@ -15,38 +15,33 @@ import Snmobile
 /// Callbacks are just refs
 protocol SolidNativeView {
     /// Needs to be in lower snake case
-    static var name: String {get}
-    static var isTextElement: Bool {get}
+    static var name: String { get }
+    static var isTextElement: Bool { get }
     /// Used for things like text and textinput
-    static var doesRequireMeasuring: Bool {get}
+    static var doesRequireMeasuring: Bool { get }
 
     static func measureNode(_ nodeId: String) -> SNSnmobileSize
-    
-    init(wrapper: SolidNativeViewWrapper)
-    var wrapper: SolidNativeViewWrapper {get}
-    
-    associatedtype V: View
-    
-    func render() -> V
 
+    init(wrapper: SolidNativeViewWrapper)
+    var wrapper: SolidNativeViewWrapper { get }
+
+    associatedtype V: View
+
+    func render() -> V
 }
 
 extension SolidNativeView {
-    static var isTextElement: Bool {false}
+    static var isTextElement: Bool { false }
     static var doesRequireMeasuring: Bool { false }
     static func measureNode(_ nodeId: String) -> SNSnmobileSize {
         .init(0, height: 0)!
     }
+
     var props: SolidNativeProps {
         wrapper.props
     }
+
     var children: SolidNativeChildren {
         wrapper.children
     }
-
 }
-
-
-
-
-

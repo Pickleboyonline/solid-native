@@ -1,6 +1,6 @@
 import Foundation
-import SwiftUI
 import Snmobile
+import SwiftUI
 
 class SNText: SolidNativeView {
     required init(wrapper: SolidNativeViewWrapper) {
@@ -12,6 +12,7 @@ class SNText: SolidNativeView {
     static var name: String {
         "sn_text"
     }
+
     static var isTextElement: Bool {
         true
     }
@@ -138,18 +139,16 @@ class SNText: SolidNativeView {
             }
         }
         
-
-
         return styledText
     }
     
     func render() -> some View {
         if let txt = props["text"],
-           txt.isString() {
+           txt.isString()
+        {
             var textView = Text(txt.getString())
             
             if let style = props["style"], style.isObject() {
-
                 if let textTransform = style.getForKey("textTransform"), textTransform.isString() {
                     switch textTransform.getString() {
                     case "uppercase":
@@ -165,7 +164,7 @@ class SNText: SolidNativeView {
                 
                 textView = applyTextStyles(textView, style: style)
             }
-            return AnyView(textView.font( Font(UIFont.systemFont(ofSize: UIFont.systemFontSize))))
+            return AnyView(textView.font(Font(UIFont.systemFont(ofSize: UIFont.systemFontSize))))
         } else {
             return AnyView(EmptyView())
         }

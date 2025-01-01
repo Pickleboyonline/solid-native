@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 class SNButton: SolidNativeView {
     required init(wrapper: SolidNativeViewWrapper) {
         self.wrapper = wrapper
@@ -16,19 +15,16 @@ class SNButton: SolidNativeView {
     
     var wrapper: SolidNativeViewWrapper
     
-    static var name: String {"sn_button"}
+    static var name: String { "sn_button" }
     
     func onPress() {
         print("Hello World!")
     }
     
-    
-    @ViewBuilder func render() -> some View
-    {
+    @ViewBuilder func render() -> some View {
         let title = props["text"]?.getString() ?? ""
         Button(title) {
             self.onPress()
         }
     }
-    
 }

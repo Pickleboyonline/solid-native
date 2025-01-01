@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		581FDE5D2C2CBA3800A2E085 /* SNText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581FDE5C2C2CBA3800A2E085 /* SNText.swift */; };
+		582F24972D24DB8D00E509B3 /* SNSnmobileStringArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582F24962D24DB8D00E509B3 /* SNSnmobileStringArray.swift */; };
 		58B56C2F2C24A70800403C5B /* SolidNativeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */; };
 		58B56C312C24A70800403C5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B56C302C24A70800403C5B /* ContentView.swift */; };
 		58B56C332C24A70900403C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58B56C322C24A70900403C5B /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		581FDE5C2C2CBA3800A2E085 /* SNText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNText.swift; sourceTree = "<group>"; };
+		582F24962D24DB8D00E509B3 /* SNSnmobileStringArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNSnmobileStringArray.swift; sourceTree = "<group>"; };
 		58B56C2B2C24A70800403C5B /* SolidNative.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SolidNative.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		58B56C2E2C24A70800403C5B /* SolidNativeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolidNativeApp.swift; sourceTree = "<group>"; };
 		58B56C302C24A70800403C5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */,
 				58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */,
 				58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */,
+				582F24962D24DB8D00E509B3 /* SNSnmobileStringArray.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				58EC2BA82C24A97300D5FA11 /* SolidNativeViewWrapper.swift in Sources */,
 				58EC2B912C24A8F100D5FA11 /* SNButton.swift in Sources */,
 				58EC2BA62C24A97300D5FA11 /* SolidNativeView.swift in Sources */,
+				582F24972D24DB8D00E509B3 /* SNSnmobileStringArray.swift in Sources */,
 				58B56C2F2C24A70800403C5B /* SolidNativeApp.swift in Sources */,
 				58EC2B932C24A90700D5FA11 /* SNText_old.swift in Sources */,
 			);

@@ -12,6 +12,7 @@ class SNView: SolidNativeView {
     required init(wrapper: SolidNativeViewWrapper) {
         self.wrapper = wrapper
     }
+
     var wrapper: SolidNativeViewWrapper
     static var name: String {
         "sn_view"
