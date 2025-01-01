@@ -2,7 +2,13 @@ import Foundation
 import SwiftUI
 import Snmobile
 
-struct SNText: SolidNativeView {
+class SNText: SolidNativeView {
+    required init(wrapper: SolidNativeViewWrapper) {
+        self.wrapper = wrapper
+    }
+    
+    var wrapper: SolidNativeViewWrapper
+    
     static var name: String {
         "sn_text"
     }
@@ -48,8 +54,6 @@ struct SNText: SolidNativeView {
         // return SNSnmobileSize(149.70703125, height: 10)!
         return SNSnmobileSize(Float(size.width), height: Float(size.height))!
     }
-    
-    let wrapper: SolidNativeViewWrapper
 
     func textStyle(from style: SNSnmobileJSValue) -> Font {
         var font = Font.system(size: 14)
@@ -139,9 +143,7 @@ struct SNText: SolidNativeView {
         return styledText
     }
     
-    
-
-    var body: some View {
+    func render() -> some View {
         if let txt = props["text"],
            txt.isString() {
             var textView = Text(txt.getString())
@@ -163,8 +165,7 @@ struct SNText: SolidNativeView {
                 
                 textView = applyTextStyles(textView, style: style)
             }
-            
-            return AnyView(textView.font( Font(UIFont.systemFont(ofSize: UIFont.systemFontSize)) ))
+            return AnyView(textView.font( Font(UIFont.systemFont(ofSize: UIFont.systemFontSize))))
         } else {
             return AnyView(EmptyView())
         }

@@ -9,20 +9,26 @@ import Foundation
 import SwiftUI
 
 
-struct SNButton: SolidNativeView {
-    static var name: String = "sn_button"
+class SNButton: SolidNativeView {
+    required init(wrapper: SolidNativeViewWrapper) {
+        self.wrapper = wrapper
+    }
     
-    let wrapper: SolidNativeViewWrapper
+    var wrapper: SolidNativeViewWrapper
+    
+    static var name: String {"sn_button"}
     
     func onPress() {
         print("Hello World!")
     }
     
-    var body: some View {
+    
+    @ViewBuilder func render() -> some View
+    {
         let title = props["text"]?.getString() ?? ""
-
         Button(title) {
-            onPress()
+            self.onPress()
         }
     }
+    
 }

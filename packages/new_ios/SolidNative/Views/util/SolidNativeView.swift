@@ -13,7 +13,7 @@ import Snmobile
 /// Prob would have to be a class, because we need to get the definitions of them all
 /// Need to support "refs" basically js representation of class
 /// Callbacks are just refs
-protocol SolidNativeView: View where Body: View  {
+protocol SolidNativeView {
     /// Needs to be in lower snake case
     static var name: String {get}
     static var isTextElement: Bool {get}
@@ -21,8 +21,14 @@ protocol SolidNativeView: View where Body: View  {
     static var doesRequireMeasuring: Bool {get}
 
     static func measureNode(_ nodeId: String) -> SNSnmobileSize
+    
     init(wrapper: SolidNativeViewWrapper)
     var wrapper: SolidNativeViewWrapper {get}
+    
+    associatedtype V: View
+    
+    func render() -> V
+
 }
 
 extension SolidNativeView {
@@ -37,7 +43,10 @@ extension SolidNativeView {
     var children: SolidNativeChildren {
         wrapper.children
     }
+
 }
+
+
 
 
 

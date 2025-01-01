@@ -50,3 +50,18 @@ func (e *TextDescriptorArray) Length() int {
 func (e *TextDescriptorArray) Get(index int) TextDescriptor {
 	return e.values[index]
 }
+
+type JSValueArray struct {
+	values []JSValue
+}
+
+func (e *JSValueArray) Length() int {
+	if e.values == nil {
+		return 0
+	}
+	return len(e.values)
+}
+
+func (e *JSValueArray) Get(index int) *JSValue {
+	return &e.values[index]
+}

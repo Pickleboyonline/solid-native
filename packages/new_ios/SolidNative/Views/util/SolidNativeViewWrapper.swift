@@ -53,6 +53,7 @@ public class SolidNativeViewWrapper: ObservableObject {
     var solidNativeViewType: any SolidNativeView.Type
     var children: SolidNativeChildren = SNSnmobileStringArray()
     var layoutMetrics = SNSnmobileLayoutMetrics()
+    var solidNativeView: (any SolidNativeView)?
     
     init(viewType: any SolidNativeView.Type) {
         self.solidNativeViewType = viewType
@@ -64,10 +65,18 @@ public class SolidNativeViewWrapper: ObservableObject {
         revision += 1
     }
     
+    func getSolidNativeView() -> any SolidNativeView {
+        if let solidNativeView {
+            return solidNativeView
+        } else {
+            let v = solidNativeViewType.init(wrapper: self)
+            solidNativeView = v
+            return v
+        }
+    }
     
-    
-    func render() -> some View {
-        _SolidNativeViewWrapper(wrapper: self, view: solidNativeViewType.init(wrapper: self))
+     @ViewBuilder func render() -> some View {
+         _SolidNativeViewWrapper(wrapper: self, view: getSolidNativeView())
     }
 }
 
@@ -89,7 +98,7 @@ private struct _SolidNativeViewWrapper: View {
         )
     }
 
-    func style<InputType: View>(_ view: InputType) -> some View {
+    func style(_ view: some View) -> some View {
       let props = wrapper.props
       var backgroundColor = Color.clear
         
@@ -119,19 +128,18 @@ private struct _SolidNativeViewWrapper: View {
 
       return view.background(backgroundColor)
          .foregroundColor(foregroundColor)
-         // .overlay(Border())
+         .overlay(Border())
          .opacity(opacity)
     }
     
     var body: some View {
         // TODO: Is there someway to remove the `AnyView` here?
-        AnyView(
-            style(layout(view))
-                .offset(
-                    x: CGFloat(wrapper.layoutMetrics.x),
-                    y: CGFloat(wrapper.layoutMetrics.y)
-                )
-        ).edgesIgnoringSafeArea(.all)
+        AnyView(style(layout(view.render()))
+            .offset(
+                x: CGFloat(wrapper.layoutMetrics.x),
+                y: CGFloat(wrapper.layoutMetrics.y)
+            ).ignoresSafeArea(.all))
+
     }
     
     func Border() -> some View {
@@ -139,7 +147,7 @@ private struct _SolidNativeViewWrapper: View {
       let width = 0.0
       let color = Color.clear
 
-      return AnyView(
+      return (
         Rectangle()
           .fill(Color.clear)
           .overlay(

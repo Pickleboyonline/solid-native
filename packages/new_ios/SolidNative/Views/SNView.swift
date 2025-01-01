@@ -8,13 +8,17 @@
 import Foundation
 import SwiftUI
 
-struct SNView: SolidNativeView {
-    
-    static var name: String { "sn_view" }
-    
-    let wrapper: SolidNativeViewWrapper
-    
-    var body: some View {
+class SNView: SolidNativeView {
+    required init(wrapper: SolidNativeViewWrapper) {
+        self.wrapper = wrapper
+    }
+    var wrapper: SolidNativeViewWrapper
+    static var name: String {
+        "sn_view"
+    }
+
+    @ViewBuilder
+    func render() -> some View {
         ZStack(alignment: .topLeading) {
             ForEach(children, id: \.id) { child in
                 child.render()
@@ -31,4 +35,3 @@ struct SNView: SolidNativeView {
          */
     }
 }
-

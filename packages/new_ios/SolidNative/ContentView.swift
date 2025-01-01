@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isHidden = false
+    
     var body: some View {
-        ZStack(alignment: .topLeading) {
+        VStack {
+            Button("Toggle Hidden") {
+                isHidden.toggle()
+            }
             
-            AnyView(Text("Hello World")).frame(
-                width: 10,
-                height: 40,
-                alignment: .topLeading
-            )
-            
-        }.edgesIgnoringSafeArea(.all).frame(
-            width: 300,
-            height: 500,
-            alignment: .topLeading
-        ).background(Color.red)
+            Text("Hello")
+                .hidden()
+                .onAppear {
+                    print("View appeared") // Only prints once when view is first created
+                }
+                .onDisappear {
+                    print("View disappeared") // Won't print when using .hidden()
+                }
+        }
     }
 }
 
