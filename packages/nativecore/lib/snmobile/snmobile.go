@@ -16,14 +16,6 @@ import (
 	"gopkg.in/olebedev/go-duktape.v3"
 )
 
-var rt = quickjs.NewRuntime(
-	quickjs.WithExecuteTimeout(30),
-	quickjs.WithMemoryLimit(128*1024),
-	quickjs.WithGCThreshold(256*1024),
-	quickjs.WithMaxStackSize(65534),
-	quickjs.WithCanBlock(true),
-)
-
 // Houses important info.
 type SolidNativeMobile struct {
 	nodeContainers map[string]*NodeContainer
@@ -36,6 +28,23 @@ type SolidNativeMobile struct {
 
 func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 	ctx := duktape.New()
+
+	rt := quickjs.NewRuntime(
+		quickjs.WithMemoryLimit(128*1024),
+		quickjs.WithGCThreshold(256*1024),
+		quickjs.WithMaxStackSize(65534),
+		quickjs.WithCanBlock(true),
+	)
+	defer rt.Close()
+
+	c := rt.NewContext()
+	defer c.Close()
+	ret, err := c.Eval("1 + 3")
+	defer ret.Free()
+	if err != nil {
+		println("ERRRO :", err.Error())
+	}
+	fmt.Println("VALUE: ", ret.Int32())
 
 	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
