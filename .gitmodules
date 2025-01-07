@@ -1,3 +1,0 @@
-[submodule "packages/nativecore/ios/vendor/quickjs"]
-	path = packages/nativecore/ios/vendor/quickjs
-	url = https://github.com/bellard/quickjs.git
