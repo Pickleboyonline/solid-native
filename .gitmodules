@@ -1,0 +1,3 @@
+[submodule "packages/nativecore/ios/Sources/CQuickJS/quickjs"]
+	path = packages/nativecore/ios/Sources/CQuickJS/quickjs
+	url = https://github.com/bellard/quickjs.git
