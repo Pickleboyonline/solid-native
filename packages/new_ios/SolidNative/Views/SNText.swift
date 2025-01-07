@@ -1,6 +1,8 @@
 import Foundation
 import Snmobile
 import SwiftUI
+import QuickJS
+
 
 class SNText: SolidNativeView {
     required init(wrapper: SolidNativeViewWrapper) {

@@ -8,9 +8,10 @@ require (
 )
 
 require (
-	golang.org/x/mobile v0.0.0-20241213221354-a87c1cf6cf46 // indirect
+	github.com/buke/quickjs-go v0.4.15
+	golang.org/x/mobile v0.0.0-20250106192035-c31d5b91ecc3 // indirect
 	golang.org/x/mod v0.22.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect
-	golang.org/x/tools v0.28.0 // indirect
+	golang.org/x/tools v0.29.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 )

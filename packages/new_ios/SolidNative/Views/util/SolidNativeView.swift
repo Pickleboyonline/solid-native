@@ -26,7 +26,8 @@ protocol SolidNativeView {
     var wrapper: SolidNativeViewWrapper { get }
 
     associatedtype V: View
-
+    
+    @ViewBuilder
     func render() -> V
 }
 

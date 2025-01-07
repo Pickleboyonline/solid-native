@@ -21,7 +21,7 @@ class SNButton: SolidNativeView {
         print("Hello World!")
     }
     
-    @ViewBuilder func render() -> some View {
+    func render() -> some View {
         let title = props["text"]?.getString() ?? ""
         Button(title) {
             self.onPress()

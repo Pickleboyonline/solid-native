@@ -12,7 +12,16 @@ import (
 	"nativecore/lib/yoga"
 	"net/http"
 
+	"github.com/buke/quickjs-go"
 	"gopkg.in/olebedev/go-duktape.v3"
+)
+
+var rt = quickjs.NewRuntime(
+	quickjs.WithExecuteTimeout(30),
+	quickjs.WithMemoryLimit(128*1024),
+	quickjs.WithGCThreshold(256*1024),
+	quickjs.WithMaxStackSize(65534),
+	quickjs.WithCanBlock(true),
 )
 
 // Houses important info.

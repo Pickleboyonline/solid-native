@@ -17,6 +17,7 @@ var SharedSolidNativeCore: SolidNativeCore!
     }
 }
 
+
 @objc public class SolidNativeCore: NSObject, SNSnmobileHostReceiverProtocol {
     public func onNodeTextDescriptorsChange(_ nodeId: String?, textDescriptors: SNSnmobileTextDescriptorArray?) {}
 
@@ -41,7 +42,7 @@ var SharedSolidNativeCore: SolidNativeCore!
     
     func start(jsUrl: String) throws {
         snmobile = SNSnmobileSolidNativeMobile(self)!
-        
+
         snmobile.setPrinter(SwiftPrinter())
         
         let nodeId = snmobile.createRootNode("sn_view")

@@ -172,8 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				58EC2B9F2C24A97300D5FA11 /* Color+Modifier.swift */,
-				58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */,
 				58EC2BA32C24A97300D5FA11 /* SolidNativeViewWrapper.swift */,
+				58EC2BA12C24A97300D5FA11 /* SolidNativeView.swift */,
 				582F24962D24DB8D00E509B3 /* SNSnmobileStringArray.swift */,
 			);
 			path = util;

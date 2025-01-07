@@ -18,7 +18,7 @@ class SNView: SolidNativeView {
         "sn_view"
     }
 
-    @ViewBuilder
+    
     func render() -> some View {
         ZStack(alignment: .topLeading) {
             ForEach(children, id: \.id) { child in
