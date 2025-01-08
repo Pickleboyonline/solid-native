@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Snmobile",
+  name: "SNLib",
   platforms: [
     // .macOS(.v10_14), .iOS(.v13),
     .iOS(.v13),
@@ -10,8 +10,8 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "Snmobile",
-      targets: ["SnmobileWrapper"]
+      name: "SNLib",
+      targets: ["SNLibStub"]
     )
     // .library(name: "QuickJS", targets: ["CQuickJS"]),
   ],
@@ -20,8 +20,8 @@ let package = Package(
   ],
   targets: [
     .binaryTarget(
-      name: "Snmobile",
-      path: "./../build/ios/Snmobile.xcframework"
+      name: "SNLib",
+      path: "./../build/ios/SNLib.xcframework"
     ),
     .target(
       name: "QuickJS",
@@ -36,9 +36,9 @@ let package = Package(
       ]
     ),
     .target(
-      name: "SnmobileWrapper",
+      name: "SNLibStub",
       dependencies: [
-        .target(name: "Snmobile"),
+        .target(name: "SNLib"),
         .product(name: "yoga", package: "yoga"),
         .target(name: "QuickJS"),
       ]

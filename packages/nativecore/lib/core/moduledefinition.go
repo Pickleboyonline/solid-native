@@ -2,7 +2,7 @@ package core
 
 import "github.com/buke/quickjs-go"
 
-type GoModuleDefinition struct {
+type ModuleDefinition struct {
 	Name string
 	// Should be a Value, but can be anything
 	Value quickjs.Value
@@ -15,8 +15,8 @@ type GoModuleDefinition struct {
 // and for Go to interact with the the host platform, I will use Delegate pattern.
 // This is because it's easier and relies on gomobile's auto type gen.
 // Later, i can make the interface sexier like what Expo Modules API has done.
-type GoModule interface {
-	Define(ctx *quickjs.Context) GoModuleDefinition
+type Module interface {
+	Define(ctx *quickjs.Context) *ModuleDefinition
 }
 
 type HostModuleDefinition struct {

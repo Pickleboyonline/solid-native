@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/buke/quickjs-go"
+	polyfill "github.com/buke/quickjs-go-polyfill"
 )
 
 type Core struct {
@@ -13,11 +14,13 @@ type Core struct {
 	ctx *quickjs.Context
 }
 
+const GlobalCoreName = "_SolidNativeCore"
+
 func NewCore() *Core {
-	rt := quickjs.NewRuntime()
+	rt := quickjs.NewRuntime(quickjs.WithMaxStackSize(1024 * 1024))
 	ctx := rt.NewContext()
 	// TODO: Register(_SolidNativeCore into global this so it can grab modules)
-
+	polyfill.InjectAll(ctx)
 	/*
 		Needed function def:
 		- Just a way to get the module honestly, so something like SolidNativeCore.modules dictionary
@@ -30,7 +33,7 @@ func NewCore() *Core {
 
 	core.Set("modules", modules)
 
-	ctx.Globals().Set("_SolidNativeCore", core)
+	ctx.Globals().Set(GlobalCoreName, core)
 
 	return &Core{
 		rt:  &rt,
@@ -44,9 +47,9 @@ func NewCore() *Core {
 // For now, we'll start with pure Go module, but then i will look at a HelloWorld module where the full implementation is
 // in the host. The reasoning is that in order for the Host platform to have access, I need to wrap the context in something exposal
 // for the host.
-func (c *Core) RegisterGoModule(module GoModule) {
+func (c *Core) RegisterGoModule(module Module) {
 	definition := module.Define(c.ctx)
-	c.ctx.Globals().Set(definition.Name, definition.Value)
+	c.ctx.Globals().Get(GlobalCoreName).Get("modules").Set(definition.Name, definition.Value)
 }
 
 func (c *Core) RegisterHostModule(module HostModule) {
@@ -56,7 +59,7 @@ func (c *Core) RegisterHostModule(module HostModule) {
 		obj: &obj,
 	}
 	definition := module.Define(wrapper)
-	c.ctx.Globals().Set(definition.name, *wrapper.obj)
+	c.ctx.Globals().Get(GlobalCoreName).Get("modules").Set(definition.name, *wrapper.obj)
 }
 
 func (c *Core) Free() {

@@ -6,21 +6,21 @@
 //
 
 import Foundation
-import Snmobile
+import SNLib
 import SwiftUI
 
 /// Temp protocol for eventual implimention
 /// Prob would have to be a class, because we need to get the definitions of them all
 /// Need to support "refs" basically js representation of class
 /// Callbacks are just refs
-protocol SolidNativeView {
+protocol SolidNativeViewProtocol {
     /// Needs to be in lower snake case
     static var name: String { get }
     static var isTextElement: Bool { get }
     /// Used for things like text and textinput
     static var doesRequireMeasuring: Bool { get }
 
-    static func measureNode(_ nodeId: String) -> SNSnmobileSize
+    func measureNode(_ nodeId: String) -> SNRendererSize
 
     init(wrapper: SolidNativeViewWrapper)
     var wrapper: SolidNativeViewWrapper { get }
@@ -31,10 +31,11 @@ protocol SolidNativeView {
     func render() -> V
 }
 
-extension SolidNativeView {
+extension SolidNativeViewProtocol {
     static var isTextElement: Bool { false }
     static var doesRequireMeasuring: Bool { false }
-    static func measureNode(_ nodeId: String) -> SNSnmobileSize {
+    
+    func measureNode(_ nodeId: String) -> SNRendererSize {
         .init(0, height: 0)!
     }
 
@@ -46,3 +47,13 @@ extension SolidNativeView {
         wrapper.children
     }
 }
+
+class BaseView {
+    var wrapper: SolidNativeViewWrapper
+    
+    required init(wrapper: SolidNativeViewWrapper) {
+        self.wrapper = wrapper
+    }
+}
+
+typealias SolidNativeView = BaseView & SolidNativeViewProtocol

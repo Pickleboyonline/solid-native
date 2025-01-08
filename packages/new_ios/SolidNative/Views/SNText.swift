@@ -1,16 +1,11 @@
 import Foundation
-import Snmobile
+
 import SwiftUI
 import QuickJS
-
+import SNLib
 
 class SNText: SolidNativeView {
-    required init(wrapper: SolidNativeViewWrapper) {
-        self.wrapper = wrapper
-    }
-    
-    var wrapper: SolidNativeViewWrapper
-    
+
     static var name: String {
         "sn_text"
     }
@@ -23,8 +18,8 @@ class SNText: SolidNativeView {
         true
     }
     
-    static func measureNode(_ nodeId: String) -> SNSnmobileSize {
-        let textNode = SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
+    func measureNode(_ nodeId: String) -> SNRendererSize {
+        let textNode = self.wrapper.hostReceiver.viewWrapperRegistry[nodeId]!
         // TODO: Need to make function that:
         // Grabs View Wrapper from node ID
         // TODO: Make some cache any type on the wrapper for state
@@ -55,10 +50,10 @@ class SNText: SolidNativeView {
         // Yoga only cares about height here:
         // print(size)
         // return SNSnmobileSize(149.70703125, height: 10)!
-        return SNSnmobileSize(Float(size.width), height: Float(size.height))!
+        return .init(Float(size.width), height: Float(size.height))!
     }
 
-    func textStyle(from style: SNSnmobileJSValue) -> Font {
+    func textStyle(from style: SNRendererJSValue) -> Font {
         var font = Font.system(size: 14)
 
         if let fontFamily = style.getForKey("fontFamily"), fontFamily.isString() {
@@ -108,14 +103,14 @@ class SNText: SolidNativeView {
         return font
     }
 
-    func color(from style: SNSnmobileJSValue) -> Color {
+    func color(from style: SNRendererJSValue) -> Color {
         if let colorValue = style.getForKey("color"), colorValue.isString() {
             return Color(hex: colorValue.getString())
         }
         return Color.black
     }
 
-    func applyTextStyles(_ text: Text, style: SNSnmobileJSValue) -> Text {
+    func applyTextStyles(_ text: Text, style: SNRendererJSValue) -> Text {
         var styledText = text.font(textStyle(from: style))
         
         styledText = styledText.foregroundColor(color(from: style))
@@ -131,11 +126,11 @@ class SNText: SolidNativeView {
         if let textAlign = style.getForKey("textAlign"), textAlign.isString() {
             switch textAlign.getString() {
             case "left":
-                styledText = styledText.multilineTextAlignment(.leading) as! Text
+                styledText = styledText.multilineTextAlignment(TextAlignment.leading) as! Text
             case "right":
-                styledText = styledText.multilineTextAlignment(.trailing) as! Text
+                styledText = styledText.multilineTextAlignment(TextAlignment.trailing) as! Text
             case "center":
-                styledText = styledText.multilineTextAlignment(.center) as! Text
+                styledText = styledText.multilineTextAlignment(TextAlignment.center) as! Text
             default:
                 break
             }

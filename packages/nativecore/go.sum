@@ -1,5 +1,7 @@
 github.com/buke/quickjs-go v0.4.15 h1:VYs3OUaqoLzGXkXMqjh+MU2NVku883AlnMGwBr7sqpY=
 github.com/buke/quickjs-go v0.4.15/go.mod h1:DTNBNlQc+GflC2iemHKotAjdR5cKsfmkF75UuhA4iLs=
+github.com/buke/quickjs-go-polyfill v0.0.9 h1:IPyC8gSsofrnhiBa8+dxz3aXiElV6OT6fd+q2IZ/t6g=
+github.com/buke/quickjs-go-polyfill v0.0.9/go.mod h1:nOCYhyBgoO/tJNouc3L6WpfEZsWxNPaay+W/dnC/m6s=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/kr/pretty v0.2.1 h1:Fmg33tUaq4/8ym9TJN1x7sLJnHVwhP33CNkpYV/7rwI=

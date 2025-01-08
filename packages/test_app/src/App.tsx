@@ -1,6 +1,8 @@
 import { createSignal, onMount } from "solid-js";
-import { log, View, Text, Button } from "solid-native/core";
+import { View, Text, Button } from "solid-native/core";
 import { createEffect } from "solid-js";
+
+const log = console.log;
 
 export function App() {
   const [count, setCount] = createSignal(0);

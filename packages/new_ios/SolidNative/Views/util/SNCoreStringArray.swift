@@ -5,14 +5,14 @@
 //  Created by Imran Shitta-Bey on 12/31/24.
 //
 import Foundation
-import Snmobile
+import SNLib
 import SwiftUI
 
-extension SNSnmobileStringArray: RandomAccessCollection {
-    public typealias Element = SolidNativeViewWrapper
-    public typealias Index = Int
+extension SNCoreStringArray: RandomAccessCollection {
+//    public typealias Element = SNCoreStringArray
+//    public typealias Index = Int
     
-    public var startIndex: Index {
+    public var startIndex: Int {
         return 0
     }
     
@@ -20,9 +20,8 @@ extension SNSnmobileStringArray: RandomAccessCollection {
         return length()
     }
     
-    public subscript(position: Index) -> Element {
-        let nodeId = get(position)
-        return SharedSolidNativeCore.viewWrapperRegistry[nodeId]!
+    public subscript(position: Int) -> String {
+        return get(position)
     }
     
     public func index(after i: Index) -> Index {

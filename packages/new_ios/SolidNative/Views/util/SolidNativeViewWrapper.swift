@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import Snmobile
+import SNLib
 import SwiftUI
 
-typealias SolidNativeProps = [String: SNSnmobileJSValue]
-typealias SolidNativeChildren = SNSnmobileStringArray
+typealias SolidNativeProps = [String: SNRendererJSValue]
+typealias SolidNativeChildren = SNCoreStringArray
 
 /// Manages Flex Layout. Nodes take in a wrapper. Wrapper takes in view struct def to instanciate
 /// View takes in view types. (Managed in render for now)
@@ -24,12 +24,16 @@ public class SolidNativeViewWrapper: ObservableObject {
     // Props + Children only info needed. Pass that down to
     var props: SolidNativeProps = [:]
     var solidNativeViewType: any SolidNativeView.Type
-    var children: SolidNativeChildren = SNSnmobileStringArray()
-    var layoutMetrics = SNSnmobileLayoutMetrics()
+    var children: SolidNativeChildren = SNCoreStringArray()
+    var layoutMetrics = SNRendererLayoutMetrics()
     var solidNativeView: (any SolidNativeView)?
+    var textDescriptor: SNRendererTextDescriptorArray?
+    let hostReceiver: HostReceiver
     
-    init(viewType: any SolidNativeView.Type) {
+    init(viewType: any SolidNativeView.Type, hostReceiver: HostReceiver) {
         self.solidNativeViewType = viewType
+        self.hostReceiver = hostReceiver
+        solidNativeView = solidNativeViewType.init(wrapper: self)
     }
     
     /// Notify SwiftUI of changes
@@ -37,18 +41,8 @@ public class SolidNativeViewWrapper: ObservableObject {
         revision += 1
     }
     
-    func getSolidNativeView() -> any SolidNativeView {
-        if let solidNativeView {
-            return solidNativeView
-        } else {
-            let v = solidNativeViewType.init(wrapper: self)
-            solidNativeView = v
-            return v
-        }
-    }
-    
     @ViewBuilder func render() -> some View {
-        _SolidNativeViewWrapper(wrapper: self, view: getSolidNativeView())
+        _SolidNativeViewWrapper(wrapper: self, view: solidNativeView!)
     }
 }
 

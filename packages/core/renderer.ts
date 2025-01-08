@@ -1,6 +1,8 @@
 import { createRenderer } from "solid-js/universal";
 import { SolidNativeRenderer } from "./modules/mod.ts";
-import { log } from "./lib/log.ts";
+// import { log } from "./lib/log.ts";
+
+const log = console.log;
 
 type Node = {
   id: string;

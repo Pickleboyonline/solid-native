@@ -4,8 +4,8 @@ build-mobile-pkg: clean-build
 	@mkdir -p build/android
 	@mkdir -p build/ios
 	@echo "Building iOS and Android Packages..." 
-	@# gomobile bind -target=android -androidapi 34 -o build/android/snmobile.aar nativecore/lib/snmobile
-	@gomobile bind -target=ios,iossimulator,macos -prefix SN -o build/ios/Snmobile.xcframework nativecore/lib/snmobile github.com/buke/quickjs-go
+	@# gomobile bind -target=android -androidapi 34 -o build/android/SNLib.aar nativecore/lib/snmobile
+	@gomobile bind -target=ios,iossimulator,macos -prefix SN -o build/ios/SNLib.xcframework nativecore/lib/core nativecore/lib/modules/renderer github.com/buke/quickjs-go
 
 
 clean-build:

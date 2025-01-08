@@ -17,5 +17,5 @@ type SolidNativeRenderer = {
 };
 
 export const SolidNativeRenderer = getNativeModule<SolidNativeRenderer>(
-  "_SolidNativeRenderer",
+  "SNRenderer",
 );

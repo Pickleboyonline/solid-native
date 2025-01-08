@@ -5,18 +5,32 @@
 //  Created by Imran Shitta-Bey on 6/20/24.
 //
 
-import Snmobile
 import SwiftUI
+import SNLib
 
 @main
 struct SolidNativeApp: App {
-    let core: SolidNativeCore
+    
+    let hostReceiver: HostReceiver
     
     init() {
-        core = SolidNativeCore()
+        let core = SNCoreCore()!
         
+        hostReceiver = HostReceiver()
+        
+        let renderer = SNRendererRenderer(hostReceiver)!
+        
+        let nodeId = renderer.createRootNode(SNView.name)
+        hostReceiver.onNodeCreated(nodeId, nodeType: SNView.name)
+        hostReceiver.rootNodeId = nodeId
+        
+        core.registerGo(renderer)
+        let url = "http://localhost:8080/"
         do {
-            try core.start(jsUrl: "http://localhost:8080")
+//            try core.start(fromJS: """
+//            // console.log("Hello World from QuickJS!")
+//            """)
+            try core.start(fromServer: url)
         } catch {
             print("Unexpected error: \(error).")
         }
@@ -24,7 +38,7 @@ struct SolidNativeApp: App {
     
     var body: some Scene {
         WindowGroup {
-            core.getRootNode().render()
+            hostReceiver.getRootNode().render()
         }
     }
 }

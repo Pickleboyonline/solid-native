@@ -32,7 +32,7 @@ func (r *Renderer) OnOrientationChange() {
 
 }
 
-func (r *Renderer) Define(ctx *quickjs.Context) core.GoModuleDefinition {
+func (r *Renderer) Define(ctx *quickjs.Context) *core.ModuleDefinition {
 	module := ctx.Object()
 
 	addGoFunc := func(name string, fn func(ctx *quickjs.Context, this quickjs.Value, args []quickjs.Value) quickjs.Value) {
@@ -42,6 +42,7 @@ func (r *Renderer) Define(ctx *quickjs.Context) core.GoModuleDefinition {
 	addGoFunc("createNodeByName", func(ctx *quickjs.Context, this quickjs.Value, args []quickjs.Value) quickjs.Value {
 		nodeType := args[0].String()
 		nodeId := r.createNode(nodeType)
+
 		log.Printf("New Node create of type %v with id %v", nodeType, nodeId)
 		return ctx.String(nodeId)
 	})
@@ -153,7 +154,7 @@ func (r *Renderer) Define(ctx *quickjs.Context) core.GoModuleDefinition {
 		return ctx.String(r.rootNodeId)
 	})
 
-	return core.GoModuleDefinition{
+	return &core.ModuleDefinition{
 		Name:  "SNRenderer",
 		Value: module,
 	}

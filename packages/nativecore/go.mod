@@ -9,6 +9,7 @@ require (
 
 require (
 	github.com/buke/quickjs-go v0.4.15
+	github.com/buke/quickjs-go-polyfill v0.0.9
 	golang.org/x/mobile v0.0.0-20250106192035-c31d5b91ecc3 // indirect
 	golang.org/x/mod v0.22.0 // indirect
 	golang.org/x/sync v0.10.0 // indirect

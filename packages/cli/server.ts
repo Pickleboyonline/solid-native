@@ -3,69 +3,9 @@ import * as esbuild from "esbuid";
 import * as esbuildDenoLoader from "@luca/esbuild-deno-loader";
 import { solidPlugin } from "esbuild-plugin-solid";
 
-import { Options, Output } from "npm:@swc/types";
-import { transform, transformFile } from "npm:@swc/core";
-import { Buffer } from "node:buffer";
-
 const app = new Application();
 
 const router = new Router();
-
-/**
- * Convert it to ES5 for duktape. Source maps not really working properly
- * Code on how to do it better: https://github.com/noyobo/esbuild-plugin-es5/blob/main/src/index.ts
- * TODO: Get sourcemaps working
- * @returns
- */
-const swcPlugin = (): esbuild.Plugin => {
-  return {
-    name: "swc-plugin",
-    setup(build) {
-      // build.onLoad({ filter: /\.([tj]sx?|mjs)$/ }, async (args) => {
-      //   const opts: Options = {
-      //     env: {
-      //       mode: "usage",
-      //       coreJs: "3.22",
-      //     },
-      //   };
-      //   const results = (await transformFile(args.path, opts)) as Output;
-
-      //   return {
-      //     contents: results.code.replaceAll(
-      //       `import "core-js`,
-      //       `import "npm:core-js`,
-      //     ),
-      //     loader: "js",
-      //   };
-      // });
-
-      build.onEnd(async (result) => {
-        if (result.errors.length) return;
-
-        for (const file of result.outputFiles || []) {
-          if (file.path.endsWith(".js")) {
-            try {
-              // Deno.writeTextFile("data.js", file.text);
-              const transformed = await transform(file.text, {
-                sourceMaps: (build.initialOptions.sourcemap) ? "inline" : false,
-                jsc: {
-                  target: "es5",
-                },
-                // minify: true,
-              });
-              file.contents = Buffer.from(transformed.code, "utf-8");
-            } catch (error) {
-              console.error("SWC transform error:", error);
-              result.errors.push(
-                { text: (error as Error).message } as esbuild.Message,
-              );
-            }
-          }
-        }
-      });
-    },
-  };
-};
 
 const esbuildPlugins = (() => {
   const configPath = import.meta
@@ -74,14 +14,12 @@ const esbuildPlugins = (() => {
 
   // @ts-ignore: Versions are OK, think its some Deno Global.URL type mismatch
   return [
-    swcPlugin(),
     solidPlugin({
       solid: {
         moduleName: "solid-native-renderer",
         generate: "universal",
       },
     }),
-
     ...esbuildDenoLoader.denoPlugins({
       configPath,
     }),
@@ -99,7 +37,7 @@ router
       bundle: true,
       write: false,
       // Actually converts to es5
-      target: "es6",
+      target: "ES2020",
       outdir: "out",
     });
 
@@ -115,7 +53,7 @@ router
       bundle: true,
       write: false,
       sourcemap: true,
-      target: "es5",
+      target: "ES2020",
       outdir: "out",
     });
 
@@ -126,4 +64,6 @@ router
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-app.listen({ port: 8080 });
+const port = 8080;
+console.log(`listening on http://localhost:${port}`);
+app.listen({ port });

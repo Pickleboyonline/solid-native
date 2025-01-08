@@ -1,4 +1,4 @@
 import { render } from "solid-native/core";
-import { DuktapeApp } from "./src/DuktapeApp.tsx";
+import { QuickJSApp } from "./src/QuickJSApp.tsx";
 
-render(DuktapeApp);
+render(QuickJSApp);

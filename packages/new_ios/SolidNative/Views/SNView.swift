@@ -9,20 +9,14 @@ import Foundation
 import SwiftUI
 
 class SNView: SolidNativeView {
-    required init(wrapper: SolidNativeViewWrapper) {
-        self.wrapper = wrapper
-    }
-
-    var wrapper: SolidNativeViewWrapper
     static var name: String {
         "sn_view"
     }
-
     
     func render() -> some View {
         ZStack(alignment: .topLeading) {
-            ForEach(children, id: \.id) { child in
-                child.render()
+            ForEach(children, id: \.description) { nodeId in
+                self.wrapper.hostReceiver.viewWrapperRegistry[nodeId]!.render()
             }
         }
         // TODO: Place gestures:
