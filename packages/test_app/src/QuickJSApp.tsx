@@ -10,12 +10,13 @@ export function QuickJSApp() {
         flexDirection: "row",
       }}
     >
-      Hello my name is Imran
+      I am poggers
       <View
         style={{
           backgroundColor: "#9d29ba",
-          height: 100,
-          width: 100,
+          // height: 100,
+          // width: 100,
+          flex: 1,
         }}
       />
     </View>

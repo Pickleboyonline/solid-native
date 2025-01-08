@@ -44,6 +44,7 @@ func (r *Renderer) Define(ctx *quickjs.Context) *core.ModuleDefinition {
 		nodeId := r.createNode(nodeType)
 
 		log.Printf("New Node create of type %v with id %v", nodeType, nodeId)
+		// fmt.Printf()
 		return ctx.String(nodeId)
 	})
 

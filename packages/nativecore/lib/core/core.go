@@ -3,7 +3,9 @@ package core
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/buke/quickjs-go"
 	polyfill "github.com/buke/quickjs-go-polyfill"
@@ -25,7 +27,8 @@ func NewCore() *Core {
 		Needed function def:
 		- Just a way to get the module honestly, so something like SolidNativeCore.modules dictionary
 	*/
-
+	// ! This is to stop duplicate logs
+	log.SetOutput(os.Stdout)
 	// Define SolidNativeCore
 	core := ctx.Object()
 
