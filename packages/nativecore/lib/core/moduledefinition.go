@@ -11,6 +11,10 @@ type GoModuleDefinition struct {
 // Modules are pure Go and have access to all functions
 // But are instantiated on the Host platform
 // Modules are any Native code that can be called from the JS side
+// But for now, assume that JS only really interacts with Go,
+// and for Go to interact with the the host platform, I will use Delegate pattern.
+// This is because it's easier and relies on gomobile's auto type gen.
+// Later, i can make the interface sexier like what Expo Modules API has done.
 type GoModule interface {
 	Define(ctx *quickjs.Context) GoModuleDefinition
 }
