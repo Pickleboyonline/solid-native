@@ -20,6 +20,8 @@ import (
 type SolidNativeMobile struct {
 	nodeContainers map[string]*NodeContainer
 	hostReceiver   HostReceiver
+	quickjsRuntime *quickjs.Runtime
+	quickjsContext *quickjs.Context
 	dukContext     *duktape.Context
 	// Set to "" initially, need to set before calculating layouts
 	rootNodeId       string
@@ -29,24 +31,6 @@ type SolidNativeMobile struct {
 func NewSolidNativeMobile(hostReceiver HostReceiver) *SolidNativeMobile {
 	ctx := duktape.New()
 
-	rt := quickjs.NewRuntime(
-		quickjs.WithMemoryLimit(128*1024),
-		quickjs.WithGCThreshold(256*1024),
-		quickjs.WithMaxStackSize(65534),
-		quickjs.WithCanBlock(true),
-	)
-	defer rt.Close()
-
-	c := rt.NewContext()
-	defer c.Close()
-	ret, err := c.Eval("1 + 3")
-	defer ret.Free()
-	if err != nil {
-		println("ERRRO :", err.Error())
-	}
-	fmt.Println("VALUE: ", ret.Int32())
-
-	// ctx.PushGoFunction()
 	return &SolidNativeMobile{
 		hostReceiver:     hostReceiver,
 		dukContext:       ctx,
