@@ -12,9 +12,11 @@ import SwiftUI
 typealias SolidNativeProps = [String: SNRendererJSValue]
 typealias SolidNativeChildren = SNCoreStringArray
 
+
 /// Manages Flex Layout. Nodes take in a wrapper. Wrapper takes in view struct def to instanciate
 /// View takes in view types. (Managed in render for now)
 public class SolidNativeViewWrapper: ObservableObject {
+    @MainActor
     @Published
     var revision: UInt = 0
     
@@ -38,7 +40,9 @@ public class SolidNativeViewWrapper: ObservableObject {
     
     /// Notify SwiftUI of changes
     func updateRevisionCount() {
-        revision += 1
+        Task { @MainActor in
+            revision += 1
+        }
     }
     
     @ViewBuilder func render() -> some View {

@@ -7,7 +7,6 @@
 import SNLib
 import UIKit
 
-
 @objc public class HostReceiver: NSObject, SNRendererHostReceiverProtocol {
     public func doesNodeRequireMeasuring(_ nodeType: String?) -> Bool {
         let doesRequire = viewTypeRegistry[nodeType!]!.doesRequireMeasuring

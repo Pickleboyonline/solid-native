@@ -12,6 +12,7 @@ import SNLib
 struct SolidNativeApp: App {
     
     let hostReceiver: HostReceiver
+    var str = "Hello, World!"
     
     init() {
         let core = SNCoreCore()!
@@ -25,15 +26,17 @@ struct SolidNativeApp: App {
         hostReceiver.rootNodeId = nodeId
         
         core.registerGo(renderer)
-        let url = "http://localhost:8080/"
-        do {
-//            try core.start(fromJS: """
-//            console.log("Hello World from QuickJS!")
-//            console.log("Hello World from QuickJS!")
-//            """)
-            try core.start(fromServer: url)
-        } catch {
-            print("Unexpected error: \(error).")
+        Task.detached {
+            let url = "http://localhost:8080/"
+            do {
+    //            try core.start(fromJS: """
+    //            console.log("Hello World from QuickJS!")
+    //            console.log("Hello World from QuickJS!")
+    //            """)
+                try core.start(fromServer: url)
+            } catch {
+                print("Unexpected error: \(error).")
+            }
         }
     }
     
