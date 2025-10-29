@@ -10,6 +10,7 @@
   "imports": {
     "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@0.10.3",
     "@oak/oak": "jsr:@oak/oak@16.1.0",
+    "@tanstack/solid-query": "npm:@tanstack/solid-query@^5.64.2",
     "esbuid": "https://deno.land/x/esbuild@v0.21.4/mod.js",
     "esbuild-plugin-solid": "npm:esbuild-plugin-solid@0.6.0",
     "solid-js": "npm:solid-js@1.8.17",
