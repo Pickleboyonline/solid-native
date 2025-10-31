@@ -1,0 +1,43 @@
+# Deno
+.deno/
+deno.lock
+
+# Build outputs
+dist/
+build/
+*.js.map
+*.bundle
+
+# Solid Native
+.solid-native/
+*.log
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node (if using npm packages)
+node_modules/
+
+# Platform specific
+ios/build/
+android/build/
+android/.gradle/
+*.apk
+*.ipa
+
+# Testing
+coverage/
+
+# Temporary
+tmp/
+temp/
