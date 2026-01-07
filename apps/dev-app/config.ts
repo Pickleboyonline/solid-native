@@ -1,0 +1,1 @@
+// meant to house the configuration for all solid native stuff

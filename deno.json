@@ -13,6 +13,7 @@
     "@tanstack/solid-query": "npm:@tanstack/solid-query@^5.64.2",
     "esbuid": "https://deno.land/x/esbuild@v0.21.4/mod.js",
     "esbuild-plugin-solid": "npm:esbuild-plugin-solid@0.6.0",
+    "react": "npm:react@^19.2.3",
     "solid-js": "npm:solid-js@1.8.17",
     "solid-js/jsx-runtime": "npm:solid-js@1.8.17/jsx-runtime",
     "solid-js/universal": "npm:solid-js@1.8.17/universal",
@@ -23,7 +24,7 @@
     "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.5.0/"
   },
   "compilerOptions": {
-    "jsx": "precompile",
+    "jsx": "preserve",
     "lib": [
       "dom",
       "deno.window"
