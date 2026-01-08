@@ -11,10 +11,16 @@ uniffi = { version = "0.30", features = ["cli"] }
 uniffi = { version = "0.30", features = ["build"] }
 
 [lib]
-crate-type = ["cdylib", "staticlib"]
+crate-type = ["cdylib", "staticlib", "lib"]
 name = "sncore" # This is our crate name in this tutorial
 
 [[bin]]
 # This can be whatever name makes sense for your project, but the rest of this tutorial assumes uniffi-bindgen.
 name = "uniffi-bindgen"
 path = "uniffi-bindgen.rs"
+
+[target.aarch64-apple-ios-sim]
+rustflags = [
+    "-C", "link-arg=-isysroot",
+    "-C", "link-arg=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk",
+]

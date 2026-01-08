@@ -4,3 +4,14 @@ build-all:
     mkdir -p build/bindings/kotlin
     cargo run --bin uniffi-bindgen generate --library target/release/libsncore.dylib --language kotlin --out-dir build/bindings/kotlin
     cargo run --bin uniffi-bindgen generate --library target/release/libsncore.dylib --language swift --out-dir build/bindings/swift
+
+
+build-ios:
+    mkdir -p build/swift
+    cargo swift package -p macos ios -n SNCore -y
+    mv SNCore build/swift
+    rm -rf ./generated
+
+build-android:
+    cargo ndk -t armeabi-v7a -t arm64-v8a -t x86_64 -o ./android-sncore/src/main/jniLibs build --release
+    cargo run --bin uniffi-bindgen generate --library target/release/libsncore.dylib --language kotlin --out-dir ./android-sncore/src/main/java

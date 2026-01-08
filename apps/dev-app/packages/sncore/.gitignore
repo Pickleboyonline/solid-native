@@ -1,2 +1,4 @@
 target
 build
+android-sncore/src/main/jniLibs/**/*.so
+android-sncore/src/main/java/**/*.kt
