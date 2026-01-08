@@ -1,0 +1,8 @@
+- Scaffold CLI/Server to dist. files
+- Make Rust lib accessable from Swift/Kotlin
+- Esnure mngment from rust side
+- Ensure UI can be speciifed
+- Build engine
+- module system
+- build system/UX
+- Start creating modules/views to match up the Expo side of things
