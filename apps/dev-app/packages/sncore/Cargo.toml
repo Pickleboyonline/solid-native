@@ -19,8 +19,3 @@ name = "sncore" # This is our crate name in this tutorial
 name = "uniffi-bindgen"
 path = "uniffi-bindgen.rs"
 
-[target.aarch64-apple-ios-sim]
-rustflags = [
-    "-C", "link-arg=-isysroot",
-    "-C", "link-arg=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk",
-]
