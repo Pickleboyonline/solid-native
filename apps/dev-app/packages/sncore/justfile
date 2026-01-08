@@ -1,0 +1,6 @@
+build-all:
+    cargo build --release
+    mkdir -p build/bindings/swift
+    mkdir -p build/bindings/kotlin
+    cargo run --bin uniffi-bindgen generate --library target/release/libsncore.dylib --language kotlin --out-dir build/bindings/kotlin
+    cargo run --bin uniffi-bindgen generate --library target/release/libsncore.dylib --language swift --out-dir build/bindings/swift

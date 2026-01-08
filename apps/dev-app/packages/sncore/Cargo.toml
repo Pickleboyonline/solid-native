@@ -4,3 +4,17 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+rquickjs = { version = "0.11.0", features = ["bindgen"] }
+uniffi = { version = "0.30", features = ["cli"] }
+
+[build-dependencies]
+uniffi = { version = "0.30", features = ["build"] }
+
+[lib]
+crate-type = ["cdylib", "staticlib"]
+name = "sncore" # This is our crate name in this tutorial
+
+[[bin]]
+# This can be whatever name makes sense for your project, but the rest of this tutorial assumes uniffi-bindgen.
+name = "uniffi-bindgen"
+path = "uniffi-bindgen.rs"
