@@ -14,8 +14,76 @@ fn add(a: u32, b: u32) -> u32 {
     result
 }
 
+// Supporting types for HostDelegate
+#[derive(Debug, Clone)]
+pub struct Size {
+    pub width: f64,
+    pub height: f64,
+}
+
+#[derive(Debug, Clone)]
+pub struct SizeMode {
+    pub width_mode: MeasureMode,
+    pub height_mode: MeasureMode,
+}
+
+#[derive(Debug, Clone)]
+pub enum MeasureMode {
+    Undefined,
+    Exactly,
+    AtMost,
+}
+
+#[derive(Debug, Clone)]
+pub struct LayoutMetrics {
+    pub x: f64,
+    pub y: f64,
+    pub width: f64,
+    pub height: f64,
+}
+
+#[derive(Debug, Clone)]
+pub enum JSValue {
+    String(String),
+    Number(f64),
+    Boolean(bool),
+    Null,
+    // Add more variants as needed
+}
+
+#[derive(Debug, Clone)]
+pub struct TextDescriptor {
+    pub text: String,
+    pub start: usize,
+    pub end: usize,
+    // Add more fields as needed (font, color, etc.)
+}
+
 pub trait HostDelegate {
-    fn on_node_created(node_id: &str);
+    /// When JS creates a node (or even the Mobile side)
+    /// this callback is executed
+    fn on_node_created(&self, node_id: &str, node_type: &str);
+
+    /// Will/MUST be called after the children change and are notified
+    fn on_node_removed(&self, node_id: &str);
+
+    fn on_prop_updated(&self, node_id: &str, key: &str, value: &JSValue);
+
+    /// TODO: Determine how to send the data over.
+    /// Can work with bytes, but need to determine the size of the int
+    /// to effectively decode it.
+    fn on_children_change(&self, node_id: &str, node_ids: &[String]);
+
+    fn on_node_text_descriptors_change(&self, node_id: &str, text_descriptors: &[TextDescriptor]);
+
+    /// Signifies when its time to update JetpackCompose/SwiftUI
+    fn on_update_revision_count(&self, node_id: &str);
+
+    /// TODO: Change to node type instead
+    fn is_text_element_by_node_id(&self, node_id: &str) -> bool;
+
+    /// TODO: Change to node type instead
+    fn is_text_element_by_node_type(&self, node_type: &str) -> bool;
 }
 
 /*
@@ -24,45 +92,4 @@ What's needed:
 - It should be able to take a reference to the "receiver" object
 - We are using the delegate pattern here
 - The host platform receives function calls and data
-*/
-
-/*
-Here was the Go implementation:
-// Wrapper object that has callbacks to host platform methods
-type HostReceiver interface {
-	// When JS creates a node (or even the Mobile side)
-	// this callback is executed
-	OnNodeCreated(nodeId string, nodeType string)
-	// Will/MUST be called after the children change and are notified
-	OnNodeRemoved(nodeId string)
-
-	// Some nodes, like text & text input, need to be
-	// measured while calculating layout before
-	// sending it over the wire
-	DoesNodeRequireMeasuring(nodeType string) bool
-
-	// TODO: See if we need any other info to make measure call
-	MeasureNode(nodeId string, proposedSize *Size, sizeMode *SizeMode) *Size
-
-	// Need this to setup root node and calculate layout.
-	GetDeviceScreenSize() *Size
-
-	OnLayoutChange(nodeId string, layoutMetrics *LayoutMetrics)
-	OnPropUpdated(nodeId string, key string, value *JSValue)
-
-	// TODO: Determine how to send the data over.
-	// Can work with bytes, but need to determine the size of the int
-	// to effectivly decode it.
-	OnChildrenChange(nodeId string, nodeIds *core.StringArray)
-
-	OnNodeTextDescriptorsChange(nodeId string, textDescriptors *TextDescriptorArray)
-
-	// Signifies when its time to update JetpackCompose/SwiftUI
-	OnUpdateRevisionCount(nodeId string)
-	// TODO: Change to node type instead
-	IsTextElementByNodeId(nodeId string) bool
-	// TODO: Change to node type instead
-	IsTextElementByNodeType(nodeType string) bool
-}
-
 */
