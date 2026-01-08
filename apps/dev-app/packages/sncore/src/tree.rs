@@ -167,3 +167,212 @@ impl Default for UITree {
         Self::new()
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_create_element() {
+        let mut tree = UITree::new();
+        let key = tree.create_element("node1".to_string(), "div".to_string());
+
+        let node = tree.get_node(key).unwrap();
+        assert_eq!(node.id, "node1");
+        assert_eq!(node.get_tag(), Some("div"));
+        assert!(!node.is_text_node());
+    }
+
+    #[test]
+    fn test_create_text_node() {
+        let mut tree = UITree::new();
+        let key = tree.create_text_node("text1".to_string(), "Hello".to_string());
+
+        let node = tree.get_node(key).unwrap();
+        assert_eq!(node.id, "text1");
+        assert!(node.is_text_node());
+    }
+
+    #[test]
+    fn test_get_key_by_id() {
+        let mut tree = UITree::new();
+        let key = tree.create_element("test_id".to_string(), "span".to_string());
+
+        let found_key = tree.get_key_by_id("test_id");
+        assert_eq!(found_key, Some(key));
+
+        let not_found = tree.get_key_by_id("nonexistent");
+        assert_eq!(not_found, None);
+    }
+
+    #[test]
+    fn test_insert_node() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child_key = tree.create_element("child".to_string(), "span".to_string());
+
+        tree.insert_node(parent_key, child_key, None);
+
+        let parent = tree.get_node(parent_key).unwrap();
+        assert_eq!(parent.children.len(), 1);
+        assert_eq!(parent.children[0], child_key);
+
+        let child = tree.get_node(child_key).unwrap();
+        assert_eq!(child.parent, Some(parent_key));
+    }
+
+    #[test]
+    fn test_insert_node_with_anchor() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child1_key = tree.create_element("child1".to_string(), "span".to_string());
+        let child2_key = tree.create_element("child2".to_string(), "p".to_string());
+        let child3_key = tree.create_element("child3".to_string(), "a".to_string());
+
+        tree.insert_node(parent_key, child1_key, None);
+        tree.insert_node(parent_key, child3_key, None);
+        tree.insert_node(parent_key, child2_key, Some(child3_key)); // Insert before child3
+
+        let parent = tree.get_node(parent_key).unwrap();
+        assert_eq!(parent.children.len(), 3);
+        assert_eq!(parent.children[0], child1_key);
+        assert_eq!(parent.children[1], child2_key);
+        assert_eq!(parent.children[2], child3_key);
+    }
+
+    #[test]
+    fn test_remove_node() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child_key = tree.create_element("child".to_string(), "span".to_string());
+
+        tree.insert_node(parent_key, child_key, None);
+        tree.remove_node(parent_key, child_key);
+
+        let parent = tree.get_node(parent_key).unwrap();
+        assert_eq!(parent.children.len(), 0);
+
+        let child = tree.get_node(child_key).unwrap();
+        assert_eq!(child.parent, None);
+    }
+
+    #[test]
+    fn test_delete_node() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child_key = tree.create_element("child".to_string(), "span".to_string());
+
+        tree.insert_node(parent_key, child_key, None);
+        tree.delete_node(child_key);
+
+        assert!(tree.get_node(child_key).is_none());
+        assert!(tree.get_key_by_id("child").is_none());
+
+        let parent = tree.get_node(parent_key).unwrap();
+        assert_eq!(parent.children.len(), 0);
+    }
+
+    #[test]
+    fn test_delete_node_recursive() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child_key = tree.create_element("child".to_string(), "span".to_string());
+        let grandchild_key = tree.create_element("grandchild".to_string(), "p".to_string());
+
+        tree.insert_node(parent_key, child_key, None);
+        tree.insert_node(child_key, grandchild_key, None);
+
+        tree.delete_node(child_key);
+
+        assert!(tree.get_node(child_key).is_none());
+        assert!(tree.get_node(grandchild_key).is_none());
+        assert!(tree.get_key_by_id("child").is_none());
+        assert!(tree.get_key_by_id("grandchild").is_none());
+    }
+
+    #[test]
+    fn test_replace_text() {
+        let mut tree = UITree::new();
+        let key = tree.create_text_node("text1".to_string(), "Hello".to_string());
+
+        tree.replace_text(key, "World".to_string());
+
+        let node = tree.get_node(key).unwrap();
+        match &node.node_type {
+            NodeType::Text { content } => assert_eq!(content, "World"),
+            _ => panic!("Expected text node"),
+        }
+    }
+
+    #[test]
+    fn test_set_property() {
+        let mut tree = UITree::new();
+        let key = tree.create_element("node1".to_string(), "div".to_string());
+
+        tree.set_property(key, "className".to_string(), "container".to_string());
+        tree.set_property(key, "id".to_string(), "main".to_string());
+
+        let node = tree.get_node(key).unwrap();
+        assert_eq!(node.properties.get("className"), Some(&"container".to_string()));
+        assert_eq!(node.properties.get("id"), Some(&"main".to_string()));
+    }
+
+    #[test]
+    fn test_get_parent() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child_key = tree.create_element("child".to_string(), "span".to_string());
+
+        tree.insert_node(parent_key, child_key, None);
+
+        assert_eq!(tree.get_parent(child_key), Some(parent_key));
+        assert_eq!(tree.get_parent(parent_key), None);
+    }
+
+    #[test]
+    fn test_get_first_child() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child1_key = tree.create_element("child1".to_string(), "span".to_string());
+        let child2_key = tree.create_element("child2".to_string(), "p".to_string());
+
+        tree.insert_node(parent_key, child1_key, None);
+        tree.insert_node(parent_key, child2_key, None);
+
+        assert_eq!(tree.get_first_child(parent_key), Some(child1_key));
+        assert_eq!(tree.get_first_child(child1_key), None);
+    }
+
+    #[test]
+    fn test_get_next_sibling() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child1_key = tree.create_element("child1".to_string(), "span".to_string());
+        let child2_key = tree.create_element("child2".to_string(), "p".to_string());
+        let child3_key = tree.create_element("child3".to_string(), "a".to_string());
+
+        tree.insert_node(parent_key, child1_key, None);
+        tree.insert_node(parent_key, child2_key, None);
+        tree.insert_node(parent_key, child3_key, None);
+
+        assert_eq!(tree.get_next_sibling(child1_key), Some(child2_key));
+        assert_eq!(tree.get_next_sibling(child2_key), Some(child3_key));
+        assert_eq!(tree.get_next_sibling(child3_key), None);
+    }
+
+    #[test]
+    fn test_get_children_ids() {
+        let mut tree = UITree::new();
+        let parent_key = tree.create_element("parent".to_string(), "div".to_string());
+        let child1_key = tree.create_element("child1".to_string(), "span".to_string());
+        let child2_key = tree.create_element("child2".to_string(), "p".to_string());
+
+        tree.insert_node(parent_key, child1_key, None);
+        tree.insert_node(parent_key, child2_key, None);
+
+        let children_ids = tree.get_children_ids(parent_key);
+        assert_eq!(children_ids.len(), 2);
+        assert_eq!(children_ids[0], "child1");
+        assert_eq!(children_ids[1], "child2");
+    }
+}

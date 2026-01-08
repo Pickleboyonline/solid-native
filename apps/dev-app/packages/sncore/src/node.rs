@@ -53,3 +53,47 @@ impl Node {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_new_element() {
+        let node = Node::new_element("test_id".to_string(), "div".to_string());
+        assert_eq!(node.id, "test_id");
+        assert_eq!(node.get_tag(), Some("div"));
+        assert!(!node.is_text_node());
+        assert!(node.parent.is_none());
+        assert!(node.children.is_empty());
+        assert!(node.properties.is_empty());
+    }
+
+    #[test]
+    fn test_new_text() {
+        let node = Node::new_text("text_id".to_string(), "Hello World".to_string());
+        assert_eq!(node.id, "text_id");
+        assert!(node.is_text_node());
+        assert_eq!(node.get_tag(), None);
+        assert!(node.parent.is_none());
+        assert!(node.children.is_empty());
+    }
+
+    #[test]
+    fn test_is_text_node() {
+        let element = Node::new_element("el".to_string(), "span".to_string());
+        let text = Node::new_text("txt".to_string(), "content".to_string());
+
+        assert!(!element.is_text_node());
+        assert!(text.is_text_node());
+    }
+
+    #[test]
+    fn test_get_tag() {
+        let element = Node::new_element("el".to_string(), "button".to_string());
+        let text = Node::new_text("txt".to_string(), "text".to_string());
+
+        assert_eq!(element.get_tag(), Some("button"));
+        assert_eq!(text.get_tag(), None);
+    }
+}
