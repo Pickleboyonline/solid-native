@@ -1,10 +1,13 @@
 // Module declarations
+pub mod core;
 pub mod delegate;
+pub mod js_bindings;
 pub mod node;
 pub mod renderer;
 pub mod tree;
 
 // Re-export main types for convenience
+pub use core::SolidNativeCore;
 pub use delegate::HostDelegate;
 pub use node::{Node, NodeKey, NodeType};
 pub use renderer::SolidRenderer;

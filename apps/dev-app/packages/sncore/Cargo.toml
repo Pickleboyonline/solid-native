@@ -7,6 +7,7 @@ edition = "2024"
 rquickjs = { version = "0.11.0", features = ["bindgen"] }
 slotmap = "1.1.1"
 uniffi = { version = "0.30", features = ["cli"] }
+uuid = { version = "1.11", features = ["v4"] }
 
 [build-dependencies]
 uniffi = { version = "0.30", features = ["build"] }

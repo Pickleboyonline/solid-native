@@ -1,34 +1,26 @@
 use crate::delegate::HostDelegate;
 use crate::tree::UITree;
-use rquickjs::{Context, Runtime};
 use std::sync::{Arc, Mutex};
+use uuid::Uuid;
 
-/// The main SolidJS renderer that manages the JS engine and UI tree
+/// The main SolidJS renderer that manages the UI tree
 pub struct SolidRenderer {
-    runtime: Runtime,
     tree: Arc<Mutex<UITree>>,
     delegate: Arc<dyn HostDelegate + Send + Sync>,
-    node_counter: Arc<Mutex<usize>>,
 }
 
 impl SolidRenderer {
     /// Creates a new SolidRenderer with the given delegate
     pub fn new(delegate: Arc<dyn HostDelegate + Send + Sync>) -> Result<Self, String> {
-        let runtime = Runtime::new().map_err(|e| format!("Failed to create runtime: {:?}", e))?;
-
         Ok(Self {
-            runtime,
             tree: Arc::new(Mutex::new(UITree::new())),
             delegate,
-            node_counter: Arc::new(Mutex::new(0)),
         })
     }
 
-    /// Generates a unique node ID
+    /// Generates a unique node ID using UUID v4
     fn generate_node_id(&self) -> String {
-        let mut counter = self.node_counter.lock().unwrap();
-        *counter += 1;
-        format!("node_{}", counter)
+        Uuid::new_v4().to_string()
     }
 
     /// Creates an element node
@@ -172,17 +164,6 @@ impl SolidRenderer {
         Some(sibling.id.clone())
     }
 
-    /// Evaluates JavaScript code
-    pub fn eval_js(&self, code: String) -> Result<String, String> {
-        let context = Context::full(&self.runtime)
-            .map_err(|e| format!("Failed to create context: {:?}", e))?;
-
-        context.with(|ctx| {
-            ctx.eval::<String, _>(code)
-                .map_err(|e| format!("JS eval error: {:?}", e))
-        })
-    }
-
     /// Gets access to the UI tree (for inspection/debugging)
     pub fn get_tree(&self) -> Arc<Mutex<UITree>> {
         Arc::clone(&self.tree)
@@ -258,7 +239,9 @@ mod tests {
 
         let node_id = renderer.create_element("div".to_string());
 
-        assert!(node_id.starts_with("node_"));
+        // UUID format check: should have dashes and be 36 characters
+        assert_eq!(node_id.len(), 36);
+        assert_eq!(node_id.chars().filter(|&c| c == '-').count(), 4);
 
         let created = delegate.created_nodes.lock().unwrap();
         assert_eq!(created.len(), 1);
@@ -273,7 +256,8 @@ mod tests {
 
         let node_id = renderer.create_text_node("Hello World".to_string());
 
-        assert!(node_id.starts_with("node_"));
+        // UUID format check
+        assert_eq!(node_id.len(), 36);
 
         let created = delegate.created_nodes.lock().unwrap();
         assert_eq!(created.len(), 1);
@@ -420,15 +404,6 @@ mod tests {
 
         let next_sibling = renderer.get_next_sibling(child1_id);
         assert_eq!(next_sibling, Some(child2_id));
-    }
-
-    #[test]
-    fn test_eval_js() {
-        let delegate = Arc::new(MockDelegate::new());
-        let renderer = SolidRenderer::new(delegate.clone()).unwrap();
-
-        let result = renderer.eval_js("(2 + 3).toString()".to_string());
-        assert_eq!(result, Ok("5".to_string()));
     }
 
     #[test]
