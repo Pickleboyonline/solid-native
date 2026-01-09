@@ -30,7 +30,7 @@ impl SolidRenderer {
         tree.create_element(id.clone(), tag.clone());
 
         // Notify delegate
-        self.delegate.on_node_created(&id, &tag);
+        self.delegate.on_node_created(id.clone(), tag);
 
         id
     }
@@ -42,7 +42,7 @@ impl SolidRenderer {
         tree.create_text_node(id.clone(), value);
 
         // Notify delegate
-        self.delegate.on_node_created(&id, "text");
+        self.delegate.on_node_created(id.clone(), "text".to_string());
 
         id
     }
@@ -54,7 +54,7 @@ impl SolidRenderer {
             drop(tree_ref);
             let mut tree = self.tree.lock().unwrap();
             tree.replace_text(key, value);
-            self.delegate.on_update_revision_count(&node_id);
+            self.delegate.on_update_revision_count(node_id);
         }
     }
 
@@ -65,7 +65,7 @@ impl SolidRenderer {
             drop(tree_ref);
             let mut tree = self.tree.lock().unwrap();
             tree.set_property(key, name, value);
-            self.delegate.on_update_revision_count(&node_id);
+            self.delegate.on_update_revision_count(node_id);
         }
     }
 
@@ -94,8 +94,8 @@ impl SolidRenderer {
         drop(tree);
 
         // Notify delegate
-        self.delegate.on_children_change(&parent_id, &children_ids.iter().map(|s| s.clone()).collect::<Vec<_>>());
-        self.delegate.on_update_revision_count(&parent_id);
+        self.delegate.on_children_change(parent_id.clone(), children_ids.clone());
+        self.delegate.on_update_revision_count(parent_id);
     }
 
     /// Removes a node from its parent
@@ -121,9 +121,9 @@ impl SolidRenderer {
         drop(tree);
 
         // Notify delegate
-        self.delegate.on_node_removed(&node_id);
-        self.delegate.on_children_change(&parent_id, &children_ids.iter().map(|s| s.clone()).collect::<Vec<_>>());
-        self.delegate.on_update_revision_count(&parent_id);
+        self.delegate.on_node_removed(node_id);
+        self.delegate.on_children_change(parent_id.clone(), children_ids.clone());
+        self.delegate.on_update_revision_count(parent_id);
     }
 
     /// Checks if a node is a text node
@@ -195,39 +195,39 @@ mod tests {
     }
 
     impl HostDelegate for MockDelegate {
-        fn on_node_created(&self, node_id: &str, node_type: &str) {
+        fn on_node_created(&self, node_id: String, node_type: String) {
             self.created_nodes
                 .lock()
                 .unwrap()
-                .push((node_id.to_string(), node_type.to_string()));
+                .push((node_id, node_type));
         }
 
-        fn on_node_removed(&self, node_id: &str) {
+        fn on_node_removed(&self, node_id: String) {
             self.removed_nodes
                 .lock()
                 .unwrap()
-                .push(node_id.to_string());
+                .push(node_id);
         }
 
-        fn on_children_change(&self, node_id: &str, node_ids: &[String]) {
+        fn on_children_change(&self, node_id: String, node_ids: Vec<String>) {
             self.children_changes
                 .lock()
                 .unwrap()
-                .push((node_id.to_string(), node_ids.to_vec()));
+                .push((node_id, node_ids));
         }
 
-        fn on_update_revision_count(&self, node_id: &str) {
+        fn on_update_revision_count(&self, node_id: String) {
             self.update_counts
                 .lock()
                 .unwrap()
-                .push(node_id.to_string());
+                .push(node_id);
         }
 
-        fn is_text_element_by_node_id(&self, _node_id: &str) -> bool {
+        fn is_text_element_by_node_id(&self, _node_id: String) -> bool {
             false
         }
 
-        fn is_text_element_by_node_type(&self, node_type: &str) -> bool {
+        fn is_text_element_by_node_type(&self, node_type: String) -> bool {
             node_type == "text"
         }
     }

@@ -1,4 +1,5 @@
 use crate::delegate::HostDelegate;
+use crate::error::SNCoreError;
 use crate::js_bindings::bind_renderer_to_context;
 use crate::renderer::SolidRenderer;
 use rquickjs::{Context, Runtime};
@@ -7,38 +8,41 @@ use std::sync::{Arc, Mutex};
 /// Main entry point for SolidNative Core
 /// This struct is exposed to the host platform via Uniffi
 /// and manages both the JavaScript runtime and the renderer
+#[derive(uniffi::Object)]
 pub struct SolidNativeCore {
     _runtime: Arc<Runtime>, // Keep runtime alive, underscore to silence unused warning
     context: Arc<Mutex<Context>>,
     renderer: Arc<SolidRenderer>,
 }
 
+#[uniffi::export]
 impl SolidNativeCore {
     /// Creates a new SNCore instance with the given delegate
     /// The delegate receives callbacks when the UI tree changes
-    pub fn new(delegate: Arc<dyn HostDelegate + Send + Sync>) -> Result<Self, String> {
+    #[uniffi::constructor]
+    pub fn new(delegate: Arc<dyn HostDelegate>) -> Result<Arc<Self>, SNCoreError> {
         // Create runtime and wrap in Arc for shared ownership
-        let runtime = Arc::new(
-            Runtime::new().map_err(|e| format!("Failed to create runtime: {:?}", e))?,
-        );
+        let runtime =
+            Arc::new(Runtime::new().map_err(|e| SNCoreError::runtime(format!("Failed to create runtime: {:?}", e)))?);
 
         let renderer = Arc::new(
-            SolidRenderer::new(delegate).map_err(|e| format!("Failed to create renderer: {}", e))?,
+            SolidRenderer::new(delegate)
+                .map_err(|e| SNCoreError::renderer(format!("Failed to create renderer: {}", e)))?,
         );
 
         // Create persistent context
-        let context = Context::full(&*runtime)
-            .map_err(|e| format!("Failed to create context: {:?}", e))?;
+        let context =
+            Context::full(&*runtime).map_err(|e| SNCoreError::context(format!("Failed to create context: {:?}", e)))?;
 
         // Bind renderer to context once
         bind_renderer_to_context(&context, renderer.clone())
-            .map_err(|e| format!("Failed to bind renderer: {:?}", e))?;
+            .map_err(|e| SNCoreError::context(format!("Failed to bind renderer: {:?}", e)))?;
 
-        Ok(Self {
+        Ok(Arc::new(Self {
             _runtime: runtime,
             context: Arc::new(Mutex::new(context)),
             renderer,
-        })
+        }))
     }
 
     // ==================== Host API Methods ====================
@@ -99,20 +103,20 @@ impl SolidNativeCore {
     /// Evaluates JavaScript code
     /// The renderer is automatically bound to globalThis.solidNative
     /// Uses a persistent context, so JavaScript state persists across calls
-    pub fn eval_js(&self, code: String) -> Result<String, String> {
+    pub fn eval_js(&self, code: String) -> Result<String, SNCoreError> {
         let context = self.context.lock().unwrap();
 
         // Execute the JavaScript code using the persistent context
         context.with(|ctx| {
             ctx.eval::<String, _>(code)
-                .map_err(|e| format!("JS eval error: {:?}", e))
+                .map_err(|e| SNCoreError::js_eval(format!("JS eval error: {:?}", e)))
         })
     }
 
     /// Evaluates JavaScript module code
     /// The renderer is automatically bound to globalThis.solidNative
     /// Uses a persistent context, so JavaScript state persists across calls
-    pub fn eval_module(&self, code: String, module_name: String) -> Result<String, String> {
+    pub fn eval_module(&self, code: String, module_name: String) -> Result<String, SNCoreError> {
         let context = self.context.lock().unwrap();
 
         // Execute as module using the persistent context
@@ -129,11 +133,15 @@ impl SolidNativeCore {
             );
 
             ctx.eval::<String, _>(wrapped_code)
-                .map_err(|e| format!("Module eval error for '{}': {:?}", module_name, e))
+                .map_err(|e| SNCoreError::js_eval(format!("Module eval error for '{}': {:?}", module_name, e)))
         })
     }
+}
 
+// Non-uniffi methods (for internal/test use)
+impl SolidNativeCore {
     /// Gets access to the renderer (for advanced use cases)
+    /// Not exposed via uniffi - for internal use only
     pub fn get_renderer(&self) -> Arc<SolidRenderer> {
         self.renderer.clone()
     }
@@ -162,20 +170,20 @@ mod tests {
     }
 
     impl HostDelegate for MockDelegate {
-        fn on_node_created(&self, node_id: &str, node_type: &str) {
+        fn on_node_created(&self, node_id: String, node_type: String) {
             self.created_nodes
                 .lock()
                 .unwrap()
-                .push((node_id.to_string(), node_type.to_string()));
+                .push((node_id, node_type));
         }
 
-        fn on_node_removed(&self, _node_id: &str) {}
-        fn on_children_change(&self, _node_id: &str, _node_ids: &[String]) {}
-        fn on_update_revision_count(&self, _node_id: &str) {}
-        fn is_text_element_by_node_id(&self, _node_id: &str) -> bool {
+        fn on_node_removed(&self, _node_id: String) {}
+        fn on_children_change(&self, _node_id: String, _node_ids: Vec<String>) {}
+        fn on_update_revision_count(&self, _node_id: String) {}
+        fn is_text_element_by_node_id(&self, _node_id: String) -> bool {
             false
         }
-        fn is_text_element_by_node_type(&self, node_type: &str) -> bool {
+        fn is_text_element_by_node_type(&self, node_type: String) -> bool {
             node_type == "text"
         }
     }
@@ -326,7 +334,10 @@ mod tests {
 
         // Verify it's still accessible in subsequent calls
         let result = core
-            .eval_js("(typeof globalThis.solidNative.createElement === 'function').toString()".to_string())
+            .eval_js(
+                "(typeof globalThis.solidNative.createElement === 'function').toString()"
+                    .to_string(),
+            )
             .unwrap();
 
         assert_eq!(result, "true");

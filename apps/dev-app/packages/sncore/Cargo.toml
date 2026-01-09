@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-rquickjs = { version = "0.11.0", features = ["bindgen"] }
+rquickjs = { version = "0.11.0", features = ["bindgen", "parallel"] }
 slotmap = "1.1.1"
+thiserror = "2.0"
 uniffi = { version = "0.30", features = ["cli"] }
 uuid = { version = "1.11", features = ["v4"] }
 

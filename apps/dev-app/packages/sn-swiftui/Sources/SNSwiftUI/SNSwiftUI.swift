@@ -6,9 +6,7 @@
 //
 
 import Foundation
-
-// Re-export public types for convenience
-@_exported import struct SwiftUI.View
+import SwiftUI
 
 // Version information
 public struct SNSwiftUI {
