@@ -52,6 +52,13 @@ impl Node {
             NodeType::Text { .. } => None,
         }
     }
+
+    pub fn get_text_content(&self) -> Option<String> {
+        match &self.node_type {
+            NodeType::Text { content } => Some(content.clone()),
+            NodeType::Element { .. } => None,
+        }
+    }
 }
 
 #[cfg(test)]

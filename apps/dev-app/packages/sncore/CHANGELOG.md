@@ -3,6 +3,13 @@
 ## [Unreleased]
 
 ### Added
+- **Text descriptor system** for React Native-style text rendering
+  - TextDescriptor struct with text content and styles (HashMap<String, JSValue>)
+  - generate_text_descriptors() function that walks text node hierarchy
+  - Merges parent styles with child styles (children override parents)
+  - on_text_descriptors_change callback in HostDelegate
+  - Automatic text descriptor generation on text node changes (insert, remove, property set)
+  - Swift SNHostDelegateImpl handles text descriptors
 - **JSValue enum** for representing JavaScript values across FFI boundary
   - Supports: Null, Undefined, Boolean, Number, String, Array, Object
   - Fully uniffi-compatible with HashMap-based objects

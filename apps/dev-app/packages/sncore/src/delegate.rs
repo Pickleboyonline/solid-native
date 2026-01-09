@@ -1,4 +1,5 @@
 use crate::jsvalue::JSValue;
+use crate::text::TextDescriptor;
 
 /// Trait for receiving callbacks from the renderer to the host platform
 #[uniffi::export(with_foreign)]
@@ -17,7 +18,9 @@ pub trait HostDelegate: Send + Sync {
     /// Called when children of a node change
     fn on_children_change(&self, node_id: String, node_ids: Vec<String>);
 
-    // fn on_node_text_descriptors_change(&self, node_id: &str, text_descriptors: &[TextDescriptor]);
+    /// Called when text descriptors change for a text node
+    /// This provides the flattened array of text segments with their styles
+    fn on_text_descriptors_change(&self, node_id: String, descriptors: Vec<TextDescriptor>);
 
     /// Signifies when its time to update JetpackCompose/SwiftUI
     fn on_update_revision_count(&self, node_id: String);

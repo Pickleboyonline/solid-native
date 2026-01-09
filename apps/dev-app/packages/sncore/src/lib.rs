@@ -6,6 +6,7 @@ pub mod js_bindings;
 pub mod jsvalue;
 pub mod node;
 pub mod renderer;
+pub mod text;
 pub mod tree;
 
 // Re-export main types for convenience
@@ -15,6 +16,7 @@ pub use error::SNCoreError;
 pub use jsvalue::JSValue;
 pub use node::{Node, NodeKey, NodeType};
 pub use renderer::SolidRenderer;
+pub use text::TextDescriptor;
 pub use tree::UITree;
 
 uniffi::setup_scaffolding!();

@@ -79,6 +79,31 @@ public class SNHostDelegateImpl {
         }
     }
 
+    /// Called when text descriptors change for a text node
+    /// This provides the flattened array of text segments with their styles
+    public func onTextDescriptorsChange(nodeId: String, descriptors: [TextDescriptor]) {
+        guard let node = viewTree.getNode(nodeId) else {
+            print("[SNHostDelegate] Warning: Node \(nodeId) not found for text descriptors change")
+            return
+        }
+
+        // Update on main thread since it affects UI
+        DispatchQueue.main.async {
+            // Store the text descriptors in the node
+            // For now, we'll concatenate all text segments for display
+            let fullText = descriptors.map { $0.text }.joined()
+            node.textContent = fullText
+
+            // You could also store the individual descriptors if needed for styled text rendering
+            // node.textDescriptors = descriptors
+
+            print("[SNHostDelegate] Text descriptors changed for \(nodeId): \(descriptors.count) segments")
+
+            // Trigger UI update
+            node.objectWillChange.send()
+        }
+    }
+
     /// Called when it's time to update the UI
     /// This signals that a batch of changes is complete and the UI should re-render
     public func onUpdateRevisionCount(nodeId: String) {

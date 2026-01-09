@@ -1,5 +1,6 @@
 use crate::delegate::HostDelegate;
 use crate::jsvalue::JSValue;
+use crate::text;
 use crate::tree::UITree;
 use std::sync::{Arc, Mutex};
 use uuid::Uuid;
@@ -55,6 +56,11 @@ impl SolidRenderer {
             drop(tree_ref);
             let mut tree = self.tree.lock().unwrap();
             tree.replace_text(key, value);
+            drop(tree);
+
+            // Generate and notify text descriptors
+            self.notify_text_descriptors_if_text_node(&node_id);
+
             self.delegate.on_update_revision_count(node_id);
         }
     }
@@ -66,6 +72,7 @@ impl SolidRenderer {
             drop(tree_ref);
             let mut tree = self.tree.lock().unwrap();
             tree.set_property(key, name.clone(), value.clone());
+            drop(tree);
 
             // Notify delegate about property update
             // For now, we store properties as strings, so we wrap them in JSValue::String
@@ -74,6 +81,9 @@ impl SolidRenderer {
                 name,
                 JSValue::string(value),
             );
+
+            // If this is a text node, regenerate text descriptors
+            self.notify_text_descriptors_if_text_node(&node_id);
 
             self.delegate.on_update_revision_count(node_id);
         }
@@ -103,6 +113,10 @@ impl SolidRenderer {
         let children_ids = tree.get_children_ids(parent_key);
         drop(tree);
 
+        // If inserted node is a text node or parent is a text node, regenerate text descriptors
+        self.notify_text_descriptors_if_text_node(&node_id);
+        self.notify_text_descriptors_if_text_node(&parent_id);
+
         // Notify delegate
         self.delegate.on_children_change(parent_id.clone(), children_ids.clone());
         self.delegate.on_update_revision_count(parent_id);
@@ -129,6 +143,9 @@ impl SolidRenderer {
         // Get updated children
         let children_ids = tree.get_children_ids(parent_key);
         drop(tree);
+
+        // If parent is a text node, regenerate text descriptors
+        self.notify_text_descriptors_if_text_node(&parent_id);
 
         // Notify delegate
         self.delegate.on_node_removed(node_id);
@@ -177,6 +194,40 @@ impl SolidRenderer {
     /// Gets access to the UI tree (for inspection/debugging)
     pub fn get_tree(&self) -> Arc<Mutex<UITree>> {
         Arc::clone(&self.tree)
+    }
+
+    /// Helper: Generates and notifies text descriptors for a text node
+    /// Returns true if text descriptors were generated and sent
+    fn notify_text_descriptors_if_text_node(&self, node_id: &str) {
+        let tree = self.tree.lock().unwrap();
+
+        // Get the node key
+        let node_key = match tree.get_key_by_id(node_id) {
+            Some(k) => k,
+            None => return,
+        };
+
+        // Check if it's a text node
+        let node = match tree.get_node(node_key) {
+            Some(n) => n,
+            None => return,
+        };
+
+        if !node.is_text_node() {
+            return;
+        }
+
+        // Generate text descriptors
+        if let Some((descriptors, top_level_key)) = text::generate_text_descriptors(&tree, node_key) {
+            // Get the top-level text node ID
+            if let Some(top_node) = tree.get_node(top_level_key) {
+                let top_node_id = top_node.id.clone();
+                drop(tree); // Release lock before calling delegate
+
+                // Notify the delegate
+                self.delegate.on_text_descriptors_change(top_node_id, descriptors);
+            }
+        }
     }
 
     /// Creates and sets a root node for the tree
@@ -260,6 +311,10 @@ mod tests {
                 .lock()
                 .unwrap()
                 .push((node_id, node_ids));
+        }
+
+        fn on_text_descriptors_change(&self, _node_id: String, _descriptors: Vec<crate::text::TextDescriptor>) {
+            // Mock implementation - could track text descriptor changes if needed
         }
 
         fn on_update_revision_count(&self, node_id: String) {
