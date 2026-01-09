@@ -160,6 +160,23 @@ impl UITree {
             Vec::new()
         }
     }
+
+    /// Sets the root node of the tree
+    pub fn set_root(&mut self, key: NodeKey) {
+        self.root = Some(key);
+    }
+
+    /// Gets the root node key
+    pub fn get_root(&self) -> Option<NodeKey> {
+        self.root
+    }
+
+    /// Gets the root node ID
+    pub fn get_root_id(&self) -> Option<String> {
+        self.root
+            .and_then(|key| self.nodes.get(key))
+            .map(|node| node.id.clone())
+    }
 }
 
 impl Default for UITree {

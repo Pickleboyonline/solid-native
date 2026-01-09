@@ -28,10 +28,14 @@ public struct SNSwiftUIRenderer: View {
 }
 
 /// Renders a single ViewNode and its children
-struct NodeView: View {
+public struct NodeView: View {
     @ObservedObject var node: ViewNode
+    
+    public init(node: ViewNode) {
+        self.node = node
+    }
 
-    var body: some View {
+    public var body: some View {
         Group {
             if node.isTextNode {
                 Text(node.textContent ?? "")

@@ -1,3 +1,5 @@
+use crate::jsvalue::JSValue;
+
 /// Trait for receiving callbacks from the renderer to the host platform
 #[uniffi::export(with_foreign)]
 pub trait HostDelegate: Send + Sync {
@@ -8,12 +10,11 @@ pub trait HostDelegate: Send + Sync {
     /// Will/MUST be called after the children change and are notified
     fn on_node_removed(&self, node_id: String);
 
-    // TODO: create/determine wrapper for quckjs js types
-    // fn on_prop_updated(&self, node_id: &str, key: &str, value: &JSValue);
+    /// Called when a property is updated on a node
+    /// The value is a JSValue that can represent different JavaScript types
+    fn on_prop_updated(&self, node_id: String, key: String, value: JSValue);
 
-    /// TODO: Determine how to send the data over.
-    /// Can work with bytes, but need to determine the size of the int
-    /// to effectively decode it.
+    /// Called when children of a node change
     fn on_children_change(&self, node_id: String, node_ids: Vec<String>);
 
     // fn on_node_text_descriptors_change(&self, node_id: &str, text_descriptors: &[TextDescriptor]);

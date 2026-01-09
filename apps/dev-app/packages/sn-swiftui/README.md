@@ -104,7 +104,7 @@ struct ContentView: View {
 }
 ```
 
-### Integration with SNCore (once uniffi exports are available)
+### Integration with SNCore
 
 ```swift
 import SNSwiftUI
@@ -125,16 +125,26 @@ struct ContentView: View {
             // Initialize the Rust core with our delegate
             try manager.initializeWithCore()
 
+            // Create a root node (IMPORTANT: Always create a root first!)
+            let rootId = try manager.createRootFromCore(tag: "vstack")
+
             // Run JavaScript that builds UI
             let jsCode = """
-            const root = solidNative.createElement('vstack');
-            solidNative.setProperty(root, 'spacing', '16');
+            // Use the root node we created
+            const rootId = '\(rootId)';
+
+            solidNative.setProperty(rootId, 'spacing', '16');
+            solidNative.setProperty(rootId, 'padding', '20');
 
             const button = solidNative.createElement('button');
+            solidNative.setProperty(button, 'backgroundColor', 'blue');
+            solidNative.setProperty(button, 'cornerRadius', '8');
+
             const text = solidNative.createTextNode('Hello from JS!');
+            solidNative.setProperty(text, 'color', 'white');
 
             solidNative.insertNode(button, text);
-            solidNative.insertNode(root, button);
+            solidNative.insertNode(rootId, button);
             """
 
             try manager.evaluateJavaScript(jsCode)
@@ -180,6 +190,14 @@ The main manager class that coordinates the view tree and rendering.
 
 #### Methods
 
+**With Rust Core:**
+- `initializeWithCore()` - Initializes the Rust core with the Swift delegate
+- `createRootFromCore(tag:)` - Creates a root node in Rust and syncs to Swift (use this!)
+- `getRootFromCore()` - Gets the root node ID from Rust core
+- `evaluateJavaScript(_:)` - Evaluates JavaScript code in the Rust runtime
+- `evaluateModule(_:name:)` - Evaluates JavaScript module code
+
+**Manual Tree Building (without Rust Core):**
 - `createRoot(type:)` - Creates and sets the root node
 - `createElement(type:)` - Creates a new element node
 - `createTextNode(text:)` - Creates a new text node
@@ -215,6 +233,48 @@ Thread-safe tree management.
 - `clear()` - Clear all nodes
 - `printTree()` - Print tree structure
 
+## Root Node Management
+
+**IMPORTANT:** You must create a root node before building your UI tree. The root node is the top-level container for all UI elements.
+
+### Creating a Root Node
+
+**With Rust Core (Recommended):**
+```swift
+let rootId = try manager.createRootFromCore(tag: "vstack")
+```
+
+**Manual (for testing without Rust):**
+```swift
+let root = manager.createRoot(type: "vstack")
+```
+
+### Why Do You Need a Root Node?
+
+The root node serves as:
+1. **Entry point** - The starting point for rendering the UI tree
+2. **Container** - Holds all child elements
+3. **Synchronization point** - Keeps Rust and Swift trees in sync
+
+### Methods Available in Rust Core
+
+```swift
+// Create and set root
+core.createRoot(tag: "vstack") -> String  // Returns root node ID
+
+// Set existing node as root
+core.setRoot(nodeId: String) -> Bool  // Returns true if successful
+
+// Get current root
+core.getRoot() -> String?  // Returns root node ID or nil
+```
+
+## Examples
+
+Check the `Examples/` directory for complete examples:
+- **BasicExample.swift** - Using SNSwiftUI with the Rust core and JavaScript
+- **ManualTreeExample.swift** - Building trees manually without Rust core
+
 ## Development
 
 ### Building
@@ -234,11 +294,12 @@ swift test
 
 1. Add the package to your Xcode project via File > Add Packages
 2. Select "Add Local..." and choose the `sn-swiftui` directory
-3. Import `SNSwiftUI` in your Swift files
+3. Import both `SNSwiftUI` and `SNCore` in your Swift files
 
 ## TODO
 
-- [ ] Add uniffi conformance once SNCore exports are ready
+- [x] Add uniffi conformance for SNCore exports
+- [x] Root node management
 - [ ] Implement event handling (button presses, gestures)
 - [ ] Add more SwiftUI components (List, TextField, etc.)
 - [ ] Support for animations and transitions

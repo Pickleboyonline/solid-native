@@ -98,6 +98,23 @@ impl SolidNativeCore {
         self.renderer.get_next_sibling(node_id)
     }
 
+    // ==================== Root Node Management ====================
+
+    /// Creates and sets a root node for the tree
+    pub fn create_root(&self, tag: String) -> String {
+        self.renderer.create_root(tag)
+    }
+
+    /// Sets an existing node as the root
+    pub fn set_root(&self, node_id: String) -> bool {
+        self.renderer.set_root(node_id)
+    }
+
+    /// Gets the root node ID
+    pub fn get_root(&self) -> Option<String> {
+        self.renderer.get_root()
+    }
+
     // ==================== JavaScript Execution ====================
 
     /// Evaluates JavaScript code
@@ -178,6 +195,7 @@ mod tests {
         }
 
         fn on_node_removed(&self, _node_id: String) {}
+        fn on_prop_updated(&self, _node_id: String, _key: String, _value: crate::jsvalue::JSValue) {}
         fn on_children_change(&self, _node_id: String, _node_ids: Vec<String>) {}
         fn on_update_revision_count(&self, _node_id: String) {}
         fn is_text_element_by_node_id(&self, _node_id: String) -> bool {

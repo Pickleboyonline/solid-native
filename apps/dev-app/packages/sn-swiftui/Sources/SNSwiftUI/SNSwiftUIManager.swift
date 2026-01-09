@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 // Note: Import SNCore once uniffi exports are available
-// import SNCore
+import SNCore
 
 /// Main manager that coordinates the SwiftUI rendering system
 public class SNSwiftUIManager: ObservableObject {
@@ -16,7 +16,7 @@ public class SNSwiftUIManager: ObservableObject {
     public let hostDelegate: SNHostDelegateImpl
 
     // Reference to SNCore instance (once uniffi exports are available)
-    // private var core: SolidNativeCore?
+    private var core: SolidNativeCore?
 
     public init() {
         self.viewTree = ViewTree()
@@ -26,10 +26,34 @@ public class SNSwiftUIManager: ObservableObject {
     // MARK: - Initialization with SNCore
     // Once SNCore is properly exported via uniffi, this will create the integration
 
-    /*
     public func initializeWithCore() throws {
         // Create the core with our delegate
         self.core = try SolidNativeCore(delegate: self.hostDelegate)
+
+        // Get the root node from the core if it exists
+        if let core = self.core, let rootId = core.getRoot() {
+            if let rootNode = viewTree.getNode(rootId) {
+                viewTree.setRoot(rootNode)
+            }
+        }
+    }
+
+    /// Creates a root node in the Rust core and syncs it to the Swift tree
+    public func createRootFromCore(tag: String = "view") throws -> String {
+        guard let core = core else {
+            throw SNSwiftUIError.coreNotInitialized
+        }
+
+        // Create root in the Rust core
+        let rootId = core.createRoot(tag: tag)
+
+        // The delegate will have already created the node in our tree,
+        // but we need to set it as root in the ViewTree
+        if let rootNode = viewTree.getNode(rootId) {
+            viewTree.setRoot(rootNode)
+        }
+
+        return rootId
     }
 
     public func evaluateJavaScript(_ code: String) throws -> String {
@@ -45,7 +69,11 @@ public class SNSwiftUIManager: ObservableObject {
         }
         return try core.evalModule(code: code, moduleName: name)
     }
-    */
+
+    /// Gets the root node ID from the Rust core
+    public func getRootFromCore() -> String? {
+        return core?.getRoot()
+    }
 
     // MARK: - Manual Tree Building (for testing without core)
 

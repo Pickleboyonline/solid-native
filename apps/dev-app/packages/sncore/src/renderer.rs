@@ -1,4 +1,5 @@
 use crate::delegate::HostDelegate;
+use crate::jsvalue::JSValue;
 use crate::tree::UITree;
 use std::sync::{Arc, Mutex};
 use uuid::Uuid;
@@ -64,7 +65,16 @@ impl SolidRenderer {
         if let Some(key) = tree_ref.get_key_by_id(&node_id) {
             drop(tree_ref);
             let mut tree = self.tree.lock().unwrap();
-            tree.set_property(key, name, value);
+            tree.set_property(key, name.clone(), value.clone());
+
+            // Notify delegate about property update
+            // For now, we store properties as strings, so we wrap them in JSValue::String
+            self.delegate.on_prop_updated(
+                node_id.clone(),
+                name,
+                JSValue::string(value),
+            );
+
             self.delegate.on_update_revision_count(node_id);
         }
     }
@@ -168,6 +178,38 @@ impl SolidRenderer {
     pub fn get_tree(&self) -> Arc<Mutex<UITree>> {
         Arc::clone(&self.tree)
     }
+
+    /// Creates and sets a root node for the tree
+    pub fn create_root(&self, tag: String) -> String {
+        let id = self.generate_node_id();
+        let mut tree = self.tree.lock().unwrap();
+        let key = tree.create_element(id.clone(), tag.clone());
+        tree.set_root(key);
+
+        // Notify delegate
+        self.delegate.on_node_created(id.clone(), tag);
+
+        id
+    }
+
+    /// Sets an existing node as the root
+    pub fn set_root(&self, node_id: String) -> bool {
+        let tree_ref = self.tree.lock().unwrap();
+        if let Some(key) = tree_ref.get_key_by_id(&node_id) {
+            drop(tree_ref);
+            let mut tree = self.tree.lock().unwrap();
+            tree.set_root(key);
+            true
+        } else {
+            false
+        }
+    }
+
+    /// Gets the root node ID
+    pub fn get_root(&self) -> Option<String> {
+        let tree = self.tree.lock().unwrap();
+        tree.get_root_id()
+    }
 }
 
 #[cfg(test)]
@@ -207,6 +249,10 @@ mod tests {
                 .lock()
                 .unwrap()
                 .push(node_id);
+        }
+
+        fn on_prop_updated(&self, _node_id: String, _key: String, _value: crate::jsvalue::JSValue) {
+            // Mock implementation - could track property updates if needed
         }
 
         fn on_children_change(&self, node_id: String, node_ids: Vec<String>) {

@@ -8,7 +8,7 @@
 
 import Foundation
 // Note: Import SNCore once uniffi exports are available
-// import SNCore
+import SNCore
 
 /// Implementation of HostDelegate that manages a SwiftUI view tree
 public class SNHostDelegateImpl {
@@ -33,6 +33,24 @@ public class SNHostDelegateImpl {
     public func onNodeRemoved(nodeId: String) {
         viewTree.removeNode(nodeId)
         print("[SNHostDelegate] Node removed: \(nodeId)")
+    }
+
+    /// Called when a property is updated on a node
+    public func onPropUpdated(nodeId: String, key: String, value: JsValue) {
+        guard let node = viewTree.getNode(nodeId) else {
+            print("[SNHostDelegate] Warning: Node \(nodeId) not found for property update")
+            return
+        }
+
+        // Convert JSValue to string for now
+        let stringValue = jsValueToString(value)
+
+        // Update on main thread since it affects UI
+        DispatchQueue.main.async {
+            node.updateProperty(key: key, value: stringValue)
+        }
+
+        print("[SNHostDelegate] Property updated on \(nodeId): \(key) = \(stringValue)")
     }
 
     /// Called when children of a node change
@@ -85,8 +103,29 @@ public class SNHostDelegateImpl {
     public func isTextElementByNodeType(nodeType: String) -> Bool {
         return nodeType.lowercased() == "text"
     }
+
+    // MARK: - Helper Methods
+
+    /// Converts a JSValue to a simple string representation
+    private func jsValueToString(_ value: JsValue) -> String {
+        switch value {
+        case .null:
+            return "null"
+        case .undefined:
+            return "undefined"
+        case .boolean(let boolValue):
+            return String(boolValue)
+        case .number(let numValue):
+            return String(numValue)
+        case .string(let strValue):
+            return strValue
+        case .array(let values):
+            return "[\(values.count) items]"
+        case .object(let properties):
+            return "{\(properties.count) properties}"
+        }
+    }
 }
 
-// MARK: - Future uniffi Protocol Conformance
-// Once SNCore exports the HostDelegate protocol via uniffi, add:
-// extension SNHostDelegateImpl: HostDelegate { }
+// MARK: - HostDelegate Protocol Conformance
+extension SNHostDelegateImpl: HostDelegate { }
