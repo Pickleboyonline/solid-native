@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import YogaSwiftUI
+import yoga
 
 /// Main renderer view that displays a ViewNode tree
 public struct SNSwiftUIRenderer: View {
@@ -98,10 +100,81 @@ public struct NodeView: View {
 
     @ViewBuilder
     private func renderContainer() -> some View {
-        VStack(spacing: 0) {
+        Flex(
+            direction: parseFlexDirection(),
+            justifyContent: parseJustifyContent(),
+            alignItems: parseAlignItems(),
+            wrap: parseFlexWrap(),
+            rowGap: parseGap("rowGap"),
+            columnGap: parseGap("columnGap")
+        ) {
             renderChildren()
         }
         .applyModifiers(from: node)
+    }
+
+    // MARK: - Flex Property Parsers
+
+    private func parseFlexDirection() -> YGFlexDirection {
+        guard let dirStr = node.properties["flexDirection"] else {
+            return .column // Default to column (like VStack)
+        }
+        switch dirStr.lowercased() {
+        case "row": return .row
+        case "column": return .column
+        case "row-reverse": return .rowReverse
+        case "column-reverse": return .columnReverse
+        default: return .column
+        }
+    }
+
+    private func parseJustifyContent() -> YGJustify {
+        guard let justifyStr = node.properties["justifyContent"] else {
+            return .flexStart
+        }
+        switch justifyStr.lowercased() {
+        case "flex-start": return .flexStart
+        case "flex-end": return .flexEnd
+        case "center": return .center
+        case "space-between": return .spaceBetween
+        case "space-around": return .spaceAround
+        case "space-evenly": return .spaceEvenly
+        default: return .flexStart
+        }
+    }
+
+    private func parseAlignItems() -> YGAlign {
+        guard let alignStr = node.properties["alignItems"] else {
+            return .flexStart
+        }
+        switch alignStr.lowercased() {
+        case "flex-start": return .flexStart
+        case "flex-end": return .flexEnd
+        case "center": return .center
+        case "stretch": return .stretch
+        case "baseline": return .baseline
+        default: return .flexStart
+        }
+    }
+
+    private func parseFlexWrap() -> YGWrap {
+        guard let wrapStr = node.properties["flexWrap"] else {
+            return .noWrap
+        }
+        switch wrapStr.lowercased() {
+        case "wrap": return .wrap
+        case "nowrap", "no-wrap": return .noWrap
+        case "wrap-reverse": return .wrapReverse
+        default: return .noWrap
+        }
+    }
+
+    private func parseGap(_ property: String) -> CGFloat {
+        guard let gapStr = node.properties[property],
+              let gap = Double(gapStr) else {
+            return 0
+        }
+        return CGFloat(gap)
     }
 
     @ViewBuilder

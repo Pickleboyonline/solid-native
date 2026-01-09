@@ -7,7 +7,7 @@ let package = Package(
     name: "SNSwiftUI",
     platforms: [
         .iOS(.v15),
-        .macOS(.v12)
+        .macOS(.v13)
     ],
     products: [
         .library(
@@ -17,12 +17,17 @@ let package = Package(
     ],
     dependencies: [
         // Local dependency on the generated SNCore package
-        .package(path: "../sncore/build/swift/SNCore")
+        .package(path: "../sncore/build/swift/SNCore"),
+        // Local dependency on Yoga-SwiftUI for flexbox layout
+        .package(path: "../Yoga-SwiftUI")
     ],
     targets: [
         .target(
             name: "SNSwiftUI",
-            dependencies: ["SNCore"],
+            dependencies: [
+                "SNCore",
+                .product(name: "YogaSwiftUI", package: "Yoga-SwiftUI")
+            ],
             path: "Sources/SNSwiftUI"
         ),
         .testTarget(
