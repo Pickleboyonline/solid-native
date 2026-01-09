@@ -1,5 +1,5 @@
-[submodule "packages/nativecore/ios/vendor/quickjs"]
-	path = packages/nativecore/ios/vendor/quickjs
+[submodule "packages/nativecore/ios/Sources/quickjs"]
+	path = packages/nativecore/ios/Sources/quickjs
 	url = https://github.com/bellard/quickjs.git
 [submodule "apps/dev-app/packages/Yoga-SwiftUI"]
 	path = apps/dev-app/packages/Yoga-SwiftUI
