@@ -1,0 +1,17 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-all src/server.ts",
+    "bundle": "deno run --allow-all src/bundle.ts"
+  },
+  "imports": {
+    "solid-js": "npm:solid-js@1.8.17",
+    "solid-js/jsx-runtime": "npm:solid-js@1.8.17/jsx-runtime",
+    "solid-js/universal": "npm:solid-js@1.8.17/universal",
+    "solid-native": "./packages/solid-native/mod.ts",
+    "esbuild": "npm:esbuild@0.20.0"
+  },
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js"
+  }
+}
