@@ -1,4 +1,8 @@
-# Solid-Native Dev-App
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
 
 Self-contained development app for Solid Native with class-based architecture.
 
@@ -101,8 +105,17 @@ deno task dev
 # Build bundle only
 deno task bundle
 
-# Build Rust core
+# Build Rust core for iOS
 cd packages/sncore && just build-ios
+
+# Build Rust core for Android
+cd packages/sncore && just build-android
+
+# Run Rust tests
+cd packages/sncore && cargo test
+
+# Run specific Rust test
+cd packages/sncore && cargo test test_name -- --nocapture
 ```
 
 ## Key Files
@@ -157,10 +170,35 @@ Flex(
 
 Flex props are extracted from `style` object and mapped to Yoga types.
 
+## SNCore (Rust Core)
+
+The Rust core (`packages/sncore/`) manages the QuickJS runtime and exposes APIs to native platforms via UniFFI.
+
+### JS Bindings (`globalThis.solidNative`)
+- `createElement(tag)` / `createTextNode(value)` - Create nodes
+- `setProp(nodeId, key, value)` - Set property (auto-serializes to JSON)
+- `insertBefore(parentId, nodeId)` - Insert child node
+- `getRootView()` - Get root node ID
+- `getParentNode()` / `getFirstChild()` / `getNextSibling()` - Tree traversal
+
+### HostDelegate Callbacks
+Swift/Kotlin implements `HostDelegate` to receive:
+- `on_node_created(nodeId, nodeType)`
+- `on_prop_updated(nodeId, key, JSValue)`
+- `on_children_change(nodeId, childIds)`
+- `on_update_revision_count(nodeId)` - Signals UI refresh
+
+### Key Details
+- Node IDs are UUIDs (36 chars)
+- JS context persists across `eval_js` calls
+- Properties stored as JSON, converted to `JSValue` for callbacks
+- Output: `build/swift/SNCore/` (iOS), `android-sncore/` (Android)
+
 ## Dependencies
 
-- **SNCore**: Rust FFI layer (uniffi-generated)
+- **SNCore**: Rust FFI layer (uniffi-generated via `cargo-swift`)
 - **Yoga-SwiftUI**: Flexbox layout for SwiftUI
 - **yoga**: Facebook's layout engine (via Yoga-SwiftUI)
 - **solid-js**: Reactive UI framework
 - **esbuild**: JS bundling
+- **rquickjs**: QuickJS bindings for Rust

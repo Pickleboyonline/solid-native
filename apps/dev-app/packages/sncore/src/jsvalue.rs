@@ -139,6 +139,41 @@ impl JSValue {
         }
     }
 
+    /// Parses a JSON string into a JSValue
+    pub fn from_json(json: &str) -> Self {
+        // Use serde_json to parse the JSON string
+        match serde_json::from_str::<serde_json::Value>(json) {
+            Ok(v) => Self::from_serde_value(&v),
+            Err(_) => JSValue::Undefined,
+        }
+    }
+
+    /// Converts a serde_json::Value to a JSValue
+    fn from_serde_value(value: &serde_json::Value) -> Self {
+        match value {
+            serde_json::Value::Null => JSValue::Null,
+            serde_json::Value::Bool(b) => JSValue::Boolean { value: *b },
+            serde_json::Value::Number(n) => {
+                JSValue::Number {
+                    value: n.as_f64().unwrap_or(0.0),
+                }
+            }
+            serde_json::Value::String(s) => JSValue::String { value: s.clone() },
+            serde_json::Value::Array(arr) => {
+                JSValue::Array {
+                    values: arr.iter().map(Self::from_serde_value).collect(),
+                }
+            }
+            serde_json::Value::Object(obj) => {
+                let properties: HashMap<String, JSValue> = obj
+                    .iter()
+                    .map(|(k, v)| (k.clone(), Self::from_serde_value(v)))
+                    .collect();
+                JSValue::Object { properties }
+            }
+        }
+    }
+
     /// Converts the JSValue to a simple string representation
     /// For simple display/serialization purposes
     pub fn to_simple_string(&self) -> String {

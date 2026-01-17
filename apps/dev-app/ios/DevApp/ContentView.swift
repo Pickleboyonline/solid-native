@@ -2,6 +2,7 @@ import SNSwiftUI
 import SNCore
 import SwiftUI
 import YogaSwiftUI
+import Combine
 
 struct ContentView: View {
     @StateObject private var hostReceiver = ObservableHostReceiver()
@@ -14,28 +15,33 @@ struct ContentView: View {
                 ProgressView("Initializing...")
                     .padding()
             } else if let error = errorMessage {
-                VStack(spacing: 12) {
-                    Image(systemName: "exclamationmark.triangle.fill")
-                        .font(.system(size: 48))
-                        .foregroundColor(.red)
+                ScrollView {
+                    VStack(spacing: 16) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 48))
+                            .foregroundColor(.red)
 
-                    Text("Error")
-                        .font(.headline)
+                        Text("Error")
+                            .font(.headline)
 
-                    Text(error)
-                        .font(.caption)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
+                        Text(error)
+                            .font(.system(.body, design: .monospaced))
+                            .foregroundColor(.primary)
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
 
-                    Button("Retry") {
-                        isLoading = true
-                        errorMessage = nil
-                        initializeCoreAndRunJS()
+                        Button("Retry") {
+                            isLoading = true
+                            errorMessage = nil
+                            initializeCoreAndRunJS()
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .padding()
                 }
-                .padding()
             } else {
                 // Render the root node from the host receiver
                 if let rootWrapper = hostReceiver.receiver.getRootNode() {
@@ -131,16 +137,17 @@ struct ContentView: View {
                 }
 
             } catch let error as SnCoreError {
-                print("SNCore Error: \(error)")
+                let errorDetail = formatSnCoreError(error)
+                print("SNCore Error: \(errorDetail)")
                 DispatchQueue.main.async {
                     isLoading = false
-                    errorMessage = "SNCore Error: \(error.localizedDescription)"
+                    errorMessage = errorDetail
                 }
             } catch {
                 print("Error: \(error)")
                 DispatchQueue.main.async {
                     isLoading = false
-                    errorMessage = error.localizedDescription
+                    errorMessage = "Unknown Error:\n\(error)"
                 }
             }
         }
@@ -148,6 +155,21 @@ struct ContentView: View {
 }
 
 /// Observable wrapper around HostReceiver for SwiftUI state management
-class ObservableHostReceiver: ObservableObject {
+@MainActor
+final class ObservableHostReceiver: ObservableObject, @unchecked Sendable {
     let receiver = HostReceiver()
+}
+
+/// Formats SnCoreError with detailed information
+func formatSnCoreError(_ error: SnCoreError) -> String {
+    switch error {
+    case .RuntimeError(let msg):
+        return "Runtime Error:\n\(msg)"
+    case .RendererError(let msg):
+        return "Renderer Error:\n\(msg)"
+    case .JsEvalError(let msg):
+        return "JavaScript Evaluation Error:\n\(msg)"
+    case .ContextError(let msg):
+        return "Context Error:\n\(msg)"
+    }
 }

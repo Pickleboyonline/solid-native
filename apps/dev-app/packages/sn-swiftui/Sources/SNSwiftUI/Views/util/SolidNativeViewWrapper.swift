@@ -15,7 +15,7 @@ typealias SolidNativeChildren = [String]
 
 /// Wrapper class that provides a stable reference for SwiftUI
 /// and manages view updates from the Rust core.
-public class SolidNativeViewWrapper: ObservableObject {
+public class SolidNativeViewWrapper: ObservableObject, @unchecked Sendable {
     @MainActor
     @Published
     var revision: UInt = 0
@@ -55,7 +55,7 @@ public class SolidNativeViewWrapper: ObservableObject {
         }
     }
 
-    @ViewBuilder func render() -> some View {
+    @ViewBuilder public func render() -> some View {
         _SolidNativeViewWrapperView(wrapper: self, view: solidNativeView!)
     }
 }

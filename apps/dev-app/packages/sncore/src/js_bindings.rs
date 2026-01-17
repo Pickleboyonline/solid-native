@@ -80,8 +80,41 @@ pub fn bind_renderer_to_context(ctx: &Context, renderer: Arc<SolidRenderer>) -> 
             Func::from(move |node_id: String| r10.get_next_sibling(node_id)),
         )?;
 
-        // Attach to globalThis
+        // getRootView - returns the root node ID
+        let r11 = renderer.clone();
+        solid_native.set(
+            "getRootView",
+            Func::from(move || r11.get_root()),
+        )?;
+
+        // setProp - sets a property on a node (handles JS values)
+        // We use a JSON string for the value since rquickjs lifetimes are complex
+        let r12 = renderer.clone();
+        solid_native.set(
+            "_setPropJson",
+            Func::from(move |node_id: String, key: String, json_value: String| {
+                r12.set_prop_json(node_id, key, json_value);
+            }),
+        )?;
+
+        // insertBefore - alias for insertNode (matches React Native API)
+        let r13 = renderer.clone();
+        solid_native.set(
+            "insertBefore",
+            Func::from(move |parent_id: String, node_id: String, anchor_id: Opt<String>| {
+                r13.insert_node(parent_id, node_id, anchor_id.0);
+            }),
+        )?;
+
+        // Attach to globalThis FIRST
         globals.set("solidNative", solid_native)?;
+
+        // NOW create a JS wrapper that calls JSON.stringify before passing to _setPropJson
+        ctx.eval::<(), _>(r#"
+            globalThis.solidNative.setProp = function(nodeId, key, value) {
+                globalThis.solidNative._setPropJson(nodeId, key, JSON.stringify(value));
+            };
+        "#)?;
 
         Ok(())
     })

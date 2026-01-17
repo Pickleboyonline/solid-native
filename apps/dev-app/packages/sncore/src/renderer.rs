@@ -89,6 +89,32 @@ impl SolidRenderer {
         }
     }
 
+    /// Sets a property on a node from a JSON value (used by JS bindings)
+    pub fn set_prop_json(&self, node_id: String, name: String, json_value: String) {
+        let tree_ref = self.tree.lock().unwrap();
+        if let Some(key) = tree_ref.get_key_by_id(&node_id) {
+            drop(tree_ref);
+            let mut tree = self.tree.lock().unwrap();
+            tree.set_property(key, name.clone(), json_value.clone());
+            drop(tree);
+
+            // Parse JSON to JSValue
+            let js_value = JSValue::from_json(&json_value);
+
+            // Notify delegate about property update
+            self.delegate.on_prop_updated(
+                node_id.clone(),
+                name,
+                js_value,
+            );
+
+            // If this is a text node, regenerate text descriptors
+            self.notify_text_descriptors_if_text_node(&node_id);
+
+            self.delegate.on_update_revision_count(node_id);
+        }
+    }
+
     /// Inserts a node into a parent before an anchor node
     pub fn insert_node(&self, parent_id: String, node_id: String, anchor_id: Option<String>) {
         let tree_ref = self.tree.lock().unwrap();
