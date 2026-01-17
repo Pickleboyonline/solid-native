@@ -1,17 +1,23 @@
 {
   "tasks": {
-    "dev": "deno run --allow-all src/server.ts",
-    "bundle": "deno run --allow-all src/bundle.ts"
+    "dev": "deno run --allow-all packages/solid-native/cli/server.ts",
+    "bundle": "deno run --allow-all packages/solid-native/cli/bundle.ts"
   },
   "imports": {
     "solid-js": "npm:solid-js@1.8.17",
     "solid-js/jsx-runtime": "npm:solid-js@1.8.17/jsx-runtime",
     "solid-js/universal": "npm:solid-js@1.8.17/universal",
     "solid-native": "./packages/solid-native/mod.ts",
-    "esbuild": "npm:esbuild@0.20.0"
+    "solid-native-renderer": "./packages/solid-native/renderer.ts",
+    "esbuild": "https://deno.land/x/esbuild@v0.21.4/mod.js",
+    "esbuild-plugin-solid": "npm:esbuild-plugin-solid@0.6.0",
+    "@luca/esbuild-deno-loader": "jsr:@luca/esbuild-deno-loader@0.10.3",
+    "@oak/oak": "jsr:@oak/oak@16.1.0"
   },
   "compilerOptions": {
     "jsx": "preserve",
-    "jsxImportSource": "solid-js"
-  }
+    "jsxImportSource": "solid-js",
+    "lib": ["dom", "deno.window"]
+  },
+  "nodeModulesDir": "auto"
 }

@@ -130,7 +130,7 @@ struct ContentView: View {
                     print("UI rendering complete!")
                 }
 
-            } catch let error as SncoreError {
+            } catch let error as SnCoreError {
                 print("SNCore Error: \(error)")
                 DispatchQueue.main.async {
                     isLoading = false

@@ -25,7 +25,7 @@ class SNView: SolidNativeView {
             rowGap: flexProps.rowGap,
             columnGap: flexProps.columnGap
         ) {
-            ForEach(children, id: \.self) { nodeId in
+            ForEach(self.children, id: \.self) { nodeId in
                 if let childWrapper = self.wrapper.hostReceiver?.viewWrapperRegistry[nodeId] {
                     childWrapper.render()
                         .applyFlexChildProps(from: childWrapper.props)
@@ -115,16 +115,12 @@ class SNView: SolidNativeView {
 // MARK: - View Extension for Flex Child Props
 
 extension View {
-    @ViewBuilder
-    func applyFlexChildProps(from props: SolidNativeProps) -> some View {
-        var view = AnyView(self)
+    func applyFlexChildProps(from props: SolidNativeProps) -> AnyView {
+        var result = AnyView(self)
 
         guard let style = props["style"], case .object(let styleProps) = style else {
-            view
-            return
+            return result
         }
-
-        var result: AnyView = view
 
         // flex (shorthand for flexGrow)
         if let flex = styleProps["flex"], case .number(let val) = flex {
@@ -221,7 +217,7 @@ extension View {
 
         // alignSelf
         if let aself = styleProps["alignSelf"], case .string(let align) = aself {
-            var ygAlign: YGAlign = .auto
+            let ygAlign: YGAlign
             switch align {
             case "auto": ygAlign = .auto
             case "flex-start": ygAlign = .flexStart
@@ -229,12 +225,12 @@ extension View {
             case "center": ygAlign = .center
             case "stretch": ygAlign = .stretch
             case "baseline": ygAlign = .baseline
-            default: break
+            default: ygAlign = .auto
             }
             result = AnyView(result.alignSelf(ygAlign))
         }
 
-        result
+        return result
     }
 }
 
