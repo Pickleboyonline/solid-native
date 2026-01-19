@@ -1,3 +1,4 @@
+import { JSX } from "solid-js/jsx-runtime";
 import { createRenderer } from "solid-js/universal";
 
 type Node = {
@@ -44,6 +45,18 @@ const wrapNodeIdInNode = (id: string): Node => {
   return newNode;
 };
 
+// Helper to safely get id from a node
+const getNodeId = (node: unknown, context: string): string => {
+  if (!node || typeof node !== 'object' || !('id' in node)) {
+    throw new Error(`${context}: invalid node ${JSON.stringify(node)}`);
+  }
+  const id = (node as Node).id;
+  if (id === undefined || id === null) {
+    throw new Error(`${context}: node.id is ${id}, node: ${JSON.stringify(node)}`);
+  }
+  return id;
+};
+
 export const {
   render: solidRender,
   effect,
@@ -58,47 +71,91 @@ export const {
   mergeProps,
 } = createRenderer<Node>({
   createElement(nodeName) {
-    const id = solidNative.createElement(nodeName);
-    return wrapNodeIdInNode(id);
+    if (nodeName === undefined || nodeName === null) {
+      throw new Error(`createElement: nodeName is ${nodeName}`);
+    }
+    try {
+      const id = solidNative.createElement(nodeName);
+      return wrapNodeIdInNode(id);
+    } catch (e) {
+      throw new Error(`createElement failed for nodeName="${nodeName}": ${e}`);
+    }
   },
   createTextNode(value) {
-    const node = solidNative.createElement("sn_text");
-    solidNative.setProp(node, "text", value);
-    return wrapNodeIdInNode(node);
+    if (value === undefined) {
+      throw new Error(`createTextNode: value is undefined`);
+    }
+    try {
+      const node = solidNative.createElement("sn_text");
+      solidNative.setProp(node, "text", String(value));
+      return wrapNodeIdInNode(node);
+    } catch (e) {
+      throw new Error(`createTextNode failed for value="${value}": ${e}`);
+    }
   },
-  replaceText({ id }, value) {
-    solidNative.setProp(id, "text", value);
+  replaceText(node, value) {
+    const id = getNodeId(node, "replaceText");
+    // Ensure value is a string
+    solidNative.setProp(id, "text", value === undefined ? "" : String(value));
   },
-  setProperty({ id }, propertyName, value) {
+  setProperty(node, propertyName, value) {
+    const id = getNodeId(node, "setProperty");
+    // Don't call setProp with undefined property names
+    if (propertyName === undefined || propertyName === null) {
+      return;
+    }
     solidNative.setProp(id, propertyName, value);
   },
-  insertNode({ id: parentId }, { id: nodeId }, anchor) {
-    const anchorId = anchor?.id;
-    solidNative.insertBefore(parentId, nodeId, anchorId);
+  insertNode(parent, node, anchor) {
+    const parentId = getNodeId(parent, "insertNode.parent");
+    const nodeId = getNodeId(node, "insertNode.node");
+    // Only pass anchorId if anchor exists - rquickjs Opt<String> doesn't handle explicit undefined
+    if (anchor) {
+      const anchorId = getNodeId(anchor, "insertNode.anchor");
+      solidNative.insertBefore(parentId, nodeId, anchorId);
+    } else {
+      solidNative.insertBefore(parentId, nodeId);
+    }
   },
-  isTextNode({ id }) {
+  isTextNode(node) {
+    // SolidJS may pass null/undefined during cleanup - return false for invalid nodes
+    if (!node || typeof node !== 'object' || !('id' in node)) {
+      return false;
+    }
+    const id = (node as Node).id;
+    if (id === undefined || id === null) {
+      return false;
+    }
     return solidNative.isTextElement(id);
   },
-  removeNode({ id: parentId }, { id: nodeId }) {
+  removeNode(parent, node) {
+    const parentId = getNodeId(parent, "removeNode.parent");
+    const nodeId = getNodeId(node, "removeNode.node");
     return solidNative.removeChild(parentId, nodeId);
   },
-  getParentNode({ id }) {
+  getParentNode(node) {
+    const id = getNodeId(node, "getParentNode");
     const parentId = solidNative.getParent(id);
-    if (parentId) {
+    // Empty string means not found (rquickjs doesn't handle Option<String>)
+    if (parentId && parentId.length > 0) {
       return wrapNodeIdInNode(parentId);
     }
     return undefined;
   },
-  getFirstChild({ id }) {
+  getFirstChild(node) {
+    const id = getNodeId(node, "getFirstChild");
     const firstChildId = solidNative.getFirstChild(id);
-    if (firstChildId) {
+    // Empty string means not found
+    if (firstChildId && firstChildId.length > 0) {
       return wrapNodeIdInNode(firstChildId);
     }
     return undefined;
   },
-  getNextSibling({ id }) {
+  getNextSibling(node) {
+    const id = getNodeId(node, "getNextSibling");
     const nextSiblingId = solidNative.getNextSibling(id);
-    if (nextSiblingId) {
+    // Empty string means not found
+    if (nextSiblingId && nextSiblingId.length > 0) {
       return wrapNodeIdInNode(nextSiblingId);
     }
     return undefined;
@@ -106,7 +163,17 @@ export const {
 });
 
 export const render = (code: () => JSX.Element, rootId?: string) => {
-  const root = rootId ?? solidNative.getRootView();
+  // Get root from API (returns empty string if not set)
+  const rootFromApi = solidNative.getRootView();
+
+  // Check for empty string (means root not set)
+  if (!rootFromApi || rootFromApi.length === 0) {
+    throw new Error(`render: solidNative.getRootView() returned empty string. Root node not set. Call createRoot() from the host platform first.`);
+  }
+
+  const root = rootId ?? rootFromApi;
+  const wrappedRoot = wrapNodeIdInNode(root);
+
   // @ts-ignore - solidRender expects the root element as second argument
-  solidRender(code, wrapNodeIdInNode(root));
+  solidRender(code, wrappedRoot);
 };

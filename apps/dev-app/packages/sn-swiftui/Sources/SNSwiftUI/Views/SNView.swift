@@ -124,7 +124,7 @@ extension View {
 
         // flex (shorthand for flexGrow)
         if let flex = styleProps["flex"], case .number(let val) = flex {
-            result = AnyView(result.flexGrow(CGFloat(val)))
+            result = AnyView(result.flexGrow(CGFloat(val)).flexBasis(.init(value: 0, unit: .point)))
         }
 
         // flexGrow
@@ -135,6 +135,8 @@ extension View {
         // flexShrink
         if let fs = styleProps["flexShrink"], case .number(let val) = fs {
             result = AnyView(result.flexShrink(CGFloat(val)))
+        } else if let fs = styleProps["flex"] {
+            result = AnyView(result.flexShrink(1))
         }
 
         // width

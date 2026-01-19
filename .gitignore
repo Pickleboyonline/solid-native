@@ -67,3 +67,4 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 node_modules
+/apps/dev-app/dist

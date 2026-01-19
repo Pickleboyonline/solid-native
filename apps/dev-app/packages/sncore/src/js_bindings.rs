@@ -62,29 +62,38 @@ pub fn bind_renderer_to_context(ctx: &Context, renderer: Arc<SolidRenderer>) -> 
             Func::from(move |node_id: String| r7.is_text_node(node_id)),
         )?;
 
+        // These return empty string if not found (rquickjs doesn't handle Option<String> well)
         let r8 = renderer.clone();
         solid_native.set(
             "getParentNode",
-            Func::from(move |node_id: String| r8.get_parent_node(node_id)),
+            Func::from(move |node_id: String| -> String {
+                r8.get_parent_node(node_id).unwrap_or_default()
+            }),
         )?;
 
         let r9 = renderer.clone();
         solid_native.set(
             "getFirstChild",
-            Func::from(move |node_id: String| r9.get_first_child(node_id)),
+            Func::from(move |node_id: String| -> String {
+                r9.get_first_child(node_id).unwrap_or_default()
+            }),
         )?;
 
         let r10 = renderer.clone();
         solid_native.set(
             "getNextSibling",
-            Func::from(move |node_id: String| r10.get_next_sibling(node_id)),
+            Func::from(move |node_id: String| -> String {
+                r10.get_next_sibling(node_id).unwrap_or_default()
+            }),
         )?;
 
-        // getRootView - returns the root node ID
+        // getRootView - returns the root node ID (empty string if not set)
         let r11 = renderer.clone();
         solid_native.set(
             "getRootView",
-            Func::from(move || r11.get_root()),
+            Func::from(move || -> String {
+                r11.get_root().unwrap_or_else(|| String::new())
+            }),
         )?;
 
         // setProp - sets a property on a node (handles JS values)
@@ -106,13 +115,135 @@ pub fn bind_renderer_to_context(ctx: &Context, renderer: Arc<SolidRenderer>) -> 
             }),
         )?;
 
-        // Attach to globalThis FIRST
+        // removeChild - alias for removeNode (matches renderer API)
+        let r14 = renderer.clone();
+        solid_native.set(
+            "removeChild",
+            Func::from(move |parent_id: String, node_id: String| {
+                r14.remove_node(parent_id, node_id);
+            }),
+        )?;
+
+        // isTextElement - alias for isTextNode (matches renderer API)
+        let r15 = renderer.clone();
+        solid_native.set(
+            "isTextElement",
+            Func::from(move |node_id: String| r15.is_text_node(node_id)),
+        )?;
+
+        // getParent - alias for getParentNode (matches renderer API)
+        let r16 = renderer.clone();
+        solid_native.set(
+            "getParent",
+            Func::from(move |node_id: String| -> String {
+                r16.get_parent_node(node_id).unwrap_or_default()
+            }),
+        )?;
+
+        // Attach to globalThis
         globals.set("solidNative", solid_native)?;
 
-        // NOW create a JS wrapper that calls JSON.stringify before passing to _setPropJson
+        // Create JS wrappers with validation
         ctx.eval::<(), _>(r#"
+            // Helper to validate string arguments
+            function validateString(value, fnName, argName) {
+                if (value === undefined || value === null) {
+                    throw new Error(fnName + ': ' + argName + ' is ' + value);
+                }
+                if (typeof value !== 'string') {
+                    throw new Error(fnName + ': ' + argName + ' must be string, got ' + typeof value);
+                }
+            }
+
+            // Store originals - only for functions that actually exist
+            const originals = {
+                createElement: globalThis.solidNative.createElement,
+                createTextNode: globalThis.solidNative.createTextNode,
+                insertBefore: globalThis.solidNative.insertBefore,
+                removeChild: globalThis.solidNative.removeChild,
+                isTextElement: globalThis.solidNative.isTextElement,
+                getParent: globalThis.solidNative.getParent,
+                getFirstChild: globalThis.solidNative.getFirstChild,
+                getNextSibling: globalThis.solidNative.getNextSibling,
+                getRootView: globalThis.solidNative.getRootView,
+                isTextNode: globalThis.solidNative.isTextNode,
+                getParentNode: globalThis.solidNative.getParentNode,
+                replaceText: globalThis.solidNative.replaceText
+            };
+
+            globalThis.solidNative.createElement = function(tag) {
+                validateString(tag, 'createElement', 'tag');
+                try {
+                    return originals.createElement(tag);
+                } catch(e) {
+                    throw new Error('createElement("' + tag + '") failed: ' + e);
+                }
+            };
+
+            globalThis.solidNative.insertBefore = function(parentId, nodeId, anchorId) {
+                validateString(parentId, 'insertBefore', 'parentId');
+                validateString(nodeId, 'insertBefore', 'nodeId');
+                // anchorId is optional
+                if (anchorId !== undefined && anchorId !== null) {
+                    validateString(anchorId, 'insertBefore', 'anchorId');
+                    return originals.insertBefore(parentId, nodeId, anchorId);
+                }
+                return originals.insertBefore(parentId, nodeId);
+            };
+
+            globalThis.solidNative.removeChild = function(parentId, nodeId) {
+                validateString(parentId, 'removeChild', 'parentId');
+                validateString(nodeId, 'removeChild', 'nodeId');
+                return originals.removeChild(parentId, nodeId);
+            };
+
+            globalThis.solidNative.isTextElement = function(nodeId) {
+                validateString(nodeId, 'isTextElement', 'nodeId');
+                return originals.isTextElement(nodeId);
+            };
+
+            globalThis.solidNative.getParent = function(nodeId) {
+                validateString(nodeId, 'getParent', 'nodeId');
+                return originals.getParent(nodeId);
+            };
+
+            globalThis.solidNative.getFirstChild = function(nodeId) {
+                validateString(nodeId, 'getFirstChild', 'nodeId');
+                return originals.getFirstChild(nodeId);
+            };
+
+            globalThis.solidNative.getNextSibling = function(nodeId) {
+                validateString(nodeId, 'getNextSibling', 'nodeId');
+                return originals.getNextSibling(nodeId);
+            };
+
+            // Store original _setPropJson
+            const _originalSetPropJson = globalThis.solidNative._setPropJson;
+
+            // setProp wrapper that calls JSON.stringify before passing to _setPropJson
             globalThis.solidNative.setProp = function(nodeId, key, value) {
-                globalThis.solidNative._setPropJson(nodeId, key, JSON.stringify(value));
+                validateString(nodeId, 'setProp', 'nodeId');
+                validateString(key, 'setProp', 'key');
+                var jsonValue = JSON.stringify(value);
+                try {
+                    _originalSetPropJson(nodeId, key, jsonValue);
+                } catch(e) {
+                    throw new Error('setProp("' + nodeId + '", "' + key + '", ...) failed: ' + e);
+                }
+            };
+
+            // getRootView wrapper - now returns empty string if not set
+            globalThis.solidNative.getRootView = function() {
+                try {
+                    var root = originals.getRootView();
+                    // Empty string means root not set
+                    if (!root || root.length === 0) {
+                        throw new Error('getRootView returned empty - root node not set. Call createRoot() first.');
+                    }
+                    return root;
+                } catch(e) {
+                    throw new Error('getRootView() failed: ' + e);
+                }
             };
         "#)?;
 

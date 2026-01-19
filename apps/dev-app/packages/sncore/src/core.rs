@@ -2,7 +2,7 @@ use crate::delegate::HostDelegate;
 use crate::error::SNCoreError;
 use crate::js_bindings::bind_renderer_to_context;
 use crate::renderer::SolidRenderer;
-use rquickjs::{Context, Runtime};
+use rquickjs::{Context, Runtime, Value};
 use std::sync::{Arc, Mutex};
 
 /// Main entry point for SolidNative Core
@@ -124,29 +124,45 @@ impl SolidNativeCore {
         let context = self.context.lock().unwrap();
 
         // Execute the JavaScript code using the persistent context
+        // Use Value to accept any return type (including undefined)
         context.with(|ctx| {
-            ctx.eval::<String, _>(code)
-                .map_err(|e| {
-                    // Try to extract the full exception message
-                    let error_msg = match e {
-                        rquickjs::Error::Exception => {
-                            // Get the exception from the context
-                            let exc = ctx.catch();
-                            // Try to convert to string for full message
-                            if let Some(exc_str) = exc.clone().into_string() {
-                                if let Ok(s) = exc_str.to_string() {
-                                    s
-                                } else {
-                                    "Exception (could not convert to string)".to_string()
-                                }
+            let result: Value = ctx.eval(code).map_err(|e| {
+                // Try to extract the full exception message
+                let error_msg = match e {
+                    rquickjs::Error::Exception => {
+                        // Get the exception from the context
+                        let exc = ctx.catch();
+                        // Try to convert to string for full message
+                        if let Some(exc_str) = exc.clone().into_string() {
+                            if let Ok(s) = exc_str.to_string() {
+                                s
                             } else {
-                                format!("Exception: {:?}", exc)
+                                "Exception (could not convert to string)".to_string()
                             }
+                        } else {
+                            format!("Exception: {:?}", exc)
                         }
-                        other => format!("{:?}", other),
-                    };
-                    SNCoreError::js_eval(error_msg)
-                })
+                    }
+                    other => format!("{:?}", other),
+                };
+                SNCoreError::js_eval(error_msg)
+            })?;
+
+            // Convert the result to a string representation
+            if result.is_undefined() {
+                Ok("undefined".to_string())
+            } else if result.is_null() {
+                Ok("null".to_string())
+            } else if let Some(s) = result.clone().into_string() {
+                s.to_string().map_err(|e| SNCoreError::js_eval(format!("Failed to convert string: {:?}", e)))
+            } else if let Some(n) = result.as_number() {
+                Ok(n.to_string())
+            } else if let Some(b) = result.as_bool() {
+                Ok(b.to_string())
+            } else {
+                // For objects/arrays, just return a type indicator
+                Ok("[object]".to_string())
+            }
         })
     }
 
@@ -157,6 +173,7 @@ impl SolidNativeCore {
         let context = self.context.lock().unwrap();
 
         // Execute as module using the persistent context
+        // Use Value to accept any return type (including undefined)
         context.with(|ctx| {
             // For module evaluation, we need to compile and execute differently
             // This is a simplified version - in production you'd want better module handling
@@ -169,28 +186,43 @@ impl SolidNativeCore {
                 code
             );
 
-            ctx.eval::<String, _>(wrapped_code)
-                .map_err(|e| {
-                    // Try to extract the full exception message
-                    let error_msg = match e {
-                        rquickjs::Error::Exception => {
-                            // Get the exception from the context
-                            let exc = ctx.catch();
-                            // Try to convert to string for full message
-                            if let Some(exc_str) = exc.clone().into_string() {
-                                if let Ok(s) = exc_str.to_string() {
-                                    format!("Module '{}': {}", module_name, s)
-                                } else {
-                                    format!("Module '{}': Exception (could not convert to string)", module_name)
-                                }
+            let result: Value = ctx.eval(wrapped_code).map_err(|e| {
+                // Try to extract the full exception message
+                let error_msg = match e {
+                    rquickjs::Error::Exception => {
+                        // Get the exception from the context
+                        let exc = ctx.catch();
+                        // Try to convert to string for full message
+                        if let Some(exc_str) = exc.clone().into_string() {
+                            if let Ok(s) = exc_str.to_string() {
+                                format!("Module '{}': {}", module_name, s)
                             } else {
-                                format!("Module '{}': Exception: {:?}", module_name, exc)
+                                format!("Module '{}': Exception (could not convert to string)", module_name)
                             }
+                        } else {
+                            format!("Module '{}': Exception: {:?}", module_name, exc)
                         }
-                        other => format!("Module '{}': {:?}", module_name, other),
-                    };
-                    SNCoreError::js_eval(error_msg)
-                })
+                    }
+                    other => format!("Module '{}': {:?}", module_name, other),
+                };
+                SNCoreError::js_eval(error_msg)
+            })?;
+
+            // Convert the result to a string representation
+            if result.is_undefined() {
+                Ok("undefined".to_string())
+            } else if result.is_null() {
+                Ok("null".to_string())
+            } else if let Some(s) = result.clone().into_string() {
+                s.to_string().map_err(|e| SNCoreError::js_eval(format!("Failed to convert string: {:?}", e)))
+            } else if let Some(n) = result.as_number() {
+                Ok(n.to_string())
+            } else if let Some(b) = result.as_bool() {
+                Ok(b.to_string())
+            } else {
+                // For objects/arrays, just return a type indicator
+                Ok("[object]".to_string())
+            }
         })
     }
 }
